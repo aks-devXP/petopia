@@ -14,7 +14,7 @@ const Navbar = () => {
     return (
       <ul>
         <li>
-          <Link to={"/"} >Vetinary</Link>
+          <Link to={"/"} >Veterinary</Link>
         </li>
         <li>
           <Link to={"/"} >NGO</Link>
