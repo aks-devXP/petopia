@@ -11,7 +11,7 @@ export default {
     extend: {
       colors: {
         // contact Us page
-        primary: {"700":"#1d4ed8"},
+        
         color: {
           1: "#AC6AFF",
           2: "#FFC876",

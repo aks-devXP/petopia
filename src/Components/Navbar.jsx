@@ -39,7 +39,7 @@ const Navbar = () => {
             <Link to={"/about"} >About</Link>
           </li>
           <li className='submenu'>
-            Services
+            <Link to={"#"} >Services</Link>
             <Submenu/>
           </li>
           <li>
