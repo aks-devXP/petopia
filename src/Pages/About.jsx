@@ -1,10 +1,11 @@
 import React from 'react'
+import TeamInfo from '../Components/TeamInfo'
 
 const About = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <TeamInfo></TeamInfo>
+    </>
   )
 }
 

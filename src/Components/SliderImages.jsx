@@ -21,7 +21,7 @@ const SliderImages = ({ slides }) => {
   }, [slides.length]);
 
   return (
-    <div className="overflow-hidden relative w-auto h-36">
+    <div className="overflow-hidden relative w-auto h-[80%]">
       <div
         className="flex transition-transform ease-in-out duration-500"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}

@@ -1,7 +1,7 @@
 
 const Footer = () => {
   return (
-    <div className="mx-auto  mb-0 ">
+    <div className="mx-auto relative bottom-0 mb-0">
       <footer className="bg-n-6 text-center text-white">
         {/* for now n-6
          */}

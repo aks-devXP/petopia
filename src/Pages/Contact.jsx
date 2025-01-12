@@ -1,29 +1,159 @@
-import React from 'react'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import manager from '../assets/avatar/manager.jpg';
 
 const Contact = () => {
   return (
-    <section className="bg-white dark:bg-gray-900">
-  <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-      <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
-      <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
-      <form action="#" className="space-y-8">
-          <div>
-              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-              <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required />
-          </div>
-          <div>
-              <label htmlFor="subject" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
-              <input type="text" id="subject" className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let us know how we can help you" required/>
-          </div>
-          <div className="sm:col-span-2">
-              <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
-              <textarea id="message" rows="6" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment..."></textarea>
-          </div>
-          <button type="submit" className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send message</button>
-      </form>
-  </div>
-</section>
-  )
-}
+    <>
+      <section
+        className="py-12 bg-n-8"
+        id="section_6"
+      >
+        <div className="container mx-auto">
+          <div className="flex flex-wrap">
 
-export default Contact
+            {/* Contact Info Section */}
+            <div className="lg:w-1/3 w-full lg:ml-auto mb-8 lg:mb-0">
+              <div className="bg-n-6 p-6 rounded-3xl shadow">
+                <h2 className="text-2xl font-semibold mb-6">Get in touch</h2>
+
+                <div className="flex items-center mb-6">
+                  <img
+                    src={manager}
+                    className="w-32 h-32 object-cover rounded-full"
+                    alt=""
+                  />
+                  <div className="ml-4">
+                    <p className="text-lg font-medium mb-1">Clara Barton</p>
+                    <p className="text-sm font-semibold text-n-3">
+                      HR &amp; Office Manager
+                    </p>
+                  </div>
+                </div>
+
+                <div className="">
+                  <h5 className="text-lg text-white font-semibold mb-4">Contact Information</h5>
+                  <p className="flex text-n-3 items-center mb-3">
+                    <i className="bi-geo-alt mr-2"></i>
+                    Akershusstranda 20, 0150 Oslo, Norway
+                  </p>
+                  <p className="flex items-center mb-3">
+                    <i className="bi-telephone mr-2"></i>
+                    <NavLink
+                      to="tel:+91999966660"
+                      className="text-blue-400 hover:underline"
+                    >
+                      +91 999966660
+                    </NavLink>
+                  </p>
+                  <p className="flex items-center mb-3">
+                    <i className="bi-envelope mr-2"></i>
+                    <NavLink
+                      to="mailto:support@petopia.com"
+                      className="text-blue-400 hover:underline"
+                    >
+                      support@petopia.com
+                    </NavLink>
+                  </p>
+                  <NavLink
+                    to="https://maps.app.goo.gl/h3owoTeNAq6g5yYH7"
+                    className="mt-4 inline-block px-6 py-2 bg-color-7 text-white rounded hover:bg-blue-500"
+                  >
+                    Get Direction
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Form Section */}
+            <div className="lg:w-1/2 w-full mx-auto">
+              <form
+                className="p-6 bg-n-6 rounded-3xl shadow"
+                action="#"
+                method="post"
+                role="form"
+              >
+                <h2 className="text-2xl font-semibold mb-4">Contact form</h2>
+                <p className="mb-6 text-n-3">
+                  Or, you can just send an email at:  
+                  <NavLink
+                    to="mailto:support@petopia.com"
+                    className="text-blue-400 hover:underline"
+                  >
+                    {' '}
+                    support@petopia.com
+                  </NavLink>
+                </p>
+
+                <div className="flex flex-wrap -mx-2">
+                  <div className="w-1/2 px-2 mb-4">
+                    <input
+                      type="text"
+                      name="first-name"
+                      id="first-name"
+                      className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                      placeholder="Jack"
+                      required
+                    />
+                  </div>
+                  <div className="w-1/2 px-2 mb-4">
+                    <input
+                      type="text"
+                      name="last-name"
+                      id="last-name"
+                      className="w-full p-3 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                      placeholder="Doe"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  pattern="[^ @]*@[^ @]*"
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                  placeholder="Jackdoe@gmail.com"
+                  required
+                />
+
+                <select
+                  id="exampleDropdown"
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Who are you
+                  </option>
+                  <option value="petOwner">Pet Owner</option>
+                  <option value="option2">Veterinary Doc</option>
+                  <option value="option3">Pet Trainer</option>
+                  <option value="option4">Others</option>
+                </select>
+
+                <textarea
+                  name="message"
+                  rows="5"
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:ring focus:ring-blue-300"
+                  id="message"
+                  placeholder="How can we help you?"
+                ></textarea>
+
+                <button
+                  type="submit"
+                  className="w-full p-3 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Contact;
