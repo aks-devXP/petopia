@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
+import dog from '../assets/home-slider/dog-human.jpg';
+import trainer from '../assets/home-slider/dog.jpg';
+import vet from '../assets/home-slider/vet.jpg';
 import SliderImages from './SliderImages';
-import trainer from '../assets/home-slider/dog.jpg'
-import dog from '../assets/home-slider/dog-human.jpg'
-import vet from '../assets/home-slider/vet.jpg'
 
 const Slider = () => {
     const slideImages = [trainer,dog,vet];
   return (
-    <>
-        <div className='w-auto'>
+        <div className='w-auto '>
             <SliderImages slides={slideImages}></SliderImages>
         </div>
-    </>
   )
 }
 

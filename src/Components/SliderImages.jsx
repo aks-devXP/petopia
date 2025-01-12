@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const SliderImages = ({ slides }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -21,7 +21,7 @@ const SliderImages = ({ slides }) => {
   }, [slides.length]);
 
   return (
-    <div className="overflow-hidden relative w-full">
+    <div className="overflow-hidden relative w-auto h-36">
       <div
         className="flex transition-transform ease-in-out duration-500"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
