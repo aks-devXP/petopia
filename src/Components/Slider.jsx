@@ -1,11 +1,11 @@
 import React from 'react';
 import dog from '../assets/home-slider/dog-human.jpg';
-import trainer from '../assets/home-slider/trainer.jpg';
+import volunteer from '../assets/home-slider/volunteer.jpg';
 import vet from '../assets/home-slider/vet.jpg';
 import SliderImages from './SliderImages';
 
-const Slider = () => {
-    const slideImages = [trainer,dog,vet];
+const Slider = ({images=[dog,vet,volunteer]}) => {
+    const slideImages = images;
   return (
         <div className='h-fit'>
             <SliderImages slides={slideImages}></SliderImages>

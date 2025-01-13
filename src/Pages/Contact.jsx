@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import manager from '../assets/avatar/manager.jpg';
+import Header from '../Components/Header';
 
 const Contact = () => {
   return (
     <>
+      <Header normal1='We treat your feedback seriously.' highlighted='Contact Us' normal2='for any queries.' textcol='antiquewhite'></Header>
       <section
         className="py-12 bg-n-8"
         id="section_6"

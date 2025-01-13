@@ -3,6 +3,7 @@ import { RiCloseLine, RiMenu3Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import logo from '../assets/petopia-logo-color.png';
 import './Navbar.css';
+
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const menuOff = ()=>{
@@ -46,7 +47,7 @@ const Navbar = () => {
             <Link to={"/contact"} >Contact</Link>
           </li>
           <li>
-            <Link to={"/blog"} >News</Link>
+            <Link to={"/news"} >News</Link>
           </li>
           
         </ul>

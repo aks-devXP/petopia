@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Header = ({
-  path = "../assets/contact-vid.mp4",
+  path = "/contact-vid.mp4",
   highlighted = "digital masterpieces",
   normal1 = "Crafting",
   normal2 = "with pixel-perfect precision.",
@@ -26,8 +26,8 @@ const Header = ({
           zIndex: 1,
         }}
       >
-        <source src="/contact-vid.mp4" type="video/mp4" />
-        <source src= "../assets/contact-vid.mp4" type ="video/webM" />
+        <source src={path} type="video/mp4" />
+        <source src={path} type ="video/webM" />
         Your browser does not support the video tag.
       </video>
 

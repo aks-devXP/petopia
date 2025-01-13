@@ -8,6 +8,7 @@ import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
+import News from './pages/News'
 
 function App() {
     const router = createBrowserRouter(createRoutesFromElements(
@@ -19,7 +20,7 @@ function App() {
         <Route path="/home" element={<Home/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
-        <Route path="/blog" element={<Blog/>}></Route>
+        <Route path="/news" element={<News/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
       </Route>

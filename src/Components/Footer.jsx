@@ -146,9 +146,9 @@ const Footer = () => {
         </div>
 
         <div className="text-center p-3 bg-n-5">
-          © 2020 Copyright:
-          <a className="text-white hover:underline" href="https://mdbootstrap.com/">
-            MDBootstrap.com
+          © 2025 Copyright: 
+          <a className="text-white hover:underline" href="">
+            Petopia@org
           </a>
         </div>
       </footer>
