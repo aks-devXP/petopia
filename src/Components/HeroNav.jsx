@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import heartIcon from '../assets/trainer.png';
 import receiveIcon from '../assets/animal-rights.png';
 import scholarIcon from '../assets/pet-shop.png';
 import vet from '../assets/vet.png';
+import Card from './CardHero';
 
 const HeroNav = () => {
   return (
@@ -14,61 +14,10 @@ const HeroNav = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Vet Appointment */}
-          <div className="flex justify-center items-center p-4 hover:shadow-xl rounded-xl hover:bg-n-5 hover:-translate-y-2 cursor-pointer hover:scale-90 transition-transform duration-300">
-            <NavLink to="/vet" className="block text-center">
-              <img
-                src={vet}
-                className="w-32 max-w-xs mx-auto mb-4"
-                alt="Vet Appointment"
-              />
-              <p className="text-lg font-medium">
-                Book an <strong>Appointment</strong>
-              </p>
-            </NavLink>
-          </div>
-
-          {/* Pet Trainers */}
-          <div className="flex justify-center items-center p-4 hover:shadow-xl hover:bg-n-5 hover:-translate-y-2 rounded-xl cursor-pointer hover:scale-90 transition-transform duration-300">
-            <NavLink to="/trainer" className="block text-center">
-              <img
-                src={heartIcon}
-                className="w-32 max-w-xs mx-auto mb-4"
-                alt="Pet Trainers Nearby"
-              />
-              <p className="text-lg font-medium">
-                <strong>Pet</strong> Trainers Nearby
-              </p>
-            </NavLink>
-          </div>
-
-          {/* Animal Welfare */}
-          <div className="flex justify-center items-center p-4 hover:shadow-xl hover:bg-n-5 hover:-translate-y-2 rounded-xl cursor-pointer hover:scale-90 transition-transform duration-300">
-            <NavLink to="/ngo" className="block text-center">
-              <img
-                src={receiveIcon}
-                className="w-32 max-w-xs mx-auto mb-4"
-                alt="Animal Welfare"
-              />
-              <p className="text-lg font-medium">
-                Animal <strong>Welfare</strong>
-              </p>
-            </NavLink>
-          </div>
-
-          {/* Shopping Center */}
-          <div className="flex justify-center items-center p-4 hover:shadow-xl hover:bg-n-5 hover:-translate-y-2 rounded-xl cursor-pointer hover:scale-90 transition-transform duration-300">
-            <NavLink to="/shopping" className="block text-center">
-              <img
-                src={scholarIcon}
-                className="w-32 max-w-xs mx-auto mb-4"
-                alt="Shopping Center"
-              />
-              <p className="text-lg font-medium">
-                <strong>Shopping</strong> Center
-              </p>
-            </NavLink>
-          </div>
+          <Card link='/vet' text='Book an Appointment' img={vet} alt='Vet Logo Art'></Card>
+          <Card link='/trainer' text='Pet Trainers Nearby' img={heartIcon} alt="Pet Trainer Logo Art"></Card>
+          <Card link='/ngo' text='Animal Welfare' img={receiveIcon} alt='NGO Logo Art'></Card>
+          <Card link='/shopping' text='Shopping' img={scholarIcon} alt='Shopping Logo Art'></Card>
         </div>
       </div>
     </section>
