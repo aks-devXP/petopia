@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RiCloseLine, RiMenu3Fill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logo from '../assets/petopia-logo-color.png';
 import './Navbar.css';
 
