@@ -44,7 +44,7 @@ const HeroNav = () => {
 
           {/* Animal Welfare */}
           <div className="flex justify-center items-center p-4 hover:shadow-xl hover:bg-n-5 hover:-translate-y-2 rounded-xl cursor-pointer hover:scale-90 transition-transform duration-300">
-            <NavLink to="/animal_welfare" className="block text-center">
+            <NavLink to="/ngo" className="block text-center">
               <img
                 src={receiveIcon}
                 className="w-32 max-w-xs mx-auto mb-4"

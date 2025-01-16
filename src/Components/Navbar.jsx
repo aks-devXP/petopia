@@ -11,45 +11,47 @@ const Navbar = () => {
     console.log("menu off");
   };
   const [loggedin, setLoggedin] = useState("Sign in");
+
+
   const Submenu = ()=>{
     return (
       <ul>
         <li>
-          <Link to={"/"} >Veterinary</Link>
+          <NavLink to={"/vet"} >Veterinary</NavLink>
         </li>
         <li>
-          <Link to={"/"} >NGO</Link>
+          <NavLink to={"/ngo"} >NGO</NavLink>
         </li>
         <li>
-          <Link to={"/"} >Products</Link>
+          <NavLink to={"/shopping"} >Products</NavLink>
         </li>
         <li>
-          <Link to={"/"} >Training</Link>
+          <NavLink to={"/trainers"} >Training</NavLink>
         </li>
       </ul>
     )
   }
+
   const Menu = ()=>{
     return(
       
         <ul>
           <li>
-            <Link to={"/home"} >Home</Link>
+            <NavLink to={"/home"} >Home</NavLink>
           </li>
           <li>
-            <Link to={"/about"} >About</Link>
+            <NavLink to={"/about"} >About</NavLink>
           </li>
           <li className='submenu'>
-            <Link to={"#"} >Services</Link>
+            <NavLink to={"#"} >Services</NavLink>
             <Submenu/>
           </li>
           <li>
-            <Link to={"/contact"} >Contact</Link>
+            <NavLink to={"/contact"} >Contact</NavLink>
           </li>
           <li>
-            <Link to={"/news"} >News</Link>
+            <NavLink to={"/news"} >News</NavLink>
           </li>
-          
         </ul>
       
     )
@@ -73,6 +75,7 @@ const Navbar = () => {
           }
         }}>{loggedin}</button>
       </div>
+      
       <div className="navbar-menu" onBlur= {menuOff}>
         {toggle?<RiCloseLine color="#fff" onClick={()=>setToggle(false)}/>:<RiMenu3Fill color="#fff" onClick={()=>setToggle(true)}/>}
           {
