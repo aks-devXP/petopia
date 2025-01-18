@@ -30,7 +30,7 @@
   align-items: center;
   width: 100%;
   padding-top: 1rem;
-  background-color: rgb(8, 13, 15);
+  background-color: rgba(0,0,0,0);
 }
 
 .navbar-links{
@@ -73,13 +73,12 @@
 
 .navbar-links_container ul a:hover,
 .navbar-menu_container ul a:hover{
-  color: #E8E8E8;
+  color: #F5F5DC;
 }
 .navbar-links_container ul a,
 .navbar-sign p,
 .navbar-menu_container ul a{
-  color: rgb(128, 173, 212);
-  font-family: sans-serif;
+  color: rgb(255, 255, 255);
   font-weight: 500;
   font-size: 1.2rem;
   line-height: 25px;
@@ -88,11 +87,11 @@
   cursor: pointer;
 }
 
-.navbar-sign button,
+/* .navbar-sign button,
 .navbar-menu_container button{
   padding: 0.5rem 1rem;
   color: aliceblue;
-  background: radial-gradient(ellipse at 50% 50%, rgba(220, 71, 191, 1) 0%, rgba(172, 19, 123, 1) 57%, rgba(229, 45, 126, 1) 100%);
+  background: radial-gradient(ellipse at 50% 50%, rgb(221, 221, 221) 0%, rgba(172, 19, 123, 1) 57%, rgba(229, 45, 126, 1) 100%);
   font-family: sans-serif;
   font-weight: 500;
   font-size: 1.2rem;
@@ -101,6 +100,16 @@
   border-radius: 5px;
   outline: none;
   cursor: pointer;
+
+} */
+.navbar-sign button{
+  margin: 10px;
+}
+.log-in-button,.user-button{
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  color: #000;
 
 }
 .navbar-menu{
@@ -232,11 +241,11 @@
   transition: all 0.5s ease-in;
 }
   .navbar-links_container ul a{
-    transition: color 0.5s ease-in;
+    transition: color 0.3s ease-in;
   }
   .submenu::after{
     transition-property: opacity;
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
   }
   /* NEED TO CHANGE FOR Smaller Dispalys */
