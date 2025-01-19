@@ -3,17 +3,18 @@ import MainLayout from './Layout/MainLayout'
 import About from './Pages/About'
 import Blog from "./pages/Blog"
 import Contact from './Pages/Contact'
-import Home from './Pages/Home'
+import Home from './pages/Home'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
 import News from './pages/News'
+import NewsPage from './pages/NewsPage'
 
 function App() {
     const router = createBrowserRouter(createRoutesFromElements(
       <>
-      <Route path='/login' element={<Login/>}></Route>\
+      <Route path='/login' element={<Login/>}></Route>
       <Route path='sign-up' element={<Signup/>}></Route>
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
+        <Route path='/news2' element={<NewsPage/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
       </Route>

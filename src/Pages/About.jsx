@@ -11,7 +11,7 @@ const About = () => {
       highlighted='Learn More' 
       normal2='about our mission and services.' 
       textcol='antiquewhite'
- ></Header>
+      ></Header>
       <TeamInfo></TeamInfo>
     </>
   )
