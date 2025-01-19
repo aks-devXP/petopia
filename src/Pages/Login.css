@@ -1,6 +1,6 @@
 
-input,
-button
+login input,
+login button
 {
   font-size: var(--normal-font-size);
   font-family: var(--body-font);
@@ -8,21 +8,20 @@ button
 
 } 
 
-body{
+login body{
   color: var(--white-color);
 }
-
 input,
-button{
+ button{
   border: none;
   outline: none;
   
 }
 
-a{
+login a{
   text-decoration:none;
 }
-img{
+login img{
   max-width: 100%;
   height: auto;
 }

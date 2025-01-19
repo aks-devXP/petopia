@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiEyeCloseFill, RiEyeFill, RiLock2Line, RiUserLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import loginimg from '../assets/login-bg2.jpg';
+import Loader from '../Components/Loader/Loader';
+import { useLoading } from './LodingPage';
 import './Login.css';
 
 const Login = () => {
@@ -21,8 +23,23 @@ const Login = () => {
     }, 4000);
   };
 
+  // loading effect
+  const { isLoading, setIsLoading }  = useLoading();
+  useEffect(() => {
+    setIsLoading(true);
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [setIsLoading]);
+
   return (
-    <div className="login">
+    <>{
+      isLoading && <Loader />
+    }
+    {!isLoading && ( <div className="login">
       <img src={loginimg} alt="kitchen bg" className="login__img" />
       <form action="" className="login__form" onSubmit={handleLogin}>
         <h1 className="login__title">Login</h1>
@@ -74,7 +91,8 @@ const Login = () => {
           Don't have an account? <a href="/sign-up" className="login__link">Sign up</a>
         </p>
       </form>
-    </div>
+    </div>)}
+    </>
   );
 };
 
