@@ -30,9 +30,16 @@
   scroll-behavior: smooth;
 }
 
+/* html,
+body {
+  height: 100%;
+  
+} */
+
 @layer base {
   body {
     @apply font-sans bg-n-8 text-n-1 text-base;
+
   }
 }
 
