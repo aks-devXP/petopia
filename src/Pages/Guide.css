@@ -1,0 +1,70 @@
+.container {
+    display: grid;
+    grid-template-columns: 70% 30%; /* Default 70-30 split */
+    height: 100vh; 
+    background-color: #f5f5dc; /* Beige for background */
+    box-sizing: border-box;
+  }
+  
+  .left-section {
+    margin: 10px;
+    background-color: #d2b48c; /* Tan for the left section */
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  
+  .right-section {
+    margin: 10px;
+    background-color: #deb887;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+  
+  .picture {
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #f5deb3; /* Wheat for the picture */
+    aspect-ratio: 1; /* Ensures the div is a square */
+    height: auto;
+    max-width: 100%; /* Prevents it from exceeding container width */
+  }
+  
+  .info {
+    border-radius: 10px;
+    margin: 10px;
+    background-color: #e3c29f; /* Light pastel brown for info */
+    flex: 1; /* Takes up the remaining space */
+    padding: 10px; /* Spacing inside the info block */
+    box-sizing: border-box;
+  }
+  
+  /* Media Query for Smaller Screens (max-width: 800px) */
+  @media (max-width: 800px) {
+    .container {
+      display: flex; /* Switch to flexbox for better dynamic sizing */
+      flex-direction: column; /* Stack items vertically */
+      padding: 0px;
+    }
+  
+    .right-section {
+      order: -1;
+      display: grid;
+      grid-template-columns: 200px 1fr; 
+      gap: 10px;
+    }
+    .left-section{
+        height: 100px;
+    }
+  
+    .picture {
+      width: 200px; /* Fixed width for the picture */
+      height: 200px; /* Fixed height for the picture */
+    }
+  
+    .info {
+      height: 200px;
+    }
+  }
+  
