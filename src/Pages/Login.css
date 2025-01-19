@@ -166,3 +166,50 @@ img{
   top: -12px;
   font-size: var(--small-font-size);
 }
+
+
+/* Login Button Animation */
+
+.button--loader {
+  display: none;
+  gap: 0.25rem;
+}
+
+.button--loader > div {
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: rgb(18, 19, 20);
+  border-radius: 50%;
+  animation: loading 1s infinite alternate;
+}
+
+.button--loader div:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.button--loader div:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.login__button.loading .button--text {
+  display: none;
+}
+
+.login__button.loading .button--loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__button.success {
+  background-color: #1FA47C; /* Success color */
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(0.6);
+  }
+}
