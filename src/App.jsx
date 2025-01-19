@@ -9,6 +9,7 @@ import Signup from './Pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
 import News from './pages/News'
+import Guide from './pages/Guide'
 
 function App() {
     const router = createBrowserRouter(createRoutesFromElements(
@@ -17,6 +18,7 @@ function App() {
       <Route path='sign-up' element={<Signup/>}></Route>
       <Route index element={<Home/>}></Route>
       <Route path="/home" element={<Home/>}></Route>
+      <Route path="/guide" element={<Guide/>}></Route>
       <Route path="/" element={<MainLayout/>}>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
