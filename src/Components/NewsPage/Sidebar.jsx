@@ -13,8 +13,9 @@ const Sidebar = () => {
                 <p className='font-thin'>Published</p>
                 <p className='font-bold'>15 January 2025 22:35 IST</p>
                 <p className='mt-4 font-thin'>Content</p>
-                <p className='font-bold'>Kevin Hendricks</p>
+                <p className='font-bold hover:cursor-pointer'>Kevin Hendricks</p>
                 <p className='mt-4 font-thin'>Share</p>
+                
                 <div className='flex justify-between mt-1'>
                     <Link to='/news2'>
                         <FaLink className='hover:cursor-pointer size-5'/>
@@ -34,9 +35,9 @@ const Sidebar = () => {
                 </div>
             </div>
 
-            <div className='mt-10 font-grotesk'>
+            <div className='mt-14 font-grotesk'>
                 <p className='text-xl font-semibold'>Related News</p>
-                <div className='flex flex-col mt-2'>
+                <div className='flex flex-col'>
                     <RelatedNewsCard></RelatedNewsCard>
                     <RelatedNewsCard></RelatedNewsCard>
                     <RelatedNewsCard></RelatedNewsCard>

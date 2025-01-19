@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ScrollToTop from '../ScrollToTop'
 
-const Card = ({img='', link='/news'}) => {
+const Card = ({img='', link='/news2'}) => {
   return (
     <>  
         <div className='bg-white w-[30%] flex-col rounded-3xl overflow-hidden mx-10 border-8 border-[#595758]'>

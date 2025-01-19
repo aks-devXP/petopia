@@ -2,7 +2,7 @@ import React from 'react'
 import dogImage from '../../assets/signup-bg.jpg'
 import Card from './Card'
 
-const NewsHome = () => {
+const TrendingNews = () => {
   return (
     <>
         <section>
@@ -19,4 +19,4 @@ const NewsHome = () => {
   )
 }
 
-export default NewsHome
+export default TrendingNews

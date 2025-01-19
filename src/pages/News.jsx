@@ -6,6 +6,7 @@ import news3 from "../assets/news-slider/news-3.jpg"
 import news4 from "../assets/news-slider/news-4.jpg"
 import Header from '../Components/Header'
 import newsVid from '/news-vid1.mp4'
+import TrendingNews from '../Components/NewsPage/TrendingNews'
 
 const News = () => {
     const arr = [news1, news2, news3, news4]
@@ -14,11 +15,10 @@ const News = () => {
         <Header path={newsVid} normal1='Stay updated with the latest happenings at Petopia.'
             highlighted='Read News' 
             normal2='to discover new updates and events.' 
-            textcol='antiquewhite'></Header>
-        <div className='py-10'>
-            <p className='text-center text-3xl'>Latest News</p>
-        </div>
-        <Slider images={arr}></Slider>
+            textcol='antiquewhite'>
+        </Header>
+
+        <TrendingNews></TrendingNews>
     </>
   )
 }

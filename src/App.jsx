@@ -9,6 +9,7 @@ import NewsPage from './pages/NewsPage'
 import Signup from './Pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
+import ScrollToTop from './Components/ScrollToTop'
 
 // For smooth scrolling
 import { gsap } from 'gsap'
@@ -59,7 +60,9 @@ function App() {
     </>
     ));
   
-    return <RouterProvider router={router}></RouterProvider>
+    return <>
+      <RouterProvider router={router}/> 
+    </>
 }
 
 export default App
