@@ -2,7 +2,6 @@ const UserModel = require('../Models/UsersDB');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const loginControl = async (req, res) => {  
-    
     try {
         const { email, password } = req.body;
         console.log(email, password);
@@ -27,7 +26,6 @@ const loginControl = async (req, res) => {
 }
 
 const signupControl = async (req, res) => {
-   
     try {
         
         const { name, email, password } = req.body;
@@ -52,10 +50,17 @@ const signupControl = async (req, res) => {
         const enc_pass = await bcrypt.hash(password, 12);
         newUser.password = enc_pass;
         await newUser.save();
-        res.status(201).json({ message: 'Signup Successful' ,success: true});
+        const user = await UserModel.findOne({
+            email: email,
+        });
+
+        const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
+        res.status(201).json({ message: 'Signup Successful' ,success: true, token: token});
+        // console.log(token);
+        
     }
     catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ message: error.message });
     }
 }
 
