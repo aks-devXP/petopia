@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
 const Header = ({
   path = "/contact-vid.mp4",
   highlighted = "digital masterpieces",
   normal1 = "Crafting",
   normal2 = "with pixel-perfect precision.",
-  textcol ="white",
-  highlightedcol = "#FFBF1A"
+  textcol = "white",
+  highlightedcol = "#FFBF1A",
 }) => {
   return (
     <section id="hero" style={{ position: "relative", color: "white" }}>
@@ -27,7 +27,7 @@ const Header = ({
         }}
       >
         <source src={path} type="video/mp4" />
-        <source src={path} type ="video/webM" />
+        <source src={path} type="video/webM" />
         Your browser does not support the video tag.
       </video>
 
@@ -48,10 +48,10 @@ const Header = ({
             fontWeight: 700,
             lineHeight: 1.2,
             maxWidth: "80%",
-            color: textcol
+            color: textcol,
           }}
         >
-          {normal1} <span style={{ color:highlightedcol }}>{highlighted}</span>{" "}
+          {normal1} <span style={{ color: highlightedcol }}>{highlighted}</span>{" "}
           {normal2}
         </h1>
       </div>
