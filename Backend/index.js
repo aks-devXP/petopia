@@ -10,5 +10,5 @@ app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
 } );
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors("http://localhost:5173/"));
 app.use('/auth', require('./Routes/auth'));
