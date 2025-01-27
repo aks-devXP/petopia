@@ -7,9 +7,9 @@ const Loader = () => (
       <text x="50%" y="50%" textAnchor="middle" className="text-body">
         Petopia
       </text>
-      <text x="50%" y="50%" dx="1.9em" textAnchor="middle" className="text-body">
+      {/* <text x="50%" y="50%" dx="1.9em" textAnchor="middle" className="text-body">
         .
-      </text>
+      </text> */}
     </svg>
   </div>
 );
