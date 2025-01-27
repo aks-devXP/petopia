@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { RiEyeCloseFill, RiEyeFill, RiLock2Line, RiUserLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import { SingUpAPI } from '../API/GeneralAPI';
 import signup_img from '../assets/signup-bg.jpg';
 import Loader from '../Components/Loader/Loader';
-
 import { useLoading } from './LodingPage';
 import './Login.css';
 
@@ -13,18 +13,53 @@ export const Signup = () => {
   const [success, setSuccess] = useState(false);
   const [pass, setPass] = useState(true);
   const navigate = useNavigate();
-
+  const [user,setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  })
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     // Simulate a delay for signup process
-    setTimeout(() => {
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   setSuccess(true);
+    //   setTimeout(() => navigate("/"), 2000); // Navigate after showing success
+    // }, 4000);
+    try{
+      const response = await SingUpAPI(user);
+      const data = await response.json();
+      console.log(data);
+      if(data.success){
+        setLoading(false);
+        setSuccess(true);
+        setTimeout(() => navigate("/"), 1000); // Navigate after showing success
+      }
+      else {
+        setLoading(false);
+        setSuccess(false);
+        alert(data.message);
+      }
+    }
+    catch(err){
+      console.log(err);
       setLoading(false);
-      setSuccess(true);
-      setTimeout(() => navigate("/"), 2000); // Navigate after showing success
-    }, 4000);
+      setSuccess(false);
+      alert("Something went wrong");
+    }
+    finally{    
+      setLoading(false);
+    }
   };
+  // handle input change
+  const handleChange = (e)=>{
+    setUser({
+      ...user ,
+      [e.target.name]:e.target.value
+    })
+  }
 
   // Loader simulation from the context
   const { isLoading, setIsLoading } = useLoading();
@@ -43,21 +78,25 @@ export const Signup = () => {
       {isLoading && <Loader />}
       {!isLoading && (
         <div className="login">
-          <img src={signup_img} alt="kitchen bg image" className="login__img" />
+          <img src={signup_img} alt="SignUp bg image" className="login__img" />
           <form action="" className="login__form" onSubmit={handleSignup}>
             <h1 className="login__title">Signup</h1>
             <div className="login__content">
               <div className="login__box">
                 <RiUserLine className="login__icon" />
                 <div className="login__box-input">
-                  <input type="text" required className="login__input" placeholder="" />
+                  <input name="name"
+                  onChange={e=>handleChange(e)}
+                  type="text" required className="login__input" placeholder="" />
                   <label className="login__label">UserName</label>
                 </div>
               </div>
               <div className="login__box">
                 <MdEmail className="login__icon" />
                 <div className="login__box-input">
-                  <input type="email" required className="login__input" placeholder="" />
+                  <input type="email"
+                  name="email"
+                  onChange={e=>handleChange(e)} required className="login__input" placeholder="" />
                   <label className="login__label">Email</label>
                 </div>
               </div>
@@ -70,7 +109,10 @@ export const Signup = () => {
                   :
                   <RiEyeFill className="login__eye" onClick={()=>setPass(!pass)}/>
                                }
-                  <input type={pass?"password":"text"} required className="login__input" placeholder="" />
+                  <input type={pass?"password":"text"}
+                  name="password"
+                  onChange={e=>handleChange(e)}
+                  required className="login__input" placeholder="" />
                   <label className="login__label">Password</label>
                 </div>
               </div>
