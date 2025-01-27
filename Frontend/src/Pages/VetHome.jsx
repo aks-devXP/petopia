@@ -1,5 +1,6 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import Card from "../Components/Vet/CardHero";
+import vet from "../assets/vet.png";
 
 function VetHome() {
 
@@ -84,6 +85,18 @@ function VetHome() {
 
   return (
     <>
+      <div className='relative'>
+        <img className='' src="https://static.vecteezy.com/system/resources/previews/011/602/170/large_2x/veterinary-clinic-female-doctor-portrait-at-the-animal-hospital-holding-cute-sick-cat-free-photo.jpg" alt="" />
+        <div className='absolute left-5 bottom-0 my-5 w-[50%]'>
+          <p className='font-semibold text-4xl'>Trusted Vet Consultation Near You Compassionate Care by Expert Vets</p>
+          <button className='mt-10 border-black px-4 py-2 rounded-2xl border-2 border-solid bg-black hover:bg-n-4 hover:border-n-3 transition-colors'>Book Appointment</button>
+          <div className='flex justify-between w-[70%] mt-12'>
+            <Card link='/vet' text='150+ Caring Vets' img={vet} alt='Vet Logo Art'></Card>
+            <Card link='/vet' text='24/7 Care Available' img={vet} alt='Vet Logo Art'></Card>
+            <Card link='/vet' text='800+ Pets Served' img={vet} alt='Vet Logo Art'></Card>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

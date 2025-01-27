@@ -12,7 +12,7 @@ login body{
   color: var(--white-color);
 }
 input,
- button{
+button{
   border: none;
   outline: none;
   
@@ -131,6 +131,9 @@ login img{
   width: 16px;
   height: 16px;
 }
+.login__check-label, .login__forget{
+  margin-left:  0.5rem;
+}
 
 .login__forget:hover{
   text-decoration: underline;
@@ -202,7 +205,9 @@ login img{
 
 .login__button.success {
   background-color: #1FA47C; /* Success color */
+  transition: background-color 0.5s;
 }
+
 
 @keyframes loading {
   0% {
