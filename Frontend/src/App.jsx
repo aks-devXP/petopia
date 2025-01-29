@@ -10,6 +10,7 @@ import Signup from './Pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
 import ScrollToTop from './Components/ScrollToTop'
+import Guide from './pages/Guide'
 
 // For smooth scrolling
 import { gsap } from 'gsap'
@@ -45,11 +46,13 @@ function App() {
 
     const router = createBrowserRouter(createRoutesFromElements(
       <>
-      <Route path='/login' element={<Login/>}></Route>
-      <Route path='sign-up' element={<Signup/>}></Route>
+      {/* <Route path='/login' element={<Login/>}></Route>
+      <Route path='sign-up' element={<Signup/>}></Route> */}
+      <Route path="/guide" element={<Guide/>}></Route>
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
+        
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
