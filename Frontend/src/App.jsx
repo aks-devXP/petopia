@@ -9,8 +9,11 @@ import NewsPage from './pages/NewsPage'
 import Signup from './Pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
+import Dictionary from "./pages/Dictionary"
+import Guide from "./pages/Guide"
 import ScrollToTop from './Components/ScrollToTop'
-import Guide from './pages/Guide'
+
+
 
 // For smooth scrolling
 import { gsap } from 'gsap'
@@ -48,12 +51,13 @@ function App() {
       <>
       {/* <Route path='/login' element={<Login/>}></Route>
       <Route path='sign-up' element={<Signup/>}></Route> */}
-      <Route path="/guide" element={<Guide/>}></Route>
+
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
         
         <Route path="/vet" element={<VetHome/>}></Route>
+        <Route path="/guide" element={<Dictionary/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2' element={<NewsPage/>}></Route>
