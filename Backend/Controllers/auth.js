@@ -17,7 +17,7 @@ const loginControl = async (req, res) => {
         }
         const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
         console.log("Login Successful and The Your Token is: ", token);
-        res.status(200).json({ message: 'Login Successful',  success: true, token: token });
+        res.status(200).json({ message: 'Login Successful',  success: true, token: token, user_name: user.name });
     }
     catch (error) {
         res.status(500).json({ error: error.message });
@@ -55,7 +55,7 @@ const signupControl = async (req, res) => {
         });
 
         const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
-        res.status(201).json({ message: 'Signup Successful' ,success: true, token: token});
+        res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: user.name });
         // console.log(token);
         
     }

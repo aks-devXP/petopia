@@ -2,16 +2,14 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import MainLayout from './Layout/MainLayout'
 import About from './Pages/About'
 import Contact from './Pages/Contact'
+import Guide from './pages/Guide'
 import Home from './pages/Home'
-import Login from './Pages/Login'
+import Login from './pages/Login'
 import News from './pages/News'
 import NewsPage from './pages/NewsPage'
-import Signup from './Pages/Signup'
+import Signup from './pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
-import ScrollToTop from './Components/ScrollToTop'
-import Guide from './pages/Guide'
-
 // For smooth scrolling
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -46,13 +44,13 @@ function App() {
 
     const router = createBrowserRouter(createRoutesFromElements(
       <>
-      {/* <Route path='/login' element={<Login/>}></Route>
-      <Route path='sign-up' element={<Signup/>}></Route> */}
-      <Route path="/guide" element={<Guide/>}></Route>
+      <Route path='/login' element={<Login/>}></Route>
+      <Route path='sign-up' element={<Signup/>}></Route>
+      
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
-        
+        <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>

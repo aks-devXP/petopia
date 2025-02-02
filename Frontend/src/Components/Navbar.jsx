@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RiCloseLine, RiMenu3Fill } from "react-icons/ri";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/petopia-logo.svg";
 import "./Navbar.css";
 
@@ -8,13 +8,22 @@ const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
   const [toggle, setToggle] = useState(false);
   const userName = "UserName"; // Replace with a dynamic value if needed
-
-  const handleSignInLogIn = () => {
+  const Navigate =  useNavigate();
+  const handleSignInLogIn = (e) => {
     setLoggedin(true);
+    if(e.target.innerText === "Sign Up"){
+      Navigate("/sign-up");
+    }
+    else{
+      Navigate("/login");
+    }
+
+
   };
 
   const handleLogout = () => {
     setLoggedin(false);
+    
   };
 
   const menuOff = () => {
@@ -87,10 +96,10 @@ const Navbar = () => {
           </button>
         ) : (
           <>
-            <button className="sign-in-button" type="sign-in-button" onClick={handleSignInLogIn}>
-              Sign in
+            <button className="sign-in-button" type="sign-in-button" onClick={e=> handleSignInLogIn(e)}>
+              Sign Up
             </button>
-            <button className="log-in-button" type="log-in-button" onClick={handleSignInLogIn}>
+            <button className="log-in-button" type="log-in-button" onClick={e=>handleSignInLogIn(e)}>
               Log in
             </button>
           </>
