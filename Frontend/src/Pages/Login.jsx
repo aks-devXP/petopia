@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { RiEyeCloseFill, RiEyeFill, RiLock2Line, RiUserLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { LoginAPI } from '../API/GeneralAPI';
 import loginimg from '../assets/login-bg2.jpg';
 import Loader from '../Components/Loader/Loader';
+import { handleError } from '../Util/Alerts';
 import { useLoading } from './LodingPage';
 import './Login.css';
 
@@ -36,19 +38,21 @@ const Login = () => {
       if(data.success){
         setLoading(false);
         setSuccess(true);
+        localStorage.setItem("token",data.token);
+        localStorage.setItem("user_name",JSON.stringify(data.user_name));
         setTimeout(() => navigate("/"), 2000); // Navigate after showing success
       }
       else{
         setLoading(false);
         setSuccess(false);
-        alert(data.message);
+        handleError(data.message);
       }
     }
     catch(err){
       console.log(err);
       setLoading(false);
       setSuccess(false);
-      alert(err);
+      handleError(err);
     }
     finally{
     setLoading(false);
@@ -139,6 +143,7 @@ const Login = () => {
           Don't have an account? <a href="/sign-up" className="login__link">Sign up</a>
         </p>
       </form>
+      <ToastContainer/>
     </div>)}
     </>
   );

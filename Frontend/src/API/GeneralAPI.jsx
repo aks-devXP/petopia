@@ -21,3 +21,13 @@ export async function SingUpAPI(user){
     body:JSON.stringify(user)
   });
 }
+export  async  function ContactAPI(contactInfo){
+  console.log(contactInfo.message);
+  return fetch(`${baseUrl}/user/contact-us`,{
+    method:'POST',
+    headers:{
+      'Content-Type':"application/json"
+    },
+    body:JSON.stringify(contactInfo)
+  });
+}

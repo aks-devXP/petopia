@@ -1,4 +1,4 @@
-const { boolean } = require('joi');
+
 const mogoo = require('mongoose');
 const Schema = mogoo.Schema;
 const UserSchema = new Schema({
@@ -11,6 +11,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique: true
+  },
+  profilePic:{
+    type: String,
+    default: ""
   },
   password: {
     type: String,
