@@ -12,6 +12,7 @@ import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
 import UserDashboard from './Pages/UserDashboard'
 
+import "react-toastify/ReactToastify.css";
 // For smooth scrolling
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'

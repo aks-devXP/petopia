@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiCloseLine, RiMenu3Fill } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/petopia-logo.svg";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const [loggedin, setLoggedin] = useState(false);
+  const [loggedin, setLoggedin] = useState("");
   const [toggle, setToggle] = useState(false);
-  const userName = "UserName"; // Replace with a dynamic value if needed
+  let userName = ""; 
   const Navigate =  useNavigate();
+
   const handleSignInLogIn = (e) => {
     setLoggedin(true);
     if(e.target.innerText === "Sign Up"){
@@ -17,12 +18,17 @@ const Navbar = () => {
     else{
       Navigate("/login");
     }
-
-
   };
-
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      setLoggedin(localStorage.getItem("user_name")||"");
+      // userName = JSON.parse(localStorage.getItem("user_name"));
+      console.log(loggedin);
+    }
+  }, []);
+  // console.log(loggedin);
   const handleLogout = () => {
-    setLoggedin(false);
+    setLoggedin("");
     
   };
 
@@ -90,9 +96,9 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-sign">
-        {loggedin ? (
-          <button className="user-button" type="user-button" onClick={handleLogout}>
-            Hi, {userName}
+        {localStorage.getItem("token") ? (
+          <button className="user-button" type="user-button">
+            Hi, {loggedin.replace(/['"]+/g, "")}
           </button>
         ) : (
           <>
