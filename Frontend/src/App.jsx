@@ -10,6 +10,8 @@ import NewsPage from './pages/NewsPage'
 import Signup from './pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
+import UserDashboard from './Pages/UserDashboard'
+
 // For smooth scrolling
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -49,6 +51,7 @@ function App() {
       
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
+        <Route path='/dashboard' element={<UserDashboard/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
