@@ -26,8 +26,8 @@ const Slider = ({doctors}) => {
         style={{ transform: `translateX(-${currentIndex * imageWidth}%)` }}
       >
         {doctors.map((slide, index) => (
-            <div className='w-[300px] flex-shrink-0 h-[300px] bg-slate-400 rounded-3xl p-2'>
-              <div className='w-[50%] h-[50%] mb-3 '>
+            <div className='w-[300px] flex-shrink-0 h-[300px] bg-slate-400 rounded-3xl p-2 mx-1'>
+              <div className='w-[50%] h-[50%] mb-3'>
                 <img
                   className="w-full h-full rounded-full object-cover"
                   src={slide.imageUrl}
@@ -38,7 +38,7 @@ const Slider = ({doctors}) => {
                 <p className='text-black font-bold'>Debijit Chowdhury</p>
                 <p className='text-black font-bold'>Qualification: <span>BVSc, MVSc</span> </p>
                 <p className='text-black font-bold'>Experience: <span>6 Years</span></p>
-                <p className='text-black font-bold'>Rating: 4.2 Star</p>
+                <p className='text-black font-bold'>Rating: 4.2</p>
               </div>
             </div>
         ))}
