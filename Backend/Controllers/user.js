@@ -20,13 +20,13 @@ const ContactControl = async (req, res) => {
 
 const getProfileControl = async (req,res)=>{
   try{
-    const user_name = req.body.name;
+    const user_name = req.verified.user_name;
     
     // res.status(200).json({message: 'Profile Info', success: true, user_name: user_name});
   
 
     const user = await UserModel.findOne({name: user_name, });
-    console.log(user);
+    console.log(user.name);
     if(!user){
       return res.status(400).json({message: 'User not found', success: false});
     }
@@ -37,11 +37,13 @@ const getProfileControl = async (req,res)=>{
   }
 }
 
-const postProfileControl = async (req,res)=>{
+const updateProfileControl = async (req,res)=>{
   try{
     const user_name = req.body.name;
     const user = await UserModel.findOne({name: user_name, });
     console.log(user);
+    // will implement the update profile logic here 
+    // in parts
     if(!user){
       return res.status(400).json({message: 'User not found', success: false});
     }
@@ -51,5 +53,5 @@ const postProfileControl = async (req,res)=>{
     res.status(500).json({message:'Internal server error', success: false});
   }
 } 
-module.exports = { ContactControl, getProfileControl };
+module.exports = { ContactControl, getProfileControl, updateProfileControl };
 
