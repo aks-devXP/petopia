@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import manager from '../assets/avatar/manager.jpg';
+import User from '../Components/Dashboard/User';
+import ButtonNav from '../Components/Dashboard/ButtonNav';
+import Pass from '../Components/Dashboard/Pass';
+import Appointments from '../Components/Dashboard/Appointments';
+import History from '../Components/Dashboard/History';
+import Messages from '../Components/Dashboard/Messages';
+import { FaBookMedical, FaCircleUser  } from "react-icons/fa6";
+import { MdDashboard } from "react-icons/md";
+import { FaCalendarMinus } from "react-icons/fa6";
+import { TiMessages } from "react-icons/ti";
+
 
 const UserDashboard = () => {
   const [user, setUser] = useState({
@@ -16,6 +27,7 @@ const UserDashboard = () => {
   });
 
   const [isEditing, setIsEditing] = useState(false);
+  const [toggleButton, setToggleButton] = useState(1);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,129 +42,31 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className='m-6 rounded-3xl bg-n-11 h-fit'>
-      <div className='flex'>
-        <div className='lg:w-1/3 w-full my-5 ml-5'>
-          <div className='bg-n-6 p-6 rounded-3xl shadow'>
-            <h2 className='text-2xl font-semibold mb-6'>My Profile</h2>
+    <>
+      <div className='bg-white h-screen'>
+        <div className='flex h-full'>
+          <div className='lg:w-1/4 h-full bg-n-6'>
+              <ul className= 'w-full font-grotesk text-lg'>
+                <ButtonNav click={() => setToggleButton(1)} icon={<MdDashboard/>} content={<li className=''>My Account</li>} isActive={toggleButton === 1}></ButtonNav>
+                <ButtonNav click={() => setToggleButton(2)} icon={<FaCircleUser />} content={<li className=''>Login & Security</li>} isActive={toggleButton === 2}></ButtonNav>
+                <ButtonNav click={() => setToggleButton(3)} icon={<FaCalendarMinus/>} content={<li className=''>My Appointments</li>} isActive={toggleButton === 3}></ButtonNav>
+                <ButtonNav icon={<FaBookMedical/>} click={() => setToggleButton(4)} content={<li className='' >Medical History</li>} isActive={toggleButton === 4}></ButtonNav>
+                <ButtonNav click={() => setToggleButton(5)} icon={<TiMessages/>} content={<li className='' >Messages Preferences</li>} isActive={toggleButton === 5}></ButtonNav>
+              </ul>
+          </div>
 
-            <div className='flex items-center mb-6'>
-              <img src={manager} className='w-48 h-48 object-cover rounded-full' alt='User Avatar' />
-              <div className='ml-4'>
-                {isEditing ? (
-                    <div className='border border-white rounded-lg pl-2'>
-                        <input
-                          type='text'
-                          name='name'
-                          value={user.name}
-                          onChange={handleChange}
-                          className='text-lg font-medium bg-transparent  focus:outline-none'
-                        />
-                    </div>
-                ) : (
-                  <p className='text-lg font-medium'>{user.name}</p>
-                )}
-                <p className='text-sm font-semibold text-n-3'>{user.petStatus ? ('Pet Owner') : ('User')}</p>
+          <div className='w-3/4 bg-black'>
+              <div className='w-[90%] h-fit mx-auto my-5'>
+                  {toggleButton == 1 ? <User isEditing={isEditing} user={user} toggleEditing={toggleEditing} handleChange={handleChange}></User> : <></>}
+                  {toggleButton == 2 ? <Pass/>: <></>}
+                  {toggleButton == 3 ? <Appointments />: <></>}
+                  {toggleButton == 4 ? <History/> : <></>}
+                  {toggleButton == 5 ? <Messages/> : <></>}
               </div>
-            </div>
-
-            <div>
-              <h5 className='text-lg text-white font-semibold mb-4'>Contact Information</h5>
-              <p className='mb-3'>
-                Email:
-                {isEditing ? (
-                    <div className='border border-white rounded-lg mt-1 pl-2 w-[50%] px-2 py-1'>
-                        <input
-                          type='email'
-                          name='email'
-                          value={user.email}
-                          onChange={handleChange}
-                          className='bg-transparent w-full border-b focus:outline-none'
-                        />
-                    </div>
-                ) : (
-                  <span className='ml-2'>{user.email}</span>
-                )}
-              </p>
-
-              <p className='mb-3'>
-                Password:
-                {isEditing ? (
-                    <div className='border border-white rounded-lg mt-1 pl-2 w-[50%] px-2 py-1'>
-                        <input
-                          type='email'
-                          name='email'
-                          value={user.password}
-                          onChange={handleChange}
-                          className='bg-transparent w-full border-b focus:outline-none'
-                        />
-                    </div>
-                ) : (
-                  <span className='ml-2'>{'*********'}</span>
-                )}
-              </p>
-
-              <p className='mb-3'>
-                Phone:
-                {isEditing ? (
-                    <div className='border border-white rounded-lg mt-1 pl-2 w-fit p-1'>
-                        <input
-                          type='text'
-                          name='phone'
-                          value={user.phone}
-                          onChange={handleChange}
-                          className='bg-transparent border-b focus:outline-none'
-                        />
-                    </div>
-                ) : (
-                  <span className='ml-2'>{user.phone}</span>
-                )}
-              </p>
-              <p className='mb-3'>
-                Age:
-                {isEditing ? (
-                    <div className='border border-white rounded-lg mt-1 pl-2 w-fit py-1 px-2'>
-                        <input
-                          type='number'
-                          name='age'
-                          value={user.age}
-                          onChange={handleChange}
-                          className='bg-transparent border-b focus:outline-none'
-                        />
-                    </div>
-                ) : (
-                  <span className='ml-2'>{user.age}</span>
-                )}
-              </p>
-              <p className='mb-3'>
-                Gender:
-                {isEditing ? (
-                  <select
-                    name='gender'
-                    value={user.gender}
-                    onChange={handleChange}
-                    className='ml-2  border-b bg-inherit focus:outline-none'
-                  >
-                    <option value='Female' className='bg-black'>Female</option>
-                    <option value='Male' className='bg-black'>Male</option>
-                    <option value='Other' className='bg-black'>Other</option>
-                  </select>
-                ) : (
-                  <span className='ml-2'>{user.gender}</span>
-                )}
-              </p>
-              
-              <button
-                className='mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
-                onClick={toggleEditing}
-              >
-                {isEditing ? 'Save Details' : 'Update Information'}
-              </button>
-            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

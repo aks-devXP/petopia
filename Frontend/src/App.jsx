@@ -11,6 +11,7 @@ import Signup from './pages/Signup'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
 import UserDashboard from './Pages/UserDashboard'
+import VetBook from './Pages/VetBook'
 
 import "react-toastify/ReactToastify.css";
 // For smooth scrolling
@@ -53,9 +54,11 @@ function App() {
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route path='/dashboard' element={<UserDashboard/>}></Route>
+
         <Route path="/home" element={<Home/>}></Route>
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
+        <Route path="/vet/book" element={<VetBook/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2' element={<NewsPage/>}></Route>
