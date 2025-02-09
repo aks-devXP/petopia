@@ -1,31 +1,47 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import manager from '../assets/avatar/manager.jpg';
-import User from '../Components/Dashboard/User';
-import ButtonNav from '../Components/Dashboard/ButtonNav';
-import Pass from '../Components/Dashboard/Pass';
+import { FaBookMedical, FaCalendarMinus, FaCircleUser } from "react-icons/fa6";
+import { MdDashboard } from "react-icons/md";
+import { TiMessages } from "react-icons/ti";
 import Appointments from '../Components/Dashboard/Appointments';
+import ButtonNav from '../Components/Dashboard/ButtonNav';
 import History from '../Components/Dashboard/History';
 import Messages from '../Components/Dashboard/Messages';
-import { FaBookMedical, FaCircleUser  } from "react-icons/fa6";
-import { MdDashboard } from "react-icons/md";
-import { FaCalendarMinus } from "react-icons/fa6";
-import { TiMessages } from "react-icons/ti";
+import Pass from '../Components/Dashboard/Pass';
+import User from '../Components/Dashboard/User';
 
 
 const UserDashboard = () => {
   const [user, setUser] = useState({
-    user_id: '12345',
-    password: 'password123',
+    password: 'TTTTTTTT',
     name: 'Clara Barton',
     age: 30,
-    gender: 'Female',
-    phone: '+91 999966660',
-    email: 'placeholder@gmail.com',
-    petStatus: true,
-    pet_id: 'PET123',
+    gender: '',
+    phone: '+91 99XXXXXXXX',
+    email: '',
+    petStatus: false,
   });
+  // useEffect( ()=>{
+  //   const fetchUserProfile = async () => {
+  //   try {
+  //     const response = await GetProfileInfo(); // Fetch user data
+  //     const data = await response.json(); // Convert response to JSON
 
+  //     if (response.ok) {
+  //       setUser((prevUser) => ({
+  //         ...prevUser,
+  //         ...data, // Update user state with fetched data
+  //       }));
+  //     } else {
+  //       console.error("Error fetching user data:", data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to fetch user profile:", error);
+  //   }
+  // };
+
+  // fetchUserProfile(); 
+    
+  // },[]);
   const [isEditing, setIsEditing] = useState(false);
   const [toggleButton, setToggleButton] = useState(1);
 
@@ -36,6 +52,7 @@ const UserDashboard = () => {
       [name]: value,
     }));
   };
+
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
@@ -57,7 +74,7 @@ const UserDashboard = () => {
 
           <div className='w-3/4 bg-black'>
               <div className='w-[90%] h-fit mx-auto my-5'>
-                  {toggleButton == 1 ? <User isEditing={isEditing} user={user} toggleEditing={toggleEditing} handleChange={handleChange}></User> : <></>}
+                  {toggleButton == 1 ? <User isEditing={isEditing}  toggleEditing={toggleEditing} handleChange={handleChange}></User> : <></>}
                   {toggleButton == 2 ? <Pass/>: <></>}
                   {toggleButton == 3 ? <Appointments />: <></>}
                   {toggleButton == 4 ? <History/> : <></>}

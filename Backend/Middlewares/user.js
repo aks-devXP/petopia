@@ -29,13 +29,15 @@ const ContactValidation = (req,res,next)=>{
 
 const UserValidation = (req,res,next)=>{
   const token = req.headers['authorization'];
+  
   if(!token){
     return res.status(401).json({message:'Unauthorized access', success: false});
   }
   try{
     const verified = jwt.verify(token, process.env.JWT_SECRET);
     req.verified = verified;
-    next(); 
+    console.log(verified.user_name);
+    next();
   }
   catch(error){
     return res.status(400).json({message:'Invalid token', success: false});

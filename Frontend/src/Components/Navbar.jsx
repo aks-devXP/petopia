@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RiCloseLine, RiMenu3Fill } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/petopia-logo.svg";
+import { handleError } from "../Util/Alerts";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -82,6 +83,16 @@ const Navbar = () => {
     );
   };
 
+  const ProfileButton = ()=>{
+    try{
+      Navigate("/dashboard");
+    }
+
+    catch(e){
+      handleError(e);
+    }
+  }
+
   return (
     <div className="navbar">
       <div className="navbar-links">
@@ -97,7 +108,7 @@ const Navbar = () => {
 
       <div className="navbar-sign">
         {localStorage.getItem("token") ? (
-          <button className="user-button" type="user-button">
+          <button className="user-button" type="user-button" onClick={ProfileButton}>
             Hi, {loggedin.replace(/['"]+/g, "")}
           </button>
         ) : (

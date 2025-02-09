@@ -1,7 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { GetProfileInfo } from '../../API/UserAPI';
 import manager from '../../assets/avatar/manager.jpg';
 
-const User = ({isEditing,user,toggleEditing,handleChange}) => {
+const User = ({isEditing,toggleEditing,handleChange}) => {
+
+  const [user, setUser] = useState({
+    password: 'TTTTTTTT',
+    name: 'Clara Barton',
+    age: 30,
+    gender: '',
+    phone: '+91 99XXXXXXXX',
+    email: '',
+    petStatus: false,
+  });
+     useEffect( ()=>{
+        const fetchUserProfile = async () => {
+          try {
+            const response = await GetProfileInfo(); // Fetch user data
+            const data = await response.json(); // Convert response to JSON
+      
+            if (response.ok) {
+              setUser((user)=>({
+                ...user,
+                ...data.user, // Update user state with fetched data
+                })
+              );
+            } else {
+              console.error("Error fetching user data:", data.message);
+            }
+          } catch (error) {
+            console.error("Failed to fetch user profile:", error);
+          }
+        };
+      
+        fetchUserProfile(); 
+        
+      },[]);
   return (
     <>
         <div className='bg-n-6 p-6 rounded-3xl shadow'>
