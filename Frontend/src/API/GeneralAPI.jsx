@@ -10,6 +10,16 @@ export async function LoginAPI(user){
     body:JSON.stringify(user)
   });
 }
+export async function GoogleLoginAPI(user){
+  console.log(user);
+  return fetch(`${baseUrl}/auth/google-login`,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(user)
+  });
+}
 
 export async function SingUpAPI(user){
   console.log(user);
@@ -19,5 +29,15 @@ export async function SingUpAPI(user){
       'Content-Type':"application/json"
     },
     body:JSON.stringify(user)
+  });
+}
+export  async  function ContactAPI(contactInfo){
+  console.log(contactInfo.message);
+  return fetch(`${baseUrl}/user/contact-us`,{
+    method:'POST',
+    headers:{
+      'Content-Type':"application/json"
+    },
+    body:JSON.stringify(contactInfo)
   });
 }

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { RiEyeCloseFill, RiEyeFill, RiLock2Line, RiUserLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { SingUpAPI } from '../API/GeneralAPI';
 import signup_img from '../assets/signup-bg.jpg';
 import Loader from '../Components/Loader/Loader';
+import { handleError } from '../Util/Alerts';
 import { useLoading } from './LodingPage';
 import './Login.css';
 
@@ -35,19 +37,22 @@ export const Signup = () => {
       if(data.success){
         setLoading(false);
         setSuccess(true);
+        localStorage.setItem("token",data.token);
+        localStorage.setItem("user_name",JSON.stringify(data.user_name));
+
         setTimeout(() => navigate("/"), 1000); // Navigate after showing success
       }
       else {
         setLoading(false);
         setSuccess(false);
-        alert(data.message);
+        handleError(data.message);
       }
     }
     catch(err){
       console.log(err);
       setLoading(false);
       setSuccess(false);
-      alert("Something went wrong");
+      handleError(err);
     }
     finally{    
       setLoading(false);
@@ -139,6 +144,8 @@ export const Signup = () => {
               Try Login? <a href="/login" className="login__link">Log In</a>
             </p>
           </form>
+          <ToastContainer/>
+          
         </div>
       )}
     </>

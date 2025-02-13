@@ -17,7 +17,7 @@ const loginControl = async (req, res) => {
         }
         const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
         console.log("Login Successful and The Your Token is: ", token);
-        res.status(200).json({ message: 'Login Successful',  success: true, token: token });
+        res.status(200).json({ message: 'Login Successful',  success: true, token: token, user_name: user.name });
     }
     catch (error) {
         res.status(500).json({ error: error.message });
@@ -55,7 +55,7 @@ const signupControl = async (req, res) => {
         });
 
         const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
-        res.status(201).json({ message: 'Signup Successful' ,success: true, token: token});
+        res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: user.name });
         // console.log(token);
         
     }
@@ -63,5 +63,34 @@ const signupControl = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+const GoogleControl = async (req, res) => {
+    try{
+        const email = req.body.email;
+        console.log(email);
+        const user = await UserModel.findOne({
+            email: email,
+        });
+        
+        if(!user){
+            const name =  email.split('@')[0];
+            console.log(name);
+            const newUser = new UserModel({
+                name: name,
+                email: email,
+                password: 'google12345',
+            });
+            await newUser.save();
 
-module.exports = { loginControl, signupControl };
+            const user = await UserModel.findOne({
+                email: email,
+            });
+        }
+        const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
+        res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: user.name });
+    }
+    catch(error){
+        res.status(500).json({ message: error.message });
+    }
+
+}
+module.exports = { loginControl, signupControl, GoogleControl };

@@ -1,9 +1,44 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { ContactAPI } from '../API/GeneralAPI';
 import manager from '../assets/avatar/manager.jpg';
 import Header from '../Components/Header';
-
+import { handleError, handleSuccess } from '../Util/Alerts';
 const Contact = () => {
+  const OnSubmit = async (e) =>{
+    e.preventDefault();
+    const submitButton = document.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    try {
+    var name = document.getElementById('first-name').value;
+    const lname = document.getElementById('last-name').value;
+    name = name + " " + lname;
+    const category = document.getElementById('exampleDropdown').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const data = {name,email,category,message};
+    console.log(data);
+    const response = await ContactAPI(data);
+    const info = await response.json();
+    console.log(info);
+    if(info.success){
+      handleSuccess(info.message);
+      document.getElementById('first-name').value = "";
+      document.getElementById('last-name').value = "";
+      document.getElementById('email').value = "";
+      document.getElementById('message').value = "";
+    }
+    else{ 
+      handleError(info.message);
+    }}
+    catch(error){
+      handleError(error);
+    }
+    finally{
+      submitButton.disabled = false;
+    }
+    }
   return (
     <>
       <Header normal1='We treat your feedback seriously.' highlighted='Contact Us' normal2='for any queries.' textcol='antiquewhite'></Header>
@@ -74,6 +109,7 @@ const Contact = () => {
                 action="#"
                 method="post"
                 role="form"
+                onSubmit={e=>OnSubmit(e)}
               >
                 <h2 className="text-2xl font-semibold mb-4">Contact form</h2>
                 <p className="mb-6 text-n-3">
@@ -145,6 +181,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   className="w-full p-3 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  
                 >
                   Send Message
                 </button>
@@ -153,6 +190,7 @@ const Contact = () => {
 
           </div>
         </div>
+        
       </section>
     </>
   );

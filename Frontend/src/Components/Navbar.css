@@ -30,7 +30,7 @@
   align-items: center;
   width: 100%;
   padding-top: 1rem;
-  background-color: rgba(0,0,0,0);
+  background-color: #141415;
 }
 
 .navbar-links{
@@ -41,6 +41,8 @@
 }
 .navbar-links_logo{
   margin-left: 1.5rem ;
+  background-color: aliceblue;
+  border-radius: 50%;
 }
 .navbar-links_logo img{
   min-width: 3rem;
@@ -72,7 +74,7 @@
 
 .navbar-links_container ul a:hover,
 .navbar-menu_container ul a:hover{
-  color: #F5F5DC;
+  color: rgb(118, 188, 249);;
 }
 .navbar-links_container ul a,
 .navbar-sign p,
@@ -176,7 +178,6 @@
 .submenu{
   position: relative;
   display: flex;
-  
   gap: .5rem;
   align-items: center;
   justify-content: flex-start;
