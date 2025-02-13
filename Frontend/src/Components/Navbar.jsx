@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiCloseLine, RiMenu3Fill } from "react-icons/ri";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/petopia-logo.svg";
+import { handleError } from "../Util/Alerts";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const [loggedin, setLoggedin] = useState(false);
+  const [loggedin, setLoggedin] = useState("");
   const [toggle, setToggle] = useState(false);
-  const userName = "UserName"; // Replace with a dynamic value if needed
+  let userName = ""; 
+  const Navigate =  useNavigate();
 
-  const handleSignInLogIn = () => {
+  const handleSignInLogIn = (e) => {
     setLoggedin(true);
+    if(e.target.innerText === "Sign Up"){
+      Navigate("/sign-up");
+    }
+    else{
+      Navigate("/login");
+    }
   };
-
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      setLoggedin(localStorage.getItem("user_name")||"");
+      // userName = JSON.parse(localStorage.getItem("user_name"));
+      console.log(loggedin);
+    }
+  }, []);
+  // console.log(loggedin);
   const handleLogout = () => {
-    setLoggedin(false);
+    setLoggedin("");
+    
   };
 
   const menuOff = () => {
@@ -48,7 +64,7 @@ const Navbar = () => {
           <NavLink to="/home">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/guide">Guide</NavLink>
+          <NavLink to="/dictionary">Guide</NavLink>
         </li>
         <li>
           <NavLink to="/vet">Medical Care</NavLink>
@@ -57,7 +73,7 @@ const Navbar = () => {
           <NavLink to="/shopping">Pet Essentials</NavLink>
         </li>
         <li>
-          <NavLink to="/trainers">Trainer</NavLink>
+          <NavLink to="/trainer">Trainer</NavLink>
         </li>
         <li className="submenu">
           <NavLink to="#">More</NavLink>
@@ -66,6 +82,16 @@ const Navbar = () => {
       </ul>
     );
   };
+
+  const ProfileButton = ()=>{
+    try{
+      Navigate("/dashboard");
+    }
+
+    catch(e){
+      handleError(e);
+    }
+  }
 
   return (
     <div className="navbar">
@@ -81,16 +107,16 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-sign">
-        {loggedin ? (
-          <button className="user-button" type="user-button" onClick={handleLogout}>
-            Hi, {userName}
+        {localStorage.getItem("token") ? (
+          <button className="user-button" type="user-button" onClick={ProfileButton}>
+            Hi, {loggedin.replace(/['"]+/g, "")}
           </button>
         ) : (
           <>
-            <button className="sign-in-button" type="sign-in-button" onClick={handleSignInLogIn}>
-              Sign in
+            <button className="sign-in-button" type="sign-in-button" onClick={e=> handleSignInLogIn(e)}>
+              Sign Up
             </button>
-            <button className="log-in-button" type="log-in-button" onClick={handleSignInLogIn}>
+            <button className="log-in-button" type="log-in-button" onClick={e=>handleSignInLogIn(e)}>
               Log in
             </button>
           </>

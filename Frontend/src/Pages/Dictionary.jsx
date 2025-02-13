@@ -1,6 +1,8 @@
 import React from 'react';
-import './Dictionary.css'
-import germanShepherd from '../assets/GuidePageImages/german_shepherd.png';
+import './Dictionary.css';
+import Card from '../Components/CardDictionary';
+import breedsData from '../Data/breed.json'; // Import JSON data
+
 const Dictionary = () => {
   return (
     <>
@@ -8,26 +10,18 @@ const Dictionary = () => {
         <input className='breed-search' type="text" placeholder="Search..." />
         <button className='breed-search-button'>Search</button>
       </div>
+
       <div className='breed-blocks'>
-        <div className='dog-blocks'>
-            <div className='block-title'>Cats</div>
+        {Object.entries(breedsData).map(([category, breeds]) => (
+          <div key={category} className='category-block'>
+            <div className='block-title'>{category}</div>
             <div className='breed-table'>
-                <div className='breed-cell'></div>
-                <div className='breed-cell'></div>
-                <div className='breed-cell'></div>
+              {breeds.map((breed, index) => (
+                <Card key={index} link={breed.link} text={breed.name} img={breed.image} alt={breed.name} className='breed-card' />
+              ))}
             </div>
-        </div>
-        <div className='cat-blocks'>
-            <div className='block-title'>Dogs</div>
-            <div className='breed-table'>
-                <div className='breed-cell'>
-                    <img className="breed-img" src={germanShepherd} alt="German Shepherd" />
-                    <p className='breed-title'>German Shepherd</p>
-                </div>
-                <div className='breed-cell'></div>
-                <div className='breed-cell'></div>
-            </div>
-        </div>
+          </div>
+        ))}
       </div>
     </>
   );

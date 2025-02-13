@@ -5,7 +5,7 @@ import './Guide.css';
 const Guide = () => {
   return (
     <>
-      <div className="container">
+      <div className="guide-container">
         <div className="left-section">
           <div className="pet-guide-detail">
             <h1 className='tip-heading'>Tips</h1>
