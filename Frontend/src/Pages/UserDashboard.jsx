@@ -6,8 +6,6 @@ import Messages from '../Components/Dashboard/Messages';
 import { FaBookMedical, FaCalendarMinus, FaCircleUser } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
 import { TiMessages } from "react-icons/ti";
-import Appointments from '../Components/Dashboard/Appointments';
-import ButtonNav from '../Components/Dashboard/ButtonNav';
 import Pass from '../Components/Dashboard/Pass';
 import User from '../Components/Dashboard/User';
 
