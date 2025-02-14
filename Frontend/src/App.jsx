@@ -12,7 +12,8 @@ import Volunteer from "./pages/Volunteer"
 import UserDashboard from './Pages/UserDashboard'
 import VetBook from './Pages/VetBook'
 import Dictionary from "./pages/Dictionary"
-import Guide from "./pages/Guide"
+import Login from './Pages/Login'
+import Trainer from './Pages/Trainer'
 // import ScrollToTop from './Components/ScrollToTop'
 
 import "react-toastify/ReactToastify.css";
@@ -61,10 +62,11 @@ function App() {
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet/book" element={<VetBook/>}></Route>
-        <Route path="/guide" element={<Dictionary/>}></Route>
+        <Route path="/dictionary" element={<Dictionary/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2' element={<NewsPage/>}></Route>
+        <Route path="/trainer" element={<Trainer/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
       </Route>

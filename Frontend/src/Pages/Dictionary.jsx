@@ -17,7 +17,8 @@ const Dictionary = () => {
             <div className='block-title'>{category}</div>
             <div className='breed-table'>
               {breeds.map((breed, index) => (
-                <Card key={index} link={breed.link} text={breed.name} img={breed.image} alt={breed.name} className='breed-card' />
+                <Card key={index} link={breed.link} text={breed.name} img={breed.image} alt={breed.name}
+                className='breed-card' />
               ))}
             </div>
           </div>
