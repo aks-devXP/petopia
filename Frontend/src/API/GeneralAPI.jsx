@@ -10,6 +10,16 @@ export async function LoginAPI(user){
     body:JSON.stringify(user)
   });
 }
+export async function GoogleLoginAPI(user){
+  console.log(user);
+  return fetch(`${baseUrl}/auth/google-login`,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(user)
+  });
+}
 
 export async function SingUpAPI(user){
   console.log(user);

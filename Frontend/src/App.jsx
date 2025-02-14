@@ -4,7 +4,6 @@ import About from './Pages/About'
 import Contact from './Pages/Contact'
 import Guide from './pages/Guide'
 import Home from './pages/Home'
-import Login from './pages/Login'
 import News from './pages/News'
 import NewsPage from './pages/NewsPage'
 import Signup from './pages/Signup'
@@ -12,6 +11,9 @@ import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
 import UserDashboard from './Pages/UserDashboard'
 import VetBook from './Pages/VetBook'
+import Dictionary from "./pages/Dictionary"
+import Guide from "./pages/Guide"
+// import ScrollToTop from './Components/ScrollToTop'
 
 import "react-toastify/ReactToastify.css";
 // For smooth scrolling
@@ -59,6 +61,7 @@ function App() {
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet/book" element={<VetBook/>}></Route>
+        <Route path="/guide" element={<Dictionary/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2' element={<NewsPage/>}></Route>
