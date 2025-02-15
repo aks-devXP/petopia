@@ -1,84 +1,110 @@
 import React from 'react';
+import petData from '../Data/BreedData.json';
+import Rating from '../Components/Rating'
 import germanShepherd from '../assets/GuidePageImages/german_shepherd.png';
-import './Guide.css';
+import germanShepherdBody from '../assets/GuideBody/german_shepherd.png';
 
 const Guide = () => {
   return (
-    <>
-      <div className="guide-container">
-        <div className="left-section">
-          <div className="pet-guide-detail">
-            <h1 className='tip-heading'>Tips</h1>
-            <ul className='tip-points'>
-              <li>German Shepherds need 7-10 years of daily exercise.</li>
-              <li>Early training is key as they grow into large, strong dogs.</li>
-              <li>They require a “job” to avoid boredom and destructive behavior.</li>
-              <li>Naturally protective, they may bark frequently and be reserved with guests.</li>
-              <li>Expect significant shedding and dog hair around the house.</li>
-            </ul>
-
-          </div>
-
-          <div className="bloat-symptoms">
-            <h1 className='tip-heading'>Symptoms of Bloat</h1>
-            <ul className='tip-points'>
-              <li>Swollen or distended abdomen</li>
-              <li>Abdominal pain</li>
-              <li>Unproductive retching/dry heaving</li>
-              <li>Drooling</li>
-              <li>Pacing/restlessness</li>
-              <li>Lethargy</li>
-            </ul>
-
-            <div className='care-tips'>
-              <h1 className='tip-heading'>Tips to Help Prevent Bloat</h1>
-              <ul className='tip-points'>
-                <li>Feed smaller, more frequent meals instead of one big meal</li>
-                <li>Don’t allow your dog to gorge on food or water, use a slow feeder if necessary</li>
-                <li>Never allow unfettered access to food (make sure their food bags/bins are out of reach)</li>
-                <li>No exercise for a minimum of one hour before or two hours after meals</li>
-                <li>Talk to your veterinarian about a gastropexy, a preventative procedure for high-risk dogs</li>
-              </ul>
-            </div>
-          </div>
+    /* top section */
+    <div className="guide-container bg-[#f5f5dc] p-[20px]">
+      <div className="flex ml-20">
+        <div className="text-black p-[20px] flex flex-col justify-center items-center w-[50%]">
+          <h1 className="table-cell font-[550] px-2 py-1 text-[50px] m-[40px] w-full">{petData.breed}</h1>
+            <dl className="w-full">
+              {Object.entries(petData.general_info).map(([key, value]) => (
+                <div className="table-row" key={key}>
+                  <dt className="table-cell font-bold px-2 py-1">
+                    {key.replace(/([A-Z])/g, " $1").trim().replace(/^./, str => str.toUpperCase())}
+                  </dt>
+                  <dd className="table-cell text-left px-2 py-1">: {value}</dd>
+                </div>
+              ))}
+            </dl>
         </div>
 
-        <div className="right-section">
-          <div className="picture">
-            <img className="pet-picture" src={germanShepherd} alt="German Shepherd" />
-          </div>
-          <div className="info">
-            <h1 className="pet-name">German Shepherd</h1>
-            <dl className="pet-info">
-              <div className="info-row">
-                <dt>Breed Group</dt>
-                <dd>: Working</dd>
-              </div>
-              <div className="info-row">
-                <dt>Temperament</dt>
-                <dd>: Smart, loyal, and protective</dd>
-              </div>
-              <div className="info-row">
-                <dt>Energy Level</dt>
-                <dd>: High</dd>
-              </div>
-              <div className="info-row">
-                <dt>Height</dt>
-                <dd>: 22 to 26 inches</dd>
-              </div>
-              <div className="info-row">
-                <dt>Weight</dt>
-                <dd>: 50 to 90 pounds</dd>
-              </div>
-              <div className="info-row">
-                <dt>Life Expectancy</dt>
-                <dd>: 7 to 10 years</dd>
-              </div>
-            </dl>
-          </div>
+        <div className="w-[50%] p-[20px]">
+          <img className="h-full w-full" src={germanShepherd} alt="German Shepherd" />
         </div>
       </div>
-    </>
+
+
+      <div className="bg-[#D8DBBD] p-[10px] rounded-[20px] text-black flex flex-col gap-[40px]">
+      {/* Ratings Section */}
+        <div >
+
+          <dl className="w-full grid grid-cols-3 p-[20px] gap-x-[40px] gap-y-[20px]">
+            {Object.entries(petData.ratings).map(([key, value]) => (
+              <div className="flex justify-between py-2" key={key}>
+                <dt className="font-bold flex justify-center items-center text-[15px]">
+                  {key.replace(/([A-Z])/g, " $1").trim().replace(/^./, str => str.toUpperCase())}
+                </dt>
+                <dd className=''><Rating a={value} /></dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+
+        {/* Physical Traits */}
+        <div className="p-[20px]">
+          <h2 className="text-[30px] font-bold mb-[20px]">Head to Tail</h2>
+          <dl className="w-full grid grid-cols-2 gap-[50px]">
+            <div className='p-[50px]'>
+            <img className="h-full w-full" src={germanShepherdBody} alt="German Shepherd" />
+            </div>
+            <div className='p-[50px] flex flex-col justify-center'>
+              {Object.entries(petData.physical_characteristics).map(([key, value]) => (
+                <div key={key} className="mb-2">
+                  <dt className="font-bold">{key.replace(/([A-Z])/g, " $1").trim().replace(/^./, str => str.toUpperCase())}:</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </div>
+          </dl>
+        </div>
+
+        {/* Exercise & Training */}
+        <div className="p-[20px]">
+          <h2 className="text-[30px] font-bold mb-[20px]">Exercise & Training</h2>
+          <p>{petData.care.exercise}</p>
+        </div>
+
+        {/* Diet Information */}
+        <div className="p-[20px]">
+          <h2 className="text-[30px] font-bold mb-[20px]">Diet</h2>
+          <h3 className="font-bold">To Give:</h3>
+          <ul className="list-disc pl-[20px] mb-[10px]">
+            {petData.diet.recommended.map((food, index) => (
+              <li key={index}>{food}</li>
+            ))}
+          </ul>
+          <h3 className="font-bold">To Avoid:</h3>
+          <ul className="list-disc pl-[20px]">
+            {petData.diet.notRecommended.map((food, index) => (
+              <li key={index}>{food}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Health Information */}
+        <div className="p-[20px]">
+          <h2 className="text-[30px] font-bold mb-[20px]">Health & Care</h2>
+          <h3 className="font-bold">Bloat Symptoms:</h3>
+          <ul className="list-disc pl-[20px] mb-[10px]">
+            {petData.health.bloatSymptoms.map((symptom, index) => (
+              <li key={index}>{symptom}</li>
+            ))}
+          </ul>
+          <h3 className="font-bold">Prevention Tips:</h3>
+          <ul className="list-disc pl-[20px]">
+            {petData.health.bloatPrevention.map((tip, index) => (
+              <li key={index}>{tip}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 };
 
