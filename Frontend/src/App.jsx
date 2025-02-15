@@ -14,6 +14,7 @@ import VetBook from './Pages/VetBook'
 import Dictionary from "./pages/Dictionary"
 import Login from './Pages/Login'
 import Trainer from './Pages/Trainer'
+import TrainerBooking from './Pages/TrainerBooking'
 // import ScrollToTop from './Components/ScrollToTop'
 
 import "react-toastify/ReactToastify.css";
@@ -54,6 +55,7 @@ function App() {
       <Route path='/login' element={<Login/>}></Route>
       <Route path='sign-up' element={<Signup/>}></Route>
       
+      
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route path='/dashboard' element={<UserDashboard/>}></Route>
@@ -64,6 +66,7 @@ function App() {
         <Route path="/vet/book" element={<VetBook/>}></Route>
         <Route path="/dictionary" element={<Dictionary/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
+        <Route path='/book-trainer' element={<TrainerBooking/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2' element={<NewsPage/>}></Route>
         <Route path="/trainer" element={<Trainer/>}></Route>
