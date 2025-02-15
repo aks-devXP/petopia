@@ -1,7 +1,7 @@
 import React from 'react';
 import './Dictionary.css';
 import Card from '../Components/CardDictionary';
-import breedsData from '../Data/breed.json'; // Import JSON data
+import breedsData from '../Data/breed.json'; 
 
 const Dictionary = () => {
   return (
