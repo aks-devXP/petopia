@@ -26,6 +26,12 @@ const UserDashboard = () => {
   //     const response = await GetProfileInfo(); // Fetch user data
   //     const data = await response.json(); // Convert response to JSON
 
+  // useEffect( ()=>{
+  //   const fetchUserProfile = async () => {
+  //   try {
+  //     const response = await GetProfileInfo(); // Fetch user data
+  //     const data = await response.json(); // Convert response to JSON
+
   //     if (response.ok) {
   //       setUser((prevUser) => ({
   //         ...prevUser,
