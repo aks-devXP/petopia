@@ -16,6 +16,7 @@ import Login from './Pages/Login'
 import Trainer from './Pages/Trainer'
 import TrainerBooking from './Pages/TrainerBooking'
 // import ScrollToTop from './Components/ScrollToTop'
+import ScrollAnimations from './Components/ScrollAnimations'
 
 import "react-toastify/ReactToastify.css";
 // For smooth scrolling
@@ -54,6 +55,7 @@ function App() {
       <>
       <Route path='/login' element={<Login/>}></Route>
       <Route path='sign-up' element={<Signup/>}></Route>
+      <Route path='sample' element={<ScrollAnimations/>}></Route>
       
       
       <Route path="/" element={<MainLayout/>}>
