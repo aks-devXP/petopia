@@ -10,8 +10,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // contact Us page
-        
+        cream:{
+          lightest: "#F8F3D9",
+          light: "#EBE5C2",
+          mid: "#B9B28A",
+          dark: "#504B38"
+        },
+
+        sand:{
+          lightest: "#E5E5CB",
+          light: "#D5CEA3",
+          mid: "#3C2A21",
+          dark: "#1A120B",
+        },
+
+        pink:{
+          lightest: "#F8E7F6",
+          light: "#F5F5F5",
+          mid: "#DD88CF",
+          dark: "#4B164C",
+        },
+
+        rose: {
+          rose_lightest: "#FF8BA0",
+          rose_light: "#E41F7B",
+          rose_mid: "#86003C",
+          black: "#000000",
+        },
+
         color: {
           1: "#AC6AFF",
           2: "#FFC876",
@@ -21,9 +47,7 @@ export default {
           6: "#FF98E2",
           7: "#80add4"
         },
-        stroke: {
-          1: "#26242C",
-        },
+
         n: {
           1: "#FFFFFF",
           2: "#CAC6DD",
@@ -45,16 +69,10 @@ export default {
         code: "var(--font-code)",
         grotesk: "var(--font-grotesk)",
       },
-      letterSpacing: {
-        tagline: ".15em",
-      },
       spacing: {
         0.25: "0.0625rem",
         7.5: "1.875rem",
         15: "3.75rem",
-      },
-      opacity: {
-        15: ".15",
       },
       transitionDuration: {
         DEFAULT: "200ms",
@@ -69,13 +87,9 @@ export default {
         4: "4",
         5: "5",
       },
-      borderWidth: {
-        DEFAULT: "0.0625rem",
-      },
       backgroundImage: {
         "radial-gradient": "radial-gradient(var(--tw-gradient-stops))",
-        "conic-gradient":
-          "conic-gradient(from 225deg, #FFC876, #79FFF7, #9F53FF, #FF98E2, #FFC876)",
+        "conic-gradient": "conic-gradient(from 225deg, #FFC876, #79FFF7, #9F53FF, #FF98E2, #FFC876)",
       },
     },
   },

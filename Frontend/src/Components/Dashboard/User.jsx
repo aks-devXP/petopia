@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { GetProfileInfo } from '../../API/UserAPI';
 import manager from '../../assets/avatar/manager.jpg';
+import NameHolder from './NameHolder';
 
 const User = ({isEditing,toggleEditing,handleChange}) => {
+    const [user, setUser] = useState({
+        password: 'TTTTTTTT',
+        name: 'Clara Barton',
+        age: 30,
+        gender: '',
+        phone: '+91 99XXXXXXXX',
+        email: '',
+        petStatus: false,
+    });
 
-  const [user, setUser] = useState({
-    password: 'TTTTTTTT',
-    name: 'Clara Barton',
-    age: 30,
-    gender: '',
-    phone: '+91 99XXXXXXXX',
-    email: '',
-    petStatus: false,
-  });
      useEffect( ()=>{
         const fetchUserProfile = async () => {
           try {
@@ -28,11 +29,10 @@ const User = ({isEditing,toggleEditing,handleChange}) => {
             } else {
               console.error("Error fetching user data:", data.message);
             }
-          } catch (error) {
+        } catch (error) {
             console.error("Failed to fetch user profile:", error);
-          }
+    }
         };
-      
         fetchUserProfile(); 
         
       },[]);
@@ -42,7 +42,12 @@ const User = ({isEditing,toggleEditing,handleChange}) => {
             <h2 className='text-2xl font-semibold mb-6'>My Profile</h2>
 
             <div className='flex items-center mb-6'>
-            <img src={manager} className='w-48 h-48 object-cover rounded-full' alt='User Avatar' />
+            <NameHolder 
+                firstName="John" 
+                lastName="Doe" 
+                isEditable={isEditing}/>
+            {/* {isEditing?
+                />:<img src={manager} className='w-48 h-48 object-cover rounded-full' alt='User Avatar' />} */}
             <div className='ml-4'>
                 {isEditing ? (
                     <div className='border border-white rounded-lg pl-2'>

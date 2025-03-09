@@ -66,7 +66,7 @@ const UserDashboard = () => {
     <>
       <div className='bg-white h-screen'>
         <div className='flex h-full'>
-          <div className='lg:w-1/4 h-full bg-n-6'>
+          <div className='lg:w-1/5 h-full bg-n-6'>
               <ul className= 'w-full font-grotesk text-lg'>
                 <ButtonNav click={() => setToggleButton(1)} icon={<MdDashboard/>} content={<li className=''>My Account</li>} isActive={toggleButton === 1}></ButtonNav>
                 <ButtonNav click={() => setToggleButton(2)} icon={<FaCircleUser />} content={<li className=''>Login & Security</li>} isActive={toggleButton === 2}></ButtonNav>
@@ -76,7 +76,7 @@ const UserDashboard = () => {
               </ul>
           </div>
 
-          <div className='w-3/4 bg-black'>
+          <div className='w-4/5 bg-black'>
               <div className='w-[90%] h-fit mx-auto my-5'>
                   {toggleButton == 1 ? <User isEditing={isEditing} user={user} toggleEditing={toggleEditing} handleChange={handleChange}></User> : <></>}
                   {toggleButton == 2 ? <Pass/>: <></>}
