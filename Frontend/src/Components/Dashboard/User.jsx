@@ -8,9 +8,9 @@ const User = ({isEditing,toggleEditing,handleChange}) => {
         password: 'TTTTTTTT',
         name: 'Clara Barton',
         age: 30,
-        gender: '',
+        gender: 'Female',
         phone: '+91 99XXXXXXXX',
-        email: '',
+        email: 'clara@gmail.com',
         petStatus: false,
     });
 

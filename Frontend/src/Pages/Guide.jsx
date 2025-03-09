@@ -20,7 +20,7 @@ const Guide = () => {
 
 
     /* top section */
-    <div className="guide-container bg-[#f5f5dc] p-[20px]">>
+    <div className="guide-container bg-[#f5f5dc] p-[20px]">
       <div className="flex ml-20">
         <div className="text-black p-[20px] flex flex-col justify-center items-center w-[50%]">
           <h1 className="table-cell font-[550] px-2 py-1 text-[50px] m-[40px] w-full">{petData.breed}</h1>
