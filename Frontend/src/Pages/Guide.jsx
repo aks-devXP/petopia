@@ -1,13 +1,26 @@
 import React from 'react';
 import petData from '../Data/BreedData.json';
 import Rating from '../Components/Rating'
-import germanShepherd from '../assets/GuidePageImages/german_shepherd.png';
-import germanShepherdBody from '../assets/GuideBody/german_shepherd.png';
+import germanShepherd from '../assets/PetGuide/germanShepherd.png';
+import germanShepherdBody from '../assets/PetGuide/germanShepherd2.png';
+
+import chicken from '../assets/Food/chicken.svg';
+import meat from '../assets/Food/meat.svg';
+import fish from '../assets/Food/fish.svg';
+import mutton from '../assets/Food/mutton.svg';
+import chocolate from '../assets/Food/chocolate.svg';
+import fatty from '../assets/Food/fatty.svg';
+import grain from '../assets/Food/grain.svg';
+import grapes from '../assets/Food/grapes.svg';
+import vegetables from '../assets/Food/vegetables.svg';
+import onion from '../assets/Food/onion.svg';
 
 const Guide = () => {
   return (
+
+
     /* top section */
-    <div className="guide-container bg-[#f5f5dc] p-[20px]">
+    <div className="guide-container bg-[#f5f5dc] p-[20px]">>
       <div className="flex ml-20">
         <div className="text-black p-[20px] flex flex-col justify-center items-center w-[50%]">
           <h1 className="table-cell font-[550] px-2 py-1 text-[50px] m-[40px] w-full">{petData.breed}</h1>
@@ -73,18 +86,84 @@ const Guide = () => {
         {/* Diet Information */}
         <div className="p-[20px]">
           <h2 className="text-[30px] font-bold mb-[20px]">Diet</h2>
-          <h3 className="font-bold">To Give:</h3>
-          <ul className="list-disc pl-[20px] mb-[10px]">
-            {petData.diet.recommended.map((food, index) => (
-              <li key={index}>{food}</li>
-            ))}
-          </ul>
-          <h3 className="font-bold">To Avoid:</h3>
-          <ul className="list-disc pl-[20px]">
-            {petData.diet.notRecommended.map((food, index) => (
-              <li key={index}>{food}</li>
-            ))}
-          </ul>
+
+          <div className='grid grid-cols-2 gap-[20px]'>
+            
+            <div className='w-[50%]'>
+              <h3 className="font-bold">To Give:</h3>
+
+              <div className="mb-[10px] flex flex-col gap-[40px]">
+                <div>
+                <div className='flex'>
+                  <img className="h-15 w-15" src={chicken} alt="chicken" />
+                  <img className="h-15 w-15" src={fish} alt="fish" />
+                  <img className="h-15 w-15" src={meat} alt="meat" />
+                  <img className="h-15 w-15" src={mutton} alt="mutton" />
+                </div>
+                <div>High-quality protein sources (chicken, meat, fish)</div>
+                </div>
+                <div>
+                <div className='flex'>
+                  <img className="h-15 w-15" src={grain} alt="grain" />
+                </div>
+                <div>Whole grains (brown rice, oatmeal)</div>
+                </div>
+                <div>
+                <div className='flex'>
+                  <img className="h-15 w-15" src={vegetables} alt="vegetables" />
+                </div>
+                <div>Vegetables and fruits (carrots, apples, blueberries)</div>
+                </div>
+              </div>
+              </div>
+
+              <div className='w-[50%]'>
+              <h3 className="font-bold">To Avoid:</h3>
+              <div className="mb-[10px] grid grid-cols-2 gap-[40px]">
+                <div>
+                  <div className="flex">
+                    <div className="relative inline-block h-15 w-15">
+                      <img src={chocolate} className="h-full w-full" alt="chocolate" />
+                      <div className="absolute top-1/2 left-[15%] w-[80%] h-[6px] bg-black opacity-70 rotate-45"></div>
+                    </div>
+                  </div>
+                  <div>Chocolate</div>
+                </div>
+
+                <div>
+                  <div className="flex">
+                    <div className="relative inline-block h-15 w-15">
+                      <img src={grapes} className="h-full w-full" alt="grapes" />
+                      <div className="absolute top-1/2 left-[15%] w-[60%] h-[6px] bg-black opacity-70 rotate-45"></div>
+                    </div>
+                  </div>
+                  <div>Grapes and raisins</div>
+                </div>
+
+                <div>
+                  <div className="flex">
+                    <div className="relative inline-block h-15 w-15">
+                      <img src={onion} className="h-full w-full" alt="onion" />
+                      <div className="absolute top-1/2 left-[15%] w-[70%] h-[6px] bg-black opacity-70 rotate-45"></div>
+                    </div>
+                  </div>
+                  <div>Onions and garlic</div>
+                </div>
+
+                <div>
+                  <div className="flex">
+                    <div className="relative inline-block h-15 w-15">
+                      <img src={fatty} className="h-full w-full" alt="fatty" />
+                      <div className="absolute top-1/2 left-[15%] w-[100%] h-[6px] bg-black opacity-70 rotate-45"></div>
+                    </div>
+                  </div>
+                  <div>Excessively fatty or processed foods</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
 
         {/* Health Information */}
