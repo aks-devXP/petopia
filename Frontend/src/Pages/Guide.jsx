@@ -1,19 +1,19 @@
 import React from 'react';
+import Rating from '../Components/Rating';
 import petData from '../Data/BreedData.json';
-import Rating from '../Components/Rating'
 import germanShepherd from '../assets/PetGuide/germanShepherd.png';
 import germanShepherdBody from '../assets/PetGuide/germanShepherd2.png';
 
 import chicken from '../assets/Food/chicken.svg';
-import meat from '../assets/Food/meat.svg';
-import fish from '../assets/Food/fish.svg';
-import mutton from '../assets/Food/mutton.svg';
 import chocolate from '../assets/Food/chocolate.svg';
 import fatty from '../assets/Food/fatty.svg';
+import fish from '../assets/Food/fish.svg';
 import grain from '../assets/Food/grain.svg';
 import grapes from '../assets/Food/grapes.svg';
-import vegetables from '../assets/Food/vegetables.svg';
+import meat from '../assets/Food/meat.svg';
+import mutton from '../assets/Food/mutton.svg';
 import onion from '../assets/Food/onion.svg';
+import vegetables from '../assets/Food/vegetables.svg';
 
 const Guide = () => {
   return (
