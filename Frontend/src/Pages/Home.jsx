@@ -5,7 +5,9 @@ import ScrollAnimations from '../Components/ScrollAnimations'
 const Home = () => {
   return (
     <div className='my-2 bg-slate-500'>
-      <ScrollAnimations/>
+      <Slider/>
+      <HeroNav/>
+      {/* <ScrollAnimations/> */}
     </div>
   )
 }
