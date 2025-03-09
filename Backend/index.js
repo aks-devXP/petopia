@@ -13,5 +13,3 @@ app.use(bodyParser.json());
 app.use(cors("http://localhost:5173/"));
 app.use('/auth', require('./Routes/auth'));
 app.use('/user',require('./Routes/user'));
-app.use('/vet',require('./Routes/vet'));
-

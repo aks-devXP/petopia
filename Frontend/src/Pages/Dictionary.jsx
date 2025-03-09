@@ -1,12 +1,8 @@
 import React from 'react';
+import './Dictionary.css';
 import Card from '../Components/CardDictionary';
-<<<<<<< Updated upstream
 import breedsData from '../Data/breed.json'; 
 import { useState, useEffect } from 'react';
-=======
-import breedsData from '../Data/breed.json';
-import './Dictionary.css';
->>>>>>> Stashed changes
 
 const Dictionary = () => {
   const [loadedImages, setLoadedImages] = useState({});
@@ -42,11 +38,7 @@ const Dictionary = () => {
             <div className='block-title'>{category}</div>
             <div className='breed-table'>
               {breeds.map((breed, index) => (
-<<<<<<< Updated upstream
                 <Card key={index} link={breed.link} text={breed.name} img={loadedImages[breed.image]} alt={breed.name}
-=======
-                <Card key={index} link={breed.link} text={breed.name} img={'breed.image'} alt={breed.name}
->>>>>>> Stashed changes
                 className='breed-card' />
               ))}
             </div>
