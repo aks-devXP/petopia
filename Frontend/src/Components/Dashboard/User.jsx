@@ -42,20 +42,12 @@ const User = ({isEditing,toggleEditing,handleChange}) => {
             <h2 className='text-2xl font-semibold mb-6'>My Profile</h2>
 
             <div className='flex items-center mb-6'>
-<<<<<<< Updated upstream
             <NameHolder 
                 firstName="John" 
                 lastName="Doe" 
                 isEditable={isEditing}/>
             {/* {isEditing?
                 />:<img src={manager} className='w-48 h-48 object-cover rounded-full' alt='User Avatar' />} */}
-=======
-            {!isEditing?<NameHolder 
-  firstName="John" 
-  lastName="Doe" 
-  isEditable={true}
-/>:<img src={manager} className='w-48 h-48 object-cover rounded-full' alt='User Avatar' />}
->>>>>>> Stashed changes
             <div className='ml-4'>
                 {isEditing ? (
                     <div className='border border-white rounded-lg pl-2'>
