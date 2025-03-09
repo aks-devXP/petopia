@@ -8,6 +8,7 @@ import News from './pages/News'
 import NewsPage from './pages/NewsPage'
 import Signup from './pages/Signup'
 import VetHome from "./pages/VetHome"
+import VetDocs from './Pages/VetDocs'
 import Volunteer from "./pages/Volunteer"
 import UserDashboard from './Pages/UserDashboard'
 import VetBook from './Pages/VetBook'
@@ -63,7 +64,8 @@ function App() {
         <Route path="/home" element={<Home/>}></Route>
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
-        <Route path="/vet/book" element={<VetBook/>}></Route>
+        <Route path="/vet-docs" element={<VetDocs/>}></Route>
+        <Route path="/vet-book" element={<VetBook/>}></Route>
         <Route path="/dictionary" element={<Dictionary/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path='/book-trainer' element={<TrainerBooking/>}></Route>
