@@ -1,49 +1,33 @@
 import React from 'react';
-import './Dictionary.css';
-import Card from '../Components/CardDictionary';
-import breedsData from '../Data/breed.json'; 
-import { useState, useEffect } from 'react';
-
+import './Dictionary.css'
+import germanShepherd from '../assets/PetGuide/germanShepherd.png';
 const Dictionary = () => {
-  const [loadedImages, setLoadedImages] = useState({});
-
-  useEffect(() => {
-    const loadImages = async () => {
-      const imagePromises = Object.entries(breedsData).flatMap(([_, breeds]) =>
-        breeds.map(async (breed) => {
-          try {
-            const imgSrc = breed.image;
-            setLoadedImages((prev) => ({ ...prev, [breed.image]: imgSrc }));
-          } catch (error) {
-            console.error(`Error loading image: ${breed.image}`, error);
-          }
-        })
-      );
-      await Promise.all(imagePromises);
-    };
-
-    loadImages();
-  }, []);
-
   return (
     <>
       <div className='search-div'>
         <input className='breed-search' type="text" placeholder="Search..." />
         <button className='breed-search-button'>Search</button>
       </div>
-
       <div className='breed-blocks'>
-        {Object.entries(breedsData).map(([category, breeds]) => (
-          <div key={category} className='category-block'>
-            <div className='block-title'>{category}</div>
+        <div className='dog-blocks'>
+            <div className='block-title'>Cats</div>
             <div className='breed-table'>
-              {breeds.map((breed, index) => (
-                <Card key={index} link={breed.link} text={breed.name} img={loadedImages[breed.image]} alt={breed.name}
-                className='breed-card' />
-              ))}
+                <div className='breed-cell'></div>
+                <div className='breed-cell'></div>
+                <div className='breed-cell'></div>
             </div>
-          </div>
-        ))}
+        </div>
+        <div className='cat-blocks'>
+            <div className='block-title'>Dogs</div>
+            <div className='breed-table'>
+                <div className='breed-cell'>
+                    <img className="breed-img" src={germanShepherd} alt="German Shepherd" />
+                    <p className='breed-title'>German Shepherd</p>
+                </div>
+                <div className='breed-cell'></div>
+                <div className='breed-cell'></div>
+            </div>
+        </div>
       </div>
     </>
   );
