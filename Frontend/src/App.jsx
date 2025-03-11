@@ -57,13 +57,13 @@ function App() {
       <Route path='/login' element={<Login/>}></Route>
       <Route path='sign-up' element={<Signup/>}></Route>
       <Route path='sample' element={<ScrollAnimations/>}></Route>
-      
-      
+      <Route path="/home" element={<Home/>}></Route>
+      <Route index element={<Home/>}></Route>
+
       <Route path="/" element={<MainLayout/>}>
-        <Route index element={<Home/>}></Route>
         <Route path='/dashboard' element={<UserDashboard/>}></Route>
 
-        <Route path="/home" element={<Home/>}></Route>
+        
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
