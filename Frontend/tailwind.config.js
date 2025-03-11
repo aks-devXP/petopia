@@ -68,6 +68,9 @@ export default {
         sans: ["var(--font-sora)", ...fontFamily.sans],
         code: "var(--font-code)",
         grotesk: "var(--font-grotesk)",
+        poppins: "var(--font-poppins)", 
+        fredoka: "var(--font-fredoka)",  
+        bree: "var(--font-bree)",        
       },
       spacing: {
         0.25: "0.0625rem",
