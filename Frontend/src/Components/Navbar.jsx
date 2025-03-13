@@ -4,6 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/petopia-logo.svg";
 import { handleError } from "../Util/Alerts";
 import "./Navbar.css";
+import DashboardModal from "../Components/ProfileSetting/DashboardModal"
+import ProfileDropdown from "./ProfileSetting/Dropdown"
 
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState("");
@@ -32,6 +34,25 @@ const Navbar = () => {
     setLoggedin("");
     
   };
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [modalType, setModalType] = useState(null);
+
+  const handleProfileClick = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleOptionSelect = (option) => {
+    setIsDropdownOpen(false);
+  
+    if (option === "profile" || option === "history") {
+      setModalType(option);
+    } else if (option === "logout") {
+      localStorage.removeItem("token");
+      window.location.reload();
+    }
+  };
+  
 
   const menuOff = () => {
     setToggle(false);
@@ -94,7 +115,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="navbar">
+    <div className="navbar fixed z-50">
       <div className="navbar-links">
         <div className="navbar-links_logo">
           <NavLink to="/home">
@@ -108,10 +129,13 @@ const Navbar = () => {
 
       <div className="navbar-sign">
         {localStorage.getItem("token") ? (
-          <button className="user-button" type="user-button" onClick={ProfileButton}>
+         <div className="relative">
+         <button className="user-button" onClick={handleProfileClick}>
             Hi, {loggedin.replace(/['"]+/g, "")}
-          </button>
-        ) : (
+         </button>
+ 
+         {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} />}
+       </div> ) : (
           <>
             <button className="sign-in-button" type="sign-in-button" onClick={e=> handleSignInLogIn(e)}>
               Sign Up
@@ -140,6 +164,14 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      
+
+      {/* Modals */}
+      <DashboardModal
+        isOpen={modalType !== null}
+        onClose={() => setModalType(null)}
+        option={modalType}
+      />
     </div>
   );
 };

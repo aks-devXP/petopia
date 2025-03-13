@@ -74,7 +74,7 @@
 
 .navbar-links_container ul a:hover,
 .navbar-menu_container ul a:hover{
-  color: rgb(118, 188, 249);;
+  color: #E5E5CB;
 }
 .navbar-links_container ul a,
 .navbar-sign p,
@@ -218,11 +218,11 @@
 }
 .submenu ul a:hover {
   background-color: #1f1d1d;
-  color: rgb(118, 188, 249);
+  color: #E5E5CB;
   padding: 1rem 1.5rem;
 }
 .has-submenu:hover > a {
-  color: #E8E8E8;
+  color: #E5E5CB;
 }
 
 .submenu ul a:hover::after {
@@ -232,13 +232,13 @@
   opacity: 1;
 }
 .submenu:hover > a{
-  color:  #E8E8E8;
+  color: #E5E5CB;
 }
 
 /* Transitions */
 .navbar-menu_container ul a{
-
-  transition: all 0.5s ease-in;
+  color: #E5E5CB;
+  transition: all 0.1s ease-in;
 }
   .navbar-links_container ul a{
     transition: color 0.3s ease-in;

@@ -17,7 +17,7 @@ const Messages = () => {
   };
 
   return (
-    <div className='bg-n-6 p-6 rounded-3xl shadow'>
+    <div className='text-[#E5E5CB] p-6 rounded-3xl shadow'>
       <h2 className='text-2xl font-semibold mb-6'>Messages Preferences</h2>
       <div className="flex flex-col gap-2">
         <label className="flex items-center gap-2 cursor-pointer">
@@ -70,7 +70,7 @@ const Messages = () => {
           <span className={checkedItems.news ? "font-bold" : ""}>Latest News</span>
         </label>
 
-        <div className='mt-5 cursor-pointer bg-n-6 border-2 w-fit px-5 py-2 hover:bg-black rounded-full'>
+        <div className="mt-5 bg-[#3C2A21] border-2 w-fit px-5 py-2 hover:bg-black rounded-full">
           <button className='text-lg'>Save Changes</button>
         </div>
       </div>
