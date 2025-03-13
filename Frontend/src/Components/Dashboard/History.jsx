@@ -40,39 +40,38 @@ const History = () => {
   }, {});
 
   return (
-    <div className="w-full pt-4 bg-[#3d4143] p-4 rounded-lg">
+    <div className="w-full pt-0 p-4 rounded-lg">
       {Object.keys(groupedByYearMonth).map((key) => {
         const [year, month] = key.split("-");
 
         return (
           <div key={key} className="mb-8">
             {/* Month & Year Header */}
-            <div className="border-b-2 mb-4 text-white font-bold text-lg">
+            <div className="border-b-2 border-[#E5E5CB]/50 mb-4 text-[#E5E5CB] font-bold text-lg">
               {monthMap[month]} {year}
             </div>
 
             {/* Rows for that Month */}
             {groupedByYearMonth[key].map((row, index) => (
-              <div key={index} className="flex items-center h-[120px] bg-[#656c70] text-white p-1 rounded-md shadow-sm mt-2">
+              <div key={index} className="flex items-center h-[120px] bg-[#3C2A21] text-[#E5E5CB] p-1 rounded-md shadow-sm mt-2">
                 {/* Day & Date */}
                 <div className="h-full aspect-square text-center p-2 items-center justify-center">
                   <div className="flex h-[60%] uppercase text-3xl items-center justify-center">{row[0]}</div>
                   <div className="flex items-center justify-center h-[40%] text-xl">{row[1]}</div>
                 </div>
 
-                <div class="w-[1.5px] h-20 bg-gray-700"></div>
+                <div class="w-[1.5px] h-20 bg-[#E5E5CB]/40"></div>
                 
                 {/* Time & Doctor Name */}
                 <div className=" h-full flex-1 flex flex-col gap-3 justify-center p-2 pl-5">
                   {/* Time with Clock Icon */}
                   <div className="text-sm flex items-center gap-2">
-                    <Clock size={16} className="text-gray-400" />
+                    <Clock size={18} color="#E5E5CB" className="text-gray-400" />
                     {row[4]}
                   </div>
 
-                  {/* Doctor Name with Stethoscope Icon */}
                   <div className="text-sm flex items-center gap-2">
-                    <Stethoscope size={16} className="text-gray-400" />
+                    <Stethoscope size={18} color="#E5E5CB" className="text-gray-400" />
                     {row[5]}
                   </div>
                 </div>
@@ -90,7 +89,7 @@ const History = () => {
 
                 {/* View Details Button */}
                 <div className="h-full flex items-center justify-center px-4">
-                  <button className="bg-black px-3 py-1 rounded text-white">
+                  <button className="bg-black px-3 py-1 rounded text-[#E5E5CB]">
                     View Details
                   </button>
                 </div>
