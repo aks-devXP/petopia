@@ -1,42 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { RiCloseLine, RiMenu3Fill } from "react-icons/ri";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/petopia-logo.svg";
 import { handleError } from "../Util/Alerts";
-import "./Navbar.css";
-import DashboardModal from "../Components/ProfileSetting/DashboardModal"
-import ProfileDropdown from "./ProfileSetting/Dropdown"
+import DashboardModal from "../Components/ProfileSetting/DashboardModal";
+import ProfileDropdown from "./ProfileSetting/Dropdown";
+import MainMenu from "./NavbarMenu/MainMenu";
 
-const Navbar = () => {
+const Navbar = ({ MenuComponent = MainMenu }) => {
   const [loggedin, setLoggedin] = useState("");
-  const [toggle, setToggle] = useState(false);
-  let userName = ""; 
-  const Navigate =  useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [modalType, setModalType] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setLoggedin(localStorage.getItem("user_name") || "");
+    }
+  }, []);
 
   const handleSignInLogIn = (e) => {
     setLoggedin(true);
-    if(e.target.innerText === "Sign Up"){
-      Navigate("/sign-up");
-    }
-    else{
-      Navigate("/login");
-    }
-  };
-  useEffect(() => {
-    if(localStorage.getItem("token")){
-      setLoggedin(localStorage.getItem("user_name")||"");
-      // userName = JSON.parse(localStorage.getItem("user_name"));
-      console.log(loggedin);
-    }
-  }, []);
-  // console.log(loggedin);
-  const handleLogout = () => {
-    setLoggedin("");
-    
+    navigate(e.target.innerText === "Sign Up" ? "/sign-up" : "/login");
   };
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [modalType, setModalType] = useState(null);
+  const handleLogout = () => {
+    setLoggedin("");
+  };
 
   const handleProfileClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -44,7 +33,6 @@ const Navbar = () => {
 
   const handleOptionSelect = (option) => {
     setIsDropdownOpen(false);
-  
     if (option === "profile" || option === "history") {
       setModalType(option);
     } else if (option === "logout") {
@@ -52,126 +40,42 @@ const Navbar = () => {
       window.location.reload();
     }
   };
-  
-
-  const menuOff = () => {
-    setToggle(false);
-    console.log("menu off");
-  };
-
-  const Submenu = () => {
-    return (
-      <ul>
-        <li>
-          <NavLink to="/news">News</NavLink>
-        </li>
-        <li>
-          <NavLink to="/ngo">NGO</NavLink>
-        </li>
-        <li>
-          <NavLink to="/about">About Us</NavLink>
-        </li>
-        <li>
-          <NavLink to="/contact">Contact</NavLink>
-        </li>
-      </ul>
-    );
-  };
-
-  const Menu = () => {
-    return (
-      <ul>
-        <li>
-          <NavLink to="/home">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/dictionary">Guide</NavLink>
-        </li>
-        <li>
-          <NavLink to="/vet">Medical Care</NavLink>
-        </li>
-        <li>
-          <NavLink to="/shopping">Pet Essentials</NavLink>
-        </li>
-        <li>
-          <NavLink to="/trainer">Trainer</NavLink>
-        </li>
-        <li className="submenu">
-          <NavLink to="#">More</NavLink>
-          <Submenu />
-        </li>
-      </ul>
-    );
-  };
-
-  const ProfileButton = ()=>{
-    try{
-      Navigate("/dashboard");
-    }
-
-    catch(e){
-      handleError(e);
-    }
-  }
 
   return (
-    <div className="navbar fixed z-50">
-      <div className="navbar-links">
-        <div className="navbar-links_logo">
+    <div className="flex justify-between w-full p-1.5 bg-[#1A120B] fixed z-50 min-h-20">
+      <div className="flex flex-1 justify-start items-center">
+        <div className="ml-6 rounded-full">
           <NavLink to="/home">
-            <img src={logo} alt="Petopia Logo" />
+            <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
           </NavLink>
         </div>
-        <div className="navbar-links_container">
-          <Menu />
+        <div className="flex flex-[2] justify-evenly h-full">
+          <MenuComponent />
         </div>
       </div>
 
-      <div className="navbar-sign">
+      <div className="flex justify-end items-center mr-2">
         {localStorage.getItem("token") ? (
-         <div className="relative">
-         <button className="user-button" onClick={handleProfileClick}>
-            Hi, {loggedin.replace(/['"]+/g, "")}
-         </button>
- 
-         {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} />}
-       </div> ) : (
+          <div className="relative">
+            <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" onClick={handleProfileClick}>
+              Hi, {loggedin.replace(/['"]+/g, "")}
+            </button>
+            {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} />}
+          </div>
+        ) : (
           <>
-            <button className="sign-in-button" type="sign-in-button" onClick={e=> handleSignInLogIn(e)}>
+            <button className="mr-4 hover:text-[#E5E5CB]" type="button" onClick={handleSignInLogIn}>
               Sign Up
             </button>
-            <button className="log-in-button" type="log-in-button" onClick={e=>handleSignInLogIn(e)}>
+            <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" type="button" onClick={handleSignInLogIn}>
               Log in
             </button>
           </>
         )}
       </div>
 
-      <div className="navbar-menu" onBlur={menuOff}>
-        {toggle ? (
-          <RiCloseLine color="#fff" onClick={() => setToggle(false)} />
-        ) : (
-          <RiMenu3Fill color="#fff" onClick={() => setToggle(true)} />
-        )}
-        {toggle && (
-          <div className="navbar-menu_container scale-up-center">
-            <div className="navbar-menu_container-links">
-              <Menu />
-              <div className="navbar-menu_container-links-sign">
-                <button type="button">Sign up</button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-      
-
       {/* Modals */}
-      <DashboardModal
-        isOpen={modalType !== null}
-        onClose={() => setModalType(null)}
-        option={modalType}
-      />
+      <DashboardModal isOpen={modalType !== null} onClose={() => setModalType(null)} option={modalType} />
     </div>
   );
 };

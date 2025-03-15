@@ -18,6 +18,7 @@ import Trainer from './Pages/Trainer'
 import TrainerBooking from './Pages/TrainerBooking'
 // import ScrollToTop from './Components/ScrollToTop'
 import ScrollAnimations from './Components/ScrollAnimations'
+import ProductDirectory from './Pages/ProductDirectory'
 
 import "react-toastify/ReactToastify.css";
 // For smooth scrolling
@@ -59,11 +60,10 @@ function App() {
       <Route path='sample' element={<ScrollAnimations/>}></Route>
       <Route path="/home" element={<Home/>}></Route>
       <Route index element={<Home/>}></Route>
+      <Route  path="/shopping" element={<ProductDirectory/>}></Route>
 
       <Route path="/" element={<MainLayout/>}>
-        <Route path='/dashboard' element={<UserDashboard/>}></Route>
-
-        
+        <Route path='/dashboard' element={<UserDashboard/>}></Route>  
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
