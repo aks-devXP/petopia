@@ -7,10 +7,12 @@ import Navbar from '../Components/Navbar'
 const MainLayout = () => {
   return (
     <>
-        <Navbar></Navbar>
-        <Outlet></Outlet>
-        <Footer></Footer>
-        <ToastContainer/>
+        <div className='relative h-screen'>
+          <Navbar></Navbar>
+          <Outlet></Outlet>
+          <Footer></Footer>
+          <ToastContainer/>
+        </div>
     </>
   )
 }
