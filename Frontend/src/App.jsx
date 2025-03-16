@@ -2,30 +2,31 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import MainLayout from './Layout/MainLayout'
 import About from './Pages/About'
 import Contact from './Pages/Contact'
+import Dictionary from "./pages/Dictionary"
 import Guide from './pages/Guide'
 import Home from './pages/Home'
+import Login from './Pages/Login'
 import News from './pages/News'
 import NewsPage from './pages/NewsPage'
 import Signup from './pages/Signup'
-import VetHome from "./pages/VetHome"
-import VetDocs from './Pages/VetDocs'
-import Volunteer from "./pages/Volunteer"
-import UserDashboard from './Pages/UserDashboard'
-import VetBook from './Pages/VetBook'
-import Dictionary from "./pages/Dictionary"
-import Login from './Pages/Login'
 import Trainer from './Pages/Trainer'
 import TrainerBooking from './Pages/TrainerBooking'
+import UserDashboard from './Pages/UserDashboard'
+import VetBook from './Pages/VetBook'
+import VetDocs from './Pages/VetDocs'
+import VetHome from "./pages/VetHome"
+import Volunteer from "./pages/Volunteer"
 // import ScrollToTop from './Components/ScrollToTop'
 import ScrollAnimations from './Components/ScrollAnimations'
 import ProductDirectory from './Pages/ProductDirectory'
 
-import "react-toastify/ReactToastify.css";
+import "react-toastify/ReactToastify.css"
 // For smooth scrolling
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { useEffect } from 'react'
+import Testing from './Pages/Testing'
 
 gsap.registerPlugin(ScrollTrigger);
 function App() {
@@ -59,7 +60,7 @@ function App() {
       <Route path='sign-up' element={<Signup/>}></Route>
       <Route path='sample' element={<ScrollAnimations/>}></Route>
       <Route  path="/shopping" element={<ProductDirectory/>}></Route>
-
+      <Route path="/testing" element={<Testing/>}></Route>
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
@@ -76,6 +77,7 @@ function App() {
         <Route path="/trainer" element={<Trainer/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
+        
       </Route>
     </>
     ));
