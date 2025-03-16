@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { PersonStanding, BriefcaseMedical, Store, House } from 'lucide-react';
+
 
 const Submenu = () => {
   return (
@@ -43,8 +45,13 @@ const Menu = () => {
   return (
     <ul className="list-none p-0 m-0 flex gap-12 h-15 items-center">
       <li>
-        <NavLink to="/home" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
-          Home
+        <NavLink to="/home" className = {({ isActive }) => `text-white font-medium text-lg leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB] ${isActive ? "border-2 rounded-3xl" : ""}`}>
+          <div className= {`flex justify-center transition-transform`}>
+            <div className="mr-2">
+              <House/>
+            </div>
+            <p>Home</p>
+          </div>
         </NavLink>
       </li>
       <li>

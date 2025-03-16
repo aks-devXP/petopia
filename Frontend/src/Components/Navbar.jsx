@@ -5,9 +5,8 @@ import { handleError } from "../Util/Alerts";
 import DashboardModal from "../Components/ProfileSetting/DashboardModal";
 import ProfileDropdown from "./ProfileSetting/Dropdown";
 import MainMenu from "./NavbarMenu/MainMenu";
-import { PersonStanding, BriefcaseMedical, Store, House } from 'lucide-react';
 
-const Navbar = ({ MenuComponent = MainMenu }) => {
+const Navbar = () => {
   const [loggedin, setLoggedin] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -42,8 +41,10 @@ const Navbar = ({ MenuComponent = MainMenu }) => {
     }
   };
 
+  // console.log("Current Path:", window.location.pathname);
+
   return (
-    <div className="flex justify-between w-[90%] p-1.5 bg-[#1A120B] fixed top-2 left-20 z-50 min-h-20 rounded-3xl">
+    <div className="flex justify-between w-[90%] p-1.5 bg-[#1A120B] fixed top-2 left-20 z-20 min-h-20 rounded-3xl">
       <div className="flex flex-1 justify-start items-center">
         <div className="ml-6 rounded-full">
           <NavLink to="/home">
@@ -51,14 +52,9 @@ const Navbar = ({ MenuComponent = MainMenu }) => {
           </NavLink>
         </div>
         <div className="flex flex-[2] justify-evenly h-full">
-          <MenuComponent />
+          <MainMenu />
         </div>
       </div>
-
-      <BriefcaseMedical />
-      <House />
-      <Store />
-      <PersonStanding />
 
       <div className="flex justify-end items-center mr-2">
         {localStorage.getItem("token") ? (
