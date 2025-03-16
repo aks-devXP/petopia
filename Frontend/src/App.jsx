@@ -58,11 +58,11 @@ function App() {
       <Route path='/login' element={<Login/>}></Route>
       <Route path='sign-up' element={<Signup/>}></Route>
       <Route path='sample' element={<ScrollAnimations/>}></Route>
-      <Route path="/home" element={<Home/>}></Route>
       <Route index element={<Home/>}></Route>
       <Route  path="/shopping" element={<ProductDirectory/>}></Route>
 
       <Route path="/" element={<MainLayout/>}>
+        <Route path="/home" element={<Home/>}></Route>
         <Route path='/dashboard' element={<UserDashboard/>}></Route>  
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>

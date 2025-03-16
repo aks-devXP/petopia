@@ -11,9 +11,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 const Home = () => {
   return (
     <div className="">
-
-      <Navbar/>
-
       {/* Top content */}
       <div className="min-h-[calc(100vh+16px)] w-full bg-[#1A120B] pt-16">
 
