@@ -62,7 +62,7 @@ const Navbar = () => {
             <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" onClick={handleProfileClick}>
               Hi, {loggedin.replace(/['"]+/g, "")}
             </button>
-            {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} />}
+            {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} name={loggedin.replace(/['"]+/g, "")}/>}
           </div>
         ) : (
           <>

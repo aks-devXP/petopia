@@ -1,4 +1,4 @@
-import { Bone, BookOpenTextIcon, ChevronDown, Home, MoveRight, PawPrint } from 'lucide-react';
+import { Bone, BookOpenTextIcon, ChevronDown, Home, MoveRight, PawPrint, Store } from 'lucide-react';
 import { NavLink } from "react-router-dom";
 
 const Submenu = () => {
@@ -23,7 +23,7 @@ const Submenu = () => {
               <MoveRight 
                 className="absolute top-1/2 left-1/2 
                   -translate-x-[150%] -translate-y-1/2 
-                  opacity-0 
+                  opacity-0 w-4 h-4
                   transition-all duration-300 
                   group-hover/item:opacity-100 group-hover/item:translate-x-[-50%]"
               />
@@ -41,8 +41,8 @@ const Menu = () => {
       <li>
         <NavLink to="/home" className="text-white font-medium text-lg leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
           {({ isActive }) => (
-            <div className={`flex justify-center transition-transform  ${isActive ? "border-2 border-white rounded-3xl p-2 " : ""}`}>
-              { isActive?(<div className="mr-2">
+            <div className={`flex justify-center transition-transform ${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
+              { isActive?(<div className="px-3">
                 <Home />
               </div>):
               (<p>Home</p>)
@@ -54,8 +54,8 @@ const Menu = () => {
       <li>
         <NavLink to="/dictionary" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
           {({ isActive }) => (
-            <div className={`flex justify-center transition-transform ${isActive ? "border-2 border-white rounded-3xl p-2 " : ""}`}>
-              { isActive?(<div className="mr-2">
+            <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
+              { isActive?(<div className="px-3">
                 <BookOpenTextIcon />
               </div>):
               (<p>Guide</p>)
@@ -67,8 +67,8 @@ const Menu = () => {
       <li>
         <NavLink to="/vet" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
           {({ isActive }) => (
-            <div className={`flex justify-center transition-transform ${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-              { isActive?(<div className="mr-2">
+            <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
+              { isActive?(<div className="px-3">
                 <PawPrint />
               </div>):
               (<p>Medic</p>)
@@ -80,9 +80,9 @@ const Menu = () => {
       <li>
         <NavLink to="/shopping" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
           {({ isActive }) => (
-            <div className={`flex justify-center transition-transform ${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-              { isActive?(<div className="mr-2">
-                <Bone />
+            <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
+              { isActive?(<div className="px-3">
+                <Store />
               </div>):
               (<p>Pet Essentials</p>)
               }
@@ -92,16 +92,20 @@ const Menu = () => {
       </li>
       <li>
         <NavLink to="/trainer" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
-          {({ isActive }) => (
-            <div className={`flex justify-center transition-transform ${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-              Trainer
-            </div>
-          )}
-        </NavLink>
+            {({ isActive }) => (
+              <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
+                { isActive?(<div className="px-3">
+                  <Bone />
+                </div>):
+                (<p>Trainer</p>)
+                }
+              </div>
+            )}
+          </NavLink>
       </li>
       <li className="relative group">
         <NavLink 
-          to="#" 
+          to="/bc" 
           className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer group-hover:text-[#E5E5CB]"
         >
           {({ isActive }) => (
