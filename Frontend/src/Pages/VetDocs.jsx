@@ -85,7 +85,7 @@ const VetDocs = () => {
 
   return (
     <>
-        <div className='bg-sand-dark flex flex-col sm:flex-row justify-around gap-5 py-5'>
+        <div className='bg-sand-dark flex flex-col sm:flex-row justify-around gap-5 py-5 mt-20'>
             <div className='w-1/5'>
                 <p className='text-2xl text-center'>Browse through our <br /> specialist doctors here</p>
                 <div className='flex flex-col items-start mt-10 gap-3 w-[80%]'>
