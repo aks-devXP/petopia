@@ -119,9 +119,6 @@ const Home = () => {
           </NavLink>
         </div>
       </div>
-
-      <Footer/>
-      
     </div>
   );
 };
