@@ -1,19 +1,19 @@
 import React from 'react';
-import petData from '../Data/BreedData.json';
-import Rating from '../Components/Rating'
-import germanShepherd from '../assets/PetGuide/germanShepherd.png';
-import germanShepherdBody from '../assets/PetGuide/germanShepherd2.png';
-
 import chicken from '../assets/Food/chicken.svg';
-import meat from '../assets/Food/meat.svg';
-import fish from '../assets/Food/fish.svg';
-import mutton from '../assets/Food/mutton.svg';
 import chocolate from '../assets/Food/chocolate.svg';
 import fatty from '../assets/Food/fatty.svg';
+import fish from '../assets/Food/fish.svg';
 import grain from '../assets/Food/grain.svg';
 import grapes from '../assets/Food/grapes.svg';
-import vegetables from '../assets/Food/vegetables.svg';
+import meat from '../assets/Food/meat.svg';
+import mutton from '../assets/Food/mutton.svg';
 import onion from '../assets/Food/onion.svg';
+import vegetables from '../assets/Food/vegetables.svg';
+// import germanShepherd from '../assets/PetGuide/germanShepherd.png';
+import Rating from '../Components/Rating';
+import petData from '../Data/BreedData.json';
+import { getImageURL, getImgUrl } from '../Util/ImageExtract';
+
 
 const Guide = () => {
   return (
@@ -37,7 +37,7 @@ const Guide = () => {
         </div>
 
         <div className="w-[50%] p-[20px]">
-          <img className="h-full w-full" src={germanShepherd} alt="German Shepherd" />
+          <img className="h-full w-full" src={getImgUrl("../assets/PetGuide/germanShepherd.png")} alt="German Shepherd" />
         </div>
       </div>
 
@@ -64,7 +64,7 @@ const Guide = () => {
           <h2 className="text-[30px] font-bold mb-[20px]">Head to Tail</h2>
           <dl className="w-full grid grid-cols-2 gap-[50px]">
             <div className='p-[50px]'>
-            <img className="h-full w-full" src={germanShepherdBody} alt="German Shepherd" />
+            <img className="h-full w-full" src={getImageURL("PetGuide/germanShepherd.png")} alt="German Shepherd" />
             </div>
             <div className='p-[50px] flex flex-col justify-center'>
               {Object.entries(petData.physical_characteristics).map(([key, value]) => (

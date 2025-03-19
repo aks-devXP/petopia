@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 import React from 'react'
 import Slidebar, { SlidebarItem } from '../Components/Dashboard/slidebar'
+// testing for the slidebar
 const Testing = () => {
   return (
     <div className="flex flex-row h-screen w-full">
@@ -33,5 +34,6 @@ const Testing = () => {
     </div>
   )
 }
+
 
 export default Testing

@@ -1,5 +1,15 @@
-function getImageURL({name}){
-    return new URL(`../assets/${name}`, import.meta.url).href; 
+async function getImageURL(name) {
+    const image= await import(/* @vite-ignore */`../assets/PetGuide/${name}`);
+    return image.default;
 }
 
-export { getImageURL };
+// is working when comlete path is being given
+function getImgUrl(name) {
+    return new URL(`${name}`, import.meta.url).href
+  }
+
+
+export { getImageURL, getImgUrl };
+
+
+ 
