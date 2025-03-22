@@ -44,7 +44,8 @@ const Navbar = () => {
   // console.log("Current Path:", window.location.pathname);
 
   return (
-    <div className="flex justify-between w-[90%] p-1.5 bg-[#1A120B] fixed top-2 left-20 z-20 min-h-20 rounded-3xl">
+    <div className="flex justify-between w-[90%] p-1.5 bg-[#1A120B] 
+    fixed top-2 left-20 z-20 min-h-20 rounded-3xl shadow-[0_0_10px_rgba(229,229,203,0.4)]">
       <div className="flex flex-1 justify-start items-center">
         <div className="ml-6 rounded-full">
           <NavLink to="/home">
