@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div className="">
       {/* Top content */}
-      <div className="min-h-[calc(100vh+16px)] w-full bg-[#1A120B] pt-16">
+      <div className="min-h-[calc(100vh+16px)] w-full bg-[#1A120B] ">
 
         {/* Background Image */}
         <div className="">
@@ -30,7 +30,7 @@ const Home = () => {
           <h1 className="font-bree text-[19px] my-5">Book trusted vets, find expert guidance, and shop for pet products effortlessly</h1>
           <button
             className="bg-black rounded-3xl w-[30%] h-[20%] text-white"
-            onClick={() => window.scrollBy({ top: window.innerHeight, behavior: "smooth" })}
+            onClick={() => window.scrollBy({ top: window.innerHeight + 60, behavior: "smooth" })}
           >
             Explore
           </button>
