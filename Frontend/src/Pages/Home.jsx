@@ -25,7 +25,7 @@ const Home = () => {
 
         {/* Foreground Content */}
         <div className="h-full pt-16">
-        <div className="absolute right-[17%] bottom-[3%] h-[30%] w-[33%] text-black text-right p">
+        <div className="absolute right-[12%] bottom-[-10%] h-[30%] w-[33%] text-black text-right p">
           <h1 className="font-fredoka text-[29px]">Caring for Your Pet Made Simple!</h1>
           <h1 className="font-bree text-[19px] my-5">Book trusted vets, find expert guidance, and shop for pet products effortlessly</h1>
           <button
