@@ -1,10 +1,11 @@
 import React from "react";
-import { Bell, Power } from "lucide-react";
+import { Bell, LogOut } from "lucide-react";
 import ToggleSwitch from "./ToggleSwitch";
 
 const ProfileDropdown = ({ onSelect, name }) => {
   return (
-    <div className="absolute flex flex-col right-[-9px] top-[65px] w-[280px] h-[368px] bg-[#1A120B] rounded-[32px] z-50 text-[#E5E5CB] px-6">
+    <div className="absolute flex flex-col right-[-9px] top-[65px] 
+    w-[265px] h-[350px] bg-[#1A120B] rounded-[32px] z-50 text-[#E5E5CB] px-6">
       <div className="h-[28%] flex items-center justify-between">
         {/* Profile Picture */}
         <div className="w-[30%] flex items-center">
@@ -21,12 +22,12 @@ const ProfileDropdown = ({ onSelect, name }) => {
       </div>
 
       {/* Toggle Switch */}
-      <div className="h-[17%] border-t border-[#E5E5CB]/30 flex justify-center items-center">
+      <div className="h-[15%] border-t border-[#E5E5CB]/30 flex justify-center items-center">
         <ToggleSwitch />
       </div>
 
       {/* Menu Options */}
-      <div className="h-[35%] border-t border-[#E5E5CB]/30 flex flex-col justify-center">
+      <div className="h-[35%] border-t border-[#E5E5CB]/30 flex flex-col justify-between py-2">
         <div
           className="py-1 hover:bg-[#3C2A21] cursor-pointer rounded-lg pl-3"
           onClick={() => onSelect("profile")}
@@ -48,16 +49,16 @@ const ProfileDropdown = ({ onSelect, name }) => {
       </div>
 
       {/* Logout Option */}
-      <div className="h-[20%] border-t border-[#E5E5CB]/30">
+      <div className="h-[10%] border-t border-[#E5E5CB]/30">
         <div
-          className="py-2 hover:bg-red-900 cursor-pointer rounded-2xl pl-3 mt-2"
+          className="py-2 hover:bg-[#3C2A21] hover:text-red-500 cursor-pointer rounded-2xl pl-3 mt-2"
           onClick={() => onSelect("logout")}
         >
           <div className="flex justify-between items-center">
             <p> Log Out </p>
-            <div className="mr-4">
-              <Power className="w-4 h-4"/>
-            </div>
+          <div className="mr-4">
+              <LogOut className="w-4 h-4"/>
+          </div>
           </div>
         </div>
       </div>
