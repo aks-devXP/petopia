@@ -7,7 +7,8 @@ const appointmentSchema = new schema({
     },
     type:{
         type: String,
-        required: true
+        required: true,
+        enum: ['vet', 'groomer', 'trainer']
     },
     authority_id:{
         type: String,

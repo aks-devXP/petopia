@@ -1,4 +1,5 @@
 const VetModel = require('../Models/VetDB');
+
 const getAllVets = async(req,res)=>{
   try{
     const vets = await VetModel.find();
@@ -8,9 +9,10 @@ const getAllVets = async(req,res)=>{
     res.status(500).json({message:'Internal server error', success: false});
   }
 }
+
 const createVet = async (req, res) => {
   try {
-    const { name, email, phone, address, city, state, zip, about, tenure, rating, profilePic } = req.body;
+    const { name, email, phone, address, city, state, zip, about, tenure, rating, profilePic , timings} = req.body;
     const existingVet = await VetModel.findOne
     ({
       email: email,
@@ -30,7 +32,8 @@ const createVet = async (req, res) => {
       about,
       tenure, 
       rating, 
-      profilePic
+      profilePic,
+      timings
     });
 
     // Save to the database

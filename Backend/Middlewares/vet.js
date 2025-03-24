@@ -39,8 +39,8 @@ const VetValidation = (req,res,next)=>{
       'string.empty': 'Tenure is required.'
     }),
     rating: joi.number().default(4),
-    profilePic: joi.string().allow('').default("")
-
+    profilePic: joi.string().allow('').default(""),
+    timings: joi.array().items(joi.array().items(joi.string())).required()
   })
   const {error} = schema.validate(req.body)
   if(error){
