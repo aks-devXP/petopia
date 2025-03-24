@@ -10,9 +10,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="">
+    <div>
       {/* Top content */}
-      <div className="min-h-[calc(100vh+16px)] w-full bg-[#1A120B] pt-16">
+      <div className="min-h-[calc(100vh+16px)] w-full bg-[#1A120B] ">
 
         {/* Background Image */}
         <div className="">
@@ -25,12 +25,12 @@ const Home = () => {
 
         {/* Foreground Content */}
         <div className="h-full pt-16">
-        <div className="absolute right-[17%] bottom-[3%] h-[30%] w-[33%] text-black text-right p">
+        <div className="absolute right-[12%] bottom-[-10%] h-[30%] w-[33%] text-black text-right p">
           <h1 className="font-fredoka text-[29px]">Caring for Your Pet Made Simple!</h1>
           <h1 className="font-bree text-[19px] my-5">Book trusted vets, find expert guidance, and shop for pet products effortlessly</h1>
           <button
             className="bg-black rounded-3xl w-[30%] h-[20%] text-white"
-            onClick={() => window.scrollBy({ top: window.innerHeight, behavior: "smooth" })}
+            onClick={() => window.scrollBy({ top: window.innerHeight + 60, behavior: "smooth" })}
           >
             Explore
           </button>

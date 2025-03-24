@@ -9,14 +9,13 @@ import Login from './Pages/Login'
 import News from './pages/News'
 import NewsPage from './pages/NewsPage'
 import Signup from './pages/Signup'
-import Trainer from './Pages/Trainer'
-import TrainerBooking from './Pages/TrainerBooking'
+import PetServices from './Pages/PetServices'
 import UserDashboard from './Pages/UserDashboard'
 import VetBook from './Pages/VetBook'
 import VetDocs from './Pages/VetDocs'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
-// import ScrollToTop from './Components/ScrollToTop'
+import GroomerBook from './Pages/GroomerBook'
 import ScrollAnimations from './Components/ScrollAnimations'
 import ProductDirectory from './Pages/ProductDirectory'
 
@@ -59,10 +58,10 @@ function App() {
       <Route path='/login' element={<Login/>}></Route>
       <Route path='sign-up' element={<Signup/>}></Route>
       <Route path='sample' element={<ScrollAnimations/>}></Route>
-      <Route  path="/shopping" element={<ProductDirectory/>}></Route>
       <Route path="/testing" element={<Testing/>}></Route>
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
+        <Route  path="/shopping" element={<ProductDirectory/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
         <Route path='/dashboard' element={<UserDashboard/>}></Route>  
         <Route path="/guide" element={<Guide/>}></Route>
@@ -70,11 +69,11 @@ function App() {
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
         <Route path="/vet-book" element={<VetBook/>}></Route>
         <Route path="/dictionary" element={<Dictionary/>}></Route>
+        <Route path="/groomer-book" element={<GroomerBook/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
-        <Route path='/book-trainer' element={<TrainerBooking/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2' element={<NewsPage/>}></Route>
-        <Route path="/trainer" element={<Trainer/>}></Route>
+        <Route path="/trainer" element={<PetServices/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
         

@@ -41,8 +41,8 @@ const SunMoonToggle = ({ scale = 0.5 }) => {
         .switch__label {
           position: relative;
           display: inline-block;
-          width: 12rem;
-          height: 5rem;
+          width: 8.5rem;
+          height: 4.5rem;
           background-color: #2B2B2B;
           border: 5px solid #5B5B5B;
           border-radius: 9999px;
