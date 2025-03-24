@@ -25,6 +25,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { useEffect } from 'react'
+import NGO from './Pages/NGO'
 import Testing from './Pages/Testing'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -76,6 +77,7 @@ function App() {
         <Route path="/trainer" element={<PetServices/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
+        <Route path="/ngo" element={<NGO/>}/>
         
       </Route>
     </>
