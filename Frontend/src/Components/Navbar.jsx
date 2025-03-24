@@ -5,6 +5,9 @@ import { handleError } from "../Util/Alerts";
 import DashboardModal from "../Components/ProfileSetting/DashboardModal";
 import ProfileDropdown from "./ProfileSetting/Dropdown";
 import MainMenu from "./NavbarMenu/MainMenu";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState("");
@@ -13,10 +16,72 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setLoggedin(localStorage.getItem("user_name") || "");
-    }
+    setLoggedin(localStorage.getItem("username") || "");
+  
+    // Initial setup
+    gsap.set(".navbar", {
+      display: "flex",
+      position: "fixed",
+      top: 0,
+      width: "100%",
+      opacity: 1,
+      transition: "opacity 0.5s ease-in-out",
+    });
+  
+    // First timeline - handles the navbar transformation
+    const t1 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".navbar",
+        start: "+=100 top",
+        end: "+=500 top",
+        scrub: 1,
+      },
+    });
+  
+    t1.to(".navbar", {
+      position: "fixed",
+      top: "2.5%",
+      left: "12.5%",
+      width: "75%",
+      borderRadius: "1.25rem",
+      zIndex: 1000,
+      opacity: 1,
+    });
+  
+    // For show/hide on scroll, use a separate approach
+    let lastScrollY = window.scrollY;
+  
+    // Define the scroll handler function
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDiff = Math.abs(currentScrollY - lastScrollY);
+  
+      if (scrollDiff > 130) {
+        if (currentScrollY > lastScrollY) {
+          // Scrolling down by more than 150px: Hide navbar
+          gsap.to(".navbar", { y: "-130%", duration: 0.8 });
+        } else {
+          // Scrolling up by more than 150px: Show navbar
+          gsap.to(".navbar", { y: "0", duration: 0.8 });
+        }
+        lastScrollY = currentScrollY;
+      }
+    };
+  
+    // Add the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+  
+    // Cleanup function
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+  
+      // Kill the GSAP animations to prevent memory leaks
+      if (t1.scrollTrigger) {
+        t1.scrollTrigger.kill();
+      }
+    };
   }, []);
+  
 
   const handleSignInLogIn = (e) => {
     setLoggedin(true);
@@ -44,41 +109,42 @@ const Navbar = () => {
   // console.log("Current Path:", window.location.pathname);
 
   return (
-    <div className="flex justify-between w-[90%] p-1.5 bg-[#1A120B] 
-    fixed top-2 left-20 z-20 min-h-20 rounded-3xl shadow-[0_0_10px_rgba(229,229,203,0.4)]">
-      <div className="flex flex-1 justify-start items-center">
-        <div className="ml-6 rounded-full">
-          <NavLink to="/home">
-            <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
-          </NavLink>
+    <div className="flex w-full h-20">
+        <div className="navbar flex h-fit justify-between w-[90%] p-1.5 bg-[#1A120B] z-20 min-h-20 shadow-[0_0_10px_rgba(229,229,203,0.4)]">
+        <div className="flex flex-1 justify-start items-center">
+            <div className="ml-6 rounded-full">
+            <NavLink to="/home">
+                <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
+            </NavLink>
+            </div>
+            <div className="flex flex-[2] justify-evenly h-full">
+            <MainMenu />
+            </div>
         </div>
-        <div className="flex flex-[2] justify-evenly h-full">
-          <MainMenu />
+
+        <div className="flex justify-end items-center mr-2">
+            {localStorage.getItem("token") ? (
+            <div className="relative">
+                <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" onClick={handleProfileClick}>
+                Hi, {loggedin.replace(/['"]+/g, "")}
+                </button>
+                {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} name={loggedin.replace(/['"]+/g, "")}/>}
+            </div>
+            ) : (
+            <>
+                <button className="mr-4 hover:text-[#E5E5CB]" type="button" onClick={handleSignInLogIn}>
+                Sign Up
+                </button>
+                <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" type="button" onClick={handleSignInLogIn}>
+                Log in
+                </button>
+            </>
+            )}
         </div>
-      </div>
 
-      <div className="flex justify-end items-center mr-2">
-        {localStorage.getItem("token") ? (
-          <div className="relative">
-            <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" onClick={handleProfileClick}>
-              Hi, {loggedin.replace(/['"]+/g, "")}
-            </button>
-            {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} name={loggedin.replace(/['"]+/g, "")}/>}
-          </div>
-        ) : (
-          <>
-            <button className="mr-4 hover:text-[#E5E5CB]" type="button" onClick={handleSignInLogIn}>
-              Sign Up
-            </button>
-            <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" type="button" onClick={handleSignInLogIn}>
-              Log in
-            </button>
-          </>
-        )}
-      </div>
-
-      {/* Modals */}
-      <DashboardModal isOpen={modalType !== null} onClose={() => setModalType(null)} option={modalType} />
+        {/* Modals */}
+        <DashboardModal isOpen={modalType !== null} onClose={() => setModalType(null)} option={modalType} />
+        </div>
     </div>
   );
 };
