@@ -15,7 +15,7 @@ import VetBook from './Pages/VetBook'
 import VetDocs from './Pages/VetDocs'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
-// import ScrollToTop from './Components/ScrollToTop'
+import GroomerBook from './Pages/GroomerBook'
 import ScrollAnimations from './Components/ScrollAnimations'
 import ProductDirectory from './Pages/ProductDirectory'
 
@@ -69,6 +69,7 @@ function App() {
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
         <Route path="/vet-book" element={<VetBook/>}></Route>
         <Route path="/dictionary" element={<Dictionary/>}></Route>
+        <Route path="/groomer-book" element={<GroomerBook/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2' element={<NewsPage/>}></Route>
