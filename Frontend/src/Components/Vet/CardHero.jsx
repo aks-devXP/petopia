@@ -22,4 +22,6 @@ const CardHero = ({link='',text='',img='', alt=''}) => {
   )
 }
 
+
+
 export default CardHero

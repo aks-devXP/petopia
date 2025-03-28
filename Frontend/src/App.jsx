@@ -15,7 +15,7 @@ import VetBook from './Pages/VetBook'
 import VetDocs from './Pages/VetDocs'
 import VetHome from "./pages/VetHome"
 import Volunteer from "./pages/Volunteer"
-// import ScrollToTop from './Components/ScrollToTop'
+import GroomerBook from './Pages/GroomerBook'
 import ScrollAnimations from './Components/ScrollAnimations'
 import ProductDirectory from './Pages/ProductDirectory'
 
@@ -25,6 +25,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { useEffect } from 'react'
+import NGO from './Pages/NGO'
 import Testing from './Pages/Testing'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -69,12 +70,14 @@ function App() {
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
         <Route path="/vet-book" element={<VetBook/>}></Route>
         <Route path="/dictionary" element={<Dictionary/>}></Route>
+        <Route path="/groomer-book" element={<GroomerBook/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2' element={<NewsPage/>}></Route>
         <Route path="/trainer" element={<PetServices/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
+        <Route path="/ngo" element={<NGO/>}/>
         
       </Route>
     </>
