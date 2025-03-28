@@ -1,5 +1,5 @@
 const UserModel = require('../Models/UsersDB');
-
+const Appointment = require('../Models/AppointmentsDB');
 const Contact = require('../Models/ContactDB');
 const ContactControl = async (req, res) => {
   const { name, email, category, message } = req.body;
@@ -42,7 +42,7 @@ const updateProfileControl = async (req, res) => {
     const mongoose = require("mongoose");
 
     const _id = req.verified.id;
-
+    // console.log(_id);
     if (!mongoose.Types.ObjectId.isValid(_id)) {
       return res.status(400).json({ error: "Invalid user ID" });
     }
@@ -128,5 +128,134 @@ catch (error) {
 }
 };
 
-module.exports = { ContactControl, getProfileControl, updateProfileControl, updatePasswordControl };
+
+// Appointment Middleware
+const createAppointmentControl = async (req, res) => {
+  try{
+    const {type, authority_id,  date, time, status, description} = req.body.appointment;
+    user_id = req.verified.id;
+    const type1 = type.toLowerCase();
+    if (type1 === "vet"){
+      const VetModel = require('../Models/VetDB');
+      const vet = await VetModel.findById(authority_id);
+      if (!vet){
+        return res.status(400).json({message: 'Vet not found', success: false});
+    }
+  }
+  // else if (type1 === "groomer"){
+      // first data Model need to be implemented
+    // }
+    // else if (type1 === "trainer"){
+      // first data Model need to be implemented
+    // }
+    else{
+      return res.status(400).json({message: 'Invalid appointment type', success: false});
+    }
+
+    const appointment = new Appointment({
+      type:type1,
+      authority_id,
+      user_id,
+      date,
+      time,
+      status,
+      description,
+      created_at: Date.now()
+    });
+    await appointment.save();
+    res.status(201).json({message: 'Appointment created successfully', success: true});
+    
+  }
+  catch(error){
+    console.log(error,"error in create appointment control");
+    return res.status(500).json({message:'Internal server error ', success: false});
+  }
+};
+
+// Update Appointment Control
+const updateAppointmentControl = async (req, res)=>{
+  try{
+    const {appointment_id, appointment} = req.body;
+
+  if(!appointment_id){
+      return res.status(400).json({message: 'Appointment ID is required', success:
+      false});
+  }
+
+
+    const mongoose = require("mongoose");
+    if(!mongoose.Types.ObjectId.isValid(appointment_id)){
+      return res.status(400).json({message: 'Invalid appointment ID', success: false});
+    }
+    let appointment_data = await Appointment.findById(appointment_id);
+    if(!appointment_data){
+      return res.status(400).json({message: 'Appointment not found', success: false});}
+
+    // update all the fields
+    appointment_data.type = appointment.type.toLowerCase();
+    appointment_data.authority_id = appointment.authority_id;
+    appointment_data.date = appointment.date;
+    appointment_data.time = appointment.time;
+    appointment_data.status = appointment.status;
+    appointment_data.description = appointment.description;
+
+  // save the updated data
+    await appointment_data.save();
+    res.status(200).json({message: 'Appointment updated successfully', success: true});
+  }
+
+  catch(error){
+    console.log(error,"error in update appointment control");
+
+    return res.status(500).json({message:'Internal server error ', success: false});
+  }
+
+}
+
+
+// Get All Appointments For a User
+const getAllAppointmentControl = async (req, res) => {
+  try {
+    const user_id = req.verified.id;
+    let appointments = await Appointment.find({ user_id: user_id });
+    appointments.sort((a,b)=> b.created_at - a.created_at);
+    res.status(200).json({ message: 'Appointments', success: true, appointments: appointments });
+  }
+  catch (error) {
+    console.log(error, "error in get appointment control");
+    return res.status(500).json({ message: 'Internal server error ', success: false });
+  }
+};
+
+const deleteAppointmentControl = async (req, res) => {
+  try{
+    const {appointment_id} = req.body;
+    if(!appointment_id){
+      return res.status(400).json({message: 'Appointment ID is required', success: false});
+    }
+    const mongoose = require("mongoose");
+  if(!mongoose.Types.ObjectId.isValid(appointment_id)){
+    res.status(400).json({message: 'Invalid appointment ID', success: false});
+  
+  }
+  let appointment_data = await Appointment.findById(appointment_id);
+  if(!appointment_data){
+    return res.status(400).json({message: 'Appointment not found', success: false});
+  }
+  await Appointment.deleteOne({_id: appointment_id});
+  res.status(200).json({message: 'Appointment deleted successfully', success: true});
+
+  }
+
+  catch(error){
+    console.log(error,"error in delete appointment control");
+
+    return res.status(500).json({message:'Internal server error ', success: false});
+  }
+};
+
+
+module.exports = { ContactControl, getProfileControl, updateProfileControl, updatePasswordControl, createAppointmentControl, updateAppointmentControl, getAllAppointmentControl, deleteAppointmentControl };
+
+
 

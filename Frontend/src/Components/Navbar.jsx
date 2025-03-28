@@ -1,12 +1,11 @@
+import gsap from "gsap";
+import ScrollTrigger from "gsap/all";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/petopia-logo.svg";
-import { handleError } from "../Util/Alerts";
 import DashboardModal from "../Components/ProfileSetting/DashboardModal";
-import ProfileDropdown from "./ProfileSetting/Dropdown";
 import MainMenu from "./NavbarMenu/MainMenu";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/all";
+import ProfileDropdown from "./ProfileSetting/Dropdown";
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {

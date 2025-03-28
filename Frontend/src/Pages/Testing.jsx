@@ -7,9 +7,14 @@ import {
 } from 'lucide-react'
 import React from 'react'
 import Slidebar, { SlidebarItem } from '../Components/Dashboard/slidebar'
+// testing for the slidebar
 const Testing = () => {
   return (
+    <div className='flex flex-col'>
+      
+
     <div className="flex flex-row h-screen w-full">
+      
       <Slidebar>
         <SlidebarItem icon={<UserCircle/>} text="User Profile" active={true}/>
         <SlidebarItem icon={<Calendar1/>} text="Appointments" alert="See Appointments"/>
@@ -30,7 +35,9 @@ const Testing = () => {
         </div>
       </div>
     </div>
+    </div>
   )
 }
+
 
 export default Testing

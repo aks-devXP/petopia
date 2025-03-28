@@ -33,21 +33,48 @@ const DashboardModal = ({ isOpen, onClose }) => {
     return "";
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.overflow = "hidden";
-    } else {
-      const scrollY = parseInt(document.body.style.top || "0") * -1;
-      document.body.style.position = "";
-      document.body.style.overflow = "";
-      window.scrollTo(0, scrollY);
-    }
-  }, [isOpen]);
-
-  if (!isOpen) return null;
+    // Stop scrolling when modal is open
+    useEffect(() => {
+      const handleKeyDown = (e) => {
+        if (e.key === "Escape") {
+          onClose();
+        }
+      };
+  
+      if (isOpen) {
+        // Save current scroll position
+        const scrollY = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.left = "0";
+        document.body.style.width = "100vw";
+        document.body.style.overflow = "hidden";
+        document.addEventListener("keydown", handleKeyDown);
+      } else {
+        // Restore scrolling
+        const scrollY = parseInt(document.body.style.top || "0") * -1;
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollY);
+      }
+  
+      return () => {
+        const scrollY = parseInt(document.body.style.top || "0") * -1;
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollY);
+  
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [isOpen, onClose]);
+  
+    if (!isOpen) return null;
 
   return (
     <div className="fixed z-50 inset-0 flex items-end justify-center" onClick={onClose} role="dialog">
