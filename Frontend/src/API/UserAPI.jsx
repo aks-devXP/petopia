@@ -1,9 +1,9 @@
 
-const baseUrl = "http://localhost:3456";
+const baseUrl = "http://localhost:3456/user";
 
 export async function GetProfileInfo(){
   
-  return fetch(`${baseUrl}/user/profile-info`,{
+  return fetch(`${baseUrl}/profile-info`,{
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +13,7 @@ export async function GetProfileInfo(){
 }
 
 export async function UpdateProfileInfo(user){
-  return fetch(`${baseUrl}/user/profile-info`,{
+  return fetch(`${baseUrl}/profile-info`,{
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export async function UpdateProfileInfo(user){
 }
 
 export async function UpdatePassword(user){
-  return fetch(`${baseUrl}/user/profile-pass`,{
+  return fetch(`${baseUrl}/profile-pass`,{
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

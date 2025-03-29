@@ -45,6 +45,11 @@ const VetSchema = new Schema({
 tenure:{
     type: Number,
     required: true
+  },
+  timings:{
+    type: [[String]],
+    required: true
   }
 })
 module.exports = mongo.model('Vet', VetSchema)
+  
