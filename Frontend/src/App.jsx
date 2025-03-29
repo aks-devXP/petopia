@@ -8,7 +8,7 @@ import Home from './pages/Home'
 import Login from './Pages/Login'
 import News from './pages/News'
 import NewsPage from './pages/NewsPage'
-import Signup from './pages/Signup'
+import SignUp2 from './pages/SignUp2'
 import PetServices from './Pages/PetServices'
 import UserDashboard from './Pages/UserDashboard'
 import VetBook from './Pages/VetBook'
@@ -18,8 +18,9 @@ import Volunteer from "./pages/Volunteer"
 import GroomerBook from './Pages/GroomerBook'
 import ScrollAnimations from './Components/ScrollAnimations'
 import ProductDirectory from './Pages/ProductDirectory'
-
+import CareTaker from './Pages/CareTaker'
 import "react-toastify/ReactToastify.css"
+
 // For smooth scrolling
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -56,14 +57,15 @@ function App() {
     const router = createBrowserRouter(createRoutesFromElements(
       <>
       <Route path='/login' element={<Login/>}></Route>
-      <Route path='sign-up' element={<Signup/>}></Route>
+      <Route path='sign-up' element={<SignUp2/>}></Route>
       <Route path='sample' element={<ScrollAnimations/>}></Route>
       <Route path="/testing" element={<Testing/>}></Route>
+      <Route path='/dashboard' element={<UserDashboard/>}></Route> 
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route  path="/shopping" element={<ProductDirectory/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
-        <Route path='/dashboard' element={<UserDashboard/>}></Route>  
+ 
         <Route path="/guide" element={<Guide/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
@@ -76,7 +78,7 @@ function App() {
         <Route path="/trainer" element={<PetServices/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
-        
+        <Route  path="/care-taker-book" element={<CareTaker/>}></Route>
       </Route>
     </>
     ));

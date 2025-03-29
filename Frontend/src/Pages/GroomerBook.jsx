@@ -8,7 +8,7 @@ export default function GroomerBook() {
   return (
     <div className="w-full bg-[#1A120B]">
 
-      <div className="h-[14vh]"></div>
+      <div className="h-[4vh]"></div>
 
       <div className="w-full flex items-center justify-center sticky top-0 z-10 shadow-md bg-[#1A120B]">
         <Head/>
