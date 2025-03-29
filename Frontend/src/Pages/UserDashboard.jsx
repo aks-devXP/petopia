@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { FaBookMedical, FaCalendarMinus, FaCircleUser } from "react-icons/fa6";
-import { MdDashboard } from "react-icons/md";
-import { TiMessages } from "react-icons/ti";
 import Appointments from '../Components/Dashboard/Appointments';
-import ButtonNav from '../Components/Dashboard/ButtonNav';
 import History from '../Components/Dashboard/History';
 import Messages from '../Components/Dashboard/Messages';
 import Pass from '../Components/Dashboard/Pass';
-import User from '../Components/Dashboard/User';
+import User from '../Components/Dashboard/ProfileSettings';
 import Slidebar , { SlidebarItem } from '../Components/Dashboard/slidebar';
+import { NavLink } from "react-router-dom";
+import logo from "../assets/petopia-logo.svg";
+
 import {
   Calendar1,
   HeartPulse,
@@ -75,11 +74,19 @@ const UserDashboard = () => {
 
   return (
     <>
-      <div className='bg-black h-screen'>
-        <div className='flex h-full'>
-          <div className='h-full bg-black'>
+      <div className='bg-[#1A120B] min-h-screen'>
+        <NavLink to="/home">
+          <div className='w-full p-4 pl-[30px] flex gap-3 items-center'>
+            <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
+            <h className="text-2xl font-grotesk font-bold">Petopia</h>
+          </div>
+        </NavLink>
+        
+        <div className='flex h-full bg-[#1A120B]'>
+          <div className='h-[85vh] flex flex-col justify-between pr-2 '>
             <Slidebar>
-              <SlidebarItem click={() => setToggleButton(1)} active={toggleButton === 1} icon={<UserCircle/>} text="User Profile"/>
+
+              <SlidebarItem click={() => setToggleButton(1)} active={toggleButton === 1} icon={<UserCircle/>} className="bg-[#1A120B]" text="User Profile"/>
               <SlidebarItem click={() => setToggleButton(3)} active={toggleButton === 3} icon={<Calendar1/>} text="Appointments" alert="See Appointments"/>
               <SlidebarItem click={() => setToggleButton(4)} active={toggleButton === 4} icon={<HeartPulse/>} text="Medical History" alert="View Medical History"/>
               <SlidebarItem click={() => setToggleButton(5)} active={toggleButton === 5} icon={<MessageCircleMore/>} text="Message Settings" alert={false}/>
@@ -95,8 +102,8 @@ const UserDashboard = () => {
               </ul> */}
           </div>
 
-          <div className='w-full bg-black mt-20'>
-              <div className='w-[90%] h-fit mx-auto my-5'>
+          <div className='w-full'>
+              <div className=' px-2 h-fit mx-auto my-5 border-l border-[#E5E5CB]/20'>
                   {toggleButton == 1 ? <User isEditing={isEditing}  toggleEditing={toggleEditing} handleChange={handleChange}></User> : <></>}
                   {toggleButton == 2 ? <Pass/>: <></>}
                   {toggleButton == 3 ? <Appointments />: <></>}

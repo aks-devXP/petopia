@@ -24,12 +24,7 @@ export const Signup = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate a delay for signup process
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   setSuccess(true);
-    //   setTimeout(() => navigate("/"), 2000); // Navigate after showing success
-    // }, 4000);
+   
     try{
       const response = await SingUpAPI(user);
       const data = await response.json();
