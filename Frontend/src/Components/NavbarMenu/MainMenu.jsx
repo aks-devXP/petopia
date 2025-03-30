@@ -1,12 +1,12 @@
-import { Bone, BookOpenTextIcon, ChevronDown, Home, MoveRight, PawPrint, Store } from 'lucide-react';
+import { Bone, BookOpenTextIcon, ChevronDown, Home, MoveRight, PawPrint, Newspaper } from 'lucide-react';
 import { NavLink } from "react-router-dom";
 
 const Submenu = () => {
   return (
     <ul className="absolute top-full left-[-2rem] bg-[#151516] rounded-md p-2 hidden group-hover:block z-50">
       {[
-        { to: "/news", label: "News" },
         { to: "/ngo", label: "NGO" },
+        { to: "/shopping", label: "Pet Essentials" },
         { to: "/about", label: "About Us" },
         { to: "/contact", label: "Contact" }
       ].map((item, index) => (
@@ -78,13 +78,13 @@ const Menu = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/shopping" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
+        <NavLink to="/news" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
           {({ isActive }) => (
             <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
               { isActive?(<div className="px-3">
-                <Store />
+                <Newspaper />
               </div>):
-              (<p>Pet Essentials</p>)
+              (<p>News</p>)
               }
             </div>
           )}

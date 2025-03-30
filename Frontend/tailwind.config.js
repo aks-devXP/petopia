@@ -9,6 +9,7 @@ export default {
   ],
   theme: {
     extend: {
+      
       colors: {
         cream:{
           lightest: "#F8F3D9",

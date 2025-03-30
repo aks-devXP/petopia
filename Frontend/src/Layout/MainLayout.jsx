@@ -7,7 +7,7 @@ import Navbar from '../Components/Navbar'
 const MainLayout = () => {
   return (
     <>
-        <div className='relative h-screen'>
+        <div className='relative h-screen bg-[#1A120B]">'>
           <Navbar></Navbar>
           <Outlet></Outlet>
           <Footer></Footer>
