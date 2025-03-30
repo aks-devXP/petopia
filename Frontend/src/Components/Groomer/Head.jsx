@@ -60,7 +60,8 @@ export default function Head() {
                   <MessageCircle className="text-[#E5E5CB] w-4 h-4" />
                   Reviews
                 </button>
-                <button className="flex items-center gap-2 border px-4 py-2 rounded-xl bg-[#3C2A21] hover:text-white text-[#E5E5CB]">
+                <button className="flex items-center gap-2 border px-4 py-2 rounded-xl 
+                bg-[#3C2A21] hover:text-white text-[#E5E5CB]">
                   <CalendarCheck className="w-4 h-4" />
                   Book Appointment
                 </button>
