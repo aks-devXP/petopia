@@ -43,7 +43,7 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
   return (
     <>
       <div className="h-full w-full bg-cream-mid rounded-3xl py-5 text-black">
-        <div className="h-[75%] border-b border-[#E5E5E5] shadow-lg border-opacity-80 flex flex-col gap-2">
+        <div className="h-[75%] border-b border-[#E5E5E5] shadow-lg border-opacity-80 flex flex-col gap-5">
           <div className="h-fit">
             <div className="flex justify-between items-center px-5">
               <button onClick={scrollLeft} className=" hover:text-slate-500 hover:scale-125 duration-300">
