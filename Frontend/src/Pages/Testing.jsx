@@ -1,19 +1,15 @@
-import {
-  Calendar1,
-  HeartPulse,
-  LogOut,
-  MessageCircleMore,
-  UserCircle,
-} from 'lucide-react'
 import React from 'react'
-import Slidebar, { SlidebarItem } from '../Components/Dashboard/slidebar'
 import Banner from '../Components/Banner'
+import WeekTop from '../Components/NGO comp/WeekTop'
 // testing for the slidebar
 const Testing = () => {
   return (
     <>
       <div className='w-screen h-screen'>
         <Banner/>
+        <div>
+         <WeekTop/>
+        </div>
       </div>
     </>
   )
