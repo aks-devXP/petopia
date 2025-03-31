@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import banner_img from '../../assets/NGO/ngo_banner.jpg';
+
+
 const Banner = () => {
   const [animalsSaved, setAnimalsSaved] = useState(0);
   const [ngosAffiliated, setNgosAffiliated] = useState(0);
@@ -39,7 +41,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden w-full bg-cover bg-center h-96" style={{ backgroundImage: `url(${banner_img})`}}>
+    <div className="relative overflow-hidden h-screen w-full bg-cover bg-center" style={{ backgroundImage: `url(${banner_img})`}}>
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="container relative z-10 mx-auto flex flex-col items-center justify-center h-full text-white text-center">
         <h1 className="text-4xl font-bold mb-4 ">
