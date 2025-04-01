@@ -29,17 +29,17 @@ const Impact = () => {
     {
       value: 15,
       unit: "LAC",
-      description: "children and their families are impacted every year",
+      description: "Stray animals have been rescued",
     },
     {
       value: 2000,
-      unit: "VILLAGES",
-      description: "and slums are reached out to across the country",
+      unit: "NGO's",
+      description: "are affiliated with us",
     },
     {
       value: 400,
       unit: "PROJECTS",
-      description: "focused on education, healthcare, and women empowerment",
+      description: "focused on animal welfare",
     },
     {
       value: 25,
@@ -49,23 +49,27 @@ const Impact = () => {
   ];
 
   return (
-    <div className="bg-gray-200 py-12 px-6">
-      <h2 className="text-3xl font-bold text-center mb-8">OUR IMPACT</h2>
+    <div className="py-12 px-6  rounded-lg     w-[70rem] m-auto mt-4"
+    style={{
+      backgroundImage: 'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #9d9ce4, #a09de7, #a39fea, #bc96e6, #d58cdc, #ec81cc, #ff77b7)',
+    }}>
+      <h2 className="text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-[#FABC3F]">OUR IMPACT</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto text-center">
         {data.map((item, index) => (
           <div key={index} className="flex flex-col items-center">
-            <div className="text-6xl font-bold text-sand-light">
+            <div className="text-6xl font-bold text-[#faecf4]">
               <Counter target={item.value} duration={1500} />
             </div>
-            <div className="text-sand-mid text-lg font-semibold mt-2">
+            <div className="text-[#A02334] text-lg font-semibold mt-2">
               {item.unit}
             </div>
-            <p className="text-gray-600 mt-2 leading-relaxed">{item.description}</p>
+            <p className="text-[#383737] mt-2 leading-relaxed">{item.description}</p>
           </div>
         ))}
       </div>
     </div>
   );
 };
-
+// 1b3535
+// linear-gradient(to right bottom, #ebb63e, #ff813e, #ff3b67, #f300a2, #982be0)
 export default Impact;
