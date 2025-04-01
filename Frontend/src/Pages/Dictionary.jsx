@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, ShoppingBag, Search, User, ArrowUpRight, PawPrint, Dog } from 'lucide-react';
 import PawSearchBar from '../Components/Guide/PawSearchBar';
+import pawprint from "../assets/PetGuide/Home/yellow-pawprint.png"
 
 import { CatSlider, DogSlider } from '../Components/Guide/BreedSlider';
 import Tips from '../Components/Guide/Tips';
@@ -13,14 +14,13 @@ const DogCoatProductPage = () => {
       <div className={`${petSelected === "Dogs" ? "bg-amber-100" : "bg-purple-200"} min-h-screen flex items-center justify-center p-1`}>
         <div className="bg-slate-900 rounded-md w-full overflow-hidden relative px-4">
 
-          <header className="flex justify-between items-center mb-8">
-            <div className="text-amber-200 text-2xl font-semibold">Explore Pet Breeds</div>
+          <header className="flex justify-center items-center mb-8">
             <div className="hidden md:flex space-x-6 text-white">
               <div className="flex items-center border border-white rounded-full p-1 w-96 bg-transparent mt-4">
                 <PawSearchBar/>
               </div>
             </div>
-            <div> SOME ICON </div>
+
           </header>
 
           <div className="flex gap-2 h-screen">
@@ -41,17 +41,14 @@ const DogCoatProductPage = () => {
                     Checkout More Facts</div>
                 </div>
               </div>
-              
+              <img src={pawprint} className='absolute w-52 right-8 top-8 rotate-45'/>
 
               <CatSlider/>
             </div>
           </div>
-
-          {/* Bottom thumbnails */}
-
         </div>
       </div>
-
+      
       <Tips petSelected={petSelected} setPetSelected={setPetSelected}/>
       
     </>
