@@ -1,25 +1,34 @@
 import React from 'react'
+import InfiniteScroll from '../Components/InfiniteScroll'
 import Banner from '../Components/NGO comp/Banner'
 import Contribute from '../Components/NGO comp/Contribute'
-import LayeredCard from '../Components/NGO comp/LayeredCard'
-import WeekTop from '../Components/NGO comp/WeekTop'
 import Impact from '../Components/NGO comp/Impact'
-import InfiniteScroll from '../Components/InfiniteScroll'
-import SupportACause from '../Components/NGO comp/SupportACause'
-
-
+import LayeredCard from '../Components/NGO comp/LayeredCard'
 const NGO = () => {
+  const path = "../assets/NGO/"
+  const list = [ { name: "Dog Caring", src: `${path}2e5f69dd-1a6a-4260-b39d-6cc56932d751.jpeg`},
+    { name: "Ahmedabad", src: `${path}9c2d3071-d377-4811-888b-0ea185978ddc.jpeg`},
+    { name: "Hyderabad", src: `${path}5480f0d9-dab7-4438-a1c3-d2ba14b5aef2.jpeg`},
+    { name: "Mumbai", src: `${path}55248cf5-23dd-4c25-a266-04c73a00285f.jpeg`},
+    { name: "Pune", src: `${path}03505041-df8c-487c-af29-69aa00e47000.jpeg`},
+    { name: "Srinagar", src: `${path}13095094-524d-4068-a69d-0ad16991234e.jpeg`}]
+    const list2 = [ { name: "Dog Caring", src: `${path}pexels-ifaw-5486964.jpg`},
+      { name: "Ahmedabad", src: `${path}pexels-ifaw-5487067.jpg`},
+      { name: "Hyderabad", src: `${path}pexels-ifaw-5487074.jpg`},
+      { name: "Mumbai", src: `${path}pexels-sims1217-12195429.jpg`},
+      { name: "Pune", src: `${path}pexels-sims1217-12195433.jpg`},
+      { name: "Srinagar", src: `${path}2e5f69dd-1a6a-4260-b39d-6cc56932d751.jpeg`}]
   return (
-    <div className='w-full'>
+    <div className='w-full bg-[#0b0811]'>
      <div className='w-full'>
       <Banner/>
      </div>
      <div>
       <Impact/>
      </div>
-     <div>
+     {/* <div>
       <WeekTop/>
-     </div>
+     </div> */}
      <div>
       <Contribute/>
      </div>
@@ -29,10 +38,16 @@ const NGO = () => {
       <div>
         <LayeredCard/>
       </div>
-     <div className='my-10'>
-      <InfiniteScroll text={" "} data={""} />
-      <InfiniteScroll text={" "} data={""} dir={"right"}/>
-     </div>
+      <div className='bg-[#0b0811]  mt-4 flex flex-col' >
+        <div className='flex justify-left px-4 py-2  '>
+          <h3 className='text-5xl font-grotesk font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,_rgba(15,6,170,0.9710477941176471)_0%,_rgba(255,138,138,0.9150253851540616)_81%)] text-left tracking-widest'>One Memory</h3>
+        </div>
+        <InfiniteScroll dir="right" max_width="8xl" img_width="80" img_height="60" list = {list} folder = "NGO" bg_col="#FF9D3D" rounded="0" pad="0" mx="2"></InfiniteScroll>
+        <div className='flex justify-end px-4 mt-2'>
+          <h3 className='text-5xl font-grotesk font-bold text-right  bg-clip-text text-transparent bg-[linear-gradient(90deg,_rgba(15,6,170,0.9710477941176471)_0%,_rgba(255,138,138,0.9150253851540616)_81%)] tracking-widest'>One Life</h3>
+        </div>
+        <InfiniteScroll  dir="left" max_width="8xl" img_width="80" img_height="60" list = {list2} folder = "NGO" bg_col="#FF9D3D" rounded="0" pad="4" mx="2"/>
+      </div>
     </div>
   )
 }
