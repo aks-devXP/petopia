@@ -1,0 +1,139 @@
+{
+    "Dogs": {
+      "Feeding": [
+        {
+          "title": "Avoid overfeeding",
+          "content": "Obesity leads to joint problems and diabetes. Follow portion guidelines based on weight and activity level."
+        },
+        {
+          "title": "No human junk food",
+          "content": "Chocolate, grapes, onions, and artificial sweeteners (like xylitol) are toxic to dogs."
+        },
+        {
+          "title": "Regular meal schedule",
+          "content": "Helps with digestion and prevents begging behavior."
+        },
+        {
+          "title": "Slow feeding for fast eaters",
+          "content": "Use a slow-feeder bowl to prevent bloating and choking."
+        },
+        {
+          "title": "Fresh water is a must",
+          "content": "Change water at least twice a day to keep them hydrated."
+        }
+      ],
+      "Grooming": [
+        {
+          "title": "Regular brushing prevents shedding mess",
+          "content": "Short-haired dogs need weekly brushing; long-haired breeds may need daily brushing."
+        },
+        {
+          "title": "Bath once a month (or as needed)",
+          "content": "Too many baths strip natural oils, causing dry skin."
+        },
+        {
+          "title": "Trim nails every 3-4 weeks",
+          "content": "Overgrown nails can cause pain and affect posture."
+        },
+        {
+          "title": "Clean ears regularly",
+          "content": "Especially for floppy-eared dogs prone to infections."
+        },
+        {
+          "title": "Use dog-specific shampoo",
+          "content": "Human shampoos can irritate their skin due to different pH levels."
+        }
+      ],
+      "Training": [
+        {
+          "title": "Start training early",
+          "content": "Puppies learn faster, but older dogs can still be trained with patience."
+        },
+        {
+          "title": "Positive reinforcement works best",
+          "content": "Reward good behavior with treats and praise instead of punishment."
+        },
+        {
+          "title": "Be consistent with commands",
+          "content": "Use the same words like 'sit' and 'stay' to avoid confusion."
+        },
+        {
+          "title": "Short training sessions (5-10 mins)",
+          "content": "Keeps them engaged without boredom."
+        },
+        {
+          "title": "Socialization is key",
+          "content": "Expose dogs to different people, sounds, and places early on to prevent fear and aggression."
+        }
+      ]
+    },
+    "Cats": {
+      "Feeding": [
+        {
+          "title": "Cats are obligate carnivores",
+          "content": "They need meat-based food for proper nutrition."
+        },
+        {
+          "title": "Dry food isn’t enough",
+          "content": "Include wet food to keep them hydrated and prevent urinary problems."
+        },
+        {
+          "title": "Small, frequent meals mimic nature",
+          "content": "Cats naturally eat multiple small meals a day instead of two large ones."
+        },
+        {
+          "title": "Avoid milk",
+          "content": "Despite common belief, most cats are lactose intolerant."
+        },
+        {
+          "title": "Feeding in a quiet place",
+          "content": "Cats feel more comfortable eating in a calm, stress-free area."
+        }
+      ],
+      "Grooming": [
+        {
+          "title": "Cats groom themselves, but brushing helps",
+          "content": "It reduces shedding and prevents hairballs."
+        },
+        {
+          "title": "Avoid frequent baths",
+          "content": "Cats rarely need baths unless dirty or prescribed by a vet."
+        },
+        {
+          "title": "Trim claws every 2-3 weeks",
+          "content": "This prevents furniture damage and keeps their paws healthy."
+        },
+        {
+          "title": "Clean their ears gently",
+          "content": "Use a damp cotton ball, but don’t go too deep."
+        },
+        {
+          "title": "Provide scratching posts",
+          "content": "Helps maintain claw health and prevents furniture damage."
+        }
+      ],
+      "Training": [
+        {
+          "title": "Use treats and praise",
+          "content": "Cats respond best to positive reinforcement."
+        },
+        {
+          "title": "Litter box training is easy",
+          "content": "Just place them in the box after meals, and they usually learn quickly."
+        },
+        {
+          "title": "Discourage bad behavior gently",
+          "content": "Redirect instead of punishing (e.g., use a scratching post instead of scolding for clawing furniture)."
+        },
+        {
+          "title": "Clicker training works for cats too",
+          "content": "Reward them with treats when they respond to commands."
+        },
+        {
+          "title": "Routine builds trust",
+          "content": "Cats prefer predictability, so train at the same time daily."
+        }
+      ]
+    }
+  }
+  

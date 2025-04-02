@@ -12,6 +12,7 @@ import vegetables from '../assets/Food/vegetables.svg';
 // import germanShepherd from '../assets/PetGuide/germanShepherd.png';
 import Rating from '../Components/Rating';
 import petData from '../Data/BreedData.json';
+
 import { getImageURL, getImgUrl } from '../Util/ImageExtract';
 
 
