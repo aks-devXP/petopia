@@ -3,45 +3,45 @@ import React from "react";
 const causes = [
   {
     id: 1,
-    title: "TAYYARI KAL KI",
+    title: "Adopt a Pet",
     description:
-      "Our campaign ‘Tayyari Kal Ki’ aims at Training & Up Skilling the youth between the age of 18-32 years for employment and empowering them.",
+      "Give a rescued animal a loving home and gain a loyal companion for life. Adopt today!",
     image:
-      "https://www.smilefoundationindia.org/images/tayyari_kal_ki.jpg", // Replace with actual image path
-    link: "https://www.smilefoundationindia.org/#!",
+      "https://i.pinimg.com/236x/e2/42/1e/e2421ea92c654c3e88aa220b69cbd9e3.jpg", // Replace with actual image path
+    link: "",
   },
   {
     id: 2,
-    title: "HEALTH CANNOT WAIT",
+    title: "Donate for Animal Welfare",
     description:
-      "Realising the need for accessible and quality healthcare for all, our campaign ‘Health Cannot Wait’ aims at providing people from the underserved communities timely medical help.",
+      "Your support provides food, shelter, and care for animals in need. Every contribution saves lives!",
     image:
-      "https://www.smilefoundationindia.org/images/health_cannot_wait.jpg", // Replace with actual image path
-    link: "https://www.smilefoundationindia.org/#!",
+      "https://www.eatright.org/-/media/images/eatright-articles/eatright-article-1200x675/animal-welfare_1200x675.jpg?as=0&w=967&rev=ae79d07cf65642069b2b009beed082e6&hash=6383C2EEA914D366445F65EA4E15B098", // Replace with actual image path
+    link: "",
   },
   {
     id: 3,
-    title: "SHIKSHA NA RUKE",
+    title: "Find an NGO Nearby",
     description:
-      "Smile Foundation, through its ‘Shiksha Na Ruke’ initiative, has been helping children from difficult circumstances get back to school.",
+      "Discover nearby animal welfare organizations and join the movement to help animals.",
     image:
-      "https://www.smilefoundationindia.org/images/shiksha_na_ruke.jpg", // Replace with actual image path
-    link: "https://www.smilefoundationindia.org/#!",
+      "https://kolkatastreetdogsdotin.wordpress.com/wp-content/uploads/2016/11/ngos.jpg?w=640", // Replace with actual image path
+    link: "",
   },
   {
     id: 4,
-    title: "SHE CAN FLY",
+    title: "Report Animal Cruelty",
     description:
-      "Smile Foundation’s initiative ‘She Can Fly’ is an effort to enable, equip and empower girl children with quality education, proper guidance, and nutrition.",
+      "See an animal in distress? Take prompt action by reporting cruelty to save lives.",
     image:
-      "https://www.smilefoundationindia.org/images/she_can_fly.jpg", // Replace with actual image path
-    link: "https://www.smilefoundationindia.org/#!",
+      "https://uvhs.org/wp-content/uploads/2023/01/dachshund-2683905_1920.jpg", // Replace with actual image path
+    link: "",
   },
 ];
 
 const SupportACause = () => {
   return (
-    <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#FFF7D6] py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-center text-black mb-12">
         SUPPORT A CAUSE
       </h1>
@@ -74,7 +74,7 @@ const SupportACause = () => {
                   href={cause.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#85EFC4] font-bold hover:underline"
+                  className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300"
                 >
                   Learn More
                 </a>

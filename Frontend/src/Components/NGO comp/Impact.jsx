@@ -49,7 +49,7 @@ const Impact = () => {
   ];
 
   return (
-    <div className="py-12 px-6  rounded-lg     w-[70rem] m-auto mt-4"
+    <div className="py-12 px-6 w-full m-auto"
     style={{
       backgroundImage: 'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #9d9ce4, #a09de7, #a39fea, #bc96e6, #d58cdc, #ec81cc, #ff77b7)',
     }}>
