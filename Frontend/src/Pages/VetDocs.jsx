@@ -1,13 +1,19 @@
-import React from 'react'
-import { data, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getVets } from '../API/VetAPI';
+import { getImgUrl } from '../Util/ImageExtract';
 
 const VetDocs = () => {
     const docsPanel = [];
     const buttons = [];
     const specialities = ["General Physician", "Internal Medicine", "Surgery", "Dentistry", "Dermatology", "Ophthalmology"]
     const navigate = useNavigate();
-
-    const doctors = [
+    const {data, isPending, error} = useQuery({
+        queryKey: ['getdocs'],
+        queryFn: getVets,
+    })
+    const [doctors, setDoctors] = useState([
         {
           name: 'Dr. John Doe',
           imageUrl: 'https://vetic-img.s3.ap-south-1.amazonaws.com/Dr.anshulShukla.jpg',
@@ -61,17 +67,29 @@ const VetDocs = () => {
           stars: '4.9',
           location: 'Ludhiana, IN'
         }
-      ];
+      ]);
+
+      useEffect(()=>{
+        
+        setDoctors(data);
+        
+      },[data])
     
+
+    if(isPending) return <div className='text-center text-2xl font-grotesk'>Loading...</div>
+    if(error) return <div className='text-center text-2xl font-grotesk'>{error.message}</div>
+    console.log("Doctors", doctors);
+
     specialities.forEach((data) => {
         buttons.push(
             <p className='w-full pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer hover:translate-x-2 hover:bg-sand-mid'>{data}</p>
         );
     })
 
+
     doctors.forEach((res)=>{docsPanel.push(
-        <div onClick={()=>{navigate("/vet-book")}} className="border border-[rgb(201,216,255)] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 bg-sand-light">
-            <img className="bg-[#EAEFFF]" src={res.imageUrl} alt=""/>
+        <div onClick={()=>{navigate(`/vet-book/${res._id}`)}} className="border border-[rgb(201,216,255)] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 bg-sand-light">
+            <img className="bg-[#EAEFFF]" src={getImgUrl(`../assets/Vet/${res.profilePic}`)} alt=""/>
             <div className="p-4">
                 <div className="flex items-center gap-2 text-sm text-center text-green-500">
                     <p className="w-2 h-2 rounded-full bg-green-500"></p>
