@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import ProfileOptions from "../ProfileSetting/ProfileOptions";
 import HistoryOptions from "../ProfileSetting/HistoryOptions";
+import { useNavigate } from "react-router-dom";
 const DashboardModal = ({ isOpen, onClose , option }) => {
+
+  const navigate = useNavigate();
 
   // Stop scrolling when modal is open
   useEffect(() => {

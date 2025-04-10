@@ -65,12 +65,7 @@ const UserDashboard =  () => {
   return (
     <>
       <div className='bg-[#1A120B] min-h-screen'>
-        <NavLink to="/home">
-          <div className='w-full p-4 pl-[30px] flex gap-3 items-center'>
-            <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
-            <h className="text-2xl font-grotesk font-bold">Petopia</h>
-          </div>
-        </NavLink>
+        
         
         <div className='flex h-full bg-[#1A120B]'>
           <div className='h-[85vh] flex flex-col justify-between pr-2 '>

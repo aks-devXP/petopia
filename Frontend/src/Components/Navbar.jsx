@@ -109,37 +109,39 @@ const Navbar = () => {
 
   return (
     <div className="flex w-full h-20">
-        <div className="navbar flex h-fit justify-between w-[90%] p-1.5 bg-[#1A120B] z-20 min-h-20 shadow-[0_0_10px_rgba(229,229,203,0.4)]">
-        <div className="flex flex-1 justify-start items-center">
-            <div className="ml-6 rounded-full">
-            <NavLink to="/home">
-                <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
-            </NavLink>
+        <div className="navbar flex h-fit justify-between w-full p-1.5 bg-[#1A120B] z-20 min-h-20 shadow-[0_0_10px_rgba(229,229,203,0.4)]">
+          <div className="flex justify-between flex-shrink w-full items-center mx-5">
+            <div className="rounded-full w-[20%]">
+              <NavLink to="/home">
+                  <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
+              </NavLink>
             </div>
-            <div className="flex flex-[2] justify-evenly h-full">
-            <MainMenu />
+            
+            <div className="flex flex-shrink justify-evenly h-full w-[50%]">
+              <MainMenu />
             </div>
-        </div>
 
-        <div className="flex justify-end items-center mr-2">
-            {localStorage.getItem("token") ? (
-            <div className="relative">
-                <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" onClick={handleProfileClick}>
-                Hi, {loggedin.replace(/['"]+/g, "")}
-                </button>
-                {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} name={loggedin.replace(/['"]+/g, "")}/>}
+            <div className="flex justify-end items-center w-[30%]">
+                {localStorage.getItem("token") ? (
+                <div className="relative">
+                    <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" onClick={handleProfileClick}>
+                    Hi, {loggedin.replace(/['"]+/g, "")}
+                    </button>
+                    {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} name={loggedin.replace(/['"]+/g, "")}/>}
+                </div>
+                ) : (
+                <>
+                    <button className="mr-4 hover:text-[#E5E5CB]" type="button" onClick={handleSignInLogIn}>
+                    Sign Up
+                    </button>
+                    <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" type="button" onClick={handleSignInLogIn}>
+                    Log in
+                    </button>
+                </>
+                )}
             </div>
-            ) : (
-            <>
-                <button className="mr-4 hover:text-[#E5E5CB]" type="button" onClick={handleSignInLogIn}>
-                Sign Up
-                </button>
-                <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" type="button" onClick={handleSignInLogIn}>
-                Log in
-                </button>
-            </>
-            )}
-        </div>
+          </div>
+
 
         {/* Modals */}
         <DashboardModal isOpen={modalType !== null} onClose={() => setModalType(null)} option={modalType} />
