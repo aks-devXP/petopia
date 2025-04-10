@@ -45,9 +45,9 @@ export function DogSlider() {
     return () => clearInterval(interval);
   }, []);
 
-  return (
+  return ( 
     <div className="relative rounded-full overflow-hidden border-2 
-    border-amber-400 aspect-[3/4] max-w-md mx-auto">
+    border-amber-400 aspect-[3/4] w-full max-w-md mx-auto">
       
       <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex flex-col space-y-3 z-10">
         {dogBreeds.map((_, index) => (
@@ -101,26 +101,14 @@ export function CatSlider() {
   }, []);
 
   return (
-    <div className="relative mt-1">
-      <div className="rounded-full overflow-hidden border-2 border-amber-400 w-[500px] h-96 absolute right-8 ">
-        <div className={`transition-all duration-500 ease-in-out h-full ${isTransitioning ? 'opacity-0 transform -translate-x-8' : 'opacity-100'}`}>
-          <img 
-            src={catBreeds[currentCatIndex].image} 
-            alt={catBreeds[currentCatIndex].name} 
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-
-      <div className={`absolute left-[570px] mt-2 bg-black bg-opacity-50 text-white rounded-full px-2 py-1 text-sm transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 transform translate-x-8' : 'opacity-100'}`}>
-        {catBreeds[currentCatIndex].name}
-      </div>
-      
-      <div className="absolute bottom-[-370px] left-[620px] transform -translate-x-1/2 flex space-x-3">
+    <div className="relative rounded-full overflow-hidden border-2 border-amber-400 aspect-[4/3] w-full max-w-[520px]">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-x-3 z-10">
         {catBreeds.map((_, index) => (
           <button 
             key={index} 
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${currentCatIndex === index ? 'bg-amber-400 scale-125' : 'bg-black bg-opacity-40 hover:bg-opacity-60'}`}
+            className={`w-3 h-3 rounded-full transition-all duration-300 
+                ${currentCatIndex === index ? 'bg-amber-400 scale-125' : 
+                    'bg-white bg-opacity-60 hover:bg-opacity-80'}`}
             onClick={() => {
               setIsTransitioning(true);
               setTimeout(() => {
@@ -130,6 +118,20 @@ export function CatSlider() {
             }}
           />
         ))}
+      </div>
+      
+      <div className={`transition-all duration-500 
+        ease-in-out h-full ${isTransitioning ? 'opacity-0 transform -translate-x-8' : 'opacity-100'}`}>
+        <img 
+          src={catBreeds[currentCatIndex].image} 
+          alt={catBreeds[currentCatIndex].name} 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+          <div className="bg-black bg-opacity-50 text-white rounded-full px-3 py-1 text-sm">
+            {catBreeds[currentCatIndex].name}
+          </div>
+        </div>
       </div>
     </div>
   );
