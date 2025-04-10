@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const CardHero = ({link='',text='',img='', alt=''}) => {
   return (
     <>
-        <div className="w-36 pt-3  rounded-xl  hover:shadow-2xl hover:scale-105 transition-transform duration-300">
+        <div className="w-[50%] h-[50%] pt-3 rounded-xl  hover:shadow-2xl hover:scale-105 transition-transform duration-300">
             <div className="block text-center">
               <div className='w-16 h-16 mx-auto bg-n-1 px-2 py-2 rounded-2xl'>
                 <img

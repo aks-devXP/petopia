@@ -15,7 +15,7 @@ const Home = () => {
       <div className=" w-full bg-[#1A120B] ">
 
         {/* Background Image */}
-        <div className="">
+        <div className="w-full h-full">
           <img 
             src={HomeScreenBG} 
             alt="background" 
