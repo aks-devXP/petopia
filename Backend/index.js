@@ -1,19 +1,28 @@
-const exp = require('express');
-const app = exp();
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const mongo = require('./Models/SetDB');
-const PORT = process.env.PORT || 3000;
 const cors = require('cors');
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log(`http://localhost:${PORT}`);
-} );
+
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
-app.use(cors("http://localhost:5173/"));
+app.use(cors({ origin: "http://localhost:5173" }));
 
-app.use('/auth', require('./Routes/auth'));
-app.use('/user',require('./Routes/user'));
-app.use('/vet',require('./Routes/vet'));
+// Create a main router for /api
+// const apiRouter = express.Router();
+
+// Mount all sub-routers to the apiRouter
+app.use('/api/auth', require('./Routes/auth'));
+app.use('/api/user', require('./Routes/user'));
+app.use('/api/vet', require('./Routes/vet'));
+app.use('/api/trainer', require('./Routes/trainer'));
+app.use('/api/pet', require('./Routes/pet'));
 
 
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`http://localhost:${PORT}/api`);
+});

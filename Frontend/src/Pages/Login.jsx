@@ -53,7 +53,7 @@ const Login = () => {
         setLoading(false);
         setSuccess(true);
         localStorage.setItem("token", data.token);
-        localStorage.setItem("user_name", JSON.stringify(data.user_name));
+        localStorage.setItem("username", JSON.stringify(data.user_name));
         setTimeout(() => navigate("/"), 2000); // Navigate after showing success
       } else {
         setLoading(false);
@@ -87,10 +87,21 @@ const Login = () => {
       const data = await response.json();
       console.log(data);
       // Save the user info to the database
-      localStorage.setItem("user_name", JSON.stringify(data.user_name));
-      localStorage.setItem("token", data.token);
-      // Redirect to the home page
-      navigate("/");
+      try {
+        if (data.success) {
+        localStorage.setItem("username", JSON.stringify(data.user_name));
+        localStorage.setItem("token", data.token);
+         // Redirect to the home page
+        navigate("/");
+        }
+        else {
+          handleError(data.message);
+        }
+      } catch (error) {
+        handleError(error);
+      }
+     
+      
       // 
     },
     onError: () => {
