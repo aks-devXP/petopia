@@ -41,7 +41,7 @@ const DogCoatProductPage = () => {
                     Checkout More Facts</div>
                 </div>
               </div>
-              <img src={pawprint} className='absolute w-52 right-8 top-8 rotate-45'/>
+              <img src={pawprint} className='absolute w-52 right-8 top-8 rotate-45 hidden xl:block'/>
 
               <CatSlider/>
             </div>
