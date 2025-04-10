@@ -57,9 +57,9 @@ const VetBook = ({ name, spec, exp, fee, info, img, rating }) => {
     return (
         <>
             <div className="bg-transparent py-5 w-full h-fit font-poppins">
-                <div className="h-fit w-full flex justify-evenly">
+                <div className="h-fit w-full flex flex-col lg:flex-row justify-evenly">
                     {/* Left Section */}
-                    <div className="h-fit w-[60%]">
+                    <div className="h-fit w-full lg:w-[60%]">
                         <div className="h-fit w-full text-black rounded-xl p-10">
                             {/* Doctor Info */}
                             <div className="h-72 rounded-xl bg-sand-light flex justify-evenly items-center" id="image">
@@ -93,7 +93,7 @@ const VetBook = ({ name, spec, exp, fee, info, img, rating }) => {
                         </div>
 
                         {/* Review Section */}
-                        <div className="h-fit w-full text-white">
+                        <div className="h-fit w-full text-white p-5">
                             <div className="flex text-xl justify-start font-medium items-center gap-2 mb-3">
                                 <Star className="w-4 h-4 text-rose-500" />
                                 <span className="font-medium">{rating ? rating : "4.2"}</span>
@@ -136,8 +136,8 @@ const VetBook = ({ name, spec, exp, fee, info, img, rating }) => {
                     </div>
 
                     {/* Right Section */}
-                    <div className="w-[30%] h-screen">
-                        <div className="w-full h-[84%] flex justify-center items-center sticky top-24">
+                    <div className="w-[80%] mx-auto lg:w-[40%] p-5 h-screen">
+                        <div className="w-full h-[90%] flex justify-center items-center sticky top-24">
                             <VetBookCard
                                 fees={"2590"}
                                 day={"Today"}
