@@ -85,14 +85,14 @@ const VetDocs = () => {
 
   return (
     <>
-        <div className='bg-sand-dark flex flex-col sm:flex-row justify-around gap-5 py-5 pt-15'>
-            <div className='w-1/5'>
+        <div className='bg-sand-dark flex-col flex lg:flex-row md:flex-row sm:flex-col justify-around gap-5 py-5 pt-15'>
+            <div className='w-full lg:w-1/5 md:w-1/5'>
                 <p className='text-2xl text-center'>Browse through our <br /> specialist doctors here</p>
-                <div className='flex flex-col items-start mt-10 gap-3 w-[80%]'>
+                <div className='grid grid-cols-3 px-5 lg:flex lg:flex-col sm:grid sm:grid-cols-4 items-start mt-10 gap-3 lg:w-[80%] sm:w-full sm:px-5'>
                     {buttons}
                 </div>
             </div>
-            <div className='w-2/3 grid grid-cols-4 gap-4 gap-y-6'>
+            <div className='w-full lg:w-2/3 md:w-2/3 sm:w-full grid-cols-2 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 px-5 gap-5 gap-y-6'>
                 {docsPanel}
             </div>
         </div>

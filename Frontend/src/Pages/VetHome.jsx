@@ -93,7 +93,7 @@ function VetHome() {
 
   return (
     <>
-      <div className='relative h-screen opacity-85 bg-black bg-[url(https://static.vecteezy.com/system/resources/previews/011/602/170/large_2x/veterinary-clinic-female-doctor-portrait-at-the-animal-hospital-holding-cute-sick-cat-free-photo.jpg)] bg-cover bg-blend-lighten'>
+      <div className='relative h-screen w-full opacity-85 bg-black bg-[url(https://static.vecteezy.com/system/resources/previews/011/602/170/large_2x/veterinary-clinic-female-doctor-portrait-at-the-animal-hospital-holding-cute-sick-cat-free-photo.jpg)] bg-cover bg-blend-lighten'>
         <div className='absolute left-5 bottom-0 my-5 w-[50%]'>
           <p className='font-semibold text-4xl'>Trusted Vet Consultation & Compassionate Care by Expert Vets</p>
           <div onClick={()=>navigate("/vet-docs")} className='mt-10 flex justify-between items-center gap-2 border-black px-10 py-5 w-fit cursor-pointer rounded-2xl border-2 border-solid bg-black hover:bg-n-1 hover:border-white hover:text-black hover:scale-105 transition-transform'>
@@ -101,7 +101,7 @@ function VetHome() {
             <IoIosArrowDroprightCircle className='w-5 h-5'/>
           </div>
 
-          <div className='flex justify-between w-[70%] mt-12'>
+          <div className='flex justify-between lg:w-[70%] sm:w-[100%] mt-12'>
             <Card link='/vet' text='150+ Caring Vets' img={vet} alt='Vet Logo Art'></Card>
             <Card link='/vet' text='24/7 Care Available' img='https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-24-hours-veterinary-flaticons-flat-flat-icons.png' alt='Vet Logo Art'></Card>
             <Card link='/vet' text='800+ Pets Served' img={'https://img.icons8.com/dusk/64/pets.png'} alt='Vet Logo Art'></Card>
@@ -109,11 +109,11 @@ function VetHome() {
         </div>
       </div>
 
-      <div>
+      <div className='w-full'>
         <InfiniteScroll text={"Now Available in your City"}/>
       </div>
 
-      <div className='h-screen w-full'>
+      <div className='h-fit w-full'>
         <VetCareInfo/>
       </div>
 
