@@ -1,5 +1,5 @@
 const joi = require('joi')
-const { schema } = require('../Models/UsersDB')
+
 
 const VetValidation = (req,res,next)=>{
   let schema = joi.object({

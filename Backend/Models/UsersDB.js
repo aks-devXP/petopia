@@ -5,7 +5,7 @@ const UserSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    // unique: true // Decided name need not to be unique 
   },
   email:{
     type: String,
@@ -20,20 +20,34 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  age : {
-    type: Number,
-  },
   phone:{
   type: Number,
   },
-  petStatus:{
-    type: Boolean,
-    default: false
-  },
   petID:{
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: 'Pet'
+  },
+  profileColor:{
+    type: String,
+    default: "#000000"
+  },
+  nameColor:{
+    type: String,
+    default: "#0fff00"
+  },
+  city:{
+    type: String,
+    default: ""
+  },
+  state:{
+    type: String,
+    default: ""
+  },
+  address:{
+    type: String,
+    default: ""
   }
+  
 })
 
 module.exports = mogoo.model('User', UserSchema)

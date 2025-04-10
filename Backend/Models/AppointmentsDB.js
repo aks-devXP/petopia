@@ -24,7 +24,9 @@ const appointmentSchema = new schema({
     },
     status:{
         type: String,
-        required: true
+        required: true,
+        default: 'pending'
+
     },
     description:{
         type: String,

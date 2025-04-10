@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
+import { NavLink } from "react-router-dom";
+import logo from "../assets/petopia-logo.svg";
 import Appointments from '../Components/Dashboard/Appointments';
 import History from '../Components/Dashboard/History';
 import Messages from '../Components/Dashboard/Messages';
 import Pass from '../Components/Dashboard/Pass';
 import User from '../Components/Dashboard/ProfileSettings';
-import Slidebar , { SlidebarItem } from '../Components/Dashboard/slidebar';
-import { NavLink } from "react-router-dom";
-import logo from "../assets/petopia-logo.svg";
+import Slidebar, { SlidebarItem } from '../Components/Dashboard/slidebar';
 
+import { useQueries } from '@tanstack/react-query';
 import {
   Calendar1,
   HeartPulse,
   LogOut,
   MessageCircleMore,
   UserCircle,
-} from 'lucide-react'
+} from 'lucide-react';
+import { GetPets } from '../API/PetApi';
+import { GetProfileInfo } from '../API/UserAPI';
+import { handleError } from '../Util/Alerts';
 
 
-const UserDashboard = () => {
+const UserDashboard =  () => {
   const [user, setUser] = useState({
     password: 'TTTTTTTT',
     name: 'Clara Barton',
@@ -27,35 +31,19 @@ const UserDashboard = () => {
     email: '',
     petStatus: false,
   });
-  
-  // useEffect( ()=>{
-  //   const fetchUserProfile = async () => {
-  //   try {
-  //     const response = await GetProfileInfo(); // Fetch user data
-  //     const data = await response.json(); // Convert response to JSON
 
-  // useEffect( ()=>{
-  //   const fetchUserProfile = async () => {
-  //   try {
-  //     const response = await GetProfileInfo(); // Fetch user data
-  //     const data = await response.json(); // Convert response to JSON
+  const [userInfo, petInfo] = useQueries({queries:[
+    {queryKey: ['userProfile'],
+    queryFn: GetProfileInfo},
+    {
+      queryKey: ['petProfile'],
+      queryFn: GetPets
+    }
+  ]})
+  // Testing
+  //  console.log("PetInfo",  petInfo.data);
+  // console.log("UserDashboard", userInfo.data);
 
-  //     if (response.ok) {
-  //       setUser((prevUser) => ({
-  //         ...prevUser,
-  //         ...data, // Update user state with fetched data
-  //       }));
-  //     } else {
-  //       console.error("Error fetching user data:", data.message);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch user profile:", error);
-  //   }
-  // };
-
-  // fetchUserProfile(); 
-    
-  // },[]);
   const [isEditing, setIsEditing] = useState(false);
   const [toggleButton, setToggleButton] = useState(1);
 
@@ -71,7 +59,9 @@ const UserDashboard = () => {
   const toggleEditing = () => {
     setIsEditing(!isEditing);
   };
-
+  if(userInfo.error) {
+    handleError(userInfo.error.message)
+    }
   return (
     <>
       <div className='bg-[#1A120B] min-h-screen'>
@@ -88,22 +78,21 @@ const UserDashboard = () => {
               <SlidebarItem icon={<LogOut/>} text="Logout" alert={false}/>
             </Slidebar>
 
-              {/* <ul className= 'w-full font-grotesk text-lg'>
-                <ButtonNav click={() => setToggleButton(1)} icon={<MdDashboard/>} content={<li className=''>My Account</li>} isActive={toggleButton === 1}></ButtonNav>
-                <ButtonNav click={() => setToggleButton(2)} icon={<FaCircleUser />} content={<li className=''>Login & Security</li>} isActive={toggleButton === 2}></ButtonNav>
-                <ButtonNav click={() => setToggleButton(3)} icon={<FaCalendarMinus/>} content={<li className=''>My Appointments</li>} isActive={toggleButton === 3}></ButtonNav>
-                <ButtonNav icon={<FaBookMedical/>} click={() => setToggleButton(4)} content={<li className='' >Medical History</li>} isActive={toggleButton === 4}></ButtonNav>
-                <ButtonNav click={() => setToggleButton(5)} icon={<TiMessages/>} content={<li className='' >Messages Preferences</li>} isActive={toggleButton === 5}></ButtonNav>
-              </ul> */}
+             
           </div>
 
           <div className='w-full'>
               <div className=' px-2 h-fit mx-auto my-5 border-l border-[#E5E5CB]/20'>
-                  {toggleButton == 1 ? <User isEditing={isEditing}  toggleEditing={toggleEditing} handleChange={handleChange}></User> : <></>}
+              {(userInfo.isPending&&petInfo.isPending) ? (<div className='text-center text-2xl font-grotesk'>Loading...</div>) :
+                  (<>
+                    {toggleButton == 1 ? <User info= {userInfo.data} petInfo ={petInfo.data} ></User> : <></>}
                   {toggleButton == 2 ? <Pass/>: <></>}
                   {toggleButton == 3 ? <Appointments />: <></>}
                   {toggleButton == 4 ? <History/> : <></>}
                   {toggleButton == 5 ? <Messages/> : <></>}
+                  </>
+                  )
+                  }
               </div>
           </div>
         </div>

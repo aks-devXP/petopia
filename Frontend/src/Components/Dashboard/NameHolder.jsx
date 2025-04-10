@@ -5,17 +5,20 @@ const NameHolder = ({
   lastName = "", 
   isEditable = false,
   initialColor = "#6366f1",
-  size = "xl" 
+  size = "xl" ,
+  setprofileColor = () => {}
 }) => {
   const [color, setColor] = useState(initialColor);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [ButtonText, setButtonText] = useState("Change Color")
+  
   // Get initials from first and last name
   const getInitials = () => {
     const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : "";
     const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : "";
     return `${firstInitial}${lastInitial}`;
   };
+  
   
   // Size classes
   const sizeClasses = {
@@ -28,7 +31,7 @@ const NameHolder = ({
   // Handle color change from color picker
   const handleColorChange = (colorResult) => {
     setColor(colorResult.hex);
-    
+    setprofileColor(colorResult.hex);
   };
   const handleButtonClick = () => {
     setShowColorPicker(!showColorPicker);
