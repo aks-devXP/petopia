@@ -37,10 +37,11 @@ const UserValidation = (req,res,next)=>{
     const verified = jwt.verify(token, process.env.JWT_SECRET);
     req.verified = verified;
     // Testing
-    console.log(verified.user_name);
+    // console.log(verified.user_name);
     next();
   }
   catch(error){
+    console.log( "Error in User Validation",error);
     return res.status(400).json({message:'Invalid token', success: false});
   }
 }
