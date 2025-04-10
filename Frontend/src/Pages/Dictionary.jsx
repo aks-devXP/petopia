@@ -11,7 +11,7 @@ const DogCoatProductPage = () => {
   
   return (
     <>
-      <div className={`${petSelected === "Dogs" ? "bg-amber-100" : "bg-purple-200"} min-h-screen flex items-center justify-center p-1`}>
+      <div className={`${petSelected === "Dogs" ? "bg-amber-100" : "bg-purple-200"} min-h-screen flex items-center justify-center p-1 pb-4`}>
         <div className="bg-slate-900 rounded-md w-full overflow-hidden relative px-4">
 
           <header className="flex justify-center items-center mb-8">
@@ -24,26 +24,32 @@ const DogCoatProductPage = () => {
           </header>
 
           <div className="flex gap-2 h-screen">
-            <div className="relative ">
+            <div className=''>
               <DogSlider/> 
             </div>
 
-            <div className="flex-1 text-white">
-              <div className='pl-8'>
-                <h1 className="text-4xl font-bold mb-6">
-                Paws & Personalities<br />Learn About Every <br />Breed
-                </h1>
-                <div className="h-1 w-32 bg-amber-400 mb-6"></div>
-                
-                <div className="mb-6">
-                  <div className="text-amber-400 text-4xl font-bold hover:cursor-pointer"
-                  onClick={() => window.scrollBy({ top: window.innerHeight + 200, behavior: "smooth" })}>
-                    Checkout More Facts</div>
+            <div className="flex-1 text-white flex flex-col">
+              <div className='pl-8 flex justify-between'>
+                <div>
+                  <h1 className="text-4xl font-bold mb-6 ">
+                    Paws & Personalities<br />Learn About Every <br />Breed
+                  </h1>
+                  <div className="h-1 w-32 bg-amber-400 mb-6"></div>
+                  
+                  <div className="mb-6">
+                    <div className="text-amber-400 text-4xl font-bold hover:cursor-pointer"
+                    onClick={() => window.scrollBy({ top: window.innerHeight + 200, behavior: "smooth" })}>
+                      Checkout More Facts</div>
+                  </div>
                 </div>
-              </div>
-              <img src={pawprint} className='absolute w-52 right-8 top-8 rotate-45 hidden xl:block'/>
 
-              <CatSlider/>
+                <img src={pawprint} className='w-44 h-44 rotate-45 hidden xl:block mr-10'/>
+              </div>
+              
+
+              <div className='flex justify-end p-4 items-start'>
+                <CatSlider/>
+              </div>
             </div>
           </div>
         </div>

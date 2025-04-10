@@ -18,9 +18,9 @@ export default function Tips({petSelected, setPetSelected}) {
   };
 
   return (
-    <div className={`h-full w-full ${petSelected === "Dogs" ? "bg-amber-100" : "bg-purple-200"} min-h-screen flex`}>
+    <div className={`w-full ${petSelected === "Dogs" ? "bg-amber-100" : "bg-purple-200"} min-h-screen flex flex-col lg:flex-row`}>
 
-      <div className="h-full w-1/5 flex flex-col justify-between items-center text-black/70 font-bold text-xl py-10">
+      <div className="lg:h-full w-full h-40 lg:gap-10 lg:w-1/5 flex lg:flex-col lg:justify-between lg:items-center text-black/70 font-bold text-xl py-10">
           {/* Training */}
           <div className="relative w-full h-full flex justify-center items-center">
             <div className="absolute inset-0 z-0">
@@ -67,11 +67,11 @@ export default function Tips({petSelected, setPetSelected}) {
           </div>
       </div>
 
-      <div className="w-3/5 flex justify-center items-center ">
+      <div className="lg:w-3/5 flex justify-center items-center w-full">
         <PetCareTips petSelected={petSelected} tipSelected={tipSelected}/>
       </div>
 
-      <div className="flex-1 flex items-center justify-center relative flex-col">
+      <div className="flex-1 flex items-center justify-center relative flex-col mt-4 lg:mt-0">
           <PetToggle setPetSelected={setPetSelected} petSelected={petSelected}/>
           <img 
             src={petSelected === "Dogs" ? Doggy : Cat}
