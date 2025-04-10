@@ -1,5 +1,5 @@
 const VetModel = require('../Models/VetDB');
-
+const ObjectId = require('mongoose').Types.ObjectId;
 const getAllVets = async(req,res)=>{
   try{
     const vets = await VetModel.find();
@@ -45,6 +45,26 @@ const createVet = async (req, res) => {
     res.status(500).json({ message: 'Internal server error', success: false });
   }
 };
+const getVet = async (req, res) => {
+  try{
+    const id = req.params.id;
+    if(!ObjectId.isValid(id)){
+      res.status(400).json({error: "Invalid ID Format", success:false})
+    }
+    const vet = await VetModel.findById(id);
+    if(!vet){
+      return res.status(404).json({message:'Vet not found', success: false});
+    }
+
+    console.log(vet)
+    res.status(200).json({message:'Vet found', success: true, vet: vet});
+  }
+  catch (error) {
+    console.log("Error in GetVetById", error)
+    res.status(500).json({message:'Internal server error', success: false});
+  }
+
+}
 
 
-module.exports = {getAllVets, createVet}
+module.exports = {getAllVets, createVet, getVet}
