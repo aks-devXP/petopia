@@ -1,117 +1,101 @@
-import { Bone, BookOpenTextIcon, ChevronDown, Home, MoveRight, PawPrint, Newspaper } from 'lucide-react';
+// MainMenu.jsx
+import {
+  Bone,
+  BookOpenTextIcon,
+  ChevronDown,
+  Home,
+  MoveRight,
+  PawPrint,
+  Newspaper,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
 
-const Submenu = () => {
-  return (
-    <ul className="absolute top-full left-[-2rem] bg-[#151516] rounded-md p-2 hidden group-hover:block z-50">
-      {[
-        { to: "/ngo", label: "NGO" },
-        { to: "/shopping", label: "Pet Essentials" },
-        { to: "/about", label: "About Us" },
-        { to: "/contact", label: "Contact" }
-      ].map((item, index) => (
-        <li key={index} className="mt-2 group/item">
-          <NavLink
-            to={item.to}
-            className="relative flex justify-between items-center p-2 min-w-[15rem] rounded-md 
-              group-hover/item:bg-[#1f1d1d] group-hover/item:text-[#E5E5CB] 
-              transition-all duration-300 
-              group-hover/item:pl-4 group-hover/item:pr-4"
-          >
-            {item.label}
-            <div className="relative w-5 h-5 ml-2">
-              <MoveRight 
-                className="absolute top-1/2 left-1/2 
-                  -translate-x-[150%] -translate-y-1/2 
-                  opacity-0 w-4 h-4
-                  transition-all duration-300 
-                  group-hover/item:opacity-100 group-hover/item:translate-x-[-50%]"
-              />
-            </div>
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  );
-};
+const Submenu = () => (
+  <ul className="absolute top-full left-[-2rem] bg-[#151516] rounded-md p-2 hidden group-hover:block z-50">
+    {[
+      { to: "/ngo", label: "NGO" },
+      { to: "/shopping", label: "Pet Essentials" },
+      { to: "/about", label: "About Us" },
+      { to: "/contact", label: "Contact" },
+    ].map((item, i) => (
+      <li key={i} className="mt-2 group/item">
+        <NavLink
+          to={item.to}
+          className="relative flex justify-between items-center p-2 min-w-[15rem] rounded-md
+                     group-hover/item:bg-[#1f1d1d] group-hover/item:text-[#E5E5CB]
+                     transition-all duration-300
+                     group-hover/item:pl-4 group-hover/item:pr-4"
+        >
+          {item.label}
+          <MoveRight
+            className="absolute top-1/2 left-1/2 -translate-x-[150%] -translate-y-1/2
+                       opacity-0 w-4 h-4
+                       transition-all duration-300
+                       group-hover/item:opacity-100 group-hover/item:translate-x-[-50%]"
+          />
+        </NavLink>
+      </li>
+    ))}
+  </ul>
+);
 
 const Menu = () => {
+  const items = [
+    { to: "/home", label: "Home", Icon: Home },
+    { to: "/dictionary", label: "Guide", Icon: BookOpenTextIcon },
+    { to: "/vet", label: "Medic", Icon: PawPrint },
+    { to: "/news", label: "News", Icon: Newspaper },
+    { to: "/trainer", label: "Trainer", Icon: Bone },
+  ];
+
   return (
-    <ul className="list-none p-0 m-0 flex gap-12 h-15 items-center ">
-      <li>
-        <NavLink to="/home" className="text-white font-medium text-lg leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
-          {({ isActive }) => (
-            <div className={`flex justify-center transition-transform ${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-              { isActive?(<div className="px-3">
-                <Home />
-              </div>):
-              (<p>Home</p>)
-              }
-            </div>
-          )}
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dictionary" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
-          {({ isActive }) => (
-            <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-              { isActive?(<div className="px-3">
-                <BookOpenTextIcon />
-              </div>):
-              (<p>Guide</p>)
-              }
-            </div>
-          )}
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/vet" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
-          {({ isActive }) => (
-            <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-              { isActive?(<div className="px-3">
-                <PawPrint />
-              </div>):
-              (<p>Medic</p>)
-              }
-            </div>
-          )}
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/news" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
-          {({ isActive }) => (
-            <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-              { isActive?(<div className="px-3">
-                <Newspaper />
-              </div>):
-              (<p>News</p>)
-              }
-            </div>
-          )}
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/trainer" className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer hover:text-[#E5E5CB]">
+    <ul className="flex items-center gap-10 text-lg">
+      {items.map(({ to, label, Icon }, idx) => (
+        <li key={idx}>
+          <NavLink to={to} end>
             {({ isActive }) => (
-              <div className={`${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-                { isActive?(<div className="px-3">
-                  <Bone />
-                </div>):
-                (<p>Trainer</p>)
-                }
+              <div
+                className={`flex items-center justify-center space-x-1
+                            transition-transform duration-200
+                            ${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}
+              >
+                {/* ICON: always visible on xs/sm/md; hide on lg+ if you want */}
+                <Icon
+                  className={`w-5 h-5 block
+                              ${!isActive ? "lg:hidden" : ""}`}
+                />
+
+                {/* TEXT: hidden on xs/sm; show from md upwards; hide entirely if active */}
+                <span
+                  className={`hidden lg:inline text-white font-medium
+                              ${isActive ? "hidden" : ""}`}
+                >
+                  {label}
+                </span>
               </div>
             )}
           </NavLink>
-      </li>
+        </li>
+      ))}
+
+      {/* "More" with submenu */}
       <li className="relative group">
-        <NavLink 
-          to="/bc" 
-          className="text-white font-medium text-xl leading-[25px] capitalize mx-4 cursor-pointer group-hover:text-[#E5E5CB]"
-        >
+        <NavLink to="#" className="flex items-center">
           {({ isActive }) => (
-            <div className={`flex items-center ${isActive ? "border-2 border-white rounded-3xl p-2" : ""}`}>
-              More
-              <ChevronDown className="ml-2 w-5 h-5 opacity-50 group-hover:opacity-100" />
+            <div
+              className={`flex items-center space-x-1
+                          transition-transform duration-200
+                          ${isActive ? "border border-white rounded-2xl p-2" : ""}`}
+            >
+              {/* always show chevron */}
+              <ChevronDown className="w-5 h-5 block" />
+
+              <span
+                className={`hidden md:inline text-white font-medium
+                            ${isActive ? "hidden" : ""}`}
+              >
+                More
+              </span>
             </div>
           )}
         </NavLink>
@@ -120,4 +104,5 @@ const Menu = () => {
     </ul>
   );
 };
+
 export default Menu;

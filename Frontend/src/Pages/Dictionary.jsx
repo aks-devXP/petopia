@@ -11,7 +11,7 @@ const DogCoatProductPage = () => {
   
   return (
     <>
-      <div className={`${petSelected === "Dogs" ? "bg-amber-100" : "bg-purple-200"} min-h-screen flex items-center justify-center p-1 pb-4`}>
+      <div className={`${petSelected === "Dogs" ? "bg-amber-100" : "bg-purple-200"}  flex items-center justify-center p-1 pb-4`}>
         <div className="bg-slate-900 rounded-md w-full overflow-hidden relative px-4">
 
           <header className="flex justify-center items-center mb-8">
@@ -20,7 +20,6 @@ const DogCoatProductPage = () => {
                 <PawSearchBar/>
               </div>
             </div>
-
           </header>
 
           <div className="flex gap-2 h-screen">
