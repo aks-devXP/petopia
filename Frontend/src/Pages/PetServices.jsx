@@ -1,21 +1,27 @@
 import { React, useState } from "react";
 import { NavLink } from "react-router-dom";
 import backgroundimg from "../assets/trainerbg.jpg";
-import TrainerBooking from "../Components/PetServices/TrainerBooking"
-
+import CareTakerOptions from "../Components/PetServices/CareTakerOptions";
+import TrainerOptions from "../Components/PetServices/TrainerOptions";
+import GroomerOptions from "../Components/PetServices/GroomerOptions";
 
 function PetServices() {
   const textOptions = {
     trainer: "Where pet parents find expert care and trusted trainers.",
-    caretaker: "Loving care when you’re not there.",
+    caretaker: "Loving care when you're not there.",
     groomer: "Pamper your pet with top-notch grooming."
   };
 
-  const [selectedText, setSelectedText] = useState(textOptions.trainer);
+  // Track the selected service type, not just the text
+  const [selectedService, setSelectedService] = useState("trainer");
+
+  // Function to handle service selection
+  const handleServiceSelect = (service, text) => {
+    setSelectedService(service);
+  };
 
   return (
     <div>
-
       <div className="relative overflow-hidden h-screen w-full">
         <div className="absolute inset-0 w-full h-full bg-black bg-opacity-70 z-4"></div>
 
@@ -27,9 +33,9 @@ function PetServices() {
             {Object.entries(textOptions).map(([key, value]) => (
               <button
                 key={key}
-                onClick={() => setSelectedText(value)}
+                onClick={() => handleServiceSelect(key, value)}
                 className={`w-[180px] text-[22px] transition-all duration-300 py-2 rounded-md
-                  ${selectedText === value
+                  ${selectedService === key
                     ? "font-bold bg-white text-black "
                     : "hover:border-b-4 hover:border-gray-400 hover:font-bold"}`}
               >
@@ -39,8 +45,8 @@ function PetServices() {
           </div>
 
           {/* Centered Text with Fixed Size */}
-          <div className="max-w-[70%] h-[300px] flex items-center text-[70px] leading-tight">
-            {selectedText}
+          <div className="max-w-[70%] h-[300px] flex items-center text-[50px] lg:text-[70px] leading-tight">
+            {textOptions[selectedService]}
           </div>
 
           {/* Appointment Button */}
@@ -49,7 +55,7 @@ function PetServices() {
               text-white cursor-pointer text-[16px] transition-all 
               duration-300 hover:bg-white hover:text-black">
             <button
-              onClick={() => window.scrollBy({ top: window.innerHeight, behavior: "smooth" })}>
+              onClick={() => window.scrollBy({ top: window.innerHeight + 80, behavior: "smooth" })}>
               Book Appointment
             </button>
           </div>
@@ -57,7 +63,9 @@ function PetServices() {
       </div>
 
       <div className="w-full bg-[#1A120B]">
-        <TrainerBooking/>
+        {selectedService === "trainer" && <TrainerOptions />}
+        {selectedService === "caretaker" && <CareTakerOptions />}
+        {selectedService === "groomer" && <GroomerOptions />}
       </div>
     </div>
   );
