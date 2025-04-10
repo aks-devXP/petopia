@@ -20,12 +20,13 @@ const ContactControl = async (req, res) => {
 
 const getProfileControl = async (req,res)=>{
   try{
-    const user_name = req.verified.user_name;
-    
+    // const user_name = req.verified.user_name;
+    const id = req.verified.id;
+    // console.log(id);
     // res.status(200).json({message: 'Profile Info', success: true, user_name: user_name});
   
-
-    const user = await UserModel.findOne({name: user_name });
+    console.log("User ID", id);
+    const user = await UserModel.findById(id);
     console.log(user.name);
     if(!user){
       return res.status(400).json({message: 'User not found', success: false});
@@ -59,11 +60,12 @@ const updateProfileControl = async (req, res) => {
 
     if (user.name && user.name !== user_data.name) {
       // Check for duplicate name
-      const nameExist = await UserModel.find({ name: user.name });
+      // Decided name need not to be unique
+      // const nameExist = await UserModel.find({ name: user.name });
 
-      if (nameExist.length > 1) {
-        return res.status(400).json({ message: "User Already Exist By This Name.", success: false });
-      }
+      // if (nameExist.length > 1) {
+      //   return res.status(400).json({ message: "User Already Exist By This Name.", success: false });
+      // }
       user_data.name = user.name;
     }
 
@@ -75,6 +77,7 @@ const updateProfileControl = async (req, res) => {
         return res.status(400).json({ message: "User Already Exist By This Email.", success: false });
       }
       user_data.email = user.email;
+
     }
 
     if (user_data.phone === undefined) {
@@ -87,16 +90,23 @@ const updateProfileControl = async (req, res) => {
       }
       user_data.phone = user.phone;
     }
-
+    // Not using currently on frontend
     user_data.age = user.age;
-    user_data.petStatus = user.petStatus;
 
+    // Has removed from model fields
+    // user_data.petStatus = user.petStatus;
+    user_data.address = user.address;
+    user_data.city = user.city;
+    user_data.state = user.state;
+    user_data.profileColor = user.profileColor;
+    user_data.nameColor = user.nameColor;
     await user_data.save();
 
     // Send response of success
     return res.status(200).json({ message: "Profile Info Updated Successfully", success: true });
 
   } catch (error) {
+    console.log(error, "error in update profile control");
     return res.status(500).json({ message: "Internal server error", success: false });
   }
 };
