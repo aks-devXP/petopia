@@ -5,7 +5,7 @@ import MainLayout from './Layout/MainLayout'
 import About from './Pages/About'
 import CareTaker from './Pages/CareTaker'
 import Contact from './Pages/Contact'
-import Dictionary from "./pages/Dictionary"
+import Dictionary from './Pages/Dictionary'
 import GroomerBook from './Pages/GroomerBook'
 import Guide from './pages/Guide'
 import Home from './pages/Home'
