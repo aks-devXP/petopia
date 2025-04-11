@@ -21,7 +21,6 @@ app.use('/api/trainer', require('./Routes/trainer'));
 app.use('/api/pet', require('./Routes/pet'));
 
 
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`http://localhost:${PORT}/api`);
