@@ -1,5 +1,7 @@
 import { LucidePen, PencilIcon, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { UpdateProfileInfo } from "../../API/UserAPI";
+import { handleError } from "../../Util/Alerts";
 import NameHolder from "./NameHolder";
 
 const ProfileSettings = ({ info, petInfo }) => {
@@ -45,7 +47,7 @@ const ProfileSettings = ({ info, petInfo }) => {
 
   //   }]
   // })
-
+  console.log("Profile Info", info);
   const onchangeHandler = (e) => {
     const { name, value } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -92,11 +94,11 @@ const ProfileSettings = ({ info, petInfo }) => {
     console.log("Updated Profile", updatedProfile);
 
     // Call the API to update the profile
-    // const response =  await UpdateProfileInfo(updatedProfile);
-    // if (!response.success) {
-    //   handleError(response.message);
-    // }
-    // console.log("Profile Updated", response);
+    const response =  await UpdateProfileInfo(updatedProfile);
+    if (!response.success) {
+      handleError(response.message);
+    }
+    console.log("Profile Updated", response);
 
     // Pet Details
     // New Pet Details
@@ -134,6 +136,8 @@ const ProfileSettings = ({ info, petInfo }) => {
 
   return (
     <>
+
+    
       {isEditing ? (
         <UpdateDetails
           formValues={formValues}
@@ -154,7 +158,9 @@ const ProfileSettings = ({ info, petInfo }) => {
           petDetails={petDetails}
           onEdit={() => setIsEditing(true)}
         />
-      )}
+      )
+    }
+      
     </>
   );
 };

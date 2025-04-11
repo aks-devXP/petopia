@@ -1,5 +1,5 @@
-import React from "react";
 import { Bell, LogOut } from "lucide-react";
+import React from "react";
 import ToggleSwitch from "./ToggleSwitch";
 
 const ProfileDropdown = ({ onSelect, name }) => {
@@ -36,7 +36,7 @@ const ProfileDropdown = ({ onSelect, name }) => {
         </div>
         <div
           className="py-1 hover:bg-[#3C2A21] cursor-pointer rounded-lg pl-3"
-          onClick={() => onSelect("history")}
+          onClick={() => onSelect("Appointments")}
         >
           Appointments
         </div>
@@ -44,7 +44,7 @@ const ProfileDropdown = ({ onSelect, name }) => {
           className="py-1 hover:bg-[#3C2A21] cursor-pointer rounded-lg pl-3"
           onClick={() => onSelect("history")}
         >
-          Order History
+          Medical History
         </div>
       </div>
 

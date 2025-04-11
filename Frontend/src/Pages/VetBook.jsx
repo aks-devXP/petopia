@@ -221,7 +221,6 @@ import { useParams } from "react-router-dom";
 import { getVetById } from "../API/VetAPI";
 import Loader from "../Components/Loader/Loader";
 import VetBookCard from "../Components/Vet/VetBookCard";
-import { AppointmentTimings } from "../Util/AppointmentTimings";
 import { getImgUrl } from "../Util/ImageExtract";
 
 const VetBook = () => {
@@ -290,13 +289,14 @@ const VetBook = () => {
         const vet = await getVetById(id);
         if (vet) {
           setData(vet);
+          setAvailableTimes(vet.timings)
         }
       } catch (err) {
         console.error("Error loading vet data:", err);
       } finally {
         setLoading(false);
       }
-      setAvailableTimes(AppointmentTimings());
+      // setAvailableTimes(AppointmentTimings());
     };
 
     fetchData();

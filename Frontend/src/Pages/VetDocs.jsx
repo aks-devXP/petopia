@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVets } from '../API/VetAPI';
+import Loader from '../Components/Loader/Loader';
 import { getImgUrl } from '../Util/ImageExtract';
 
 const VetDocs = () => {
@@ -76,7 +77,9 @@ const VetDocs = () => {
       },[data])
     
 
-    if(isPending) return <div className='text-center text-2xl font-grotesk'>Loading...</div>
+    if(isPending) return <div >
+      <Loader/>
+    </div>
     if(error) return <div className='text-center text-2xl font-grotesk'>{error.message}</div>
     console.log("Doctors", doctors);
 
