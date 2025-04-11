@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
-import logo from "../assets/petopia-logo.svg";
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import Appointments from '../Components/Dashboard/Appointments';
 import History from '../Components/Dashboard/History';
 import Messages from '../Components/Dashboard/Messages';
@@ -20,8 +19,7 @@ import { GetPets } from '../API/PetApi';
 import { GetProfileInfo } from '../API/UserAPI';
 import { handleError } from '../Util/Alerts';
 
-
-const UserDashboard =  () => {
+const UserDashboard = () => {
   const [user, setUser] = useState({
     password: 'TTTTTTTT',
     name: 'Clara Barton',
@@ -32,20 +30,30 @@ const UserDashboard =  () => {
     petStatus: false,
   });
 
-  const [userInfo, petInfo] = useQueries({queries:[
-    {queryKey: ['userProfile'],
-    queryFn: GetProfileInfo},
-    {
-      queryKey: ['petProfile'],
-      queryFn: GetPets
+  const { option } = useParams();
+
+  const [toggleButton, setToggleButton] = useState(null);
+
+  useEffect(() => {
+    if (option) {
+      setToggleButton(Number(option));
     }
-  ]})
-  // Testing
-  //  console.log("PetInfo",  petInfo.data);
-  // console.log("UserDashboard", userInfo.data);
+  }, [option]);
+
+  const [userInfo, petInfo] = useQueries({
+    queries: [
+      {
+        queryKey: ['userProfile'],
+        queryFn: GetProfileInfo
+      },
+      {
+        queryKey: ['petProfile'],
+        queryFn: GetPets
+      }
+    ]
+  });
 
   const [isEditing, setIsEditing] = useState(false);
-  const [toggleButton, setToggleButton] = useState(1);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,45 +63,43 @@ const UserDashboard =  () => {
     }));
   };
 
-
   const toggleEditing = () => {
     setIsEditing(!isEditing);
   };
-  if(userInfo.error) {
-    handleError(userInfo.error.message)
-    }
+
+  if (userInfo.error) {
+    handleError(userInfo.error.message);
+  }
+  console.log("User Dash", userInfo.data);
+
   return (
     <>
       <div className='bg-[#1A120B] min-h-screen'>
-        
-        
         <div className='flex h-full bg-[#1A120B]'>
           <div className='h-[85vh] flex flex-col justify-between pr-2 '>
             <Slidebar>
-
-              <SlidebarItem click={() => setToggleButton(1)} active={toggleButton === 1} icon={<UserCircle/>} className="bg-[#1A120B]" text="User Profile"/>
-              <SlidebarItem click={() => setToggleButton(3)} active={toggleButton === 3} icon={<Calendar1/>} text="Appointments" alert="See Appointments"/>
-              <SlidebarItem click={() => setToggleButton(4)} active={toggleButton === 4} icon={<HeartPulse/>} text="Medical History" alert="View Medical History"/>
-              <SlidebarItem click={() => setToggleButton(5)} active={toggleButton === 5} icon={<MessageCircleMore/>} text="Message Settings" alert={false}/>
-              <SlidebarItem icon={<LogOut/>} text="Logout" alert={false}/>
+              <SlidebarItem click={() => setToggleButton(1)} active={toggleButton === 1} icon={<UserCircle />} className="bg-[#1A120B]" text="User Profile" />
+              <SlidebarItem click={() => setToggleButton(3)} active={toggleButton === 3} icon={<Calendar1 />} text="Appointments" alert="See Appointments" />
+              <SlidebarItem click={() => setToggleButton(4)} active={toggleButton === 4} icon={<HeartPulse />} text="Medical History" alert="View Medical History" />
+              <SlidebarItem click={() => setToggleButton(5)} active={toggleButton === 5} icon={<MessageCircleMore />} text="Message Settings" alert={false} />
+              <SlidebarItem icon={<LogOut />} text="Logout" alert={false} />
             </Slidebar>
-
-             
           </div>
 
           <div className='w-full'>
-              <div className=' px-2 h-fit mx-auto my-5 border-l border-[#E5E5CB]/20'>
-              {(userInfo.isPending&&petInfo.isPending) ? (<div className='text-center text-2xl font-grotesk'>Loading...</div>) :
-                  (<>
-                    {toggleButton == 1 ? <User info= {userInfo.data} petInfo ={petInfo.data} ></User> : <></>}
-                  {toggleButton == 2 ? <Pass/>: <></>}
-                  {toggleButton == 3 ? <Appointments />: <></>}
-                  {toggleButton == 4 ? <History/> : <></>}
-                  {toggleButton == 5 ? <Messages/> : <></>}
-                  </>
-                  )
-                  }
-              </div>
+            <div className='px-2 h-fit mx-auto my-5 border-l border-[#E5E5CB]/20'>
+              {(userInfo.isPending && petInfo.isPending) || toggleButton === null ? (
+                <div className='text-center text-2xl font-grotesk'>Loading...</div>
+              ) : (
+                <>
+                  {toggleButton === 1 && <User info={userInfo.data} petInfo={petInfo.data} />}
+                  {toggleButton === 2 && <Pass />}
+                  {toggleButton === 3 && <Appointments />}
+                  {toggleButton === 4 && <History />}
+                  {toggleButton === 5 && <Messages />}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

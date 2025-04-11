@@ -65,6 +65,7 @@ const createVet = async ({
 const getVetById = async (id) =>  {
   try {
     console.log(id)
+    // ${baseUrl}
     const response = await fetch(`${baseUrl}/data/${id}`,{
       method: "GET",
       headers: {
