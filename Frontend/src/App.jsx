@@ -7,19 +7,19 @@ import CareTaker from './Pages/CareTaker'
 import Contact from './Pages/Contact'
 import Dictionary from './Pages/Dictionary'
 import GroomerBook from './Pages/GroomerBook'
-import Guide from './pages/Guide'
-import Home from './pages/Home'
+import Guide from './Pages/Guide'
+import Home from './Pages/Home'
 import Login from './Pages/Login'
-import News from './pages/News'
-import NewsPage from './pages/NewsPage'
+import News from './Pages/News'
+import NewsPage from './Pages/NewsPage'
 import PetServices from './Pages/PetServices'
 import ProductDirectory from './Pages/ProductDirectory'
-import SignUp2 from './pages/SignUp2'
+import SignUp2 from './Pages/SignUp2'
 import UserDashboard from './Pages/UserDashboard'
 import VetBook from './Pages/VetBook'
 import VetDocs from './Pages/VetDocs'
-import VetHome from "./pages/VetHome"
-import Volunteer from "./pages/Volunteer"
+import VetHome from "./Pages/VetHome"
+import Volunteer from "./Pages/Volunteer"
 
 // For smooth scrolling
 import { gsap } from 'gsap'
