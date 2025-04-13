@@ -2,7 +2,8 @@ const  mongo = require('mongoose');
 const schema  = mongo.Schema;
 const appointmentSchema = new schema({
     user_id:{
-        type: String,
+        type: mongo.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     type:{
@@ -10,10 +11,11 @@ const appointmentSchema = new schema({
         required: true,
         enum: ['vet', 'groomer', 'trainer']
     },
-    authority_id:{
-        type: String,
-        required: true
-    },
+    authority_id: {
+        type: mongo.Schema.Types.ObjectId,
+        required: true,
+        refPath: 'type',
+      },
     date:{
         type: Date,
         required: true
@@ -22,11 +24,15 @@ const appointmentSchema = new schema({
         type: String,
         required: true
     },
+    pet_id:{
+        type: mongo.Types.ObjectId,
+        ref: 'Pet',
+        required: true
+    },
     status:{
         type: String,
         required: true,
         default: 'pending'
-
     },
     description:{
         type: String,

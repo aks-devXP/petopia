@@ -103,7 +103,7 @@ const Navbar = () => {
         navigate("/dashboard/1");
       }
       else if (option === "history") {
-        navigate("/dashboard/2");
+        navigate("/dashboard/4");
       } else if (option === "Appointments") {
         navigate("/dashboard/3");
       }

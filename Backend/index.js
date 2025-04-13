@@ -10,8 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:5173" }));
 
-// Create a main router for /api
-// const apiRouter = express.Router();
+
 
 // Mount all sub-routers to the apiRouter
 app.use('/api/auth', require('./Routes/auth'));

@@ -51,21 +51,20 @@ const updateProfileControl = async (req, res) => {
     const user_data = await UserModel.findById(_id);
     // Testing
     // console.log(user_data);
+   
     if (!user_data) {
       return res.status(404).json({ error: "User not found" });
     }
 
 
     const user = req.body.user;
-
+    // console.log(req.body, "user data in update profile control");
+    // Testing
+    // console.log(user, "user data in update profile control");
+    // return res.status(200).json({ message: "Profile Info Updated Successfully", success: true });
     if (user.name && user.name !== user_data.name) {
       // Check for duplicate name
       // Decided name need not to be unique
-      // const nameExist = await UserModel.find({ name: user.name });
-
-      // if (nameExist.length > 1) {
-      //   return res.status(400).json({ message: "User Already Exist By This Name.", success: false });
-      // }
       user_data.name = user.name;
     }
 
@@ -82,12 +81,21 @@ const updateProfileControl = async (req, res) => {
 
     if (user_data.phone === undefined) {
       user_data.phone = user.phone;
-    } else if (user.phone && user.phone !== user_data.phone) {
+    }
+    else if (user.phone && Number(user.phone) !== user_data.phone) {
+      // Error Occurred here:
+        //1. Comparing String with Number
+      // console.log(user_data.phone, "user phone in  profile ", user.phone, "user phone in update profile control");
+      if (user.phone.length !== 10) {
+        return res.status(400).json({ message: "Phone number should be 10 digits.", success: false });
+      }
+      console.log(user.phone.length, "user phone length in update profile control");
       const valid = await UserModel.find({ phone: user.phone });
-
-      if (valid.length > 1) {
+      
+      if (valid.length == 1) {
         return res.status(400).json({ message: "Phone number already exists.", success: false });
       }
+      // console.log(valid, "valid phone number in update profile control");
       user_data.phone = user.phone;
     }
     // Not using currently on frontend
@@ -99,6 +107,7 @@ const updateProfileControl = async (req, res) => {
     user_data.city = user.city;
     user_data.state = user.state;
     user_data.profileColor = user.profileColor;
+    // console.log(user_data.profileColor, "user profile color in update profile control");
     user_data.nameColor = user.nameColor;
     await user_data.save();
 
@@ -142,8 +151,14 @@ catch (error) {
 // Appointment Middleware
 const createAppointmentControl = async (req, res) => {
   try{
-    const {type, authority_id,  date, time, status, description} = req.body.appointment;
-    user_id = req.verified.id;
+    const {user_id,type, authority_id,pet_id,  date, time, status, description} = req.body.appointment;
+    const userid = req.verified.id;
+    const pet = require('../Models/PetDB');
+    const pet_data = await pet.findById(pet_id);
+    if(!pet_data){
+      return res.status(400).json({message: 'Pet not found', success: false});
+    }
+
     const type1 = type.toLowerCase();
     if (type1 === "vet"){
       const VetModel = require('../Models/VetDB');
@@ -155,9 +170,13 @@ const createAppointmentControl = async (req, res) => {
   // else if (type1 === "groomer"){
       // first data Model need to be implemented
     // }
-    // else if (type1 === "trainer"){
-      // first data Model need to be implemented
-    // }
+    else if (type1 === "trainer"){
+      const trainerModel = require('../Models/TrainerDB');
+      const trainer = await trainerModel.findById(authority_id);
+      if (!trainer){
+        return res.status(400).json({message: 'Trainer not found', success: false});
+      }
+    }
     else{
       return res.status(400).json({message: 'Invalid appointment type', success: false});
     }
@@ -170,6 +189,7 @@ const createAppointmentControl = async (req, res) => {
       time,
       status,
       description,
+      pet_id: pet_id,
       created_at: Date.now()
     });
     await appointment.save();
@@ -227,8 +247,10 @@ const updateAppointmentControl = async (req, res)=>{
 const getAllAppointmentControl = async (req, res) => {
   try {
     const user_id = req.verified.id;
+    // console.log(user_id, "user id in get appointment control");
     let appointments = await Appointment.find({ user_id: user_id });
     appointments.sort((a,b)=> b.created_at - a.created_at);
+    // console.log(appointments, "appointments in get appointment control");
     res.status(200).json({ message: 'Appointments', success: true, appointments: appointments });
   }
   catch (error) {

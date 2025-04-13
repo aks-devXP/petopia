@@ -5,8 +5,8 @@ import {
   ChevronDown,
   Home,
   MoveRight,
-  PawPrint,
   Newspaper,
+  PawPrint,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -28,7 +28,7 @@ const Submenu = () => (
         >
           {item.label}
           <MoveRight
-            className="absolute top-1/2 left-1/2 -translate-x-[150%] -translate-y-1/2
+            className="absolute top-1/2 left-[90%] -translate-x-[150%] -translate-y-1/2
                        opacity-0 w-4 h-4
                        transition-all duration-300
                        group-hover/item:opacity-100 group-hover/item:translate-x-[-50%]"
@@ -84,6 +84,7 @@ const Menu = () => {
           {({ isActive }) => (
             <div
               className={`flex items-center space-x-1
+                  
                           transition-transform duration-200
                           ${isActive ? "border border-white rounded-2xl p-2" : ""}`}
             >
@@ -99,7 +100,7 @@ const Menu = () => {
             </div>
           )}
         </NavLink>
-        <Submenu />
+        <Submenu/>
       </li>
     </ul>
   );

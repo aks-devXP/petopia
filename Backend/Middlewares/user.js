@@ -52,6 +52,9 @@ const AppointmentMiddleware = (req,res,next)=>{
   {
     // console.log("Inside CA Middleware");
     const schema = checker.object({
+    user_id: checker.string().required().messages({
+      'string.empty': 'User ID is required.'
+    }),
     type : checker.string().required().messages({
       'string.empty': 'Type is required.'
     }),
@@ -70,7 +73,10 @@ const AppointmentMiddleware = (req,res,next)=>{
     }),
     description: checker.string().required().messages({
       'string.empty': 'Description is required.'
-    })
+    }),
+    pet_id: checker.string().required().messages({
+      'string.empty': 'Pet ID is required.'
+    }),
 
   })
   const {error} = schema.validate(req.body.appointment);

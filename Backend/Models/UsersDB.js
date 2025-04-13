@@ -22,6 +22,7 @@ const UserSchema = new Schema({
   },
   phone:{
   type: Number,
+  unique: true,
   },
   petID:{
     type: [Schema.Types.ObjectId],
