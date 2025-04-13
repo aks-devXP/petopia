@@ -10,8 +10,6 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cors({ origin: process.env.FrontEnd}));
 
-
-
 // Mount all sub-routers to the apiRouter
 app.use('/api/auth', require('./Routes/auth'));
 app.use('/api/user', require('./Routes/user'));
