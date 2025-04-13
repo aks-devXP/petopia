@@ -1,10 +1,11 @@
 import { handleError } from "../Util/Alerts";
+const baseUrl = import.meta.env.VITE_BACKEND_BASEURL
 
 
 
 export async function GetPets ()  {
   try {
-    const response = await fetch(`/api/pet/get`, {
+    const response = await fetch(`${baseUrl}/pet/get`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +26,7 @@ export async function GetPets ()  {
 
 export async function CreatePet(pet) {
   try {
-    const response = await fetch(`/api/pet/create-pet`, {
+    const response = await fetch(`${baseUrl}/pet/create-pet`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +47,7 @@ export async function CreatePet(pet) {
 
 export async function UpdatePet(pet) {
   try {
-    const response = await fetch(`/api/pet/update`, {
+    const response = await fetch(`${baseUrl}/pet/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +67,7 @@ export async function UpdatePet(pet) {
 }
 export async function DeletePet(petId) {
   try {
-    const response = await fetch(`/api/pet/delete/${petId}`, {
+    const response = await fetch(`${baseUrl}/pet/delete/${petId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
