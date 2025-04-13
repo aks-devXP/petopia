@@ -3,7 +3,7 @@ import { handleError } from "../Util/Alerts";
 const baseUrl = "http://localhost:3456/api/vet";
 const getVets = async () => {
   try{
-    const response = await fetch(`api/vet/all-data`,{
+    const response = await fetch(`/api/vet/all-data`,{
       method:"GET",
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const createVet = async ({
   timings
 }) => {
   try {
-    const response = await fetch(`api/vet/create-vet`, {
+    const response = await fetch(`/api/vet/create-vet`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const getVetById = async (id) =>  {
   try {
     console.log(id)
     // ${baseUrl}
-    const response = await fetch(`${baseUrl}/data/${id}`,{
+    const response = await fetch(`/api/vet/data/${id}`,{
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
