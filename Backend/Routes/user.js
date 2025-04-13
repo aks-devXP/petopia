@@ -14,8 +14,7 @@ router.get('/profile-info', UserValidation, getProfileControl);
 router.post('/profile-info', UserValidation, updateProfileControl);
 router.put('/profile-pass', UserValidation, updatePasswordControl);
 
-
-
+console.log("User Routes Loaded");
 // --Appointment Routes
 router.post('/appointment_create', UserValidation, AppointmentMiddleware ,createAppointmentControl);
 router.put('/appointment_update', UserValidation,AppointmentMiddleware , updateAppointmentControl);
