@@ -16,7 +16,7 @@ const loginControl = async (req, res) => {
             return res.status(400).json({message: 'Invalid Credentials'});
         }
         // Testing
-        console.log(user);
+        // console.log(user);
         const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
         console.log("Login Successful and The Your Token is: ", token);
         res.status(200).json({ message: 'Login Successful',  success: true, token: token, user_name: user.name });
@@ -65,6 +65,7 @@ const signupControl = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
 const GoogleControl = async (req, res) => {
     try{
         const email = req.body.email;
@@ -95,4 +96,5 @@ const GoogleControl = async (req, res) => {
     }
 
 }
+
 module.exports = { loginControl, signupControl, GoogleControl };

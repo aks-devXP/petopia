@@ -4,7 +4,7 @@ import { UpdateProfileInfo } from "../../API/UserAPI";
 import { handleError } from "../../Util/Alerts";
 import NameHolder from "./NameHolder";
 
-const ProfileSettings = ({ info, petInfo }) => {
+const ProfileSettings = ({ info, petInfo, userFetch, petFetch }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
   const [petDetails, setPetDetails] = useState(petInfo || []);
@@ -22,12 +22,14 @@ const ProfileSettings = ({ info, petInfo }) => {
   petInfo?.forEach((pet) => {
     petMap.set(pet._id, pet);
   });
+  const [fetch, setFetch] = useState(false);
 
   useEffect(() => {
     setFormValues({
       name: info?.name || "",
       email: info?.email || "",
       city: info?.city || "",
+      phone: info?.phone || "",
       address: info?.address || "",
       state: info?.state || "",
       profilePic: info?.profilePic || null,
@@ -84,53 +86,61 @@ const ProfileSettings = ({ info, petInfo }) => {
   };
 
   const handleSave = async (e) => {
-    e.preventDefault();
-    setIsEditing(false);
-
-    // Updating Profile Data
-    const updatedProfile = {
-      ...formValues,
-    };
-    console.log("Updated Profile", updatedProfile);
-
-    // Call the API to update the profile
-    const response =  await UpdateProfileInfo(updatedProfile);
-    if (!response.success) {
-      handleError(response.message);
-    }
-    console.log("Profile Updated", response);
-
-    // Pet Details
-    // New Pet Details
-    const newPets = petDetails.filter((pet) => {
-      if (!pet._id) {
-        return true;
+    try {
+      e.preventDefault();
+      
+  
+      // Updating Profile Data
+      const updatedProfile = {
+        ...formValues,
+      };
+      console.log("Updated Profile", updatedProfile);
+  
+      // Call the API to update the profile
+      const response =  await UpdateProfileInfo(updatedProfile);
+      console.log("Profile Response", response);
+      if (!response.success) {
+        throw new Error(response.message);
       }
-      return false;
-    });
-    console.log("New Pets", newPets);
-    // Call the API to create new pets
-
-    // Updated Pet Details
-    const updatedPets = petDetails.filter((pet) => {
-      if (pet._id) {
-        return true;
+      // console.log("Profile Updated", response.json());
+      await userFetch();
+      
+      // New Pet Details
+      const newPets = petDetails.filter((pet) => {
+        if (!pet._id) {
+          return true;
+        }
+        return false;
+      });
+      console.log("New Pets", newPets);
+      // Call the API to create new pets
+  
+      // Updated Pet Details
+      const updatedPets = petDetails.filter((pet) => {
+        if (pet._id) {
+          return true;
+        }
+        return false;
+      });
+      console.log("Updated Pets", updatedPets);
+      for (let i = 0; i < updatedPets.length; i++) {
+        const pet = updatedPets[i];
+        const oldPet = petMap.get(pet._id);
+        // check if the data is updated or not
+        if (
+          pet.petName !== oldPet.petName ||
+          pet.petCategory !== oldPet.petCategory ||
+          pet.petBreed !== oldPet.petBreed ||
+          pet.petAge !== oldPet.petAge
+        ) {
+          console.log("Updated Pet", pet);
+        }
+       
       }
-      return false;
-    });
-    console.log("Updated Pets", updatedPets);
-    for (let i = 0; i < updatedPets.length; i++) {
-      const pet = updatedPets[i];
-      const oldPet = petMap.get(pet._id);
-      // check if the data is updated or not
-      if (
-        pet.petName !== oldPet.petName ||
-        pet.petCategory !== oldPet.petCategory ||
-        pet.petBreed !== oldPet.petBreed ||
-        pet.petAge !== oldPet.petAge
-      ) {
-        console.log("Updated Pet", pet);
-      }
+      setIsEditing(false);
+    } catch (error) {
+      handleError(error.message);
+      
     }
   };
 
@@ -290,6 +300,18 @@ const UpdateDetails = ({
                 className="w-full bg-[#1a1a1a] border border-[#333] rounded p-2 text-[#E5E5CB]"
               />
             </div>
+            <div>
+              <label className="block text-sm text-[#E5E5CB]/50 mb-1">
+                Phone
+              </label>
+              <input
+                type="number"
+                name="phone"
+                value={formValues.phone || ""}
+                onChange={onchangeHandler}
+                className="w-full bg-[#1a1a1a] border border-[#333] rounded p-2 text-[#E5E5CB]"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -379,7 +401,8 @@ const ViewDetails = ({ data, onEdit, petDetails }) => {
   // const { name ,profileColor, email, profilePic, address, city, state } = data;
   // const [profileColor, setProfileColor] = useState("");
   const [profileColor, setProfileColor] = useState(data.profileColor);
-  console.log("Profile Color", profileColor);
+  // console.log("Profile Color", profileColor);
+  console.log("User Phone", data.phone);
   useEffect(() => {
     setProfileColor(data.profileColor);
   }, [data.profileColor]);
@@ -447,6 +470,14 @@ const ViewDetails = ({ data, onEdit, petDetails }) => {
                 Email
               </label>
               <div className="p-2 text-[#E5E5CB]">{data.email}</div>
+            </div>
+            <div>
+              <label className="block text-sm text-[#E5E5CB]/50 mb-1">
+                Phone
+              </label>
+              <div className="p-2 text-[#E5E5CB]">{data.phone}</div>
+            
+            
             </div>
           </div>
         </div>

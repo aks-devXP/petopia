@@ -46,7 +46,7 @@ export async function CreatePet(pet) {
 
 export async function UpdatePet(pet) {
   try {
-    const response = await fetch(`/api/pet/update-pet`, {
+    const response = await fetch(`/api/pet/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
