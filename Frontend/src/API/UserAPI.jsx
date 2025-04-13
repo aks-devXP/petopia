@@ -1,10 +1,10 @@
 import { handleError } from "../Util/Alerts";
 
-// const baseUrl = "http://localhost:3456/api/user";
+const baseUrl = import.meta.env.VITE_BACKEND_BASEURL
 
 export async function GetProfileInfo(){
   
-  const response = await fetch(`/api/user/profile-info`,{
+  const response = await fetch(`${baseUrl}/user/profile-info`,{
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function GetProfileInfo(){
 
 export async function UpdateProfileInfo(user){
   try {
-    const response =  await fetch(`/api/user/profile-info`,{
+    const response =  await fetch(`${baseUrl}/user/profile-info`,{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export async function UpdateProfileInfo(user){
 }
 
 export async function UpdatePassword(user){
-  return fetch(`/api/user/profile-pass`,{
+  return fetch(`${baseUrl}/user/profile-pass`,{
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export async function UpdatePassword(user){
 }
 // 67f595f06cef232b330c26b5
 export async function getAppointments(){
-  const response = await fetch(`/api/user/appointment_get`, {
+  const response = await fetch(`${baseUrl}/user/appointment_get`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

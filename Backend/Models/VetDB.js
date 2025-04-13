@@ -49,6 +49,10 @@ tenure:{
   timings:{
     type: [[String]],
     required: true
+  },
+  specialization:{
+    type: String,
+    required: true
   }
 })
 module.exports = mongo.model('Vet', VetSchema)
