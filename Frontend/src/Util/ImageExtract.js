@@ -5,7 +5,7 @@ async function getImageURL(name) {
 
 // is working when complete path is being given
 function getImgUrl(name) {
-    return  new URL(`${name}`, import.meta.url).href
+    return new URL(`${name}`, import.meta.url).href
 }
 
 

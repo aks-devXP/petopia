@@ -13,7 +13,8 @@ const InfiniteScroll = ({list,text,data, dir, max_width="w-screen", img_width ="
         { name: "Mumbai", src: `${path}mumbai.jpg`},
         { name: "Pune", src: `${path}pune.jpg`},
         { name: "Srinagar", src: `${path}Srinagar.jpg`},
-    ]; 
+    ];
+
     logos = list ? list : logos;
 
   return (
