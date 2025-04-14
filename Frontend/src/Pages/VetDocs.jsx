@@ -91,13 +91,14 @@ const VetDocs = () => {
 
     doctors.forEach((res)=>{docsPanel.push(
         <div onClick={()=>{navigate(`/vet-book/${res._id}`)}} className="border border-[rgb(201,216,255)] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 bg-sand-light">
-            <img className="bg-[#EAEFFF]" src={`https://petopia-inky.vercel.app/src/assets/Vet/${res.profilePic}`} alt=""/>
+            <img className="bg-[#EAEFFF]" src={`https://petopia-inky.vercel.app/assets/Vet/${res.profilePic}`} alt=""/>
             <div className="p-4">
                 <div className="flex items-center gap-2 text-sm text-center text-green-500">
                     <p className="w-2 h-2 rounded-full bg-green-500"></p>
-                    <p>Available</p></div>
-                    <p class="text-[#262626] text-lg font-medium">{res.name}</p>
-                    <p class="text-[#5C5C5C] text-sm">{res.specialty}</p>
+                    <p>Available</p>
+                </div>
+                <p class="text-[#262626] text-lg font-medium">{res.name}</p>
+                <p class="text-[#5C5C5C] text-sm">{res.specialty}</p>
                 </div>
         </div>
     )})
