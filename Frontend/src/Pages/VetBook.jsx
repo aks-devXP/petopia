@@ -105,7 +105,7 @@ const VetBook = () => {
               id="image"
             >
               <img
-                className="h-60 w-60 rounded-full shadow-lg"
+                className="h-60 w-60 rounded-full shadow-lg object-cover"
                 src={(`/Vet/${data.profilePic}`)}
                 alt="Profile"
               />
