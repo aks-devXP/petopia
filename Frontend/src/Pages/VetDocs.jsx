@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVets } from '../API/VetAPI';
 import Loader from '../Components/Loader/Loader';
-import { getImgUrl } from '../Util/ImageExtract';
 
 const VetDocs = () => {
     const specialities = ["General Physician", "Internal Medicine", "Surgery", "Dentistry", "Dermatology", "Ophthalmology"]
@@ -103,7 +102,7 @@ const VetDocs = () => {
                 {
                   (doctors || []).map((doc,index)=>(
                     <div onClick={()=>{navigate(`/vet-book/${doc._id}`)}} className="border border-[rgb(201,216,255)] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 bg-sand-light">
-                      <img className="bg-[#EAEFFF]" src={getImgUrl(`../assets/Vet/${doc.profilePic}`)} alt=""/>
+                      <img className="bg-[#EAEFFF]" src={(`/Vet/${doc.profilePic}`)} alt=""/>
                       <div className="p-4">
                           <div className="flex items-center gap-2 text-sm text-center text-green-500">
                               <p className="w-2 h-2 rounded-full bg-green-500"></p>
