@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVets } from '../API/VetAPI';
 import Loader from '../Components/Loader/Loader';
+import { getImgUrl } from '../Util/ImageExtract';
 
 const VetDocs = () => {
     const specialities = ["General Physician", "Internal Medicine", "Surgery", "Dentistry", "Dermatology", "Ophthalmology"]
