@@ -1,158 +1,59 @@
+import React from 'react';
+import { Twitter, Linkedin, Github, Facebook, Instagram } from 'lucide-react';
+import logo from "../assets/petopia-logo.svg";
 
 const Footer = () => {
   return (
-    <div className="mx-auto relative bottom-0 mb-0">
-      <footer className="bg-n-6 text-center text-white">
-        {/* for now n-6
-         */}
-        <div className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 my-4">
-            {/* Grid column */}
-            <div className="text-center">
-              <div
-                className="rounded-full bg-white shadow-lg flex items-center justify-center mb-4 mx-auto"
-                style={{ width: '150px', height: '150px' }}
-              >
-                <img
-                  src="https://mdbootstrap.com/img/Photos/new-templates/animal-shelter/logo.png"
-                  className="h-16"
-                  alt=""
-                  loading="lazy"
-                />
-              </div>
-
-              <p>Homeless animal shelter The budgetary unit of the Capital City of Warsaw</p>
-
-              <ul className="flex justify-center space-x-4 mt-4">
-                <li>
-                  <a className="text-white hover:text-gray-200" href="#!">
-                    <i className="fab fa-facebook-square text-2xl"></i>
-                  </a>
-                </li>
-                <li>
-                  <a className="text-white hover:text-gray-200" href="#!">
-                    <i className="fab fa-instagram text-2xl"></i>
-                  </a>
-                </li>
-                <li>
-                  <a className="text-white hover:text-gray-200" href="#!">
-                    <i className="fab fa-youtube text-2xl"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Grid column */}
-            <div>
-              <h5 className="text-xl font-semibold mb-4">Animals</h5>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>When your pet is missing
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Recently found
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>How to adopt?
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Pets for adoption
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Material gifts
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Help with walks
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Volunteer activities
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Grid column */}
-            <div>
-              <h5 className="text-xl font-semibold mb-4">Animals</h5>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>General information
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>About the shelter
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Statistic data
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Job
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Tenders
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" className="text-white hover:text-gray-200 flex items-center">
-                    <i className="fas fa-paw mr-3"></i>Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Grid column */}
-            <div>
-              <h5 className="text-xl font-semibold mb-4">Contact</h5>
-              <ul className="space-y-2">
-                <li>
-                  <p className="flex items-center">
-                    <i className="fas fa-map-marker-alt mr-3"></i>Warsaw, 57 Street, Poland
-                  </p>
-                </li>
-                <li>
-                  <p className="flex items-center">
-                    <i className="fas fa-phone mr-3"></i>+ 01 234 567 89
-                  </p>
-                </li>
-                <li>
-                  <p className="flex items-center">
-                    <i className="fas fa-envelope mr-3"></i>contact@example.com
-                  </p>
-                </li>
-              </ul>
+    <footer className="bg-[#1A120B] text-[#E5E5CB] py-6 px-10">
+      <div className="">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+          {/* Logo and Tagline */}
+          <div className="mb-4 md:mb-0">
+            <div className="flex items-center mb-2 gap-2">
+              <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
+              <span className="text-md font-light">
+                Petopia — Because every pet deserves love, care, and a better life.
+              </span>
             </div>
           </div>
+
+          {/* Navigation Links */}
+          <nav className="flex flex-wrap gap-6 text-sm mb-4 md:mb-0">
+            <a href="#ecosystem" className="hover:text-[#E5E5CB]">Ecosystem</a>
+            <a href="#token" className="hover:text-[#E5E5CB]">Token</a>
+            <a href="#docs" className="hover:text-[#E5E5CB]">Docs</a>
+            <a href="#contact" className="hover:text-[#E5E5CB]">Contact Us</a>
+            <a href="#terms" className="hover:text-[#E5E5CB]">Terms of Service</a>
+          </nav>
         </div>
 
-        <div className="text-center p-3 bg-n-5">
-          © 2025 Copyright: 
-          <a className="text-white hover:underline" href="">
-            Petopia@org
-          </a>
+
+        <div className="flex flex-col md:flex-row justify-between items-start 
+        md:items-center mt-6 pt-4 border-t border-[#E5E5CB]/20">
+          <div className="text-sm text-[#E5E5CB]/50 mb-4 md:mb-0">
+            © 2025 Petopia. All rights reserved.
+          </div>
+          
+          <div className="flex space-x-4">
+          <a href="#github" className="text-[#E5E5CB]/50 hover:text-[#E5E5CB]">
+              <Instagram size={20} />
+            </a>
+            <a href="#twitter" className="text-[#E5E5CB]/50 hover:text-[#E5E5CB]">
+              <Twitter size={20} />
+            </a>
+            <a href="#linkedin" className="text-[#E5E5CB]/50 hover:text-[#E5E5CB]">
+              <Linkedin size={20} />
+            </a>
+            <a href="#facebook" className="text-[#E5E5CB]/50 hover:text-[#E5E5CB]">
+              <Facebook size={20} />
+            </a>
+            <a href="#github" className="text-[#E5E5CB]/50 hover:text-[#E5E5CB]">
+              <Github size={20} />
+            </a>
+          </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
 
