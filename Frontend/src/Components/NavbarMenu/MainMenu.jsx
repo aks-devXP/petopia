@@ -11,7 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 
 const Submenu = () => (
-  <ul className="absolute top-full left-[-2rem] bg-[#151516] rounded-md p-2 hidden group-hover:block z-50">
+  <ul className="absolute top-full left-[-2rem] bg-[#1A120B] rounded-2xl p-2 hidden group-hover:block z-50">
     {[
       { to: "/ngo", label: "NGO" },
       { to: "/shopping", label: "Pet Essentials" },
@@ -83,16 +83,16 @@ const Menu = () => {
         <NavLink to="#" className="flex items-center">
           {({ isActive }) => (
             <div
-              className={`flex items-center space-x-1
+              className={`items-center space-x-1 hidden sm:flex
                   
                           transition-transform duration-200
-                          ${isActive ? "border border-white rounded-2xl p-2" : ""}`}
+                          ${isActive ? "border border-white rounded-full p-2" : ""}`}
             >
               {/* always show chevron */}
               <ChevronDown className="w-5 h-5 block" />
 
               <span
-                className={`hidden md:inline text-white font-medium
+                className={`hidden lg:inline text-white font-medium
                             ${isActive ? "hidden" : ""}`}
               >
                 More

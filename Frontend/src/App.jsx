@@ -59,13 +59,13 @@ function App() {
       <Route path='sign-up' element={<SignUp2/>}></Route>
       <Route path='sample' element={<ScrollAnimations/>}></Route>
       <Route path="/testing" element={<Testing/>}></Route>
-       
+      <Route path="/guide" element={<Guide/>}></Route>
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route  path="/shopping" element={<ProductDirectory/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
         <Route path='/dashboard/:option' element={<UserDashboard/>}></Route>
-        <Route path="/guide" element={<Guide/>}></Route>
+        
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
         <Route path="/vet-book/:id" element={<VetBook/>}></Route>
