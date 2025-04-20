@@ -120,7 +120,7 @@ const Navbar = () => {
   return (
     <div className="flex w-full h-20">
         <div className="navbar flex h-fit justify-between w-full p-1.5 bg-[#1A120B] z-20 min-h-20 shadow-[0_0_10px_rgba(229,229,203,0.4)]">
-          <div className="flex justify-between flex-shrink w-full items-center mx-5">
+          <div className="flex justify-between flex-shrink w-full items-center md:mx-5">
             <div className="rounded-full w-[20%]">
               <NavLink to="/home">
                   <img src={logo} className="min-w-12 h-12" alt="Petopia Logo" />
@@ -134,13 +134,17 @@ const Navbar = () => {
             <div className="flex justify-end items-center w-[30%]">
                 {localStorage.getItem("token") ? (
                 <div className="relative">
-                    <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" onClick={handleProfileClick}>
+                    {/* <button className="bg-white hover:bg-[#E5E5CB] px-5 py-2.5 rounded-[25px] text-[#1A120B]" onClick={handleProfileClick}>
                     Hi, {loggedin.replace(/['"]+/g, "")}
-                    </button>
-                    {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} name={loggedin.replace(/['"]+/g, "")}/>}
-                </div>
+                    </button> */}
+                      <div className="h-14 w-14 border-4 border-white/50 rounded-full hover:border-white/70 object-cover p-1 cursor-pointer" onClick={handleProfileClick}>
+                        <img className="w-full h-full rounded-full" 
+                        src="https://snapynow.com/wp-content/uploads/2024/05/sad-boy-profile-dp_66.webp" alt="" />
+                      </div>
+                      {isDropdownOpen && <ProfileDropdown onSelect={handleOptionSelect} name={loggedin.replace(/['"]+/g, "")}/>}
+                    </div>
                 ) : (
-                <>
+                <> 
                     <button className="mr-4 hover:text-[#E5E5CB]" type="button" onClick={handleSignInLogIn}>
                     Sign Up
                     </button>

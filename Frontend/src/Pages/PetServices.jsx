@@ -27,7 +27,7 @@ function PetServices() {
 
         <img className="object-cover absolute inset-0 w-full h-full" src={backgroundimg} alt="Trainer Background" />
 
-        <div className="absolute w-full h-full flex flex-col justify-center text-white z-5 pl-5 pt-10">
+        <div className="absolute w-full h-full flex flex-col justify-center text-white z-5 md:pl-5 p-3 pt-10">
           {/* Button Group */}
           <div className="flex gap-5">
             {Object.entries(textOptions).map(([key, value]) => (
@@ -45,7 +45,7 @@ function PetServices() {
           </div>
 
           {/* Centered Text with Fixed Size */}
-          <div className="max-w-[70%] h-[300px] flex items-center text-[50px] lg:text-[70px] leading-tight">
+          <div className="md:max-w-[70%] md:mt-0 mt-4 h-[300px] flex items-center text-[50px] lg:text-[70px] leading-tight">
             {textOptions[selectedService]}
           </div>
 
