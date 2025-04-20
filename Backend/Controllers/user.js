@@ -101,12 +101,13 @@ const updateProfileControl = async (req, res) => {
     // Not using currently on frontend
     user_data.age = user.age;
 
-    // Has removed from model fields
+    // Has removed from User model fields
     // user_data.petStatus = user.petStatus;
     user_data.address = user.address;
     user_data.city = user.city;
     user_data.state = user.state;
     user_data.profileColor = user.profileColor;
+    user_data.profilePic = user.profilePic;
     // console.log(user_data.profileColor, "user profile color in update profile control");
     user_data.nameColor = user.nameColor;
     await user_data.save();

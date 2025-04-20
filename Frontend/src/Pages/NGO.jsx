@@ -8,7 +8,7 @@ import SupportACause from '../Components/NGO comp/SupportACause'
 import BasicHero from '../Components/BasicHero'
 
 const NGO = () => {
-  const path = "../assets/NGO/"
+  const path = "/NGO/"
   const list = [ { name: "Dog Caring", src: `${path}2e5f69dd-1a6a-4260-b39d-6cc56932d751.jpeg`},
     { name: "Ahmedabad", src: `${path}9c2d3071-d377-4811-888b-0ea185978ddc.jpeg`},
     { name: "Hyderabad", src: `${path}5480f0d9-dab7-4438-a1c3-d2ba14b5aef2.jpeg`},

@@ -60,33 +60,41 @@ const getAllPets = async (req, res) => {
   }
 }
 
-const updatePet =  async()=>{
-  try{
-    const petInfo = req.body.pet;
-    const petId = req.pet._id;
-    console.log(petId);
+
+
+const updatePet = async (req, res) => {
+  try {
+    const petInfo = req.body;
+    const petId = petInfo._id;
+    console.log("Pet ID:", petId);
+
     if (!ObjectId.isValid(petId)) {
       return res.status(400).json({ error: 'Invalid pet ID' });
     }
-    const pet_data = Pet.findById(petId);
+
+    const pet_data = await Pet.findById(petId);
     if (!pet_data) {
       return res.status(404).json({ error: 'Pet not found' });
     }
+
+    // Update fields
     pet_data.name = petInfo.name;
     pet_data.age = petInfo.age;
     pet_data.category = petInfo.category;
     pet_data.breed = petInfo.breed;
-    await pet_data.save();
-    console.log('Pet updated successfully');
-    res.status(200).json({ message: 'Pet updated successfully', success:true });
-  }
-  catch(error) {
-    console.log("Error in Updateing the pet (Controller) ",error,"\nPet Id",req.pet._id);
-    res.status(500).json({ error: error.message, success:false });
-  }
-}
 
-const deletePet = async()=>{
+    await pet_data.save();
+
+    console.log('Pet updated successfully');
+    res.status(200).json({ message: 'Pet updated successfully', success: true });
+  } catch (error) {
+    console.log("Error in Updating the pet (Controller):", error, "\nPet Id:", req.body?._id);
+    res.status(500).json({ message: error.message, success: false });
+  }
+};
+
+
+const deletePet = async(req,res)=>{
   try {
     const petId = req.params.id;
     if (!ObjectId.isValid(petId)) {
@@ -96,6 +104,19 @@ const deletePet = async()=>{
     if (!pet_data) {
       return res.status(404).json({ error: 'Pet not found' });
     }
+    const userId = req.verified.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const petIndex = user.petID.indexOf(petId);
+    if (petIndex > -1) {
+      user.petID.splice(petIndex, 1);
+      await user.save();
+    }
+    //  else {
+    //   return res.status(404).json({ message: 'Pet not found in user\'s pets' });
+    // }
     console.log('Pet deleted successfully');
     res.status(200).json({ message: 'Pet deleted successfully', success:true });
   } catch (error) {
