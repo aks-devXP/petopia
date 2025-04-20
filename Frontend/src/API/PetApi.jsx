@@ -26,7 +26,8 @@ export async function GetPets ()  {
 
 export async function CreatePet(pet) {
   try {
-    const response = await fetch(`${baseUrl}/pet/create-pet`, {
+    console.log("Pet", pet);
+    const response = await fetch(`${baseUrl}/pet/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +39,7 @@ export async function CreatePet(pet) {
     if (!data.success) {
       throw new Error(data.message);
     }
-    // console.log("Pet Created", data);
+    console.log("Pet Created", data);
     return data;
   } catch (error) {
     handleError(error.message);

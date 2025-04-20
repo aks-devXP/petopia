@@ -76,5 +76,5 @@ const updateTrainer = async (req, res) => {
 
 module.exports = {
   createTrainer,
-  getTrainer
+  getTrainer, updateTrainer
 };
