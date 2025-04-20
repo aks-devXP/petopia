@@ -65,6 +65,21 @@ const getVet = async (req, res) => {
   }
 
 }
+const getVetByEmail = async (req, res) => {
+  try{
+    const email = req.params.email;
+    const vet = await VetModel.find({email: email});
+    if(!vet){
+      return res.status(404).json({message:'Vet not found', success: false});
+    }
+    delete vet.password;
+    res.status(200).json({message:'Vet found', success: true, vet: vet});
+  }
+  catch (error) {
+    console.log("Error in GetVetByEmail", error)
+    res.status(500).json({message:'Internal server error', success: false});
+  }
+}
 
 
-module.exports = {getAllVets, createVet, getVet}
+module.exports = {getAllVets, createVet, getVet,getVetByEmail}

@@ -1,13 +1,17 @@
 import { LucidePen, PencilIcon, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { UploadImageAPI } from "../../API/GeneralAPI";
+import { CreatePet, DeletePet, UpdatePet } from "../../API/PetApi";
 import { UpdateProfileInfo } from "../../API/UserAPI";
 import { handleError } from "../../Util/Alerts";
 import NameHolder from "./NameHolder";
+import PhotoUploader from "./PhotoUploader ";
 
 const ProfileSettings = ({ info, petInfo, userFetch, petFetch }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
   const [petDetails, setPetDetails] = useState(petInfo || []);
+  const [photos , setPhotos] = useState([]);
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -18,10 +22,9 @@ const ProfileSettings = ({ info, petInfo, userFetch, petFetch }) => {
     nameColor: "",
     profileColor: "",
   });
-  let petMap = new Map();
-  petInfo?.forEach((pet) => {
-    petMap.set(pet._id, pet);
-  });
+  
+  const  [petMap, setPetMap] = useState(new Map());
+  
   const [fetch, setFetch] = useState(false);
 
   useEffect(() => {
@@ -35,8 +38,17 @@ const ProfileSettings = ({ info, petInfo, userFetch, petFetch }) => {
       profilePic: info?.profilePic || null,
       nameColor: info?.nameColor || "",
       profileColor: info?.profileColor || "",
+
     });
     setPetDetails(petInfo || []);
+    setProfilePic(info?.profilePic || null);
+    setPetMap(() => {
+      const map = new Map();
+      petInfo?.forEach((pet) => {
+        map.set(pet._id, pet);
+      });
+      return map;
+    })
   }, [info, petInfo]);
   // console.log("Color", formValues.profileColor);
   // Calling Backend to update profile data
@@ -49,7 +61,7 @@ const ProfileSettings = ({ info, petInfo, userFetch, petFetch }) => {
 
   //   }]
   // })
-  console.log("Profile Info", info);
+  // console.log("Profile Info", info);
   const onchangeHandler = (e) => {
     const { name, value } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -70,12 +82,18 @@ const ProfileSettings = ({ info, petInfo, userFetch, petFetch }) => {
     const updatedPets = [...petDetails];
     updatedPets[index] = { ...updatedPets[index], [field]: value };
     setPetDetails(updatedPets);
+
   };
 
   const handleAddPet = () => {
     setPetDetails([
       ...petDetails,
-      { petName: "", petCategory: "", petBreed: "", petAge: "" },
+      {
+        name: "",
+        category: "",
+        breed: "",
+        age: ""
+      }
     ]);
   };
 
@@ -89,60 +107,100 @@ const ProfileSettings = ({ info, petInfo, userFetch, petFetch }) => {
     try {
       e.preventDefault();
       
+      let updatedProfilePic = formValues.profilePic;
   
-      // Updating Profile Data
+      if (profilePic &&profilePic !== formValues.profilePic) {
+        const result = await UploadImageAPI(profilePic, formValues.email.split("@")[0]);
+        // console.log("Image Result", result.url);
+  
+        if (result.success) {
+          updatedProfilePic = result.url;
+          // setFormValues((prev) => ({ ...prev, profilePic: result.url }));
+        }
+      }
+  
       const updatedProfile = {
         ...formValues,
+        profilePic: updatedProfilePic,
+
       };
+      console.log("Updated Profile", updatedProfilePic);
       console.log("Updated Profile", updatedProfile);
   
-      // Call the API to update the profile
-      const response =  await UpdateProfileInfo(updatedProfile);
+      const response = await UpdateProfileInfo(updatedProfile);
       console.log("Profile Response", response);
+  
       if (!response.success) {
         throw new Error(response.message);
       }
-      // console.log("Profile Updated", response.json());
-      await userFetch();
-      
-      // New Pet Details
-      const newPets = petDetails.filter((pet) => {
-        if (!pet._id) {
-          return true;
-        }
-        return false;
-      });
-      console.log("New Pets", newPets);
-      // Call the API to create new pets
   
-      // Updated Pet Details
-      const updatedPets = petDetails.filter((pet) => {
-        if (pet._id) {
-          return true;
+      await userFetch();
+      // name:{
+      //   type: String,
+      //   required: true,
+      // },
+      // age:{
+      //   type: Number,
+      //   required: true,
+      // },
+      // category:{
+      //   type: String,
+      //   required: true,
+      // },
+      // breed:{
+      //   type: String,
+      //   required: true,
+      // }
+      const newPets =  petDetails.filter((pet) => !pet._id);
+      console.log("New Pets", newPets);
+      const newPetPromises = newPets.map(async (pet) => {
+        const result = await CreatePet(pet);
+        console.log("New Pet Result", result);
+        if (result.success) {
+          return result.pet;
         }
-        return false;
-      });
-      console.log("Updated Pets", updatedPets);
+
+        return result.message;
+      })
+
+      const updatedPets = petDetails.filter((pet) => pet._id);
+      // console.log("Updated Pets", updatedPets);
+  
       for (let i = 0; i < updatedPets.length; i++) {
         const pet = updatedPets[i];
         const oldPet = petMap.get(pet._id);
-        // check if the data is updated or not
+  
         if (
-          pet.petName !== oldPet.petName ||
-          pet.petCategory !== oldPet.petCategory ||
-          pet.petBreed !== oldPet.petBreed ||
-          pet.petAge !== oldPet.petAge
+          pet.name !== oldPet.name ||
+          pet.category !== oldPet.category ||
+          pet.breed !== oldPet.breed ||
+          pet.age !== oldPet.age
         ) {
-          console.log("Updated Pet", pet);
+          const result =  await UpdatePet(pet);
+          console.log("Updated Pet Result", result);
+          if (!await result.success) {
+            throw new Error(result.message);
+          }
         }
-       
       }
+      const DeletedPets = petInfo.filter((pet) => !petDetails.some((p) => p._id === pet._id));
+      for (let i = 0; i < DeletedPets.length; i++) {
+        const pet = DeletedPets[i];
+      
+          const result = await DeletePet(pet._id);
+          console.log("Deleted Pet Result", result);
+          if (!result.success) {
+            throw new Error(result.message);
+          }
+      }
+      await petFetch();
+
       setIsEditing(false);
     } catch (error) {
       handleError(error.message);
-      
     }
   };
+  
 
   return (
     <>
@@ -161,12 +219,17 @@ const ProfileSettings = ({ info, petInfo, userFetch, petFetch }) => {
           handleAddPet={handleAddPet}
           handleRemovePet={handleRemovePet}
           handlePetChange={handlePetChange}
+          setPhotos={setPhotos}
+          photos={photos}
         />
       ) : (
         <ViewDetails
           data={formValues}
           petDetails={petDetails}
           onEdit={() => setIsEditing(true)}
+          photos={photos}
+          profilePic={profilePic}
+
         />
       )
     }
@@ -190,17 +253,27 @@ const UpdateDetails = ({
   handleAddPet,
   handleRemovePet,
   handlePetChange,
+  setPhotos,
+  photos,
 }) => {
   const [profileColor, setProfileColor] = useState(formValues.profileColor);
   const [nameColor, setNameColor] = useState(formValues.nameColor);
+  const [displayMode, setDisplayMode] = useState('picture');
+  const [saveAble, setSaveAble] = useState(false);
   useEffect(() => {
     setFormValues((prev) => ({
       ...prev,
       profileColor: profileColor,
       nameColor: nameColor,
     }));
-    console.log("Profile Color", profileColor);
+    if (profilePic === null) {
+      setDisplayMode('name');
+    }
+    // console.log("Profile Color", profileColor);
   }, [profileColor, nameColor]);
+  const toggleDisplayMode = () => {
+    setDisplayMode(prev => prev === 'name' ? 'picture' : 'name');
+  };
 
   return (
     <div className="bg-[#111111] bg-opacity-50 text-[#E5E5CB] p-8 pt-0 min-h-screen">
@@ -212,54 +285,95 @@ const UpdateDetails = ({
         <p className="text-sm text-[#E5E5CB]/50 mb-6">
           Set your account details
         </p>
-
-        <div className="w-full lg:justify-start flex justify-center items-center mt-6 lg:mt-0 py-4">
-          <div className="flex items-center flex-col">
-            {profilePic ? (
-              <div>
-                <div className="w-32 h-32 rounded-full bg-[#e5d6c5] flex items-center justify-center overflow-hidden">
-                  <img
-                    src={profilePic}
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="mt-2 flex justify-center">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="hidden"
-                    id="fileInput"
-                  />
-                  <label
-                    htmlFor="fileInput"
-                    className="bg-[#3C2A21] text-sm border rounded-full px-3 py-1 text-gray-300 mr-2 cursor-pointer"
-                  >
-                    Edit
-                  </label>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setProfilePic(null);
-                    }}
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <NameHolder
-                firstName={formValues.name.split(" ")[0]}
-                lastName={formValues.name.split(" ")[1]}
-                isEditable={true}
-                initialColor={profileColor}
-                setprofileColor={setProfileColor}
-              />
-            )}
-          </div>
+      {/* Start of the Profile Pic */}
+      <div className="w-full flex flex-col md:flex-row items-center md:items-start">
+      {/* Container for Toggle and Content */}
+      <div className="w-full md:w-auto flex flex-col items-center 
+        md:items-start 
+        md:pl-8 
+        lg:pl-8
+        xl:pl-0
+        mt-6 md:mt-0 
+        py-4"
+      >
+        {/* Toggle Switch */}
+        <div className="flex items-center mb-4">
+          <span className={`mr-2 ${displayMode === 'name' ? 'font-bold' : 'text-gray-500'}`}>
+            Name
+          </span>
+          <label className="inline-flex relative items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={displayMode === 'picture'}
+              onChange={toggleDisplayMode}
+            />
+            <div className="w-11 h-6 bg-gray-200 rounded-full peer 
+              peer-focus:ring-4 peer-focus:ring-blue-300 
+              dark:peer-focus:ring-blue-800 
+              dark:bg-gray-700 
+              peer-checked:after:translate-x-full 
+              peer-checked:after:border-white 
+              after:content-[''] after:absolute after:top-0.5 after:left-[2px] 
+              after:bg-white after:border-gray-300 after:border 
+              after:rounded-full after:h-5 after:w-5 after:transition-all 
+              dark:border-gray-600 peer-checked:bg-blue-600"
+            ></div>
+          </label>
+          <span className={`ml-2 ${displayMode === 'picture' ? 'font-bold' : 'text-gray-500'}`}>
+            Picture
+          </span>
         </div>
 
+        {/* Content Container */}
+        <div className="flex items-center flex-col">
+          {displayMode === 'picture'  ? (
+            <div>
+              <div className="w-32 h-32 rounded-full bg-[#e5d6c5] flex items-center justify-center overflow-hidden">
+                <img
+                  src={profilePic}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="mt-2 flex justify-center">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="hidden"
+                  id="fileInput"
+                />
+                <label
+                  htmlFor="fileInput"
+                  className="bg-[#3C2A21] text-sm border rounded-full px-3 py-1 text-gray-300 mr-2 cursor-pointer"
+                >
+                  Edit
+                </label>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setProfilePic(null);
+                    setDisplayMode('name');
+                  }}
+                >
+                  <Trash2 size={18} />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <NameHolder
+              firstName={formValues.name.split(" ")[0]}
+              lastName={formValues.name.split(" ")[1]}
+              isEditable={true}
+              initialColor={profileColor}
+              setprofileColor={setProfileColor}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+        {/* End of the profile pic */}
         <div className="flex flex-wrap">
           <div className="w-full lg:w-3/4 pr-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -314,6 +428,10 @@ const UpdateDetails = ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="my-4">
+        <PhotoUploader maxImages={4} onImagesChange={setPhotos} />
+
       </div>
 
       <div className="mb-12">
@@ -386,8 +504,16 @@ const UpdateDetails = ({
 
       <div className="flex justify-end">
         <button
-          onClick={handleSave}
-          className="bg-green-600 hover:bg-green-700 transition px-6 py-2 rounded text-white"
+          onClick={(e)=>{
+            setSaveAble(true);
+            handleSave(e);
+            setTimeout(() => {
+              setSaveAble(false);
+            }, 2000);
+          }}
+          className=
+          {`${saveAble? 'bg-gray-400' :'bg-green-600 hover:bg-green-700'} transition px-6 py-2 rounded text-white`}
+          disabled={saveAble}
         >
           Save
         </button>
@@ -397,14 +523,21 @@ const UpdateDetails = ({
 };
 
 // Component TO Show Pet Details
-const ViewDetails = ({ data, onEdit, petDetails }) => {
+const ViewDetails = ({ data, onEdit, petDetails, photos, profilePic }) => {
   // const { name ,profileColor, email, profilePic, address, city, state } = data;
   // const [profileColor, setProfileColor] = useState("");
+  const [collage, setCollage] = useState(["https://res.cloudinary.com/dvjcvwp61/image/upload/v1745052225/cld-sample.jpg","https://res.cloudinary.com/dvjcvwp61/image/upload/v1745052217/samples/animals/three-dogs.jpg"]);
   const [profileColor, setProfileColor] = useState(data.profileColor);
   // console.log("Profile Color", profileColor);
   console.log("User Phone", data.phone);
   useEffect(() => {
     setProfileColor(data.profileColor);
+    if (photos) {
+      
+      setCollage(photos);
+      console.log("Photos", photos.length);
+    }
+    // setCollage(photos);
   }, [data.profileColor]);
   return (
     <div className="bg-[#111111] bg-opacity-50 text-[#E5E5CB] p-8 pt-0 min-h-screen">
@@ -427,10 +560,10 @@ const ViewDetails = ({ data, onEdit, petDetails }) => {
         </div>
         <div className="w-full lg:justify-start flex justify-center items-center mt-6 lg:mt-0 py-4">
           <div className="flex items-center flex-col">
-            {data.profilePic ? (
+            {profilePic ? (
               <div className="w-32 h-32 rounded-full bg-[#e5d6c5] flex items-center justify-center overflow-hidden">
                 <img
-                  src={data.profilePic}
+                  src={profilePic}
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />
@@ -484,6 +617,24 @@ const ViewDetails = ({ data, onEdit, petDetails }) => {
       </div>
 
       {/* Pet Details */}
+      <div className="flex flex-col items-start justify-start my-4 gap-2">
+        <h2 className="text-lg font-medium mb-1 ">Your Story</h2>
+      <div className="flex items-center gap-3">
+      {collage.map((image, index) => (
+          <div 
+            key={index} 
+            className="relative w-24 h-24 rounded-lg"
+          >
+            <img 
+              src={image} 
+              alt={`Uploaded ${index + 1}`} 
+              className="w-full h-full rounded-lg object-cover"
+            />
+        
+          </div>
+        ))}
+        </div>
+      </div>
 
       <div className="mb-12">
         <h2 className="text-lg font-medium mb-1">Pet Details</h2>
