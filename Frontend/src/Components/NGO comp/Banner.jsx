@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import banner_img from '../../assets/NGO/ngo_banner.jpg';
+import banner_img from '/NGO/ngo_banner.jpg';
 
 
 const Banner = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import topw1 from '../../assets/NGO/topw1.webp';
+import topw1 from '/NGO/topw1.webp';
 import truncateText from '../../Util/Shortcuts';
 
 const SlidingCard = ({ imageUrl=topw1, title= "Donate", subtitle="There are many unfortunate ones", description="Your donations help us provide food, shelter, and medical care for animals in need." }) => {
