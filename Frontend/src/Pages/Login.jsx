@@ -8,7 +8,7 @@ import {
 } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { GoogleLoginAPI, LoginAPI } from "../API/GeneralAPI";
+import { GoogleLoginAPI, LoginAPI, LoginGenAPI } from "../API/GeneralAPI";
 import loginimg from "../assets/login-bg2.jpg";
 import Loader from "../Components/Loader/Loader";
 import { handleError } from "../Util/Alerts";
@@ -18,7 +18,7 @@ import "./Login.css";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
+  const [selectedRole, setSelectedRole] = useState('user');
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -46,6 +46,7 @@ const Login = () => {
 
     // Try verify the user
     try {
+      if(selectedRole === 'user'){
       const response = await LoginAPI(user);
       const data = await response.json();
       console.log(data);
@@ -54,12 +55,34 @@ const Login = () => {
         setSuccess(true);
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", JSON.stringify(data.user_name));
+        localStorage.setItem("userAuth", JSON.stringify("user"));
         setTimeout(() => navigate("/"), 2000); // Navigate after showing success
       } else {
         setLoading(false);
         setSuccess(false);
         handleError(data.message);
       }
+    }
+    else {
+      const response = await LoginGenAPI(user,selectedRole);
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+        setLoading(false);
+        setSuccess(true);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", JSON.stringify(data.user_name));
+        localStorage.setItem("userAuth", JSON.stringify(selectedRole));
+        setTimeout(() => navigate("/"), 2000); // Navigate after showing success
+      } else {
+        setLoading(false);
+        setSuccess(false);
+        handleError(data.message);
+      }
+    }
+    // else if(selectedRole === 'trainer'){
+
+    // }
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -83,7 +106,7 @@ const Login = () => {
       );
       const userInfo = await userInfoResponse.json();
       console.log("Google User Info:", userInfo.name);
-      const response = await GoogleLoginAPI({ email: userInfo.email });
+      const response = await GoogleLoginAPI({ email: userInfo.email, name: userInfo.name });
       const data = await response.json();
       console.log(data);
       // Save the user info to the database
@@ -176,6 +199,31 @@ const Login = () => {
                   <label className="login__label">Password</label>
                 </div>
               </div>
+             {/* New Role Selection Section */}
+             <div className="login__role-selection">
+                <p className="login__role-title">Select Your Role</p>
+                <div className="login__role-options">
+                  {['user', 'vet', 'trainer', 'groomer'].map((role) => (
+                    <label 
+                      key={role} 
+                      className={`login__role-option ${selectedRole === role ? 'selected' : ''}`}
+                    >
+                      <input
+                        type="radio"
+                        name="role"
+                        value={role}
+                        checked={selectedRole === role}
+                        onChange={() => setSelectedRole(role)}
+                        className="login__role-radio"
+                      />
+                      <span className="login__role-label">
+                        {role.charAt(0).toUpperCase() + role.slice(1)}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
               <div className="login__check">
                 <div className="login__check-group">
                   <input type="checkbox" className="login__check-input" />

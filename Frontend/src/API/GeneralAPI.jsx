@@ -22,16 +22,27 @@ export async function GoogleLoginAPI(user){
   return res;
 }
 
-export async function SingUpAPI(user){
+export async function SingUpAPI(user,type){
   console.log(user);
   return  await fetch(`${Base_URL}/auth/signup`,{
     method:'POST',
     headers:{
       'Content-Type':"application/json"
     },
-    body:JSON.stringify(user)
+    body:JSON.stringify({user,type})
   });
 }
+export async function LoginGenAPI(user,type){
+  console.log(user);
+  return fetch(`${Base_URL}/auth/gen-login`,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({user,type})
+  });
+}
+
 export  async  function ContactAPI(contactInfo){
   console.log(contactInfo.message);
   return fetch(`${Base_URL}/user/contact-us`,{
@@ -41,4 +52,19 @@ export  async  function ContactAPI(contactInfo){
     },
     body:JSON.stringify(contactInfo)
   });
+}
+
+export async function UploadImageAPI(image,public_id){
+  // console.log(image);
+  const response = await fetch(`${Base_URL}/upload/upload_image`,{
+    method:'POST',
+    headers:{
+      'Content-Type':"application/json"
+    },
+    body:JSON.stringify({image,public_id})
+  });
+  const data = await response.json();
+  console.log('File uploaded successfully:', data);
+  // console.log("UploadedImage Response",response);
+  return data;
 }
