@@ -11,40 +11,40 @@ const TrainerSchema = new Schema({
     },
     phone : {
         type : String,
-        required : true
+        // required : true
     },
     location : {
         type : String,
-        required : true
+        // required : true
     },
     city : {
         type : String,
-        required : true
+        // required : true
     },
     zip : {
         type : Number,
-        required : true
+        // required : true
     },
     experience : {
         type : String,
-        required : true
+        // required : true
     },
     description : {
         type : String,
-        required : true
+        // required : true
     },
     image:{
       type: [String],
-      required: true
+    //   required: true
     }
     ,
     services:{
-      required: true,
+    //   required: true,
       type: [String]
     }
     ,
     price:{
-      required: true,
+    //   required: true,
       type: [Number]
     }
 

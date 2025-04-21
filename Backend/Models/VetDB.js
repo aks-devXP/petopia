@@ -16,23 +16,23 @@ const VetSchema = new Schema({
   },
   phone:{
     type: Number,
-    required: true
+    // required: true
   },
   address:{
     type: String,
-    required: true
+    // required: true
   },
   city:{
     type: String,
-    required: true
+    // required: true
   },
   state:{
     type: String,
-    required: true
+    // required: true
   },
   zip:{
     type: Number,
-    required: true
+    // required: true
   },
   profilePic:{
     type: String,
@@ -40,17 +40,21 @@ const VetSchema = new Schema({
   },
   about:{
     type: String,
-    required: true
+    // required: true
   },
 tenure:{
     type: Number,
-    required: true
+    // required: true
   },
   timings:{
     type: [[String]],
-    required: true
+    // required: true
   },
   specialization:{
+    type: String,
+    // required: true
+  },
+  password:{
     type: String,
     required: true
   }
