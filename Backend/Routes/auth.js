@@ -7,5 +7,6 @@ router.post('/login',LoginValidation,loginControl);
 router.post('/gen-login',GenLoginValidation,GenLoginControl);
 router.post('/gen-signup',GenSignUpValidation,GenSignupControl);
 router.post('/google-login',GoogleControl);
+// router.post('/facebook-login',FaacebookControl);
 
 module.exports = router;
