@@ -76,7 +76,7 @@ export default function Tips({petSelected, setPetSelected}) {
           <img 
             src={petSelected === "Dogs" ? Doggy : Cat}
             alt={petSelected === "Dogs" ? "Dog" : "Cat"}
-            className="max-w-full h-auto rounded-lg object-cover m-4"
+            className="max-w-full lg:h-auto h-80 rounded-lg object-cover m-4"
           />
         </div>
       </div>

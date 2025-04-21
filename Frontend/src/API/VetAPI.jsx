@@ -33,7 +33,7 @@ const createVet = async ({
   profilePic,
   about,
   tenure,
-  timings
+  timings,
 }) => {
   try {
     const response = await fetch(`${baseUrl}/vet/create-vet`, {
@@ -82,6 +82,21 @@ const getVetById = async (id) =>  {
     handleError(error);
   }
 };
+const getVetByEmail = async (email) =>  {
+  try {
+    const response = await fetch(`${baseUrl}/vet/data-email/${email}`,{
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `${localStorage.getItem("token")}`,
+      }
+    });
+    const data = await response.json();
+    return data.vet;
+  } catch (error) {
+    handleError(error);
+  }
+}
 
-export { createVet, getVetById, getVets };
+export { createVet, getVetByEmail, getVetById, getVets };
 

@@ -58,7 +58,12 @@ const UserDashboard = () => {
   });
 
   const [isEditing, setIsEditing] = useState(false);
-
+  const logOut =  ()=>{
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userAuth');
+    window.location.href = '/';
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({
@@ -94,7 +99,7 @@ const UserDashboard = () => {
               <SlidebarItem click={() => setToggleButton(3)} active={toggleButton === 3} icon={<Calendar1 />} text="Appointments" alert="See Appointments" />
               <SlidebarItem click={() => setToggleButton(4)} active={toggleButton === 4} icon={<HeartPulse />} text="Medical History" alert="View Medical History" />
               <SlidebarItem click={() => setToggleButton(5)} active={toggleButton === 5} icon={<MessageCircleMore />} text="Message Settings" alert={false} />
-              <SlidebarItem icon={<LogOut />} text="Logout" alert={false} />
+              <SlidebarItem icon={<LogOut />} text="Logout" alert={false} click = {logOut} />
             </Slidebar>
           </div>
 

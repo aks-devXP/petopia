@@ -28,7 +28,25 @@ export default function PetCareTips({ petSelected, tipSelected }) {
         {petSelected} Care Tips - {tipSelected}
       </h2>
       
-      <div className="relative w-full h-96  mt-32">
+      <div className="md:hidden relative w-full flex flex-col justify-center items-center gap-3">
+        {tips[petSelected][tipSelected].map((tip, index) => {
+          return (
+            <div 
+              key={index}
+              className="w-full h-40 text-gray-700 
+              flex flex-col items-center justify-center p-4 rounded-full shadow-md bg-white border border-gray-100 overflow-auto"
+            >
+              <div className="flex items-center justify-center mb-2">
+                <strong className="ml-1 text-center">{tip.title}</strong>
+              </div>
+              <p className="text-gray-600 text-xs text-center">{tip.content}</p>
+            </div>
+          );
+        })}
+        
+      </div>
+
+      <div className="hidden md:block relative w-full h-96  mt-32">
         {tips[petSelected][tipSelected].map((tip, index) => {
           const positionStyle = getPentagonPosition(index, tips[petSelected][tipSelected].length);
           
