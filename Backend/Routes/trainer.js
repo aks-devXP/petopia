@@ -4,4 +4,3 @@ const {createTrainer,getTrainer} = require("../Controllers/trainer");
 router.get("/all-data",getTrainer);
 router.post("/create",TrainerValidation,createTrainer);
 module.exports = router;
-
