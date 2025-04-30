@@ -13,7 +13,6 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@google/genai": "^0.9.0",
     "@react-google-maps/api": "^2.20.6",
     "@react-oauth/google": "^0.12.1",
     "@tanstack/react-query": "^5.72.1",
@@ -22,7 +21,7 @@
     "datepicker": "^0.0.0",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
-    "framer-motion": "^10.16.1",
+    "framer-motion": "^12.5.0",
     "gsap": "^3.12.7",
     "lenis": "^1.1.19",
     "lucide-react": "^0.479.0",
