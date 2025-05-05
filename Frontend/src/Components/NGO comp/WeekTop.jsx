@@ -41,10 +41,9 @@ const WeekTop = () => {
   ];
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 bg-n-7">
       <h2 className="text-4xl font-bold text-center mb-6 bg-clip-text
       text-transparent bg-[linear-gradient(90deg,_rgba(170,6,165,0.7357536764705883)_12%,_rgba(153,123,228,0.8562018557422969)_100%);]">
-
         Top Week</h2>
       <div className="grid grid-cols-3 col-gap-4 ">
         {cardsData.map((card, index) => (

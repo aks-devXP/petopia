@@ -4,7 +4,7 @@ import logo from "../assets/petopia-logo.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1A120B] text-[#E5E5CB] pt-15 pb-6 px-10 border-t border-gray-500">
+    <footer className="bg-[#1A120B] text-[#E5E5CB] pt-5 pb-6 px-10 border-t border-gray-500">
       <div className="">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           {/* Logo and Tagline */}
