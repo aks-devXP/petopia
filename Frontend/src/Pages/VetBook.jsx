@@ -175,8 +175,8 @@ const VetBook = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-[80%] mx-auto lg:w-[40%] p-5 h-screen">
-          <div className="w-full h-[90%] flex justify-center items-center sticky top-24">
+        <div className="w-[80%] mx-auto lg:w-[40%] p-5 h-full">
+          <div className="w-full h-full flex justify-center items-center sticky top-24">
             <VetBookCard
               fees={"2590"}
               day={"Today"}

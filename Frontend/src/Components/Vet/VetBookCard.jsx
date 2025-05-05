@@ -89,7 +89,7 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
           </div>
         </div>
 
-        <div className="h-[25%] px-5 pt-2">
+        <div className="h-[25%] px-5 pt-4">
           <div className="flex justify-between mb-3">
             <div className="flex flex-col">
               <span className="text-3xl font-semibold text-black">Total</span>
@@ -116,7 +116,7 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
             <div>
               <BookingButton />
             </div>
-            <span className="text-[10px] font-thin text-white">You won't be charged yet</span>
+            <span className="text-[11px] font-thin text-white/80">You won't be charged yet</span>
           </div>
         </div>
       </div>
