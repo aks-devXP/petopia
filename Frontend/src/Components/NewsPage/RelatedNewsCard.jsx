@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RelatedNewsCard = () => {
+const RelatedNewsCard = ({img, author, topic, time}) => {
   return (
     <>
         <div className='mt-8'>

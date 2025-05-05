@@ -5,15 +5,15 @@ import { RiInstagramFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import RelatedNewsCard from './RelatedNewsCard';
 
-const Sidebar = () => {
+const Sidebar = ({author, date}) => {
   return (
     <>
         <div className='w-[20%] mb-20'>
             <div className=''>
                 <p className='font-thin'>Published</p>
-                <p className='font-bold'>15 January 2025 22:35 IST</p>
+                <p className='font-bold'>{date || "15 January 2025 22:35 IST"}</p>
                 <p className='mt-4 font-thin'>Content</p>
-                <p className='font-bold hover:cursor-pointer'>Kevin Hendricks</p>
+                <p className='font-bold hover:cursor-pointer'>{author || "Kevin Hendricks"}</p>
                 <p className='mt-4 font-thin'>Share</p>
                 
                 <div className='flex justify-between mt-1'>
