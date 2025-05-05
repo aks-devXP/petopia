@@ -176,10 +176,10 @@ const Testing = () => {
   // if (!appointments.isPending) {
   //   console.log("Appointments", appointments.data);
   // }
-
+const type = localStorage.getItem("userAuth")
   return (
     <>
-      {(appointments.isPending && userInfo.isPending) ? (<div>
+      {(type=="user"&&petInfo.isPending && userInfo.isPending) ? (<div>
         <Loader />
       </div>) : (
         <div className='bg-[#1A120B] min-h-screen'>

@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
+import User from '../Components/Dashboard/ProfileSettings';
 
-const ProfileRouting = () => {
+const ProfileRouting = (props) => {
   const type = localStorage.getItem("userAuth")
   if(type === 'user'){
-    return import('./UserProfile')
+    return <User  />
   }
   else if(type === 'vet'){
-    return import('./VetProfile')
+    return 
   }
   
   return (

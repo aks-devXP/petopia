@@ -9,7 +9,7 @@ const appointmentSchema = new schema({
     type:{
         type: String,
         required: true,
-        enum: ['vet', 'groomer', 'trainer']
+        enum: ['vet', 'groomer', 'trainer','daycare']
     },
     authority_id: {
         type: mongo.Schema.Types.ObjectId,
@@ -41,7 +41,16 @@ const appointmentSchema = new schema({
     created_at:{
         type: Date,
         default: Date.now
-    }
+    },
+    serviceCost:{
+        type: Number,
+        required: true
+    },
+    serviceName:{
+        type: String,
+        required: true
+    },
 })
+
 
 module.exports = mongo.model('Appointment', appointmentSchema)
