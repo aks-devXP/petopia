@@ -689,7 +689,7 @@ const animals = [
     id: 'bird-finch',
     category: 'Bird',
     name: 'Finch',
-    img: '/https://res.cloudinary.com/dvjcvwp61/image/upload/v1746409728/finch_bird_cmkfer.jpg',
+    img: 'https://res.cloudinary.com/dvjcvwp61/image/upload/v1746409728/finch_bird_cmkfer.jpg',
     temperament: 'Active, social, thrives in flocks',
     height: '3–6 in',
     energyLevel: 4,
