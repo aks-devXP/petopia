@@ -26,6 +26,7 @@ app.use('/api/user', require('./Routes/user'));
 app.use('/api/vet', require('./Routes/vet'));
 app.use('/api/trainer', require('./Routes/trainer'));
 app.use('/api/pet', require('./Routes/pet'));
+app.use('/api', require('./Routes/geminiWrapper'));
 app.use('/api/upload', require('./Routes/upload'));
 
 

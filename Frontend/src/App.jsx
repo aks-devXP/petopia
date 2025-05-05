@@ -20,8 +20,6 @@ import VetBook from './Pages/VetBook'
 import VetDocs from './Pages/VetDocs'
 import VetHome from "./Pages/VetHome"
 import Volunteer from "./Pages/Volunteer"
-import DoctorHome from './Pages/DoctorHome'
-
 
 // For smooth scrolling
 import { gsap } from 'gsap'
@@ -62,7 +60,6 @@ function App() {
       <Route path='sample' element={<ScrollAnimations/>}></Route>
       <Route path="/testing" element={<Testing/>}></Route>
       <Route path="/guide" element={<Guide/>}></Route>
-      <Route path="/doctor-home" element={<DoctorHome/>}></Route>
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route  path="/shopping" element={<ProductDirectory/>}></Route>
