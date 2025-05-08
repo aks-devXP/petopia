@@ -8,7 +8,6 @@ import CareTaker from './Pages/CareTaker'
 import Contact from './Pages/Contact'
 import Dictionary from './Pages/Dictionary'
 import GroomerBook from './Pages/GroomerBook'
-import Guide from './Pages/Guide'
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import News from './Pages/News'
@@ -25,6 +24,8 @@ import Volunteer from "./Pages/Volunteer"
 // For smooth scrolling
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Guide1 from './Pages/Guide1'
+import GuideDisplay from './Pages/GuideDisplay'
 import NGO from './Pages/NGO'
 import Testing from './Pages/Testing'
 
@@ -60,13 +61,13 @@ function App() {
       <Route path='sign-up' element={<SignUp2/>}></Route>
       <Route path='sample' element={<ScrollAnimations/>}></Route>
       <Route path="/testing" element={<Testing/>}></Route>
-      <Route path="/guide" element={<Guide/>}></Route>
+      {/* <Route path="/guide" element={<Guide/>}></Route> */}
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Home/>}></Route>
         <Route  path="/shopping" element={<ProductDirectory/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
         <Route path='/dashboard/:option' element={<UserDashboard/>}></Route>
-        
+        <Route path="/guide/:id" element={<Guide1/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
         <Route path="/vet-book/:id" element={<VetBook/>}></Route>
@@ -81,6 +82,8 @@ function App() {
         <Route path="/contact" element={<Contact/>}></Route>
         <Route  path="/care-taker-book" element={<CareTaker/>}></Route>
         <Route path="/ngo" element={<NGO/>}/>
+        <Route path="/dictionary-list" element={<GuideDisplay/>}/>
+        
       </Route>
     </>
     ));

@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { Heart, ShoppingBag, Search, User, ArrowUpRight, PawPrint, Dog } from 'lucide-react';
-import PawSearchBar from '../Components/Guide/PawSearchBar';
-import pawprint from "../assets/PetGuide/Home/yellow-pawprint.png"
+import pawprint from "../assets/PetGuide/Home/yellow-pawprint.png";
 import { CatSlider, DogSlider } from '../Components/Guide/BreedSlider';
+import PawSearchBar from '../Components/Guide/PawSearchBar';
 import Tips from '../Components/Guide/Tips';
 
 const DesktopTop = () =>{
   return(
     <div className="bg-slate-900 rounded-md w-full overflow-hidden relative px-4">
 
-          <header className="flex justify-center items-center mb-8">
+          {/* <header className="flex justify-center items-center mb-8">
             <div className="hidden md:flex space-x-6 text-white">
               <div className="flex items-center border border-white rounded-full p-1 w-96 bg-transparent mt-4">
                 <PawSearchBar/>
               </div>
             </div>
-          </header>
+          </header> */}
 
           <div className="flex gap-2 h-screen">
             <div className=''>

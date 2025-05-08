@@ -1,4 +1,5 @@
 const mongo = require('mongoose');
+const { create } = require('./AppointmentsDB');
 const Schema = mongo.Schema;
 const VetSchema = new Schema({
   name: {
@@ -38,6 +39,10 @@ const VetSchema = new Schema({
     type: String,
     default: ""
   },
+  image:{
+    type: [String],
+    // required: true
+  },
   about:{
     type: String,
     // required: true
@@ -57,7 +62,20 @@ tenure:{
   password:{
     type: String,
     required: true
+  },
+  cv:{
+    type: String,
+    default: ""
   }
+  ,
+  verified:{
+    type: Boolean,
+    default: false
+  },
+  created_at:{
+    type: Date,
+    default: Date.now
+  },
 })
 module.exports = mongo.model('Vet', VetSchema)
   
