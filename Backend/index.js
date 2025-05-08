@@ -4,9 +4,12 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 const mongo = require('./Models/SetDB');
 const cors = require('cors');
-
 const PORT = process.env.PORT || 3000;
 
+const keepAlive = require('./keepAlive');
+
+// keeping the backend alive
+keepAlive.job.start();
 
 app.use(cors({ origin: process.env.FrontEnd}));
 

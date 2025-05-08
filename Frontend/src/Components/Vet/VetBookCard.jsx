@@ -36,7 +36,7 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
     const getDate = currentWeek[toggleButton].fullDate;
     setDateLong(getDate);
     const time = availableTimes[toggleTime];
-    setTime(time);
+    setTime(time[0] + " - " + time[1]);
     if(toggleButton == 0 ? setDay("Today") : toggleButton == 1 ? setDay("Tomorrow") : setDay(currentWeek[toggleButton].day));
   },[toggleButton, toggleTime, []]);
 
@@ -44,7 +44,7 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
     const appointmentData = {
       vetName: vetName,
       date: dateLong,
-      time: time[0] + " - " + time[1],
+      time: time,
       fees: fees
     };
     

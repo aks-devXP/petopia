@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import banner_img from '/NGO/ngo_banner.jpg';
-
 
 const Banner = () => {
   const [animalsSaved, setAnimalsSaved] = useState(0);
   const [ngosAffiliated, setNgosAffiliated] = useState(0);
   const finalAnimalsSaved = 5000; // Example number
   const finalNgosAffiliated = 150; // Example number
+  const bannerRef = useRef(null);
 
-  useEffect(() => {
+  const startAnimations = () => {
+    // Reset counters
+    setAnimalsSaved(0);
+    setNgosAffiliated(0);
+
     // Animation for animals saved
     const interval1 = setInterval(() => {
       setAnimalsSaved(prev => {
@@ -33,15 +37,38 @@ const Banner = () => {
       });
     }, 50);
 
-    // Cleanup function
     return () => {
       clearInterval(interval1);
       clearInterval(interval2);
     };
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const cleanup = startAnimations();
+            return () => cleanup();
+          }
+        });
+      },
+      { threshold: 0.4 } // Trigger when 40% of the element is visible
+    );
+
+    if (bannerRef.current) {
+      observer.observe(bannerRef.current);
+    }
+
+    return () => {
+      if (bannerRef.current) {
+        observer.unobserve(bannerRef.current);
+      }
+    };
   }, []);
 
   return (
-    <div className="relative overflow-hidden h-screen w-full bg-cover bg-center" style={{ backgroundImage: `url(${banner_img})`}}>
+    <div ref={bannerRef} className="relative overflow-hidden h-screen w-full bg-cover bg-center" style={{ backgroundImage: `url(${banner_img})`}}>
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="container relative z-10 mx-auto flex flex-col items-center justify-center h-full text-white text-center">
         <h1 className="text-4xl font-bold mb-4 ">

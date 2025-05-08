@@ -1,11 +1,16 @@
 // ImpactSection.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 // Counter component to animate number counting
-const Counter = ({ target, duration }) => {
+const Counter = ({ target, duration, isVisible }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    if (!isVisible) {
+      setCount(0);
+      return;
+    }
+
     let start = 0;
     const increment = target / (duration / 10);
     const interval = setInterval(() => {
@@ -16,15 +21,39 @@ const Counter = ({ target, duration }) => {
       } else {
         setCount(Math.ceil(start));
       }
-    }, 10);
+    }, 20);
 
     return () => clearInterval(interval);
-  }, [target, duration]);
+  }, [target, duration, isVisible]);
 
   return <span>{count}+</span>;
 };
 
 const Impact = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const impactRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    if (impactRef.current) {
+      observer.observe(impactRef.current);
+    }
+
+    return () => {
+      if (impactRef.current) {
+        observer.unobserve(impactRef.current);
+      }
+    };
+  }, []);
+
   const data = [
     {
       value: 15,
@@ -49,7 +78,7 @@ const Impact = () => {
   ];
 
   return (
-    <div className="py-12 px-6 w-full m-auto"
+    <div ref={impactRef} className="py-12 px-6 w-full m-auto"
     style={{
       backgroundImage: 'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #9d9ce4, #a09de7, #a39fea, #bc96e6, #d58cdc, #ec81cc, #ff77b7)',
     }}>
@@ -58,7 +87,7 @@ const Impact = () => {
         {data.map((item, index) => (
           <div key={index} className="flex flex-col items-center">
             <div className="text-6xl font-bold text-[#faecf4]">
-              <Counter target={item.value} duration={1500} />
+              <Counter target={item.value} duration={1500} isVisible={isVisible} />
             </div>
             <div className="text-[#A02334] text-lg font-semibold mt-2">
               {item.unit}
