@@ -3,6 +3,7 @@ import "react-toastify/ReactToastify.css"
 import ScrollAnimations from './Components/ScrollAnimations'
 import MainLayout from './Layout/MainLayout'
 import About from './Pages/About'
+import AppointmentSuccess from './Pages/AppointmentSuccess'
 import CareTaker from './Pages/CareTaker'
 import Contact from './Pages/Contact'
 import Dictionary from './Pages/Dictionary'
@@ -69,6 +70,7 @@ function App() {
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
         <Route path="/vet-book/:id" element={<VetBook/>}></Route>
+        <Route path="/appointment-success" element={<AppointmentSuccess/>}></Route>
         <Route path="/dictionary" element={<Dictionary/>}></Route>
         <Route path="/groomer-book" element={<GroomerBook/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>

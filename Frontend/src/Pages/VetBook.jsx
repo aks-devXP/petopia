@@ -20,7 +20,7 @@ const VetBook = () => {
       name: "Wendy Phillips",
       date: "January 2025",
       content:
-        "I am extremely pleased with Annie's appointment with Dr. Erika Latham! Dr. Latham quickly addressed my concerns about Annie’s issue.",
+        "I am extremely pleased with Annie's appointment with Dr. Erika Latham! Dr. Latham quickly addressed my concerns about Annie's issue.",
     },
     {
       name: "Lisa Daniels",
@@ -51,7 +51,7 @@ const VetBook = () => {
       name: "Priya Desai",
       date: "January 2025",
       content:
-        "Dr. Carter was amazing with our puppy! She’s gentle, thorough, and truly passionate about her work. We'll definitely be coming back.",
+        "Dr. Carter was amazing with our puppy! She's gentle, thorough, and truly passionate about her work. We'll definitely be coming back.",
     },
   ]);
   
@@ -86,12 +86,12 @@ const VetBook = () => {
     fetchData();
   }, [id]);
 
+  console.log(availableTimes);
+
   if (loading || !data) {
     return <Loader />;
   }
-
-  console.log(data.profilePic);
-  
+  // console.log(data.profilePic);
 
   return (
     <div className="bg-transparent py-5 w-full h-fit font-poppins">
@@ -187,6 +187,7 @@ const VetBook = () => {
               setToggleButton={setToggleButton}
               toggleTime={toggleTimeButton}
               setTimeButton={setToggleTimeButton}
+              vetName={data.name}
             />
           </div>
         </div>

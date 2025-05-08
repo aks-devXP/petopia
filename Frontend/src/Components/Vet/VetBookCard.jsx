@@ -3,19 +3,20 @@ import BookingButton from "./BookingButton";
 import { Calendar, SquareArrowLeft, SquareArrowRight, ReceiptIndianRupee } from "lucide-react";
 import DateTile from "./DateTile";
 import TimeSlotComponent from "./TimeSlotComponent";
+import { useNavigate } from "react-router-dom";
 
-
-const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggleButton, toggleTime, setTimeButton }) => {
+const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggleButton, toggleTime, setTimeButton, vetName }) => {
   const scrollRef = useRef(null);
   const [dateLong, setDateLong] = useState();
   const [day,setDay] = useState();
   const [time,setTime] = useState();
+  const navigate = useNavigate();
 
   // Scroll left function
   const scrollLeft = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
-        left: -350, // Adjust scroll amount
+        left: -350,
         behavior: "smooth",
       });
     }
@@ -25,7 +26,7 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
   const scrollRight = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
-        left: 300, // Adjust scroll amount
+        left: 300,
         behavior: "smooth",
       });
     }
@@ -39,6 +40,17 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
     if(toggleButton == 0 ? setDay("Today") : toggleButton == 1 ? setDay("Tomorrow") : setDay(currentWeek[toggleButton].day));
   },[toggleButton, toggleTime, []]);
 
+  const handleAppointmentConfirmation = () => {
+    const appointmentData = {
+      vetName: vetName,
+      date: dateLong,
+      time: time[0] + " - " + time[1],
+      fees: fees
+    };
+    
+    navigate('/appointment-success', { state: { appointmentData } });
+  };
+  
 
   return (
     <>
@@ -83,7 +95,7 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
           </div>
 
           <div
-            onWheel={(e) => e.stopPropagation()} // Stops page scrolling
+            onWheel={(e) => e.stopPropagation()}
             className="h-fit overflow-y-auto scroll-smooth">
             <TimeSlotComponent availableTimes={availableTimes} toggleTime={toggleTime} setTimeButton={setTimeButton} />
           </div>
@@ -114,7 +126,7 @@ const VetBookCard = ({fees, currentWeek, availableTimes, toggleButton, setToggle
 
           <div className="flex flex-col justify-center items-center">
             <div>
-              <BookingButton />
+              <BookingButton click={handleAppointmentConfirmation} />
             </div>
             <span className="text-[11px] font-thin text-white/80">You won't be charged yet</span>
           </div>
