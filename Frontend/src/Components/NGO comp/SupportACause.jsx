@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const causes = [
   {
@@ -35,7 +36,7 @@ const causes = [
       "See an animal in distress? Take prompt action by reporting cruelty to save lives.",
     image:
       "https://uvhs.org/wp-content/uploads/2023/01/dachshund-2683905_1920.jpg", // Replace with actual image path
-    link: "",
+    link: "/report-cruelty",
   },
 ];
 
@@ -51,33 +52,61 @@ const SupportACause = () => {
             key={cause.id}
             className="rounded-lg shadow-lg overflow-hidden bg-white"
           >
-            <a href={cause.link} target="_blank" rel="noopener noreferrer">
-              <div
-                className="relative group h-64"
-                style={{
-                  backgroundImage: `url(${cause.image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition duration-300 flex items-center justify-center">
-                  <h3 className="text-white text-2xl font-bold text-center">
-                    {cause.title}
-                  </h3>
+            {cause.id === 4 ? (
+              <Link to={cause.link}>
+                <div
+                  className="relative group h-64"
+                  style={{
+                    backgroundImage: `url(${cause.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition duration-300 flex items-center justify-center">
+                    <h3 className="text-white text-2xl font-bold text-center">
+                      {cause.title}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            </a>
+              </Link>
+            ) : (
+              <a href={cause.link} target="_blank" rel="noopener noreferrer">
+                <div
+                  className="relative group h-64"
+                  style={{
+                    backgroundImage: `url(${cause.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition duration-300 flex items-center justify-center">
+                    <h3 className="text-white text-2xl font-bold text-center">
+                      {cause.title}
+                    </h3>
+                  </div>
+                </div>
+              </a>
+            )}
             <div className="p-4">
               <p className="text-gray-600 text-sm">{cause.description}</p>
               <div className="mt-4 text-center">
-                <a
-                  href={cause.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300"
-                >
-                  Learn More
-                </a>
+                {cause.id === 4 ? (
+                  <Link
+                    to={cause.link}
+                    className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300"
+                  >
+                    Learn More
+                  </Link>
+                ) : (
+                  <a
+                    href={cause.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300"
+                  >
+                    Learn More
+                  </a>
+                )}
               </div>
             </div>
           </div>

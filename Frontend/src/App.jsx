@@ -20,6 +20,7 @@ import VetBook from './Pages/VetBook'
 import VetDocs from './Pages/VetDocs'
 import VetHome from "./Pages/VetHome"
 import Volunteer from "./Pages/Volunteer"
+import ReportCrueltyForm from './Components/NGO comp/ReportCrueltyForm'
 
 // For smooth scrolling
 import { gsap } from 'gsap'
@@ -83,7 +84,7 @@ function App() {
         <Route  path="/care-taker-book" element={<CareTaker/>}></Route>
         <Route path="/ngo" element={<NGO/>}/>
         <Route path="/dictionary-list" element={<GuideDisplay/>}/>
-        
+        <Route path="/report-cruelty" element={<ReportCrueltyForm/>}/>
       </Route>
     </>
     ));

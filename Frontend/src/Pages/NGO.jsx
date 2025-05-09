@@ -30,9 +30,6 @@ const NGO = () => {
      <div className=''>
       <Impact/>
      </div>
-     {/* <div>
-      <WeekTop/>
-     </div> */}
      <div className='m-10'>
       <BasicHero title={"Need to find a new home for a pet?"} description={"We're here to help them find a new, loving family—quickly and safely by Adopting a Pet."} buttonText={"Learn More"} imageSrc={"https://media.adoptapet.com/image/upload/c_scale,w_524,dpr_2/f_auto,q_auto/homepage-rehome-pet.jpg"} imageLeft={false}/>
      </div>

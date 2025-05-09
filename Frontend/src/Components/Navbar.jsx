@@ -119,7 +119,7 @@ const Navbar = () => {
 
   return (
     <div className="flex w-full h-20">
-        <div className="navbar flex h-fit justify-between w-full p-1.5 bg-[#1A120B] z-20 min-h-20 shadow-[0_0_10px_rgba(229,229,203,0.4)]">
+        <div className="navbar flex h-fit justify-between lg:px-1 sm:px-5 w-full bg-[#1A120B] z-20 min-h-20 shadow-[0_0_10px_rgba(229,229,203,0.4)]">
           <div className="flex justify-between flex-shrink w-full items-center md:mx-5">
             <div className="rounded-full w-[20%]">
               <NavLink to="/home">
