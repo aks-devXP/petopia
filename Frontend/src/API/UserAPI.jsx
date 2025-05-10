@@ -55,9 +55,7 @@ export async function UpdatePassword(user){
 }
 // 67f595f06cef232b330c26b5
 export async function getAppointments(){
-  if(localStorage.getItem("userAuth") === "user"){
 
-  
   const response = await fetch(`${baseUrl}/user/appointment_get`, {
     method: "GET",
     headers: {
@@ -74,21 +72,7 @@ export async function getAppointments(){
   }
 
   return data.appointments;
-}
-else{
-  const response = await fetch(`${baseUrl}/trainer/appointment_get`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `${localStorage.getItem("token")}`,
 
-    },body: JSON.stringify({
-      type:localStorage.getItem("userAuth")
-    })
-    
-  });
-  const data = await response.json();
-  return data.appointments;
-}
+
 }
 

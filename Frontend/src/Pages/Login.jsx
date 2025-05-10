@@ -1,3 +1,4 @@
+import FacebookLogin from '@greatsumini/react-facebook-login';
 import { useGoogleLogin } from "@react-oauth/google";
 import React, { useEffect, useState } from "react";
 import {
@@ -8,13 +9,12 @@ import {
 } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { GoogleLoginAPI, LoginAPI, LoginGenAPI } from "../API/GeneralAPI";
+import { FacebookLoginAPI, GoogleLoginAPI, LoginAPI, LoginGenAPI } from "../API/GeneralAPI";
 import loginimg from "../assets/login-bg2.jpg";
 import Loader from "../Components/Loader/Loader";
-import { handleError } from "../Util/Alerts";
+import { handleError, handleInfo, handleSuccess } from "../Util/Alerts";
 import { useLoading } from "./LodingPage";
 import "./Login.css";
-
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -37,13 +37,7 @@ const Login = () => {
     }
     setLoading(true); //disabling of the login button is being handled by loading state
 
-    // Simulate a delay for demonstration
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   setSuccess(true);
-    //   setTimeout(() => navigate("/"), 2000); // Navigate after showing success
-    // }, 4000);
-
+    
     // Try verify the user
     try {
       if(selectedRole === 'user'){
@@ -92,6 +86,47 @@ const Login = () => {
       setLoading(false);
     }
   };
+  // Facebook login
+  const responseFacebook = async(response) => {
+    try {
+      console.log('Facebook login response:', response);
+      setLoading(true);
+      const name = response.name;
+      const email = response.email;
+      const user = {
+        email: email,
+        name: name,
+      };
+      const res = await FacebookLoginAPI(user);
+      const data = await res;
+      console.log(data);
+      if (data.success) {
+        localStorage.setItem("username", JSON.stringify(data.user_name));
+        localStorage.setItem("token", data.token);
+        // localStorage.setItem("userAuth", JSON.stringify("user"));
+        setSuccess(true);
+        if (!data.pass_changed) {
+          handleInfo(
+            "Please change your password for security reasons. You can do this in the profile section."
+          );
+          setTimeout(() => navigate("/"), 3000);
+        }
+        else {
+          setTimeout(() => navigate("/"), 1000); 
+        }
+        
+        
+      }
+        // Redirect
+    } 
+    catch (error) {
+      handleError(error);
+    }
+    finally {
+      setLoading(false);
+    }
+
+  };
   // Google login
   const GoogleMechanism = useGoogleLogin({
     onSuccess: async (credentialResponse) => {
@@ -104,6 +139,7 @@ const Login = () => {
           },
         }
       );
+      setLoading(true);
       const userInfo = await userInfoResponse.json();
       console.log("Google User Info:", userInfo.name);
       const response = await GoogleLoginAPI({ email: userInfo.email, name: userInfo.name });
@@ -115,6 +151,12 @@ const Login = () => {
         localStorage.setItem("username", JSON.stringify(data.user_name));
         localStorage.setItem("token", data.token);
          // Redirect to the home page
+        setSuccess(true);
+        if (!data.pass_changed) {
+          handleInfo(
+            "Please change your password for security reasons. You can do this in the profile section."
+          );
+        }
         navigate("/");
         }
         else {
@@ -123,7 +165,9 @@ const Login = () => {
       } catch (error) {
         handleError(error);
       }
-     
+     finally {
+        setLoading(false);
+      }
       
       // 
     },
@@ -200,7 +244,7 @@ const Login = () => {
                 </div>
               </div>
              {/* New Role Selection Section */}
-             <div className="login__role-selection">
+             {/* <div className="login__role-selection">
                 <p className="login__role-title">Select Your Role</p>
                 <div className="login__role-options">
                   {['user', 'vet', 'trainer', 'groomer'].map((role) => (
@@ -222,7 +266,7 @@ const Login = () => {
                     </label>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               <div className="login__check">
                 <div className="login__check-group">
@@ -269,10 +313,29 @@ const Login = () => {
                   <img src="/google-icon.png" alt="Google" width="20" />
                   Google
                 </button>
-                <button>
+
+                <FacebookLogin
+                appId="2461290760871938" 
+                autoLoad={false}
+                fields="name,email,picture"
+                onSuccess={(response)=>{
+                  handleSuccess("Login Successful");
+                }}
+                onProfileSuccess={(response) => {
+                  responseFacebook(response)
+                }}
+                render={renderProps => (
+                  <button>
                   <img src="/facebook-icon.png" alt="Facebook" width="20" />
-                  Facebook
-                </button>
+                    Facebook
+                  </button>
+                )}
+                />
+                  {/* <button>
+                    <img src="/facebook-icon.png" alt="Facebook" width="20" />
+                    Facebook
+                  </button> */}
+                
               </div>
             </div>
           </form>

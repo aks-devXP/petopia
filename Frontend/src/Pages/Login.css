@@ -302,3 +302,11 @@ login img{
   border: 2px solid #fefefe;
   color: #fefefe;
 }
+.login-options button img {
+  filter: grayscale(100%);
+  transition: all 0.5s ease;
+}
+.login-options button:hover img {
+  filter: grayscale(0%);
+}
+

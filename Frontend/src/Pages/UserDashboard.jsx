@@ -2,9 +2,10 @@ import { useQueries } from '@tanstack/react-query';
 import {
   Calendar1,
   HeartPulse,
+  LockKeyholeIcon,
   LogOut,
   MessageCircleMore,
-  UserCircle,
+  UserCircle
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
@@ -88,14 +89,15 @@ const UserDashboard = () => {
   
   return (
     <>
-    {(appointments.isPending &&  userInfo.isPending)  ?(<div>
+    {(appointments.isPending &&  userInfo.isPending )  ?(<div>
       <Loader/>
     </div>):(
-      <div className='bg-[#1A120B] min-h-screen'>
-        <div className='flex h-full bg-[#1A120B]'>
+      <div className='bg-[#08050c] min-h-screen'>
+        <div className='flex h-full bg-[#08050c]'>
           <div className='h-[85vh] flex flex-col justify-between pr-2 '>
             <Slidebar>
-              <SlidebarItem click={() => setToggleButton(1)} active={toggleButton === 1} icon={<UserCircle />} className="bg-[#1A120B]" text="User Profile" />
+              <SlidebarItem click={() => setToggleButton(1)} active={toggleButton === 1} icon={<UserCircle />} className="bg-[#030205]" text="User Profile" />
+              <SlidebarItem click={() => setToggleButton(2)} active={toggleButton === 2} icon={<LockKeyholeIcon/>} text="Change Password" alert={false} />
               <SlidebarItem click={() => setToggleButton(3)} active={toggleButton === 3} icon={<Calendar1 />} text="Appointments" alert="See Appointments" />
               <SlidebarItem click={() => setToggleButton(4)} active={toggleButton === 4} icon={<HeartPulse />} text="Medical History" alert="View Medical History" />
               <SlidebarItem click={() => setToggleButton(5)} active={toggleButton === 5} icon={<MessageCircleMore />} text="Message Settings" alert={false} />

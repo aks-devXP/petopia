@@ -153,27 +153,63 @@ const GoogleControl = async (req, res) => {
             email: email,
         });
         
-        if(!user){
-            // const name =  email.split('@')[0];
-            console.log(name);
+        if(user){
+            const token = jwt.sign({id: user._id, user_name: name}, process.env.JWT_SECRET);
+            let pass_Matched = false;
+            if (user.password === 'facebook12345'|| user.password === 'google12345') {
+                pass_Matched = true;
+            }
+            res.status(200).json({ message: 'Login Successful',  success: true, token: token, user_name: name, pass_changed: !pass_Matched });
+        }
+        else{
             const newUser = new UserModel({
                 name: name,
                 email: email,
                 password: 'google12345',
             });
-            await newUser.save();
-
-            // const user = await UserModel.findOne({
-            //     email: email,
-            // });
-        }
-        const token = jwt.sign({id: user._id, user_name: name}, process.env.JWT_SECRET); // currently not added the expiry time
-        res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: name });
+            const newU = await newUser.save();
+            const token = jwt.sign({id: newU._id, user_name: name}, process.env.JWT_SECRET);
+            res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: name,pass_changed: false  });
+        }   
+        
     }
     catch(error){
         res.status(500).json({ message: error.message });
     }
 
 }
+const FacebookControl= async (req,res)=>{
+    try{
+        const { email, name } = req.body;
+        // console.log(email);
+        const user = await UserModel.findOne({
+            email: email,
+        })
+        if(user){
+            const token = jwt.sign({id: user._id, user_name: name}, process.env.JWT_SECRET);
+            let pass_Matched = false;
+            // console.log(user.password);
+            if (user.password === 'facebook12345'|| user.password === 'google12345') {
+                pass_Matched = true;
+            }
+            res.status(200).json({ message: 'Login Successful',  success: true, token: token, user_name: name, pass_changed: !pass_Matched });
+        }
+        else{
+            const newUser = new UserModel({
+                name: name,
+                email: email,
+                password: 'facebook12345',
+            });
+            const newU = await newUser.save();
+            const token = jwt.sign({id: newU._id, user_name: name}, process.env.JWT_SECRET); 
+            res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: name,pass_changed: false  });
+        }
+    }
+    catch(error){
+        // For Testing
+        // console.log("Error In Facebook Control",error);
+        res.status(500).json({ message: error.message });
+    }
+}
 
-module.exports = { loginControl, signupControl, GoogleControl, GenLoginControl, GenSignupControl };
+module.exports = { loginControl, signupControl, GoogleControl, GenLoginControl, GenSignupControl,FacebookControl };

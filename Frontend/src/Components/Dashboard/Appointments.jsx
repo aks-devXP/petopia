@@ -1,7 +1,7 @@
 import { CheckSquare, Dumbbell, LoaderCircleIcon, MoreVertical, Scissors, Stethoscope, User } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-const Table = ({data, refetch, petdata, }) => {
+const Appointments = ({data, refetch, petdata, }) => {
   const titles = [
     "Service",
     // "Pet Owner",
@@ -69,6 +69,10 @@ const Table = ({data, refetch, petdata, }) => {
   // Sort and filter rows whenever the filter changes
   useEffect(() => {
     // setRows(data);
+    // if (!data || data.length === 0) {
+    //   return;
+    // }
+    console.log("Data",data);
     const petNameMap = petdata.reduce((acc, pet) => {
       acc[pet._id] = pet.name;
       return acc;
@@ -153,12 +157,8 @@ const Table = ({data, refetch, petdata, }) => {
     // console.log(value);
   }
 
-  const renderServiceName = (service) => {
-    const capitalizedService = service.charAt(0).toUpperCase() + service.slice(1);
-    return `Pet ${capitalizedService}`;
-  };
-  const formatted = DateFormatter("2025-04-22T00:00:00.000Z");
-  console.log(formatted); 
+  // const formatted = DateFormatter("2025-04-22T00:00:00.000Z");
+  // console.log(formatted); 
   return (
     <div className="w-full bg-gradient-to-br from-[#1C1917] to-[#292524] p-6 rounded-xl shadow-xl  sm:text-[0.8rem] md:text-base ">
       <div className="flex justify-between items-center mb-6">
@@ -185,7 +185,7 @@ const Table = ({data, refetch, petdata, }) => {
           </div>
         </div>
       </div>
-  
+    {/* Table Header */}
       <div className="grid grid-cols-6 p-3 font-medium text-[#E5E5CB]/70 border-b border-[#3C2A21] mb-4">
         {titles.map((title, index) => (
           <div key={index} className={` text-center ${index === 3 ? 'text-center' : index === 5 ? 'text-right' : ''}`}>
@@ -193,8 +193,8 @@ const Table = ({data, refetch, petdata, }) => {
           </div>
         ))}
       </div>
-  
-      <div className="flex flex-col gap-4">
+      {/* Table Rows */}
+      { data && (<div className="flex flex-col gap-4">
         {rows.map((row, rowIndex) => (
           <div
             key={rowIndex}
@@ -236,10 +236,10 @@ const Table = ({data, refetch, petdata, }) => {
             </div>
           </div>
         ))}
-      </div>
+      </div>)}
   
       {/* Empty State */}
-      {rows.length === 0 && (
+      {!data && (
         <div className="py-8 text-center text-[#E5E5CB]/70">
           No appointments match your criteria
         </div>
@@ -262,4 +262,4 @@ const DateFormatter = ( isDate ) => {
   return `${day} ${month} ${year}`;
 };
 
-export default Table;
+export default Appointments;
