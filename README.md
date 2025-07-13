@@ -6,6 +6,8 @@
 🔗 **Backend API**: [https://petopia-2l32.onrender.com](https://petopia-2l32.onrender.com)
 🎥 **Demo Video**: [Introduction & Demo](https://drive.google.com/file/d/1yaznCHAHQp2iAel1taItd_5C3n5if0Kx/view)
 
+<img width="1728" height="1117" alt="image 1 (1)" src="https://github.com/user-attachments/assets/f4110197-c3b4-42ec-846b-1362e61c9de0" />
+
 ---
 
 ## 💡 Why Petopia?
