@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { getVetById } from "../API/VetAPI";
 import Loader from "../Components/Loader/Loader";
 import VetBookCard from "../Components/Vet/VetBookCard";
-import { getImgUrl } from "../Util/ImageExtract";
 
 const VetBook = () => {
   const { id } = useParams();
@@ -106,7 +105,7 @@ const VetBook = () => {
             >
               <img
                 className="h-60 w-60 rounded-full shadow-lg object-cover"
-                src={(`/Vet/${data.profilePic}`)}
+                src={(`/petopia/Vet/${data.profilePic}`)}
                 alt="Profile"
               />
               <div>

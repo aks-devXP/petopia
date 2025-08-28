@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import pawprint from "../assets/PetGuide/Home/yellow-pawprint.png";
 import { CatSlider, DogSlider } from '../Components/Guide/BreedSlider';
-import PawSearchBar from '../Components/Guide/PawSearchBar';
+import GuideCTA from '../Components/Guide/GuideCTA';
 import Tips from '../Components/Guide/Tips';
 
 const DesktopTop = () =>{
@@ -46,6 +46,7 @@ const DesktopTop = () =>{
               </div>
             </div>
           </div>
+          
         </div>
   )
 }
@@ -54,9 +55,9 @@ const MobileTop = () => {
   return (
     <div className="bg-slate-900 rounded-md w-full overflow-hidden relative px-4">
       <div className="flex flex-col text-white space-y-6 pb-6">
-        <div className="flex items-center border border-white rounded-full p-1 w-full max-w-full bg-transparent mt-4 overflow-hidden">
+        {/* <div className="flex items-center border border-white rounded-full p-1 w-full max-w-full bg-transparent mt-4 overflow-hidden">
           <PawSearchBar />
-        </div>
+        </div> */}
         <div>
           <h1 className="text-4xl font-bold mb-6 break-words">
             Paws & Personalities<br />Learn About Every <br />Breed
@@ -80,7 +81,9 @@ const MobileTop = () => {
         <div className="w-full overflow-hidden">
           <DogSlider />
         </div>
+
       </div>
+      
     </div>
   )
 }
@@ -96,8 +99,13 @@ const DogCoatProductPage = () => {
 
       {isMobile ? <MobileTop/> : <DesktopTop />}
       </div>
+      <div>
+
       <Tips petSelected={petSelected} setPetSelected={setPetSelected}/>
-      
+      </div>
+    <div>
+      <GuideCTA/>
+    </div>
     </>
   );
 };

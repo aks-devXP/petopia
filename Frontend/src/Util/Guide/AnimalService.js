@@ -1,13 +1,13 @@
 
-import chicken from '../assets/Food/chicken.svg'
-import chocolate from '../assets/Food/chocolate.svg'
-import fatty from '../assets/Food/fatty.svg'
-import fish from '../assets/Food/fish.svg'
-import grain from '../assets/Food/grain.svg'
-import grapes from '../assets/Food/grapes.svg'
-import meat from '../assets/Food/meat.svg'
-import onion from '../assets/Food/onion.svg'
-import vegetables from '../assets/Food/vegetables.svg'
+import chicken from '../../assets/Food/chicken.svg'
+import chocolate from '../../assets/Food/chocolate.svg'
+import fatty from '../../assets/Food/fatty.svg'
+import fish from '../../assets/Food/fish.svg'
+import grain from '../../assets/Food/grain.svg'
+import grapes from '../../assets/Food/grapes.svg'
+import meat from '../../assets/Food/meat.svg'
+import onion from '../../assets/Food/onion.svg'
+import vegetables from '../../assets/Food/vegetables.svg'
 
 const animals = [
   {

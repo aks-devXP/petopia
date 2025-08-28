@@ -1,5 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import "react-toastify/ReactToastify.css"
+import ReportCrueltyForm from './Components/NGO comp/ReportCrueltyForm'
 import ScrollAnimations from './Components/ScrollAnimations'
 import MainLayout from './Layout/MainLayout'
 import About from './Pages/About'
@@ -20,7 +21,6 @@ import VetBook from './Pages/VetBook'
 import VetDocs from './Pages/VetDocs'
 import VetHome from "./Pages/VetHome"
 import Volunteer from "./Pages/Volunteer"
-import ReportCrueltyForm from './Components/NGO comp/ReportCrueltyForm'
 
 // For smooth scrolling
 import { gsap } from 'gsap'
@@ -87,7 +87,12 @@ function App() {
         <Route path="/report-cruelty" element={<ReportCrueltyForm/>}/>
       </Route>
     </>
-    ));
+    )
+  ,
+  {
+    basename:"/petopia"
+  }
+  );
   
     return <>
       <RouterProvider router={router}/> 

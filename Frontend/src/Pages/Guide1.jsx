@@ -11,7 +11,7 @@ import vegetables from '../assets/Food/vegetables.svg';
 import germanShepherd from '../assets/PetGuide/german shepherd.jpg';
 import InfoRow from '../Components/Guide/InfoRow';
 import InfoSection from '../Components/Guide/InfoSection';
-import { getAnimalById } from '../Util/AnimalService';
+import { getAnimalById } from '../Util/Guide/AnimalService';
 export default function Guide1Page() {
   const id = useParams().id
 
