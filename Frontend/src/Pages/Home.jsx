@@ -14,36 +14,61 @@ import { useMediaQuery } from 'react-responsive';
 const DesktopHome = () => {
   return (
     <div>
-      {/* Top content */}
-      <div className="w-full bg-[#1A120B] ">
+{/* Top content */}
+<div className="relative w-full bg-[#1A120B]">
 
-        {/* Background Image */}
-        <div className="w-full h-full ">
-          <img 
-            src={HomeScreenBG} 
-            alt="background" 
-            className="w-full object-cover"
-          />
-        </div>
+  {/* Background Image */}
+  <img 
+    src={HomeScreenBG} 
+    alt="background" 
+    className="w-full h-auto object-cover"
+  />
 
-        {/* Foreground Content */}
-        <div className="h-full">
-        <div className="absolute right-[2%] bottom-[30%] h-[30%]
-        md:right-[12%] md:bottom-[20%] md:h-[30%] md:w-[33%]
-        lg:right-[12%] lg:bottom-0 lg:h-[30%] lg:w-[33%]
-         text-black text-right">
-          <h1 className="font-fredoka text-[16px] lg:text-[29px]">Caring for Your Pet Made Simple!</h1>
-          <h1 className="font-bree text-[12px] lg:text-[19px] my-1 md:my-5">Book trusted vets, find expert guidance, and shop for pet products effortlessly</h1>
-          <button
-            className="bg-black rounded-3xl 
-            w-[30%] h-[20%] text-white"
-            onClick={() => window.scrollBy({ top: window.innerHeight + 60, behavior: "smooth" })}
-          >
-            Explore
-          </button>
-        </div>
-        </div>
+  {/* Foreground Content */}
+
+    <div className="absolute inset-0 flex justify-end items-end">
+      <div 
+        className="
+          text-black text-right
+          max-w-[42%] md:max-w-[38%] lg:max-w-[34%]  /* ⬅️ CHANGED: Progressive width reduction for better scaling */
+          mb-[1%] md:mb-[3%] lg:mb-[5%]  /* ⬅️ CHANGED: Increased bottom margins significantly to move text lower and avoid Petopia logo overlap */
+          mr-[1%] md:mr-[2%] lg:mr-[4%]  /* ⬅️ CHANGED: Progressive right margins for consistent spacing */
+        "
+      >
+        {/* Main heading with fluid typography */}
+        <h1 
+          className="font-fredoka mb-3 leading-tight"  /* ⬅️ CHANGED: Added fixed margin-bottom for consistent spacing */
+          style={{ fontSize: "clamp(14px, 2vw, 32px)" }}  /* ⬅️ CHANGED: Replaced responsive classes with clamp() for smooth scaling from 14px to 32px */
+        >
+          Caring for Your Pet Made Simple!
+        </h1>
+        
+        {/* Subtitle with fluid typography */}
+        <p 
+          className="font-bree mb-5 leading-relaxed"  /* ⬅️ CHANGED: Added fixed margin-bottom for consistent spacing */
+          style={{ fontSize: "clamp(12px, 1.5vw, 20px)" }}  /* ⬅️ CHANGED: Replaced responsive classes with clamp() for smooth scaling from 12px to 20px */
+        >
+          Book trusted vets, find expert guidance, and shop for pet products effortlessly
+        </p>
+        
+        {/* CTA Button with fluid scaling */}
+        <button
+          className="bg-black rounded-3xl text-white font-medium
+                    hover:bg-gray-800 transition-all duration-300
+                    origin-bottom-right"  /* ⬅️ CHANGED: Added transform origin for better scaling animation */
+          style={{
+            transform: "scale(clamp(0.6, 1vw + 0.5, 1))",  /* ⬅️ CHANGED: Fluid button scaling from 60% to 100% size */
+            fontSize: "clamp(0.6rem, 1vw + 0.2rem, 1rem)", /* ⬅️ CHANGED: Fluid font size for button text */
+            padding: "clamp(0.3rem, 1vw, 0.75rem) clamp(0.7rem, 2vw, 1.75rem)" /* ⬅️ CHANGED: Fluid padding that scales with viewport */
+          }}
+          onClick={() => window.scrollBy({ top: window.innerHeight + 60, behavior: "smooth" })}
+        >
+          Explore
+        </button>
       </div>
+    </div>
+  </div>
+
 
       {/* Bottom Content */}
       <div className="h-screen w-full bg-[#1A120B] flex flex-col p-5 gap-5">
@@ -243,10 +268,10 @@ const MobileHome = () => {
 
 
 
-
 export default function HomePage() {
   const isMobile = useMediaQuery({ maxWidth: 700 });
 
   return isMobile ? <MobileHome /> : <DesktopHome />;
 }
+
 

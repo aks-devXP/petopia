@@ -5,22 +5,23 @@ import tips from "../../Data/PetCareTips.json";
 export default function PetCareTips({ petSelected, tipSelected }) {
 
   // Function to calculate pentagon positions
-  const getPentagonPosition = (index, total) => {
-    // Pentagon geometry calculations
-    const radius = 42; // Controls how far items are from center (in percentage)
-    const startAngle = -Math.PI / 2; // Start from top center
-    const angle = (2 * Math.PI * index) / total + startAngle;
-    
-    // Calculate position as percentage from center
-    const x = 50 + radius * Math.cos(angle);
-    const y = 50 + radius * Math.sin(angle);
-    
-    return {
-      left: `${x}%`,
-      top: `${y}%`,
-      transform: 'translate(-50%, -50%)'
-    };
+  // Function to calculate pentagon positions
+const getPentagonPosition = (index, total) => {
+  // Reduce radius a bit to keep inside screen
+  const radius = 38; // was 42
+  const startAngle = -Math.PI / 2;
+  const angle = (2 * Math.PI * index) / total + startAngle;
+
+  const x = 50 + radius * Math.cos(angle);
+  const y = 50 + radius * Math.sin(angle);
+
+  return {
+    left: `${x}%`,
+    top: `${y}%`,
+    transform: "translate(-50%, -50%)",
   };
+};
+
 
   return (
     <div className="p-4 h-full w-full mx-auto ">
