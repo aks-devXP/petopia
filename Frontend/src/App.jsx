@@ -73,7 +73,7 @@ function App() {
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
         <Route path="/vet-book/:id" element={<VetBook/>}></Route>
         <Route path="/appointment-success" element={<AppointmentSuccess/>}></Route>
-        <Route path="/dictionary" element={<Dictionary/>}></Route>
+        <Route path="/guide" element={<Dictionary/>}></Route>
         <Route path="/groomer-book" element={<GroomerBook/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
@@ -83,7 +83,7 @@ function App() {
         <Route path="/contact" element={<Contact/>}></Route>
         <Route  path="/care-taker-book" element={<CareTaker/>}></Route>
         <Route path="/ngo" element={<NGO/>}/>
-        <Route path="/dictionary-list" element={<GuideDisplay/>}/>
+        <Route path="/guide-list" element={<GuideDisplay/>}/>
         <Route path="/report-cruelty" element={<ReportCrueltyForm/>}/>
       </Route>
     </>

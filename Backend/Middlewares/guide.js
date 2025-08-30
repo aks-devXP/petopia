@@ -32,7 +32,7 @@ const addPetValidation = (req,res,next)=>{
         "string.empty": "Life expectancy is required."
       }), 
       dietaryNeeds: validator.array().items(
-        validator.string().trim().min(1).max(100).messages({
+        validator.string().trim().min(3).max(100).messages({
           "string.empty": "Dietary needs cannot be empty.",
           "string.min": "Each dietary need must be at least 1 character long.",
           "string.max": "Each dietary need must be at most 100 characters long."
@@ -42,7 +42,7 @@ const addPetValidation = (req,res,next)=>{
         "array.min": "At least one dietary need is required."
       }),
       dietarAvoid: validator.array().items(
-        validator.string().trim().min(1).max(100).messages({
+        validator.string().trim().min(3).max(100).messages({
           "string.empty": "Dietary avoidances cannot be empty.",
           "string.min": "Each dietary avoidance must be at least 1 character long.",
           "string.max": "Each dietary avoidance must be at most 100 characters long."
@@ -52,7 +52,7 @@ const addPetValidation = (req,res,next)=>{
         "array.min": "At least one dietary avoidance is required."
       }),
       healthIssues: validator.array().items(
-        validator.string().trim().min(1).max(100).messages({
+        validator.string().trim().min(5).max(100).messages({
           "string.empty": "Health issues cannot be empty.",
           "string.min": "Each health issue must be at least 1 character long.",
           "string.max": "Each health issue must be at most 100 characters long."

@@ -3,7 +3,7 @@ import Marquee from "react-fast-marquee";
 
 const InfiniteScroll = ({list,text,data, dir, max_width="w-screen", img_width ="auto", img_height="32", folder="Vet" , bg_col = "0f2747", img_fit ="cover", rounded="3", pad="5", mx= "4"}) => {
 
-    const path = `/Vet/`
+    const path = `/petopia/Vet/`
 
     let logos = [
         { name: "Delhi", src: `${path}delhi.jpg`},
@@ -34,7 +34,7 @@ const InfiniteScroll = ({list,text,data, dir, max_width="w-screen", img_width ="
                                 src={(logo.src)}
                                 alt={logo.name}
                                 className={`h-${img_height} rounded-${rounded}xl w-${img_width} object-${img_fit} mx-${mx}`}
-                                loading=''
+                                
                             />
                             ))
                         }

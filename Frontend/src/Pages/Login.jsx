@@ -297,7 +297,7 @@ const Login = () => {
             </button>
             <p className="login__register">
               Don't have an account?{" "}
-              <a href="/sign-up" className="login__link">
+              <a href="/petopia/sign-up" className="login__link">
                 Sign up
               </a>
             </p>
@@ -310,7 +310,7 @@ const Login = () => {
                     GoogleMechanism();
                   }}
                 >
-                  <img src="/google-icon.png" alt="Google" width="20" />
+                  <img src="/petopia/google-icon.png" alt="Google" width="20" />
                   Google
                 </button>
 
@@ -326,7 +326,7 @@ const Login = () => {
                 }}
                 render={renderProps => (
                   <button>
-                  <img src="/facebook-icon.png" alt="Facebook" width="20" />
+                  <img src="/petopia/facebook-icon.png" alt="Facebook" width="20" />
                     Facebook
                   </button>
                 )}

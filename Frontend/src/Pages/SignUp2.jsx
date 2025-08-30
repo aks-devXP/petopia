@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { RiEyeCloseFill, RiEyeFill, RiLock2Line, RiUserLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { SingUpAPI } from '../API/GeneralAPI';
 import signup_img from '../assets/signup-bg.jpg';
-import Loader from '../Components/Loader/Loader';
 import { handleError } from '../Util/Alerts';
-import { useLoading } from './LodingPage';
 
 export const Signup = () => {
   const [loading, setLoading] = useState(false);
@@ -112,7 +110,7 @@ export const Signup = () => {
               </div>
             </button>
             <p className="text-center text-sm text-gray-400">
-              Try Login? <a href="/login" className=" text-white font-medium hover:underline">Log In</a>
+              Try Login? <a href="/petopia/login" className=" text-white font-medium hover:underline">Log In</a>
             </p>
           </form>
           <ToastContainer />

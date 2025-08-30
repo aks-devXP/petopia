@@ -14,7 +14,7 @@ const Submenu = () => (
   <ul className="absolute top-full left-[-2rem] bg-[#1A120B] rounded-2xl p-2 hidden group-hover:block z-50">
     {[
       { to: "/ngo", label: "NGO" },
-      { to: "/shopping", label: "Pet Essentials" },
+      // { to: "/shopping", label: "Pet Essentials" },
       { to: "/about", label: "About Us" },
       { to: "/contact", label: "Contact" },
     ].map((item, i) => (
@@ -29,9 +29,9 @@ const Submenu = () => (
           {item.label}
           <MoveRight
             className="absolute top-1/2 left-[90%] -translate-x-[150%] -translate-y-1/2
-                       opacity-0 w-4 h-4
-                       transition-all duration-300
-                       group-hover/item:opacity-100 group-hover/item:translate-x-[-50%]"
+                      opacity-0 w-4 h-4
+                      transition-all duration-300
+                      group-hover/item:opacity-100 group-hover/item:translate-x-[-50%]"
           />
         </NavLink>
       </li>
@@ -42,7 +42,7 @@ const Submenu = () => (
 const Menu = () => {
   const items = [
     { to: "/home", label: "Home", Icon: Home },
-    { to: "/dictionary", label: "Guide", Icon: BookOpenTextIcon },
+    { to: "/guide", label: "Guide", Icon: BookOpenTextIcon },
     { to: "/vet", label: "Medic", Icon: PawPrint },
     { to: "/news", label: "News", Icon: Newspaper },
     { to: "/trainer", label: "Trainer", Icon: Bone },

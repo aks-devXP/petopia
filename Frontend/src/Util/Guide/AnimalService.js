@@ -16,12 +16,12 @@ const animals = [
     name: 'Labrador Retriever',
     img:
       'https://res.cloudinary.com/dvjcvwp61/image/upload/v1746294829/labrador_wgzlmn.jpg',
-    temperament: 'Friendly, outgoing & even-tempered',
+    temperament: 'Friendly, outgoing & even-tempered', // delete this field
     height: '21.5–24.5 in (m), 20.5–23.5 in (f)',
     energyLevel: 4,
     weight: '65–80 lbs (m), 55–70 lbs (f)',
     lifeExpectancy: '10–12 yrs',
-    groomingNeeds: 'Low–moderate: weekly brushing',
+    groomingNeeds: 'Low–moderate: weekly brushing',// delete this field 
     canStayAlone: 3,
     physicalDescription:
       'Medium-large with a short, dense, weather-resistant coat and “otter” tail.',
@@ -1001,8 +1001,28 @@ const animals = [
 ]
 
 // -- service functions ----------------------------------
-export function getAllAnimals() {
-  return animals.slice() // return a copy
+export const iconMap ={
+  chicken,
+  fish,
+  grain,
+  vegetables,
+  chocolate,
+  grapes,
+  onion,
+  fatty,
+  meat,
+};
+export function getAllAnimals(start=1,petCount = 5, categories) {
+  if (categories?.length) {
+    const catSet = new Set(categories.map((c) => c.toLowerCase()))
+    const filtered = animals.filter((a)=>catSet.has(a.category?.toLowerCase()))
+    const base = petCount*(start-1);
+    const end = Math.min(filtered.length,base + petCount);
+    return filtered.slice(base, end);
+  }
+  const base = petCount*(start-1);
+  const end = Math.min(animals.length,base + petCount);
+  return animals.slice(base,end);
 }
 
 export function getAnimalById(id) {
@@ -1016,6 +1036,13 @@ export function getAnimalsByCategory(category) {
 export function getUniqueCategories() {
   const set = new Set(animals.map((a) => a.category).filter(Boolean))
   return Array.from(set)
+}
+export function getAnimalCount(categories) {
+  if(categories.length){
+    const category = new Set (categories.map((c)=>c.toLowerCase()));
+    return animals.filter((a)=>category.has(a.category?.toLowerCase())).length
+  }
+  return animals.length
 }
 
 export function searchAnimals(query) {

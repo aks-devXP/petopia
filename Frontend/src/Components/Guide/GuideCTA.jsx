@@ -20,9 +20,9 @@ const GuideCTA = () => {
     { Icon: BookOpen, color: 'text-blue-500', bgColor: 'bg-blue-100' },
     { Icon: Sparkles, color: 'text-yellow-500', bgColor: 'bg-yellow-100' }
   ];
-  const Navigate = useNavigate();
+  const Navigate = useNavigate();59
   const handleDictionaryClick = () => {
-    Navigate("/dictionary-list")
+    Navigate("/guide-list")
   };
 
   return (
