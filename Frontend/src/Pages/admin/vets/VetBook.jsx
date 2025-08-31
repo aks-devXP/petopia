@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { MdVerifiedUser } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { getVetById } from "../../../API/VetAPI";
-import Loader from "@/components/Loader/Loader";
+import Loader from "@components/Loader/Loader";
 import VetBookCard from "./components/VetBookCard";
 
 const VetBook = () => {

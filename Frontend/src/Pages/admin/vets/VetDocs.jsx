@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getVets } from '../../../API/VetAPI';
-import Loader from '../../../components/Loader/Loader';
+import Loader from '@components/Loader/Loader';
 
 const VetDocs = () => {
     const specialities = ["General Physician", "Internal Medicine", "Surgery", "Dentistry", "Dermatology", "Ophthalmology"]

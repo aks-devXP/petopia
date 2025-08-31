@@ -1,6 +1,6 @@
 import React from 'react'
-import TeamInfo from '../../../components/TeamInfo'
-import Header from '../../../components/Header'
+import TeamInfo from '@components/TeamInfo'
+import Header from '@components/Header'
 
 const About = () => {
   return (

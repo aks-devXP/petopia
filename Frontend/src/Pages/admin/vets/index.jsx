@@ -1,12 +1,11 @@
 import React from 'react';
 import Card from "./components/CardHero";
 import vet from "@assets/vet.png";
-import Slider from './components/Slider';
 import { TbSquareRoundedArrowRightFilled } from "react-icons/tb";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import { HeartHandshake, ShoppingBag, ShieldCheck } from "lucide-react";
-import InfiniteScroll from '@/components/InfiniteScroll';
+import InfiniteScroll from '@components/InfiniteScroll';
 import VetCareInfo from './components/VetCareInfo';
 
 
