@@ -1,70 +1,48 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import { Navigate } from "react-router-dom";
 import "react-toastify/ReactToastify.css"
-import ReportCrueltyForm from './Components/NGO comp/ReportCrueltyForm'
-import ScrollAnimations from './Components/ScrollAnimations'
-import MainLayout from './Layout/MainLayout'
-import About from './Pages/About'
-import AppointmentSuccess from './Pages/AppointmentSuccess'
-import CareTaker from './Pages/CareTaker'
-import Contact from './Pages/Contact'
-import Dictionary from './Pages/Dictionary'
-import GroomerBook from './Pages/GroomerBook'
-import Home from './Pages/Home'
-import Login from './Pages/Login'
-import News from './Pages/News'
-import NewsPage from './Pages/NewsPage'
-import PetServices from './Pages/PetServices'
-import ProductDirectory from './Pages/ProductDirectory'
-import SignUp2 from './Pages/SignUp2'
-import UserDashboard from './Pages/UserDashboard'
-import VetBook from './Pages/VetBook'
-import VetDocs from './Pages/VetDocs'
-import VetHome from "./Pages/VetHome"
-import Volunteer from "./Pages/Volunteer"
+import ReportCrueltyForm from './components/NGO comp/ReportCrueltyForm'
+import ScrollAnimations from './components/ScrollAnimations'
+import MainLayout from './Layout/admin/AdminLayout'
+import About from './Pages/admin/about'
+import AppointmentSuccess from './Pages/admin/vets/components/AppointmentSuccess'
+import CareTaker from './Pages/admin/services/components/CareTaker'
+import Contact from './Pages/admin/contact'
+import Dictionary from './Pages/admin/guide/Dictionary'
+import GroomerBook from './Pages/admin/services/GroomerBook'
+import Home from './Pages/admin/home'
+import Login from './Pages/auth/login'
+import News from './Pages/admin/news'
+import NewsPage from './Pages/admin/news/NewsPage'
+import PetServices from './Pages/admin/services'
+import ProductDirectory from './Pages/admin/product/ProductDirectory'
+import SignUp2 from './Pages/auth/signin/SignUp2'
+import UserDashboard from './Pages/admin/profile/UserDashboard'
+import VetBook from './Pages/admin/vets/VetBook'
+import VetDocs from './Pages/admin/vets/VetDocs'
+import VetHome from "./Pages/admin/vets"
+import Volunteer from "./Pages/admin/ngo/Volunteer"
 
 // For smooth scrolling
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Guide1 from './Pages/Guide1'
-import GuideDisplay from './Pages/GuideDisplay'
-import NGO from './Pages/NGO'
-import Testing from './Pages/Testing'
+import Guide1 from './Pages/admin/guide/Guide1'
+import GuideDisplay from './Pages/admin/guide/GuideDisplay'
+import NGO from './Pages/admin/ngo'
+
 
 gsap.registerPlugin(ScrollTrigger);
 function App() {
-
-  // useEffect(() => {
-  //   // Initialize Lenis for smooth scrolling
-  //   const lenis = new Lenis();
-
-  //   // Synchronize Lenis scrolling with GSAP's ScrollTrigger
-  //   lenis.on('scroll', ScrollTrigger.update);
-
-  //   // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
-  //   gsap.ticker.add((time) => {
-  //     lenis.raf(time * 1000); // Convert time from seconds to milliseconds
-  //   });
-
-  //   // Disable GSAP's lag smoothing
-  //   gsap.ticker.lagSmoothing(0);
-
-  //   return () => {
-  //     gsap.ticker.remove((time) => {
-  //       lenis.raf(time * 1000);
-  //     });
-  //     lenis.destroy(); // Cleanup on unmount
-  //   };
-  // }, []);
 
     const router = createBrowserRouter(createRoutesFromElements(
       <>
       <Route path='/login' element={<Login/>}></Route>
       <Route path='sign-up' element={<SignUp2/>}></Route>
       <Route path='sample' element={<ScrollAnimations/>}></Route>
-      <Route path="/testing" element={<Testing/>}></Route>
       {/* <Route path="/guide" element={<Guide/>}></Route> */}
       <Route path="/" element={<MainLayout/>}>
-        <Route index element={<Home/>}></Route>
+        <Route index element={<Navigate to="/home" replace />} />
+        <Route path="/home" element={<Home/>}></Route>
         <Route  path="/shopping" element={<ProductDirectory/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
         <Route path='/dashboard/:option' element={<UserDashboard/>}></Route>
@@ -78,7 +56,7 @@ function App() {
         <Route path="/volunteer" element={<Volunteer/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news2/:id' element={<NewsPage/>}></Route>
-        <Route path="/trainer" element={<PetServices/>}></Route>
+        <Route path="/services" element={<PetServices/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
         <Route  path="/care-taker-book" element={<CareTaker/>}></Route>
