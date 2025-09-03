@@ -4,6 +4,11 @@ import path from 'path'
 
 export default defineConfig({
   base: "/petopia/",
+  build: {
+    outDir: 'dist/petopia',         
+    assetsDir: 'assets',
+    emptyOutDir: true
+  },
   server: {
     open: true,
     proxy: {
