@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X, Luggage, Sun, Footprints } from "lucide-react";
-import Clock from "@/Pages/admin/services/components/Clock";
+import Clock from "./Clock";
 import Calendar from "react-calendar";
 import "./CustomCalendar.css";
 import Akash from "@assets/Trainer/akash.png";

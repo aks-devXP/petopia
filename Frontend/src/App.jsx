@@ -22,13 +22,14 @@ import VetBook from './Pages/admin/vets/VetBook'
 import VetDocs from './Pages/admin/vets/VetDocs'
 import VetHome from "./Pages/admin/vets"
 import Volunteer from "./Pages/admin/ngo/Volunteer"
-
+import List from './Pages/admin/List'
 // For smooth scrolling
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Guide1 from './Pages/admin/guide/Guide1'
 import GuideDisplay from './Pages/admin/guide/GuideDisplay'
 import NGO from './Pages/admin/ngo'
+
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -44,7 +45,7 @@ function App() {
         <Route index element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<Home/>}></Route>
         <Route  path="/shopping" element={<ProductDirectory/>}></Route>
-        <Route path="/home" element={<Home/>}></Route>
+        <Route path="/list" element={<List/>}></Route>
         <Route path='/dashboard/:option' element={<UserDashboard/>}></Route>
         <Route path="/guide/:id" element={<Guide1/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>

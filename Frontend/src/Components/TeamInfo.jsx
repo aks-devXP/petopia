@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import mission from '../assets/mission.jpg';
+import mission from '@assets/mission.jpg';
 
 const TeamInfo = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import paw from '../assets/Paw_Print.svg';
+import paw from '@assets/Paw_Print.svg';
 
 const Rating = ({ a }) => {
   return (

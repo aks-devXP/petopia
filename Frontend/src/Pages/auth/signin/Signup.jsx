@@ -4,9 +4,9 @@ import { RiEyeCloseFill, RiEyeFill, RiLock2Line, RiUserLine } from 'react-icons/
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { SingUpAPI } from '../../../API/GeneralAPI';
-import signup_img from '../assets/signup-bg.jpg';
-import Loader from '../../../components/Loader/Loader';
-import { handleError } from '../../../Util/Alerts';
+import signup_img from '@assets/signup-bg.jpg';
+import Loader from '@components/Loader/Loader';
+import { handleError } from '@/Util/Alerts';
 import { useLoading } from '../../LodingPage';
 import './Login.css';
 
