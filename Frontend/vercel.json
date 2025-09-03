@@ -1,8 +1,9 @@
 {
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
     "rewrites": [
-        {
-            "source": "/petopia/**",
-            "destination": "/petopia/index.html"
-        }
+        { "source": "/petopia", "destination": "/petopia/index.html" },
+        { "source": "/petopia/(.*)", "destination": "/petopia/index.html" }
     ]
 }
+  
