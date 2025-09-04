@@ -24,11 +24,9 @@ const InfiniteScroll = ({list,text,data, dir, max_width="w-screen", img_width ="
                     {text}
                 </h3>
                 <div className={`relative ${text ? "w-[85%]" : "w-full"} overflow-hidden`}>
-                    <Marquee className={`flex`} direction={dir?dir:'left'}>
-                        {data ? {
-
-                        } : 
-                            [...logos, ...logos].map((logo, index) => (
+                    <Marquee className={`flex`} direction={dir?dir:'left'} speed={70} gradient={false} autoFill={true}>
+                        {
+                            [...logos].map((logo, index) => (
                             <img
                                 key={index}
                                 src={(logo.src)}

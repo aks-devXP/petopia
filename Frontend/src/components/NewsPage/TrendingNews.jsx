@@ -1,6 +1,6 @@
 import React from 'react'
-import dogImage from '../../assets/signup-bg.jpg'
 import Card from './Card'
+import Marquee from 'react-fast-marquee'
 
 const TrendingNews = () => {
 
@@ -125,13 +125,15 @@ const TrendingNews = () => {
   return (
     <>
         <section>
-            <div className='py-4 bg-n-7 h-fit'>
-            <h2 className="text-center text-3xl font-extrabold my-10">Trending News</h2>
-                <div className='flex h-fit mt-2 justify-between'>
+            <div className='py-6 bg-transparent h-fit'>
+            <h2 className="text-center text-2xl md:text-3xl font-extrabold my-6">Trending News</h2>
+                <Marquee pauseOnHover={true} speed={70} gradient={false} autoFill={true} className='py-2'>
+                  <div className='flex items-stretch gap-6 px-4 md:px-0'>
                     <Card img={NewsData["A"].img} topic={NewsData["A"].topic} subtopic={NewsData["A"].subtopic} id='A'></Card>
                     <Card img={NewsData["B"].img} topic={NewsData["B"].topic} subtopic={NewsData["B"].subtopic} id='B'></Card>
                     <Card img={NewsData["C"].img} topic={NewsData["C"].topic} subtopic={NewsData["C"].subtopic} id='C'></Card>
-                </div>
+                  </div>
+                </Marquee>
             </div>
         </section>
     </>
