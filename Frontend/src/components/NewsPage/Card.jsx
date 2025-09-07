@@ -13,7 +13,7 @@ const Card = ({img='', id='A', topic="Sample Headline", subtopic="Lorem ipsum, d
         </Link>
         
         <Link to={`/news/${id}`}>
-            <div className='my-4 mx-4'>
+            <div className='my-4 mx-4'> 
                 <h2 className='text-black font-semibold text-center text-xl'>{topic}</h2>
                 <h6 className='text-gray-500 font-normal '>{subtopic}</h6>
             </div>

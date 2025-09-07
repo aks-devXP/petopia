@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const causes = [
+// Centralized data; swap to props or external data source if needed
+const CAUSES = [
   {
     id: 1,
     title: "Adopt a Pet",
     description:
       "Give a rescued animal a loving home and gain a loyal companion for life. Adopt today!",
     image:
-      "https://i.pinimg.com/236x/e2/42/1e/e2421ea92c654c3e88aa220b69cbd9e3.jpg", // Replace with actual image path
-    link: "",
+      "https://i.pinimg.com/236x/e2/42/1e/e2421ea92c654c3e88aa220b69cbd9e3.jpg",
+    link: "/ngo/adopt",
   },
   {
     id: 2,
@@ -17,7 +18,7 @@ const causes = [
     description:
       "Your support provides food, shelter, and care for animals in need. Every contribution saves lives!",
     image:
-      "https://www.eatright.org/-/media/images/eatright-articles/eatright-article-1200x675/animal-welfare_1200x675.jpg?as=0&w=967&rev=ae79d07cf65642069b2b009beed082e6&hash=6383C2EEA914D366445F65EA4E15B098", // Replace with actual image path
+      "https://www.3sidedmedia.com/Portals/3/EasyDNNNews/1208/600600p1385EDNmainshleter-dog-2.jpg",
     link: "",
   },
   {
@@ -26,7 +27,7 @@ const causes = [
     description:
       "Discover nearby animal welfare organizations and join the movement to help animals.",
     image:
-      "https://kolkatastreetdogsdotin.wordpress.com/wp-content/uploads/2016/11/ngos.jpg?w=640", // Replace with actual image path
+      "https://kolkatastreetdogsdotin.wordpress.com/wp-content/uploads/2016/11/ngos.jpg?w=640",
     link: "",
   },
   {
@@ -35,84 +36,79 @@ const causes = [
     description:
       "See an animal in distress? Take prompt action by reporting cruelty to save lives.",
     image:
-      "https://uvhs.org/wp-content/uploads/2023/01/dachshund-2683905_1920.jpg", // Replace with actual image path
+      "https://uvhs.org/wp-content/uploads/2023/01/dachshund-2683905_1920.jpg",
     link: "/report-cruelty",
   },
 ];
 
-const SupportACause = () => {
+const isInternal = (href) => typeof href === "string" && href.startsWith("/");
+const hasLink = (href) => typeof href === "string" && href.length > 0;
+
+const CardMedia = ({ image, title }) => (
+  <div
+    className="relative h-64"
+    style={{
+      backgroundImage: `url(${image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >
+    <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-colors duration-300 grid place-items-center">
+      <h3 className="text-white text-2xl font-bold text-center px-4">{title}</h3>
+    </div>
+  </div>
+);
+
+const CauseCard = ({ cause }) => {
   return (
-    <div className="bg-[#FFF7D6] py-12 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-center text-black mb-12">
-        SUPPORT A CAUSE
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {causes.map((cause) => (
-          <div
-            key={cause.id}
-            className="rounded-lg shadow-lg overflow-hidden bg-white"
-          >
-            {cause.id === 4 ? (
-              <Link to={cause.link}>
-                <div
-                  className="relative group h-64"
-                  style={{
-                    backgroundImage: `url(${cause.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition duration-300 flex items-center justify-center">
-                    <h3 className="text-white text-2xl font-bold text-center">
-                      {cause.title}
-                    </h3>
-                  </div>
-                </div>
+    <div className="rounded-lg shadow-lg overflow-hidden bg-white group">
+      {hasLink(cause.link) ? (
+        isInternal(cause.link) ? (
+          <Link to={cause.link} aria-label={cause.title} className="block outline-none">
+            <CardMedia image={cause.image} title={cause.title} />
+          </Link>
+        ) : (
+          <a href={cause.link} target="_blank" rel="noopener noreferrer" aria-label={cause.title} className="block">
+            <CardMedia image={cause.image} title={cause.title} />
+          </a>
+        )
+      ) : (
+        <CardMedia image={cause.image} title={cause.title} />
+      )}
+      <div className="p-4">
+        <p className="text-gray-600 text-sm">{cause.description}</p>
+        <div className="mt-4 text-center">
+          {hasLink(cause.link) ? (
+            isInternal(cause.link) ? (
+              <Link to={cause.link} className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300">
+                Learn More
               </Link>
             ) : (
-              <a href={cause.link} target="_blank" rel="noopener noreferrer">
-                <div
-                  className="relative group h-64"
-                  style={{
-                    backgroundImage: `url(${cause.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition duration-300 flex items-center justify-center">
-                    <h3 className="text-white text-2xl font-bold text-center">
-                      {cause.title}
-                    </h3>
-                  </div>
-                </div>
+              <a href={cause.link} target="_blank" rel="noopener noreferrer" className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300">
+                Learn More
               </a>
-            )}
-            <div className="p-4">
-              <p className="text-gray-600 text-sm">{cause.description}</p>
-              <div className="mt-4 text-center">
-                {cause.id === 4 ? (
-                  <Link
-                    to={cause.link}
-                    className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300"
-                  >
-                    Learn More
-                  </Link>
-                ) : (
-                  <a
-                    href={cause.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300"
-                  >
-                    Learn More
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+            )
+          ) : (
+            <span className="text-gray-400 font-semibold cursor-not-allowed">Coming soon</span>
+          )}
+        </div>
       </div>
     </div>
+  );
+};
+
+const SupportACause = ({ items = CAUSES }) => {
+  return (
+    <section className="bg-[#FFF7D6] py-12 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-3xl font-bold text-center text-black mb-12 tracking-tight">
+        SUPPORT A CAUSE
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {items.map((cause) => (
+          <CauseCard key={cause.id} cause={cause} />
+        ))}
+      </div>
+    </section>
   );
 };
 

@@ -22,33 +22,36 @@ const NGO = () => {
       
   return (
     <div className='w-full bg-[#0b0811]'>
-     <div className='w-full'>
-      <Banner/>
-     </div>
-     <div className=''>
-      <Impact/>
-     </div>
-     <div className='m-10'>
-      <BasicHero title={"Need to find a new home for a pet?"} description={"We're here to help them find a new, loving family—quickly and safely by Adopting a Pet."} buttonText={"Learn More"} imageSrc={"https://media.adoptapet.com/image/upload/c_scale,w_524,dpr_2/f_auto,q_auto/homepage-rehome-pet.jpg"} imageLeft={false}/>
-     </div>
-     <div>
-      <SupportACause />
-     </div>
-     <div className='m-10 h-[500px]'>
-       <BasicHero title={"Be the change, you always hoped for"} description={"Join us as a Volunteer and make a Difference in Someone's Life Today"} buttonText={"Get Involved"} imageSrc={"https://images.squarespace-cdn.com/content/v1/667b351276399d72c27b633e/e402dcb1-58f7-441c-82e0-314b1081fcbe/babyPuppy.jpg"} imageLeft={true} bgColor={"bg-[#00D4FF]"} textColor={"text-[#001F3F]"} textColor2={"text-gray-700"} to={"/volunteer"}/>
-     </div>
-      {/* <div>
-        <LayeredCard/>
-      </div> */}
+      <div className='w-full'>
+        <Banner/>
+      </div>
+      <div className=''>
+        <Impact/>
+      </div>
+      
+      <div className='m-10'>
+        <BasicHero title={"Need to find a new home for a pet?"} description={"We're here to help them find a new, loving family—quickly and safely by Adopting a Pet."} buttonText={"Learn More"} imageSrc={"https://media.adoptapet.com/image/upload/c_scale,w_524,dpr_2/f_auto,q_auto/homepage-rehome-pet.jpg"} imageLeft={false}/>
+      </div>
+      
+      <div>
+        <SupportACause />
+      </div>
+      
+      <div className='m-10 h-[500px]'>
+        <BasicHero title={"Be the change, you always hoped for"} description={"Join us as a Volunteer and make a Difference in Someone's Life Today"} buttonText={"Get Involved"} imageSrc={"https://images.squarespace-cdn.com/content/v1/667b351276399d72c27b633e/e402dcb1-58f7-441c-82e0-314b1081fcbe/babyPuppy.jpg"} imageLeft={true} bgColor={"bg-[#00D4FF]"} textColor={"text-[#001F3F]"} textColor2={"text-gray-700"} to={"/volunteer"}/>
+      </div>
 
       <div className='bg-[#0b0811] my-10 flex flex-col' >
         <div className='flex justify-left px-4 py-2  '>
           <h3 className='text-5xl font-grotesk font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,_rgba(15,6,170,0.9710477941176471)_0%,_rgba(255,138,138,0.9150253851540616)_81%)] text-left tracking-widest'>One Memory</h3>
         </div>
+        
         <InfiniteScroll dir="right" max_width="8xl" img_width="80" img_height="60" list = {list} folder = "NGO" bg_col="#FF9D3D" rounded="0" pad="0" mx="2"></InfiniteScroll>
+        
         <div className='flex justify-end px-4 mt-2'>
           <h3 className='text-5xl font-grotesk font-bold text-right  bg-clip-text text-transparent bg-[linear-gradient(90deg,_rgba(15,6,170,0.9710477941176471)_0%,_rgba(255,138,138,0.9150253851540616)_81%)] tracking-widest'>One Life</h3>
         </div>
+        
         <InfiniteScroll  dir="left" max_width="8xl" img_width="80" img_height="60" list = {list2} folder = "NGO" bg_col="#FF9D3D" rounded="0" pad="4" mx="2"/>
       </div>
     </div>

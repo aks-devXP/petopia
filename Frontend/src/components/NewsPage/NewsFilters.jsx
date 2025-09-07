@@ -12,7 +12,7 @@ const NewsFilters = ({
   onTimeRangeChange
 }) => {
   return (
-    <div className="w-full bg-white/70 backdrop-blur rounded-2xl border border-gray-200 p-4 md:p-5 mb-8">
+    <div className="w-[80%] mx-auto bg-white/70 backdrop-blur rounded-2xl border border-gray-200 p-4 md:p-5 mb-8">
       <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
         <div className="flex-1">
           <input
@@ -27,7 +27,7 @@ const NewsFilters = ({
           <select
             value={selectedCategory}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="h-11 rounded-xl border border-gray-300 px-3 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="h-11 rounded-xl border border-gray-300 px-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             {categories.map((c) => (
               <option key={c} value={c}>{c}</option>
@@ -37,7 +37,7 @@ const NewsFilters = ({
           <select
             value={timeRange}
             onChange={(e) => onTimeRangeChange(e.target.value)}
-            className="h-11 rounded-xl border border-gray-300 px-3 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="h-11 rounded-xl border border-gray-300 px-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             {timeRanges.map((t) => (
               <option key={t} value={t}>{t}</option>

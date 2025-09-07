@@ -22,6 +22,7 @@ import VetBook from './Pages/admin/vets/VetBook'
 import VetDocs from './Pages/admin/vets/VetDocs'
 import VetHome from "./Pages/admin/vets"
 import Volunteer from "./Pages/admin/ngo/Volunteer"
+import Adopt from './Pages/admin/ngo/Adopt'
 import List from './Pages/admin/List'
 // For smooth scrolling
 import { gsap } from 'gsap'
@@ -55,6 +56,7 @@ function App() {
         <Route path="/guide" element={<Dictionary/>}></Route>
         <Route path="/groomer-book" element={<GroomerBook/>}></Route>
         <Route path="/volunteer" element={<Volunteer/>}></Route>
+        <Route path="/ngo/adopt" element={<Adopt/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path='/news/:id' element={<NewsPage/>}></Route>
         <Route path="/services" element={<PetServices/>}></Route>
@@ -79,6 +81,5 @@ function App() {
 }
 
 export default App
-
 
 

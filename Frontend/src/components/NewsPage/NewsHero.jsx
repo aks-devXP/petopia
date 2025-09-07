@@ -6,7 +6,7 @@ const NewsHero = ({
   videoSrc = './news-vid1.mp4'
 }) => {
   return (
-    <section className="relative w-full overflow-hidden rounded-3xl mb-10">
+    <section className="relative w-full overflow-hidden rounded-b-3xl">
       <div className="relative h-[56vw] max-h-[520px] min-h-[260px]">
         <video
           className="absolute inset-0 w-full h-full object-cover"

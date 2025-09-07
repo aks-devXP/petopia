@@ -18,7 +18,7 @@ const NewsCard = ({ id, image, title, excerpt, badge }) => {
           )}
         </div>
         <div className="p-4">
-          <h3 className="text-lg font-bold leading-snug line-clamp-2">{title}</h3>
+          <h3 className="text-lg text-blue-700 font-bold leading-snug line-clamp-2">{title}</h3>
           <p className="mt-2 text-sm text-gray-600 line-clamp-3">{excerpt}</p>
         </div>
       </Link>

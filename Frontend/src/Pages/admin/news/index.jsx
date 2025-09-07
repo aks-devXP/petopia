@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useRef, useEffect } from 'react'
 import NewsHero from '@/components/NewsPage/NewsHero'
 import NewsFilters from '@/components/NewsPage/NewsFilters'
 import NewsGrid from '@/components/NewsPage/NewsGrid'
+import NewsPagination from '@/components/NewsPage/NewsPagination'
 import NewsletterCTA from '@/components/NewsPage/NewsletterCTA'
 import TrendingNews from '@/components/NewsPage/TrendingNews'
 
@@ -60,22 +61,56 @@ const News = () => {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
   const [timeRange, setTimeRange] = useState('Any time')
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 5
+  const newsGridRef = useRef(null)
+  const [shouldScroll, setShouldScroll] = useState(false)
 
   const filtered = useMemo(() => {
     const text = query.trim().toLowerCase()
-    return sampleItems.filter((item) => {
+    const filteredItems = sampleItems.filter((item) => {
       const matchesText = !text ||
         item.title.toLowerCase().includes(text) ||
         item.excerpt.toLowerCase().includes(text)
       const matchesCategory = category === 'All' || item.category === category
       return matchesText && matchesCategory
     })
+    
+    // Reset to page 1 when filters change
+    setCurrentPage(1)
+    return filteredItems
   }, [query, category])
+
+  const paginatedItems = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    return filtered.slice(startIndex, endIndex)
+  }, [filtered, currentPage, itemsPerPage])
+
+  const totalPages = Math.ceil(filtered.length / itemsPerPage)
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+    setShouldScroll(true)
+  }
+
+  // Handle scroll after page change
+  useEffect(() => {
+    if (shouldScroll && newsGridRef.current) {
+      // Small delay to ensure DOM has updated
+      setTimeout(() => {
+        newsGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        setShouldScroll(false)
+      }, 100)
+    }
+  }, [shouldScroll, currentPage])
 
   return (
     <>
-      <NewsHero />
-      <div className='max-w-6xl mx-auto px-4 mb-5'>
+      <NewsHero className='mt-10' />
+      <div className='w-full mx-auto px-4 mb-5'>
+        <TrendingNews/>
+
         <NewsFilters
           selectedCategory={category}
           onCategoryChange={setCategory}
@@ -85,12 +120,20 @@ const News = () => {
           onTimeRangeChange={setTimeRange}
         />
 
-        <TrendingNews />
 
-        <h2 className='text-2xl font-extrabold mt-10 mb-4'>Latest stories</h2>
-        <NewsGrid items={filtered} />
+        <div ref={newsGridRef}>
+          <h2 className='text-2xl text-center font-extrabold mt-10 mb-4'>Latest stories</h2>
+        </div>
+        <NewsGrid items={paginatedItems} />
+        
+        <NewsPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        />
 
-        <NewsletterCTA />
+        <NewsletterCTA className='max-w-6xl' />
       </div>
     </>
   )
