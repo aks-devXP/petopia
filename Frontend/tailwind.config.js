@@ -78,6 +78,10 @@ export default {
         7.5: "1.875rem",
         15: "3.75rem",
       },
+      letterSpacing: {
+        // For compact uppercase taglines used across the site
+        tagline: "0.2em",
+      },
       transitionDuration: {
         DEFAULT: "200ms",
       },

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "cmp-001",
+    "title": "Emergency Medical Fund for Injured Street Dogs",
+    "tagline": "Immediate surgeries, post-op care and rehab",
+    "description": "This campaign supports urgent medical procedures for injured street dogs rescued across the city. Funds cover surgeries, antibiotics, post-operative care, vaccinations, and foster boarding until full recovery.",
+    "images": [
+      "https://images.pexels.com/photos/7210758/pexels-photo-7210758.jpeg",
+      "https://images.pexels.com/photos/7210755/pexels-photo-7210755.jpeg",
+      "https://images.pexels.com/photos/248307/pexels-photo-248307.jpeg"
+    ],
+    "goal": 300000,
+    "raised": 176500,
+    "city": "Pune",
+    "state": "MH",
+    "organizer": {
+      "name": "Hope Paws Foundation",
+      "phone": "+91 98765 43210",
+      "email": "help@hopepaws.org",
+      "website": "https://example.org/hopepaws"
+    },
+    "donateUrl": "https://example.org/donate/hopepaws"
+  },
+  {
+    "id": "cmp-002",
+    "title": "Community Feeding Drive: Monsoon 2025",
+    "tagline": "1000+ bowls daily during monsoon",
+    "description": "With heavy rains, strays struggle to find food. Your support ensures daily meals with clean water and dry shelter points across the city during the monsoon months.",
+    "images": [
+      "https://images.pexels.com/photos/3299900/pexels-photo-3299900.jpeg",
+      "https://images.pexels.com/photos/5731867/pexels-photo-5731867.jpeg",
+      "https://images.pexels.com/photos/3299901/pexels-photo-3299901.jpeg"
+    ],
+    "goal": 200000,
+    "raised": 82000,
+    "city": "Bengaluru",
+    "state": "KA",
+    "organizer": {
+      "name": "Kind Bowls Initiative",
+      "phone": "+91 90000 12345",
+      "email": "contact@kindbowls.in"
+    },
+    "donateUrl": "https://example.org/donate/kindbowls"
+  },
+  {
+    "id": "cmp-003",
+    "title": "Shelter Expansion: Warm Kennels for Winters",
+    "tagline": "Build 20 insulated kennels before December",
+    "description": "Help us expand our shelter with insulated kennels to protect rescued dogs and cats during harsh winters. Funds cover materials, insulation, and safe heating solutions.",
+    "images": [
+      "https://images.pexels.com/photos/7210699/pexels-photo-7210699.jpeg",
+      "https://images.pexels.com/photos/7210600/pexels-photo-7210600.jpeg"
+    ],
+    "goal": 450000,
+    "raised": 298000,
+    "city": "Delhi",
+    "state": "DL",
+    "organizer": {
+      "name": "Purr & Paws Shelter",
+      "phone": "+91 88220 44556",
+      "email": "support@purrpaws.org",
+      "website": "https://example.org/purrpaws"
+    },
+    "donateUrl": "https://example.org/donate/purrpaws"
+  }
+]
+

@@ -19,7 +19,7 @@ const CAUSES = [
       "Your support provides food, shelter, and care for animals in need. Every contribution saves lives!",
     image:
       "https://www.3sidedmedia.com/Portals/3/EasyDNNNews/1208/600600p1385EDNmainshleter-dog-2.jpg",
-    link: "",
+    link: "/ngo/donate",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const CAUSES = [
       "Discover nearby animal welfare organizations and join the movement to help animals.",
     image:
       "https://kolkatastreetdogsdotin.wordpress.com/wp-content/uploads/2016/11/ngos.jpg?w=640",
-    link: "",
+    link: "/ngo/nearby",
   },
   {
     id: 4,
