@@ -992,8 +992,21 @@ const animals = [
 ]
 const getPetCount= async(req,res)=>{
   try{
+    let category = req.query.category || [];
+    if (typeof category === 'string') {
+      category = category.split(',').map(c => c.trim());
+    }
+    console.log(category);  
+    if (category.length>0){
+      category = new Set(category.map(c=>c.toLowerCase()));
+      const catCount = animals.filter(pet=> category.has(pet.category.toLowerCase())).length;
+      return res.status(200).json({success:true ,message:"All Pet count Fetched Successfully",count: catCount });
+
+
+    }
+    
     const petCount = animals.length;
-    res.status(200).json({success:true ,message:"All Et count Fetched Successfully",count: petCount });
+    res.status(200).json({success:true ,message:"All Pet count Fetched Successfully",count: petCount });
 
   }
   catch(error){
@@ -1004,9 +1017,24 @@ const getPetCount= async(req,res)=>{
 
 const getPets = async (req,res)=>{
   try {
-    const start = parseInt(req.query.start) || 0;
-    const end = animals.length-start>=20? start + 20 : animals.length;
-    const petList= animals.slice(start, end);
+    let start = parseInt(req.params.start) || 0;
+    
+    let category = req.query.category || [];
+    if (typeof category === 'string') {
+      category = category.split(',').map(c => c.trim());
+    }
+
+    const count = parseInt(req.query.count) || 5;
+    // console.log(category, start, count);
+    start = start*count;
+    if (category.length>0){
+      category = new Set(category.map(c=>c.toLowerCase()
+      ));
+    }
+    const filteredPets = category.size > 0 ? animals.filter(pet=> category.has(pet.category.toLowerCase())) : animals;
+    const end = filteredPets.length-start>=count? start + count : filteredPets.length;
+    const petList= filteredPets.slice(start, end);
+    // console.log(petList.length);
     res.status(200).json({ success: true, message: 'Pet-list Fetched Successfully', pets: petList });
 
   }
@@ -1046,7 +1074,8 @@ const getAllPetCategories= (req,res)=>{
     // ... using spread operator we are converting set back into an array
     // new keyword is required here because the inbuilt Set's constructor does not create an instance of itself
     //  Some built-in constructors like Array or Objects do work without the new keyword
-    const categories = [...new Set(animals.map(pets=> pets.category))]
+    const categories = [...new Set(animals.map(pets=> pets.category))];
+    // console.log(categories);
     res.status(200).json({ success: true, message: 'All Pet Categories Fetched Successfully', categories: categories });
   }
   catch(err){
@@ -1055,39 +1084,7 @@ const getAllPetCategories= (req,res)=>{
 
   };
 }
-const getPetByCategories = (req,res)=>{
-  try{
-    let category = req.body.categories;
-    console.log("Categories received in body:", category);
-    if(!category){
-      return res.status(400).json({
-        success:false,
-        message: 'No category provided'
-      })
-    }
-    if (typeof category === 'string') {
-      category = JSON.parse(category);
-    }
-    const categorySet = new Set(category.map(c=>c.toLowerCase()));
-    const pets = animals.filter(pet=>categorySet.has(pet.category.toLowerCase()));
-    if(pets.length===0){
-      return res.status(404).json({
-        success:false,
-        message: 'No pets found for the given category/categories',
-      })
-    }
-    return res.status(200).json({
-      success:true,
-      message: 'Pets fetched successfully by category/categories',
-      pets: pets
-    });
-  }
-  catch(err){
-    console.error('Error fetching pets by category:', err);
-    res.status(500).json({ success: false, message: 'Internal Server Error In The Pet By Categories Fetching Process' });
-  }
 
-}
 
 
 module.exports = {
@@ -1095,5 +1092,5 @@ module.exports = {
   getPetCount,
   getPetByID,
   getAllPetCategories,
-  getPetByCategories
+  // getPetByCategories
 };  

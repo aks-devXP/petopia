@@ -9,14 +9,14 @@ import {
 } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { FacebookLoginAPI, GoogleLoginAPI, LoginAPI, LoginGenAPI } from "../API/GeneralAPI";
+import { FacebookLoginAPI, GoogleLoginAPI, LoginAPI } from "../API/GeneralAPI";
 import loginimg from "../assets/login-bg2.jpg";
 import Loader from "../Components/Loader/Loader";
 import { handleError, handleInfo, handleSuccess } from "../Util/Alerts";
-import { useLoading } from "./LodingPage";
 import "./Login.css";
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const [pageLoader,setPageLoader] = useState(false);
   const [success, setSuccess] = useState(false);
   const [selectedRole, setSelectedRole] = useState('user');
   const [user, setUser] = useState({
@@ -57,23 +57,23 @@ const Login = () => {
         handleError(data.message);
       }
     }
-    else {
-      const response = await LoginGenAPI(user,selectedRole);
-      const data = await response.json();
-      console.log(data);
-      if (data.success) {
-        setLoading(false);
-        setSuccess(true);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("username", JSON.stringify(data.user_name));
-        localStorage.setItem("userAuth", JSON.stringify(selectedRole));
-        setTimeout(() => navigate("/"), 2000); // Navigate after showing success
-      } else {
-        setLoading(false);
-        setSuccess(false);
-        handleError(data.message);
-      }
-    }
+    // else {
+    //   const response = await LoginGenAPI(user,selectedRole);
+    //   const data = await response.json();
+    //   console.log(data);
+    //   if (data.success) {
+    //     setLoading(false);
+    //     setSuccess(true);
+    //     localStorage.setItem("token", data.token);
+    //     localStorage.setItem("username", JSON.stringify(data.user_name));
+    //     localStorage.setItem("userAuth", JSON.stringify(selectedRole));
+    //     setTimeout(() => navigate("/"), 2000); // Navigate after showing success
+    //   } else {
+    //     setLoading(false);
+    //     setSuccess(false);
+    //     handleError(data.message);
+    //   }
+    // }
     // else if(selectedRole === 'trainer'){
 
     // }
@@ -185,21 +185,16 @@ const Login = () => {
   };
 
   // loading effect
-  const { isLoading, setIsLoading } = useLoading();
-  useEffect(() => {
-    setIsLoading(true);
+  useEffect(()=>{
+    window.addEventListener('load',()=>{
 
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 4000);
-
-    return () => clearTimeout(timer);
-  }, [setIsLoading]);
+    })
+  },[])
 
   return (
     <>
-      {isLoading && <Loader />}
-      {!isLoading && (
+      {pageLoader && <Loader/>}
+      {!pageLoader && (
         <div className="login">
           <img src={loginimg} alt="kitchen bg" className="login__img" />
           <form action="" className="login__form">
@@ -305,6 +300,7 @@ const Login = () => {
               <p>or Continue with</p>
               <div className="login-options">
                 <button
+                type='button'
                   onClick={(e) => {
                     e.preventDefault(); // Prevent page reload
                     GoogleMechanism();
@@ -319,13 +315,26 @@ const Login = () => {
                 autoLoad={false}
                 fields="name,email,picture"
                 onSuccess={(response)=>{
+
                   handleSuccess("Login Successful");
+
                 }}
+                onFail={(err)=>{
+                  handleError(err)
+                }
+                }
                 onProfileSuccess={(response) => {
                   responseFacebook(response)
                 }}
                 render={renderProps => (
-                  <button>
+                  <button
+                  type="button"
+                  onClick={(e)=>{
+                    e.preventDefault();
+                    renderProps.onClick();
+                  }}
+                  disabled= {renderProps.isDisabled}
+                  >
                   <img src="/petopia/facebook-icon.png" alt="Facebook" width="20" />
                     Facebook
                   </button>

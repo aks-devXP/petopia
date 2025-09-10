@@ -1,28 +1,36 @@
 import { Filter } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Category.css'
 
 export default function Category({
-  categories = [],
-  selectedCategories = [],
-  onChange = () => {}
+  categories = [],              // array of strings e.g. ["Dog","Cat",...]
+  selectedCategories = [],      // array of strings (the committed selection)
+  onChange = () => {},          // (nextSelected: string[]) => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [tempCats, setTempCats] = useState(selectedCategories)
 
-  const isAllSelected = selectedCategories.length === 0
+  // When opening the modal, copy the committed selection into temp
+  useEffect(() => {
+    if (isOpen) setTempCats(selectedCategories)
+  }, [isOpen, selectedCategories])
 
-  function toggleCategory(catId) {
-    let next
-    if (selectedCategories.includes(catId)) {
-      next = selectedCategories.filter(id => id !== catId)
-    } else {
-      next = [...selectedCategories, catId]
-    }
-    onChange(next)
+  const isAllSelected = tempCats.length === 0
+
+  function toggleTempCategory(cat) {
+    setTempCats(prev =>
+      prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
+    )
   }
 
-  function clearAll() {
-    onChange([])
+  function clearAllTemp() {
+    setTempCats([])
+  }
+
+  // Close modal and APPLY the temp selection to parent
+  function closeAndApply() {
+    onChange(tempCats)
+    setIsOpen(false)
   }
 
   return (
@@ -40,19 +48,19 @@ export default function Category({
       {isOpen && (
         <div
           className="modal-backdrop"
-          onClick={() => setIsOpen(false)}
+          onClick={closeAndApply}                 // backdrop click applies & closes
         >
           <div
             className="modal-content"
-            onClick={e => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}   // prevent backdrop close
           >
             {/* Header */}
             <div className="modal-header">
               <h3>Filter by Categories</h3>
               <button
                 className="modal-close-btn"
-                onClick={() => setIsOpen(false)}
-                aria-label="Close"
+                onClick={closeAndApply}          // close button applies & closes
+                aria-label="Close and apply"
               >
                 ×
               </button>
@@ -61,27 +69,35 @@ export default function Category({
             {/* Buttons */}
             <div className="category-filter-multi">
               <button
-                className={`category-btn ${
-                  isAllSelected ? 'active' : ''
-                }`}
-                onClick={clearAll}
+                className={`category-btn ${isAllSelected ? 'active' : ''}`}
+                onClick={clearAllTemp}
               >
                 All
               </button>
 
               {categories.map(cat => (
                 <button
-                  key={cat.id}
+                  key={cat}
                   className={`category-btn ${
-                    selectedCategories.includes(cat.id)
-                      ? 'active'
-                      : ''
+                    tempCats.includes(cat) ? 'active' : ''
                   }`}
-                  onClick={() => toggleCategory(cat.id)}
+                  onClick={() => toggleTempCategory(cat)}
                 >
-                  {cat.name}
+                  {cat}
                 </button>
               ))}
+            </div>
+
+            {/* Optional footer controls */}
+            <div className="flex gap-2 justify-center mt-2 mx-2">
+              {/* If you want a cancel that discards changes, uncomment:
+              <button className="btn-secondary" onClick={() => setIsOpen(false)}>
+                Cancel
+              </button>
+              */}
+              <button className="category_apply-btn" onClick={closeAndApply}>
+                Apply
+              </button>
             </div>
           </div>
         </div>

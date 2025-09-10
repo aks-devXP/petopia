@@ -1,9 +1,11 @@
+import { useQueries } from '@tanstack/react-query'
 import React, { useEffect, useRef, useState } from 'react'
+import { getPetCount, getPets, getUniquePetCategories } from '../API/guide'
 import Pagination from '../Components/General/Pagination'
 import Category from '../Components/Guide/Category'
 import Lister from '../Components/Guide/Lister'
 import PawSearchBar from '../Components/Guide/PawSearchBar'
-import { getAllAnimals, getAnimalCount } from '../Util/Guide/AnimalService'
+import Loader from '../Components/Loader/Loader'
 import { urlChanger } from '../Util/general/Url'
 
 const ALL_CATEGORIES = [
@@ -14,23 +16,69 @@ const ALL_CATEGORIES = [
   { id: 'Reptile', name: 'Reptile' },
   { id: 'Rodent', name: 'Rodent' },
 ]
+
 export default function GuideDisplay({ count = 8, maxVisiblePages = 5 }) {
   const [selectedCats, setSelectedCats] = useState([])
   const [page, setPage] = useState(1)
-  const [endPage, setEndPage] = useState(5)
-  const [animals, setAnimals] = useState([])
   const [loaded, setLoaded] = useState(false)
 
-  // flag to prevent pushState when handling popstate
+  // prevent pushState while handling popstate
   const isPopNavRef = useRef(false)
 
-  // Parse initial state from URL on first render
+  // -------- React Query: list + total count + categories (in parallel) --------
+  const [listQ, countQ, catQ] = useQueries({
+    queries: [
+      {
+        // Paged animals for current filters
+        queryKey: ['guide-pets', 'list', { page, count, selectedCats }],
+        queryFn: async ({ queryKey, signal }) => {
+          const { page, count, selectedCats } = queryKey[2]
+          
+          return await getPets(page - 1, selectedCats, count, signal) 
+        },
+        keepPreviousData: true,
+        refetchOnWindowFocus: false,
+        staleTime: 120_000,
+      },
+      {
+        // Total items for current filters (for endPage)
+        queryKey: ['guide-pets', 'count', { selectedCats }],
+        queryFn: async ({ queryKey, signal }) => {
+          const { selectedCats } = queryKey[2]
+          return getPetCount(selectedCats, signal)
+        },
+        refetchOnWindowFocus: false,
+        staleTime: 120_000,
+      },
+      {
+        // All unique categories 
+        queryKey: ['guide-pets', 'categories'],
+        queryFn: async ({ signal }) => {
+          // If you don't yet have an endpoint, return undefined and we'll fallback
+          return getUniquePetCategories(signal)
+        },
+        refetchOnWindowFocus: false,
+        staleTime: 10 * 60_000,
+      },
+    ],
+  })
+
+  // -------- Derive data for UI from queries --------
+  const animals = listQ.data ?? []
+  const total = countQ.data ?? 0
+  const endPage = Math.max(1, Math.ceil(total / count))
+  const categories = catQ.data?? ALL_CATEGORIES;
+
+  // show loader while first load or any fetch in-flight
+  const isFetching = !loaded || listQ.isFetching || countQ.isFetching || catQ.isFetching
+
+  // -------- On mount: hydrate state from URL (no pushState here) --------
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const urlPage = parseInt(params.get('page') || '1', 10)
     const catsParam = params.get('categories')
-    
     const cats = catsParam ? catsParam.split(',').filter(Boolean) : []
+
     setSelectedCats(cats)
     setPage(Number.isFinite(urlPage) && urlPage > 0 ? urlPage : 1)
 
@@ -40,36 +88,28 @@ export default function GuideDisplay({ count = 8, maxVisiblePages = 5 }) {
     return () => window.removeEventListener('load', onLoad)
   }, [])
 
-  // Compute animals when page/filters change
+  // -------- When filters change, clamp page if it goes out of range --------
   useEffect(() => {
-    setAnimals(getAllAnimals(page, count, selectedCats))
-  }, [page, count, selectedCats])
-
-  // Recompute total pages when filters/count change
-  useEffect(() => {
-    const total = getAnimalCount(selectedCats)
-    const pages = Math.max(1, Math.ceil(total / count))
-    setEndPage(pages)
-    if (page > pages) {
+    // When countQ finishes, endPage is derived automatically (no need to set local endPage)
+    // If current page is beyond endPage (e.g., fewer results after filtering), reset to 1
+    if (page > endPage) {
       setPage(1)
-      
     }
-  }, [selectedCats, count])
+  }, [selectedCats, count, endPage, page])
 
-  // Sync URL when state changes — but skip if we arrived via popstate
+  // -------- Sync URL on state change — skip if we're handling popstate --------
   useEffect(() => {
     if (!loaded) return
     if (isPopNavRef.current) {
-      isPopNavRef.current = false // consume the flag
+      isPopNavRef.current = false
       return
     }
-    urlChanger(selectedCats, page) // pushState ONLY for user-initiated changes
+    urlChanger(selectedCats, page)
   }, [selectedCats, page, loaded])
 
-  // Handle Back/Forward
+  // -------- Back/Forward handling (only set state; do not push) --------
   useEffect(() => {
     const handlePopState = (ev) => {
-      // mark this render as pop navigation so we don't push a new entry
       isPopNavRef.current = true
 
       const params = new URLSearchParams(window.location.search)
@@ -80,7 +120,6 @@ export default function GuideDisplay({ count = 8, maxVisiblePages = 5 }) {
       if (Array.isArray(catsFromState)) {
         setSelectedCats(catsFromState)
       } else {
-        // fall back to query param if state missing
         const catsParam = params.get('categories')
         const cats = catsParam ? catsParam.split(',').filter(Boolean) : []
         setSelectedCats(cats)
@@ -90,15 +129,21 @@ export default function GuideDisplay({ count = 8, maxVisiblePages = 5 }) {
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
+  // -------- Handlers --------
   const changePageHandler = (nextPage) => {
     if (nextPage === page) return
-    setPage(nextPage) 
+    setPage(nextPage)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const onCategoriesChange = (cats) => {
     setSelectedCats(cats)
-    setPage(1)
+    setPage(1) // reset to first page on filter change
+  }
+
+  // -------- Render --------
+  if (isFetching) {
+    return <Loader />
   }
 
   return (
@@ -109,7 +154,7 @@ export default function GuideDisplay({ count = 8, maxVisiblePages = 5 }) {
         </div>
         <div>
           <Category
-            categories={ALL_CATEGORIES}
+            categories={categories}
             selectedCategories={selectedCats}
             onChange={onCategoriesChange}
           />

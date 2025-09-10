@@ -87,8 +87,27 @@
   color: #fff;
 }
 
+/* Apply Button */
+.category_apply-btn{
+ background-color: rgb(79, 55, 152);
+  padding: 8px 16px;
+  color: wheat;
+  height: 32px;
+  margin-bottom: 0.5rem;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+.category_apply-btn:hover {
+  background-color: rgb(99, 70, 202);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+}
+
 /* simple fadeIn */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95) }
   to   { opacity: 1; transform: scale(1) }
 }
+
