@@ -24,6 +24,43 @@ export async function GetPets ()  {
   }
 }
 
+export async function GetAdoptionPets(city) {
+  try {
+    const params = city ? `?city=${encodeURIComponent(city)}` : ''
+    const response = await fetch(`${baseUrl}/adoption/public${params}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+    const data = await response.json()
+    if (!data.success) {
+      throw new Error(data.message || 'Failed to fetch pets')
+    }
+    return data.pets
+  } catch (error) {
+    handleError(error.message)
+  }
+}
+
+export async function CreateAdoptionPet(pet) {
+  try {
+    const response = await fetch(`${baseUrl}/adoption/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(pet),
+    });
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.message || 'Failed to create adoption listing');
+    }
+    return data;
+  } catch (error) {
+    handleError(error.message)
+  }
+}
+
 export async function CreatePet(pet) {
   try {
     console.log("Pet", pet);
@@ -86,4 +123,3 @@ export async function DeletePet(petId) {
     handleError(error.message);
   }
 }
-
