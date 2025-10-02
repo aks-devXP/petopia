@@ -31,6 +31,7 @@ import List from './Pages/admin/List'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Guide1 from './Pages/admin/guide/Guide1'
+import GS from './Pages/admin/guide/Guide'
 import GuideDisplay from './Pages/admin/guide/GuideDisplay'
 import NGO from './Pages/admin/ngo'
 
@@ -52,6 +53,7 @@ function App() {
         <Route path="/list" element={<List/>}></Route>
         <Route path='/dashboard/:option' element={<UserDashboard/>}></Route>
         <Route path="/guide/:id" element={<Guide1/>}></Route>
+        <Route path="/gs" element={<GS/>}></Route>
         <Route path="/vet" element={<VetHome/>}></Route>
         <Route path="/vet-docs" element={<VetDocs/>}></Route>
         <Route path="/vet-book/:id" element={<VetBook/>}></Route>
