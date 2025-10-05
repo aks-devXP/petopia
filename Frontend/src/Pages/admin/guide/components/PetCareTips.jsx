@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Dog, Cat, Utensils, Scissors, GraduationCap } from "lucide-react";
-import tips from "../../Data/PetCareTips.json";
+import tips from "../../../../Data/petCareTips";
 
 export default function PetCareTips({ petSelected, tipSelected }) {
 

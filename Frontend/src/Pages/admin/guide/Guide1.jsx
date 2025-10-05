@@ -9,8 +9,8 @@ import grapes from '@assets/Food/grapes.svg';
 import onion from '@assets/Food/onion.svg';
 import vegetables from '@assets/Food/vegetables.svg';
 import germanShepherd from '@assets/PetGuide/german shepherd.jpg';
-import InfoRow from '../../../components/Guide/InfoRow';
-import InfoSection from '../../../components/Guide/InfoSection';
+import InfoRow from './components/InfoRow';
+import InfoSection from './components/InfoSection';
 import { getAnimalById } from '../../../Util/Guide/AnimalService';
 export default function Guide1Page() {
   const id = useParams().id

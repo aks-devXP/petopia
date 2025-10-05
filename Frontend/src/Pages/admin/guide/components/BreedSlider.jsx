@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-import bombaycat from "../../assets/PetGuide/Home/bombaycat.jpg";
-import germanshepherd from "../../assets/PetGuide/Home/germanshepherd.jpeg";
-import goldenretriever from "../../assets/PetGuide/Home/goldenretriever.jpg";
-import indianpariah from "../../assets/PetGuide/Home/indianpariah.jpg";
-import labradorretriever from "../../assets/PetGuide/Home/labradorretriever.webp";
-import mainecoonJPG from "../../assets/PetGuide/Home/mainecoon.jpg";
-import mainecoonWEBP from "../../assets/PetGuide/Home/mainecoon.webp";
-import ragdoll from "../../assets/PetGuide/Home/ragdoll.jpg";
-import shihtzu from "../../assets/PetGuide/Home/shihtzu.jpeg";
-import siamese from "../../assets/PetGuide/Home/siamese.jpg";
-import spottedcatAVIF from "../../assets/PetGuide/Home/spottedcat.avif";
-import spottedcatJPEG from "../../assets/PetGuide/Home/spottedcat.jpeg";
+import bombaycat from "@assets/PetGuide/Home/bombaycat.jpg";
+import germanshepherd from "@assets/PetGuide/Home/germanshepherd.jpeg";
+import goldenretriever from "@assets/PetGuide/Home/goldenretriever.jpg";
+import indianpariah from "@assets/PetGuide/Home/indianpariah.jpg";
+import labradorretriever from "@assets/PetGuide/Home/labradorretriever.webp";
+import mainecoonJPG from "@assets/PetGuide/Home/mainecoon.jpg";
+import mainecoonWEBP from "@assets/PetGuide/Home/mainecoon.webp";
+import ragdoll from "@assets/PetGuide/Home/ragdoll.jpg";
+import shihtzu from "@assets/PetGuide/Home/shihtzu.jpeg";
+import siamese from "@assets/PetGuide/Home/siamese.jpg";
+import spottedcatAVIF from "@assets/PetGuide/Home/spottedcat.avif";
+import spottedcatJPEG from "@assets/PetGuide/Home/spottedcat.jpeg";
 
 const dogBreeds = [
   { name: "German Shepherd", image: germanshepherd },

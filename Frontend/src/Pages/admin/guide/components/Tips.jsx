@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import Training from "../../assets/PetGuide/Home/training.png";
-import Feeding from "../../assets/PetGuide/Home/feeding.png";
-import Grooming from "../../assets/PetGuide/Home/grooming.png";
+import Training from "@assets/PetGuide/Home/training.png";
+import Feeding from "@assets/PetGuide/Home/feeding.png";
+import Grooming from "@assets/PetGuide/Home/grooming.png";
 import { SvgBlob1 } from './SvgBlob1'
 import { SvgBlob2 } from './SvgBlob2'
 import { SvgBlob3 } from './SvgBlob3'
-import Doggy from "../../assets/PetGuide/Home/doggy.png";
-import Cat from "../../assets/PetGuide/Home/cat.png";
+import Doggy from "@assets/PetGuide/Home/doggy.png";
+import Cat from "@assets/PetGuide/Home/cat.png";
 import PetToggle from './PetToggle';
 import PetCareTips from './PetCareTips';
 
