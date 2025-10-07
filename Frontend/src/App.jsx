@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import routes from "./routes";
+import routes from "./Routes";
 import "react-toastify/ReactToastify.css";
 
 gsap.registerPlugin(ScrollTrigger);

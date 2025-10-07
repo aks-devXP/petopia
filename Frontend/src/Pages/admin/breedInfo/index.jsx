@@ -94,7 +94,7 @@ function BreedInfo() {
   };
 
   return (
-    <div className="container mx-auto p-6 space-y-8 bg-[#f5f5dc]">
+    <div className="p-6 space-y-8 bg-[#f5f5dc]">
       <BasicInfo data={dummyData} />
       <div className='flex flex-col gap-8 p-6 bg-[#D8DBBD] rounded-2xl'>
           <RatingSection data={dummyData} />
