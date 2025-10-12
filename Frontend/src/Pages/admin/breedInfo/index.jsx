@@ -1,105 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+
 import AnatomySection from './components/AnatomySection';
 import BasicInfo from './components/BasicInfo';
 import CareTips from './components/CareTips';
 import RatingSection from './components/RatingSection';
 
 function BreedInfo() {
-  const dummyData = {
-    breed: "German Shepherd",
-    species: "Dog",
-    general_info: {
-      breedGroup: "Working",
-      description: "German Shepherds are intelligent, loyal, and protective dogs, originally bred in Germany as herding and working dogs.",
-      temperament: "Smart, loyal, and protective",
-      height: "22 to 26 inches",
-      weight: "50 to 90 pounds",
-      lifeExpectancy: "7 to 10 years"
-    },
-    ratings: {
-      energyLevel: 5,
-      barkingLevel: 4,
-      drooling: 1,
-      shedding: 5,
-      groomingNeeds: 5,
-      trainability: 5,
-      compatibilityWithKids: 4,
-      compatibilityWithOtherPets: 2,
-      apartmentSuitability: 2,
-      canStayAlone: 1,
-      familyFriendly: 3,
-      warmWeatherSuitability: 3,
-      coldWeatherSuitability: 4
-    },
-    physical_characteristics: {
-      ears: "Ears pert ending in point, slant forward to frame face.",
-      head: "Well-proportioned wedge-shaped head, strong muzzle.",
-      fur: "Thick undercoat, coarse top coat, distinctive colorings of deep black and tan, silver, and white.",
-      body: "Muscular, strong body, lanky with sense of balance and even proportion, firm ribs and chest, not stocky.",
-      tail: "Thick, long hair on tail, slightly longer on underside."
-    },
-    history: [
-      "German Shepherds were originally bred in Germany in the late 19th century.",
-      "They were developed for their intelligence and working ability, particularly in herding and protection."
-    ],
-    care: {
-      exercise: "German Shepherds need regular exercise to maintain physical and mental health.",
-      grooming: "Expect significant shedding; they require regular brushing.",
-      training: "Early training is key as they grow into large, strong dogs."
-    },
-    diet: {
-      recommended: [
-        "High-quality protein sources (chicken, beef, fish)",
-        "Vegetables and fruits (carrots, apples, blueberries)",
-        "Whole grains (brown rice, oatmeal)"
-      ],
-      notRecommended: [
-        "Chocolate",
-        "Grapes and raisins",
-        "Onions and garlic",
-        "Excessively fatty or processed foods"
-      ]
-    },
-    health: {
-      commonIssues: [
-        "Hip Dysplasia",
-        "Elbow Dysplasia",
-        "Degenerative Myelopathy",
-        "Bloat (Gastric Dilatation-Volvulus)"
-      ],
-      symptomsToWatch: [
-        "Swollen or distended abdomen",
-        "Abdominal pain",
-        "Unproductive retching/dry heaving",
-        "Drooling",
-        "Pacing/restlessness",
-        "Lethargy"
-      ],
-      preventiveTips: [
-        "Feed smaller, more frequent meals instead of one big meal.",
-        "Don't allow your dog to gorge on food or water, use a slow feeder if necessary.",
-        "No exercise for a minimum of one hour before or two hours after meals.",
-        "Talk to your veterinarian about a gastropexy, a preventative procedure for high-risk dogs."
-      ]
-    },
-    owner_tips: [
-      "German Shepherds need daily exercise to prevent destructive behavior.",
-      "They thrive when given a 'job' or task due to their working background.",
-      "Naturally protective, they may bark frequently and be reserved with guests."
-    ],
-    images: {
-      primary: 'https://via.placeholder.com/600x400',
-      secondary: 'https://via.placeholder.com/600x400'
-    }
-  };
+  const { slug } = useParams();
+  const [data, setData] = useState(null);
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const ac = new AbortController();
+    (async () => {
+      try {
+        setLoading(true);
+        setErr("");
+        const res = await fetch(`/api/breeds/${slug}`, { signal: ac.signal });
+        if (!res.ok) throw new Error(`Failed to load breed (${res.status})`);
+        const json = await res.json();
+        setData(json);
+      } catch (e) {
+        if (e.name !== 'AbortError') setErr(e.message || 'Failed to load breed');
+      } finally {
+        setLoading(false);
+      }
+    })();
+    return () => ac.abort();
+  }, [slug]);
+
+  if (loading) return <div className="p-6">Loading…</div>;
+  if (err) return (
+    <div className="p-6">
+      <p className="text-red-600 mb-3">{err}</p>
+      <Link to="/breed-info" className="text-brand-600 underline">Back to all breeds</Link>
+    </div>
+  );
+  if (!data) return null;
 
   return (
-    <div className="p-6 space-y-8 bg-[#f5f5dc]">
-      <BasicInfo data={dummyData} />
-      <div className='flex flex-col gap-8 p-6 bg-[#D8DBBD] rounded-2xl'>
-          <RatingSection data={dummyData} />
-          <AnatomySection data={dummyData} />
-          <CareTips data={dummyData} />
+    <div className="container mx-auto p-6 space-y-8 bg-[#f5f5dc]">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">{data.breed}</h1>
+        <Link to="/breed-info" className="text-sm underline">← All breeds</Link>
+      </div>
+
+      <BasicInfo data={data} />
+      <div className="flex flex-col gap-8 p-6 bg-[#D8DBBD] rounded-2xl">
+        <RatingSection data={data} />
+        <AnatomySection data={data} />
+        <CareTips data={data} />
       </div>
     </div>
   );

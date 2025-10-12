@@ -43,10 +43,13 @@ import GS from "../Pages/admin/guide/Guide";
 import Guide1 from "../Pages/admin/guide/Guide1";
 import GuideDisplay from "../Pages/admin/guide/GuideDisplay";
 
-// Others
+// News
 import News from "../Pages/admin/news";
 import NewsPage from "../Pages/admin/news/NewsPage";
-import BreedInfo from "../Pages/admin/breedInfo";
+
+//  Breed Info (new list + existing viewer)
+import BreedList from "../Pages/admin/breedInfo/BreedList";
+import BreedInfo from "../Pages/admin/breedInfo"; // we'll replace its internals to fetch by slug
 
 const routes = (
   <>
@@ -76,7 +79,8 @@ const routes = (
       <Route path="/guide-list" element={<GuideDisplay />} />
 
       {/* Breed Info */}
-      <Route path="/breed-info" element={<BreedInfo />} />
+      <Route path="/breed-info" element={<BreedList />} />
+      <Route path="/breed-info/:slug" element={<BreedInfo />} />
 
       {/* Vets */}
       <Route path="/vet" element={<VetHome />} />
