@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import germanShepherd from '@assets/PetGuide/germanShepherd.png';
 
 const BasicInfo = ({ data }) => {
   const { breed, species, general_info = {}, images } = data;
+  const imageSrc = images?.primary || images?.secondary || '/petopia/vite.svg';
 
   return (
     <div className=" text-black">
@@ -27,8 +27,8 @@ const BasicInfo = ({ data }) => {
         <div className="w-full p-5 justify-center flex items-center">
           <img
             className="h-full w-full object-cover rounded-lg"
-            src={ germanShepherd }
-            alt={`${breed} primary`}
+            src={imageSrc}
+            alt={`${breed || species || 'Pet'} image`}
           />
         </div>
       </div>
@@ -56,3 +56,4 @@ BasicInfo.propTypes = {
 };
 
 export default BasicInfo;
+ 

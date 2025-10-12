@@ -37,19 +37,13 @@ import AllCampaigns from "../Pages/admin/ngo/AllCampaigns";
 import Volunteer from "../Pages/admin/ngo/Volunteer";
 import ReportCrueltyForm from "../components/NGO comp/ReportCrueltyForm";
 
-// Guide
-import Dictionary from "../Pages/admin/guide/Dictionary";
-import GS from "../Pages/admin/guide/Guide";
-import Guide1 from "../Pages/admin/guide/Guide1";
-import GuideDisplay from "../Pages/admin/guide/GuideDisplay";
-
 // News
 import News from "../Pages/admin/news";
 import NewsPage from "../Pages/admin/news/NewsPage";
 
-//  Breed Info (new list + existing viewer)
-import BreedList from "../Pages/admin/breedInfo/BreedList";
-import BreedInfo from "../Pages/admin/breedInfo"; // we'll replace its internals to fetch by slug
+//  Breed Info 
+import BreedList from "../Pages/admin/breedList";
+import BreedInfo from "../Pages/admin/breedInfo"; 
 
 const routes = (
   <>
@@ -71,12 +65,6 @@ const routes = (
 
       {/* User */}
       <Route path="/dashboard/:option" element={<UserDashboard />} />
-
-      {/* Guide */}
-      <Route path="/guide" element={<Dictionary />} />
-      <Route path="/guide/:id" element={<Guide1 />} />
-      <Route path="/gs" element={<GS />} />
-      <Route path="/guide-list" element={<GuideDisplay />} />
 
       {/* Breed Info */}
       <Route path="/breed-info" element={<BreedList />} />

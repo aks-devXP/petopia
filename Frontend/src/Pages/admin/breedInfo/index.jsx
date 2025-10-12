@@ -42,10 +42,6 @@ function BreedInfo() {
 
   return (
     <div className="container mx-auto p-6 space-y-8 bg-[#f5f5dc]">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{data.breed}</h1>
-        <Link to="/breed-info" className="text-sm underline">← All breeds</Link>
-      </div>
 
       <BasicInfo data={data} />
       <div className="flex flex-col gap-8 p-6 bg-[#D8DBBD] rounded-2xl">

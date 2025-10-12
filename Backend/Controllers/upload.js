@@ -1,4 +1,4 @@
-const cloudinary = require('../Middlewares/cloudinary');
+const cloudinary = require('../Configs/cloudinary');
 
 const uploadProfileImage  =  async (req, res) => {
   try {

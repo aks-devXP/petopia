@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import germanShepherd from '@assets/PetGuide/germanShepherd.png';
 
 const AnatomySection = ({ data }) => {
-  const { physical_characteristics = {} } = data;
+  const { physical_characteristics = {}, images } = data;
+  const imageSrc = images?.secondary || images?.primary || '/petopia/vite.svg';
 
   return (
     <div className="text-black px-6">
@@ -12,9 +12,9 @@ const AnatomySection = ({ data }) => {
         <dl className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="w-full flex justify-center items-center">
             <img
-              className="w-full "
-              src={germanShepherd}
-              alt="German Shepherd Anatomy"
+              className="w-full object-contain"
+              src={imageSrc}
+              alt="Breed anatomy"
             />
           </div>
           <div className="p-5 flex flex-col justify-center">

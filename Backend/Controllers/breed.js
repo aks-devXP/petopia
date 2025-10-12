@@ -42,15 +42,27 @@ exports.getBreedBySlug = async (req, res, next) => {
   try {
     const doc = await Breed.findOne({ slug: req.params.slug });
     if (!doc) return res.status(404).json({ message: 'Breed not found' });
-    res.json(doc.toJSON());
+    const json = doc.toJSON();
+    if (json.ratings && json.ratings.vocalizationLevel === undefined && json.ratings.barkingLevel !== undefined) {
+      json.ratings.vocalizationLevel = json.ratings.barkingLevel;
+      delete json.ratings.barkingLevel;
+    }
+    res.json(json);
   } catch (e) { next(e); }
 };
 
 // create (admin)
 exports.createBreed = async (req, res, next) => {
   try {
-    const body = req.body; // same shape as your UI (images can be empty)
-    const created = await Breed.create({ ...body, images: { primary: {}, secondary: {} } });
+    const body = req.body || {}; // same shape as your UI (images can be empty)
+    // Normalize ratings: map legacy barkingLevel -> vocalizationLevel
+    if (body.ratings && body.ratings.barkingLevel !== undefined && body.ratings.vocalizationLevel === undefined) {
+      body.ratings.vocalizationLevel = body.ratings.barkingLevel;
+      delete body.ratings.barkingLevel;
+    }
+    // Always control images server-side to avoid casting errors from UI strings
+    const { images: _ignored, ...rest } = body;
+    const created = await Breed.create({ ...rest, images: { primary: {}, secondary: {} } });
     res.status(201).json(created.toJSON());
   } catch (e) { next(e); }
 };
@@ -59,7 +71,16 @@ exports.createBreed = async (req, res, next) => {
 exports.updateBreed = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const updates = req.body;
+    const updates = { ...(req.body || {}) };
+    // Normalize ratings: map legacy barkingLevel -> vocalizationLevel
+    if (updates.ratings && updates.ratings.barkingLevel !== undefined && updates.ratings.vocalizationLevel === undefined) {
+      updates.ratings = { ...updates.ratings, vocalizationLevel: updates.ratings.barkingLevel };
+      delete updates.ratings.barkingLevel;
+    }
+    // Images are managed via PATCH /:id/images; ignore any direct images payload to prevent cast errors
+    if (Object.prototype.hasOwnProperty.call(updates, 'images')) {
+      delete updates.images;
+    }
     const doc = await Breed.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
     if (!doc) return res.status(404).json({ message: 'Breed not found' });
     res.json(doc.toJSON());
@@ -69,6 +90,9 @@ exports.updateBreed = async (req, res, next) => {
 // upload/replace one image (admin)
 exports.updateBreedImage = async (req, res, next) => {
   try {
+    if (!cloudinary || !cloudinary.uploader || typeof cloudinary.uploader.upload_stream !== 'function') {
+      return res.status(500).json({ message: 'Cloudinary not configured. Check Backend/Configs/cloudinary.js and environment variables.' });
+    }
     const { id } = req.params;
     const type = (req.query.type || '').toLowerCase();
     if (!['primary', 'secondary'].includes(type)) {
@@ -99,5 +123,26 @@ exports.updateBreedImage = async (req, res, next) => {
     await doc.save();
 
     res.json({ id: doc.id, images: { primary: doc.images.primary.url || '', secondary: doc.images.secondary.url || '' } });
+  } catch (e) { next(e); }
+};
+
+// delete (admin)
+exports.deleteBreed = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const doc = await Breed.findById(id);
+    if (!doc) return res.status(404).json({ message: 'Breed not found' });
+
+    // best-effort cleanup of existing images in Cloudinary
+    try {
+      const pubPrimary = doc.images?.primary?.public_id;
+      const pubSecondary = doc.images?.secondary?.public_id;
+      if (pubPrimary) await cloudinary.uploader.destroy(pubPrimary);
+      if (pubSecondary) await cloudinary.uploader.destroy(pubSecondary);
+    } catch (_) {}
+
+    await doc.deleteOne();
+
+    return res.status(200).json({ success: true, id });
   } catch (e) { next(e); }
 };

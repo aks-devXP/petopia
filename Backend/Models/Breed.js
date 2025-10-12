@@ -22,19 +22,19 @@ const BreedSchema = new mongoose.Schema(
     },
 
     ratings: {
-      energyLevel: { type: Number, min: 1, max: 5 },
-      barkingLevel: { type: Number, min: 1, max: 5 },
-      drooling: { type: Number, min: 1, max: 5 },
-      shedding: { type: Number, min: 1, max: 5 },
-      groomingNeeds: { type: Number, min: 1, max: 5 },
-      trainability: { type: Number, min: 1, max: 5 },
-      compatibilityWithKids: { type: Number, min: 1, max: 5 },
-      compatibilityWithOtherPets: { type: Number, min: 1, max: 5 },
-      apartmentSuitability: { type: Number, min: 1, max: 5 },
-      canStayAlone: { type: Number, min: 1, max: 5 },
-      familyFriendly: { type: Number, min: 1, max: 5 },
-      warmWeatherSuitability: { type: Number, min: 1, max: 5 },
-      coldWeatherSuitability: { type: Number, min: 1, max: 5 }
+      energyLevel: { type: Number, min: 0, max: 5 },
+      vocalizationLevel: { type: Number, min: 0, max: 5 },
+      drooling: { type: Number, min: 0, max: 5 },
+      shedding: { type: Number, min: 0, max: 5 },
+      groomingNeeds: { type: Number, min: 0, max: 5 },
+      trainability: { type: Number, min: 0, max: 5 },
+      compatibilityWithKids: { type: Number, min: 0, max: 5 },
+      compatibilityWithOtherPets: { type: Number, min: 0, max: 5 },
+      apartmentSuitability: { type: Number, min: 0, max: 5 },
+      canStayAlone: { type: Number, min: 0, max: 5 },
+      familyFriendly: { type: Number, min: 0, max: 5 },
+      warmWeatherSuitability: { type: Number, min: 0, max: 5 },
+      coldWeatherSuitability: { type: Number, min: 0, max: 5 }
     },
 
     physical_characteristics: {

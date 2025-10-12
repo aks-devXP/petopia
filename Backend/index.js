@@ -11,7 +11,27 @@ const keepAlive = require('./keepAlive');
 
 keepAlive.job.start();
 
-app.use(cors({ origin: process.env.FrontEnd }));
+// CORS: allow localhost (any port) + configured FrontEnd for development
+const localhostPattern = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow non-browser or same-origin requests without Origin header
+      if (!origin) return callback(null, true);
+      if (localhostPattern.test(origin)) return callback(null, true);
+      if (process.env.FrontEnd && origin === process.env.FrontEnd) return callback(null, true);
+      // In development, relax CORS more broadly if needed
+      if (process.env.NODE_ENV !== 'production') return callback(null, true);
+      return callback(new Error('Not allowed by CORS'));
+    },
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false,
+  })
+);
+
+// Handle preflight for all routes explicitly
+app.options('*', cors());
 
 // Limit the size of incoming requests to 50mb for image-upload and other large data
 app.use(express.json({ limit: '50mb' }));

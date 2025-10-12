@@ -1,0 +1,718 @@
+{
+  "breeds": [
+    {
+      "breed": "German Shepherd",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Working",
+        "description": "German Shepherds are intelligent, loyal, and protective dogs, originally bred in Germany as herding and working dogs.",
+        "temperament": "Smart, loyal, and protective",
+        "height": "22 to 26 inches",
+        "weight": "50 to 90 pounds",
+        "lifeExpectancy": "9 to 13 years"
+      },
+      "ratings": {
+        "energyLevel": 5,
+        "barkingLevel": 4,
+        "drooling": 1,
+        "shedding": 5,
+        "groomingNeeds": 5,
+        "trainability": 5,
+        "compatibilityWithKids": 4,
+        "compatibilityWithOtherPets": 2,
+        "apartmentSuitability": 2,
+        "canStayAlone": 1,
+        "familyFriendly": 3,
+        "warmWeatherSuitability": 3,
+        "coldWeatherSuitability": 4
+      },
+      "physical_characteristics": {
+        "ears": "Erect, triangular ears",
+        "head": "Wedge-shaped head with strong muzzle",
+        "fur": "Double coat with dense undercoat and coarse outer coat",
+        "body": "Muscular and well-balanced",
+        "tail": "Long, bushy tail that hangs down when relaxed"
+      },
+      "history": [
+        "Developed in Germany in the late 19th century for herding and protection tasks."
+      ],
+      "care": {
+        "exercise": "Requires regular exercise to maintain physical and mental health.",
+        "grooming": "Sheds heavily; regular brushing is necessary.",
+        "training": "Highly trainable; early socialization and obedience training are recommended."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, beef, fish)",
+          "Whole grains (brown rice, oatmeal)",
+          "Vegetables and fruits (carrots, apples, blueberries)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Hip Dysplasia",
+          "Elbow Dysplasia",
+          "Degenerative Myelopathy",
+          "Bloat (Gastric Dilatation-Volvulus)"
+        ],
+        "symptomsToWatch": [
+          "Swollen or distended abdomen",
+          "Abdominal pain",
+          "Unproductive retching/dry heaving",
+          "Drooling",
+          "Pacing/restlessness",
+          "Lethargy"
+        ],
+        "preventiveTips": [
+          "Feed smaller, more frequent meals instead of one big meal.",
+          "Avoid vigorous exercise immediately before or after meals.",
+          "Consult with a veterinarian about preventive measures like gastropexy."
+        ]
+      },
+      "owner_tips": [
+        "Provide daily exercise to prevent boredom and destructive behavior.",
+        "Engage in mental stimulation activities to satisfy their working instincts.",
+        "Socialize early to ensure they are well-rounded and comfortable around strangers."
+      ]
+    },
+    {
+      "breed": "Labrador Retriever",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Sporting",
+        "description": "Labrador Retrievers are friendly, outgoing, and high-spirited dogs.",
+        "temperament": "Friendly, outgoing, and high-spirited",
+        "height": "22.5 to 24.5 inches",
+        "weight": "55 to 80 pounds",
+        "lifeExpectancy": "10 to 12 years"
+      },
+      "ratings": {
+        "energyLevel": 5,
+        "barkingLevel": 3,
+        "drooling": 2,
+        "shedding": 3,
+        "groomingNeeds": 2,
+        "trainability": 5,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 5,
+        "apartmentSuitability": 4,
+        "canStayAlone": 3,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 4,
+        "coldWeatherSuitability": 3
+      },
+      "physical_characteristics": {
+        "ears": "Short, pendant ears",
+        "head": "Broad head with a strong, square muzzle",
+        "fur": "Short, dense, water-resistant coat",
+        "body": "Strong and athletic",
+        "tail": "Thick, tapering tail known as an 'otter' tail"
+      },
+      "history": [
+        "Originated in Newfoundland, Canada, as a fishing and retrieving companion."
+      ],
+      "care": {
+        "exercise": "Requires regular exercise to maintain health and happiness.",
+        "grooming": "Minimal grooming needed; occasional brushing recommended.",
+        "training": "Eager to please and highly trainable; responds well to positive reinforcement."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, lamb, fish)",
+          "Whole grains (brown rice, barley)",
+          "Vegetables and fruits (carrots, spinach, apples)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Hip Dysplasia",
+          "Elbow Dysplasia",
+          "Obesity",
+          "Progressive Retinal Atrophy"
+        ],
+        "symptomsToWatch": [
+          "Limping or favoring a limb",
+          "Excessive weight gain",
+          "Difficulty seeing in low light",
+          "Excessive thirst or urination"
+        ],
+        "preventiveTips": [
+          "Maintain a healthy diet and regular exercise routine.",
+          "Regular veterinary check-ups to monitor weight and joint health.",
+          "Provide mental stimulation to prevent boredom-related behaviors."
+        ]
+      },
+      "owner_tips": [
+        "Ensure daily physical and mental exercise to keep them happy.",
+        "Socialize early to promote well-rounded behavior.",
+        "Provide a balanced diet to maintain optimal health."
+      ]
+    },
+    {
+      "breed": "Golden Retriever",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Sporting",
+        "description": "Golden Retrievers are friendly, tolerant, and intelligent dogs.",
+        "temperament": "Friendly, tolerant, and intelligent",
+        "height": "21.5 to 24 inches",
+        "weight": "55 to 75 pounds",
+        "lifeExpectancy": "10 to 12 years"
+      },
+      "ratings": {
+        "energyLevel": 4,
+        "barkingLevel": 3,
+        "drooling": 2,
+        "shedding": 4,
+        "groomingNeeds": 4,
+        "trainability": 5,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 5,
+        "apartmentSuitability": 4,
+        "canStayAlone": 3,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 3,
+        "coldWeatherSuitability": 4
+      },
+      "physical_characteristics": {
+        "ears": "Medium-sized, pendant ears",
+        "head": "Broad head with a gentle expression",
+        "fur": "Water-repellant double coat with a dense undercoat",
+        "body": "Strong and well-balanced",
+        "tail": "Long, feathered tail that is often carried with a slight upward curve"
+      },
+      "history": [
+        "Developed in Scotland in the mid-19th century for retrieving games during hunting."
+      ],
+      "care": {
+        "exercise": "Requires regular exercise to maintain health and happiness.",
+        "grooming": "Regular brushing needed to manage shedding.",
+        "training": "Highly trainable and eager to please; responds well to positive reinforcement."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, lamb, fish)",
+          "Whole grains (brown rice, barley)",
+          "Vegetables and fruits (carrots, spinach, apples)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Hip Dysplasia",
+          "Elbow Dysplasia",
+          "Cancer",
+          "Heart Issues"
+        ],
+        "symptomsToWatch": [
+          "Limping or favoring a limb",
+          "Unexplained weight loss",
+          "Coughing or difficulty breathing",
+          "Excessive thirst or urination"
+        ],
+        "preventiveTips": [
+          "Maintain a healthy diet and regular exercise routine.",
+          "Regular veterinary check-ups to monitor health.",
+          "Provide mental stimulation to prevent boredom-related behaviors."
+        ]
+      },
+      "owner_tips": [
+        "Ensure daily physical and mental exercise to keep them happy.",
+        "Socialize early to promote well-rounded behavior.",
+        "Provide a balanced diet to maintain optimal health."
+      ]
+    },
+    {
+      "breed": "Beagle",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Hound",
+        "description": "Beagles are curious, merry, and friendly dogs.",
+        "temperament": "Curious, merry, and friendly",
+        "height": "13 to 15 inches",
+        "weight": "20 to 25 pounds",
+        "lifeExpectancy": "12 to 15 years"
+      },
+      "ratings": {
+        "energyLevel": 4,
+        "barkingLevel": 4,
+        "drooling": 2,
+        "shedding": 3,
+        "groomingNeeds": 2,
+        "trainability": 3,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 4,
+        "apartmentSuitability": 4,
+        "canStayAlone": 2,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 3,
+        "coldWeatherSuitability": 3
+      },
+      "physical_characteristics": {
+        "ears": "Long, floppy ears",
+        "head": "Rounded head with a black nose",
+        "fur": "Short, dense coat, commonly tri-colored (black, tan, and white)",
+        "body": "Compact, muscular frame with a straight back",
+        "tail": "Medium-length tail with a slight curve, carried high"
+      },
+      "history": [
+        "Beagles originated in England as scent hounds for hunting small game like rabbits.",
+        "They were developed for their strong sense of smell and ability to work in packs."
+      ],
+      "care": {
+        "exercise": "Beagles are active and require daily exercise to keep them fit and prevent boredom.",
+        "grooming": "Regular brushing is sufficient, but they may shed seasonally.",
+        "training": "Beagles can be a bit stubborn but are generally food-driven, making them trainable with patience."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, lamb, fish)",
+          "Whole grains (brown rice, oatmeal)",
+          "Fruits and vegetables (carrots, apples, blueberries)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Obesity",
+          "Ear Infections",
+          "Hip Dysplasia",
+          "Epilepsy"
+        ],
+        "symptomsToWatch": [
+          "Excessive weight gain",
+          "Scratching or ear infections",
+          "Limping or stiffness in joints",
+          "Seizures"
+        ],
+        "preventiveTips": [
+          "Maintain a healthy weight through portion control and regular exercise.",
+          "Clean ears regularly to avoid infections.",
+          "Provide mental stimulation to prevent boredom-related behaviors."
+        ]
+      },
+      "owner_tips": [
+        "Beagles are known for their strong sense of smell, so keep them in a secured area to avoid escape.",
+        "They enjoy companionship, so consider adopting another dog if possible.",
+        "They need regular training and socialization to ensure they remain well-behaved."
+      ]
+    },
+    {
+      "breed": "Bulldog",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Non-Sporting",
+        "description": "Bulldogs are calm, courageous, and loyal dogs with a distinctive wrinkled face.",
+        "temperament": "Calm, courageous, and loyal",
+        "height": "12 to 16 inches",
+        "weight": "40 to 50 pounds",
+        "lifeExpectancy": "8 to 12 years"
+      },
+      "ratings": {
+        "energyLevel": 2,
+        "barkingLevel": 3,
+        "drooling": 5,
+        "shedding": 3,
+        "groomingNeeds": 3,
+        "trainability": 3,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 4,
+        "apartmentSuitability": 5,
+        "canStayAlone": 3,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 2,
+        "coldWeatherSuitability": 3
+      },
+      "physical_characteristics": {
+        "ears": "Small, floppy ears",
+        "head": "Large, wrinkled face with a pushed-in nose",
+        "fur": "Short, smooth coat",
+        "body": "Compact, muscular body with a broad chest",
+        "tail": "Short, straight tail"
+      },
+      "history": [
+        "Originated in England, bred for bull-baiting and later as companion dogs."
+      ],
+      "care": {
+        "exercise": "Require moderate exercise due to their calm nature.",
+        "grooming": "Minimal grooming; occasional brushing required.",
+        "training": "Can be a bit stubborn, but responsive to positive reinforcement."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, beef, lamb)",
+          "Whole grains (brown rice, oats)",
+          "Vegetables and fruits (carrots, blueberries)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Hip Dysplasia",
+          "Respiratory Issues",
+          "Skin Infections",
+          "Obesity"
+        ],
+        "symptomsToWatch": [
+          "Labored breathing",
+          "Excessive drooling",
+          "Skin irritation",
+          "Difficulty exercising"
+        ],
+        "preventiveTips": [
+          "Regular vet check-ups to monitor respiratory health.",
+          "Provide a balanced diet to maintain weight.",
+          "Keep their skin folds clean and dry to prevent infections."
+        ]
+      },
+      "owner_tips": [
+        "Bulldogs are ideal for apartment living due to their calm demeanor.",
+        "They require minimal exercise but should still have regular walks.",
+        "Be mindful of their breathing, especially in hot weather."
+      ]
+    },
+    {
+      "breed": "Poodle",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Non-Sporting",
+        "description": "Poodles are highly intelligent, active, and proud dogs, known for their curly coats.",
+        "temperament": "Intelligent, active, proud",
+        "height": "10 to 24 inches (depending on the variety)",
+        "weight": "4 to 70 pounds",
+        "lifeExpectancy": "12 to 15 years"
+      },
+      "ratings": {
+        "energyLevel": 4,
+        "barkingLevel": 3,
+        "drooling": 1,
+        "shedding": 2,
+        "groomingNeeds": 5,
+        "trainability": 5,
+        "compatibilityWithKids": 4,
+        "compatibilityWithOtherPets": 4,
+        "apartmentSuitability": 4,
+        "canStayAlone": 3,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 3,
+        "coldWeatherSuitability": 4
+      },
+      "physical_characteristics": {
+        "ears": "Long, elegant, with a slight wave",
+        "head": "Rounded head with a refined expression",
+        "fur": "Curly, dense coat that requires regular grooming",
+        "body": "Compact and well-proportioned",
+        "tail": "Curled tail carried high"
+      },
+      "history": [
+        "Poodles originated in Germany as water retrievers and were later refined in France."
+      ],
+      "care": {
+        "exercise": "Poodles are active and need regular exercise to stay fit and healthy.",
+        "grooming": "Requires frequent grooming to prevent matting of the curly coat.",
+        "training": "Highly trainable due to their intelligence and eagerness to please."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, lamb, fish)",
+          "Whole grains (brown rice, quinoa)",
+          "Vegetables and fruits (carrots, apples, spinach)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Hip Dysplasia",
+          "Epilepsy",
+          "Addison's Disease",
+          "Progressive Retinal Atrophy"
+        ],
+        "symptomsToWatch": [
+          "Limping or favoring a limb",
+          "Seizures",
+          "Excessive thirst or urination",
+          "Difficulty seeing in low light"
+        ],
+        "preventiveTips": [
+          "Regular vet check-ups for monitoring joint and eye health.",
+          "Balanced diet to prevent obesity.",
+          "Regular grooming to maintain healthy skin and coat."
+        ]
+      },
+      "owner_tips": [
+        "Poodles need mental and physical stimulation to stay happy.",
+        "Early socialization is key to prevent any timid behavior.",
+        "Consider professional grooming for maintaining their curly coat."
+      ]
+    },
+    {
+      "breed": "Rottweiler",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Working",
+        "description": "Rottweilers are confident, courageous, and loyal dogs, known for their strength and protective instincts.",
+        "temperament": "Confident, courageous, loyal",
+        "height": "22 to 27 inches",
+        "weight": "80 to 135 pounds",
+        "lifeExpectancy": "8 to 10 years"
+      },
+      "ratings": {
+        "energyLevel": 4,
+        "barkingLevel": 3,
+        "drooling": 3,
+        "shedding": 3,
+        "groomingNeeds": 2,
+        "trainability": 4,
+        "compatibilityWithKids": 4,
+        "compatibilityWithOtherPets": 3,
+        "apartmentSuitability": 3,
+        "canStayAlone": 2,
+        "familyFriendly": 4,
+        "warmWeatherSuitability": 3,
+        "coldWeatherSuitability": 4
+      },
+      "physical_characteristics": {
+        "ears": "Medium-sized, triangular ears",
+        "head": "Broad, muscular head with strong jaws",
+        "fur": "Short, dense coat that is easy to maintain",
+        "body": "Stocky and muscular",
+        "tail": "Short to medium tail that is often docked"
+      },
+      "history": [
+        "Rottweilers originated in Germany and were used as herding and guard dogs."
+      ],
+      "care": {
+        "exercise": "Requires regular exercise to maintain physical fitness and prevent boredom.",
+        "grooming": "Minimal grooming required; occasional brushing is sufficient.",
+        "training": "Trainable but needs firm, consistent training due to their strong-willed nature."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, beef, fish)",
+          "Whole grains (brown rice, oats)",
+          "Vegetables and fruits (carrots, spinach, blueberries)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Hip Dysplasia",
+          "Elbow Dysplasia",
+          "Cardiac issues (heart disease)",
+          "Cancer"
+        ],
+        "symptomsToWatch": [
+          "Limping or favoring a limb",
+          "Fatigue or weakness",
+          "Excessive coughing",
+          "Difficulty breathing"
+        ],
+        "preventiveTips": [
+          "Regular veterinary check-ups to monitor for heart and joint issues.",
+          "Proper diet and exercise to maintain a healthy weight.",
+          "Avoid excessive jumping to prevent joint stress."
+        ]
+      },
+      "owner_tips": [
+        "Rottweilers are excellent family pets when properly trained and socialized.",
+        "Be firm and consistent in training to avoid dominance issues.",
+        "Ensure they receive enough exercise to avoid behavioral problems."
+      ]
+    },
+    {
+      "breed": "Boxer",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Working",
+        "description": "Boxers are playful, energetic, and strong dogs with a great love for family.",
+        "temperament": "Playful, energetic, strong",
+        "height": "21.5 to 25 inches",
+        "weight": "50 to 80 pounds",
+        "lifeExpectancy": "10 to 12 years"
+      },
+      "ratings": {
+        "energyLevel": 5,
+        "barkingLevel": 3,
+        "drooling": 2,
+        "shedding": 3,
+        "groomingNeeds": 2,
+        "trainability": 4,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 3,
+        "apartmentSuitability": 3,
+        "canStayAlone": 2,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 3,
+        "coldWeatherSuitability": 3
+      },
+      "physical_characteristics": {
+        "ears": "Medium-sized, floppy ears",
+        "head": "Square-shaped head with a broad jaw",
+        "fur": "Short, smooth coat",
+        "body": "Muscular and athletic",
+        "tail": "Short, docked tail"
+      },
+      "history": [
+        "Boxers were originally bred in Germany for hunting and as guard dogs."
+      ],
+      "care": {
+        "exercise": "Boxers need regular exercise to burn off their high energy levels.",
+        "grooming": "Minimal grooming required; occasional brushing is sufficient.",
+        "training": "Boxers are intelligent but need firm, consistent training to control their high energy."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, lamb, fish)",
+          "Whole grains (brown rice, oats)",
+          "Vegetables and fruits (carrots, apples, blueberries)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Hip Dysplasia",
+          "Heart Conditions",
+          "Cancer",
+          "Bloat"
+        ],
+        "symptomsToWatch": [
+          "Difficulty breathing",
+          "Unexplained weight loss",
+          "Fatigue",
+          "Excessive drooling"
+        ],
+        "preventiveTips": [
+          "Maintain a healthy weight through portion control and exercise.",
+          "Regular vet check-ups for heart and joint monitoring.",
+          "Avoid overexertion in hot weather."
+        ]
+      },
+      "owner_tips": [
+        "Boxers need a lot of playtime and mental stimulation.",
+        "They are very social dogs and should not be left alone for long periods.",
+        "Make sure they get enough exercise to avoid destructive behavior."
+      ]
+    },
+    {
+      "breed": "Dachshund",
+      "species": "Dog",
+      "general_info": {
+        "breedGroup": "Hound",
+        "description": "Dachshunds are energetic and intelligent dogs, originally bred to hunt small game.",
+        "temperament": "Curious, bold, and playful",
+        "height": "8 to 9 inches",
+        "weight": "16 to 32 pounds",
+        "lifeExpectancy": "12 to 16 years"
+      },
+      "ratings": {
+        "energyLevel": 4,
+        "barkingLevel": 4,
+        "drooling": 1,
+        "shedding": 3,
+        "groomingNeeds": 2,
+        "trainability": 4,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 3,
+        "apartmentSuitability": 4,
+        "canStayAlone": 3,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 4,
+        "coldWeatherSuitability": 3
+      },
+      "physical_characteristics": {
+        "ears": "Long, floppy ears",
+        "head": "Long, narrow head with an alert expression",
+        "fur": "Short to long coat depending on the variety",
+        "body": "Long body with short legs",
+        "tail": "Long, slightly curved tail"
+      },
+      "history": [
+        "Dachshunds were bred in Germany to hunt small game like rabbits and badgers."
+      ],
+      "care": {
+        "exercise": "Dachshunds are energetic and enjoy walks and playtime.",
+        "grooming": "Coat grooming depends on the variety; long-haired Dachshunds need more frequent brushing.",
+        "training": "Dachshunds are independent and can be stubborn, but they respond well to positive reinforcement."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, lamb, fish)",
+          "Whole grains (brown rice, oats)",
+          "Vegetables and fruits (carrots, apples, spinach)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Intervertebral Disc Disease (IVDD)",
+          "Obesity",
+          "Dental issues",
+          "Hip Dysplasia"
+        ],
+        "symptomsToWatch": [
+          "Limping or difficulty walking",
+          "Excessive weight gain",
+          "Bad breath or oral discomfort",
+          "Loss of appetite"
+        ],
+        "preventiveTips": [
+          "Monitor their weight to avoid obesity and back issues.",
+          "Provide joint supplements if recommended by a vet.",
+          "Regular vet visits to monitor overall health."
+        ]
+      },
+      "owner_tips": [
+        "Dachshunds enjoy a lot of interaction and playtime.",
+        "Due to their small size, they adapt well to apartment living.",
+        "Avoid excessive jumping to protect their spine from injury."
+      ]
+    }
+  ]
+}

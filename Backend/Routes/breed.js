@@ -9,5 +9,6 @@ router.get('/:slug', ctrl.getBreedBySlug);
 router.post('/', requireAdmin, ctrl.createBreed);
 router.put('/:id', requireAdmin, ctrl.updateBreed);
 router.patch('/:id/images', requireAdmin, upload.single('image'), ctrl.updateBreedImage);
+router.delete('/:id', requireAdmin, ctrl.deleteBreed);
 
 module.exports = router;

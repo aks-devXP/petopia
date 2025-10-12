@@ -1,0 +1,794 @@
+{
+    "breeds": [
+      {
+        "breed": "Persian Cat",
+        "species": "Cat",
+        "general_info": {
+          "breedGroup": "Purebred",
+          "description": "Persian cats are known for their long, luxurious fur and calm, affectionate nature.",
+          "temperament": "Calm, affectionate, and gentle",
+          "height": "10 to 12 inches",
+          "weight": "7 to 12 pounds",
+          "lifeExpectancy": "12 to 16 years"
+        },
+        "ratings": {
+          "energyLevel": 2,
+          "barkingLevel": 0,
+          "drooling": 1,
+          "shedding": 5,
+          "groomingNeeds": 5,
+          "trainability": 3,
+          "compatibilityWithKids": 4,
+          "compatibilityWithOtherPets": 4,
+          "apartmentSuitability": 5,
+          "canStayAlone": 3,
+          "familyFriendly": 5,
+          "warmWeatherSuitability": 2,
+          "coldWeatherSuitability": 4
+        },
+        "physical_characteristics": {
+          "ears": "Small, rounded ears",
+          "head": "Round face with a flat nose and large, expressive eyes",
+          "fur": "Long, thick coat with a soft undercoat",
+          "body": "Stocky, compact body with short legs",
+          "tail": "Short, bushy tail"
+        },
+        "history": [
+          "Persian cats originated in Persia (modern-day Iran) and were popularized in Europe in the 1600s.",
+          "They were bred for their beautiful coat and calm temperament."
+        ],
+        "care": {
+          "exercise": "Persians are generally low-energy cats and do not require much exercise.",
+          "grooming": "Regular brushing is necessary to maintain their long, dense fur and prevent matting.",
+          "training": "They are gentle and relatively easy to train, though they are not as active as other breeds."
+        },
+        "diet": {
+          "recommended": [
+            "High-quality protein sources (chicken, turkey, fish)",
+            "Wet food to help with hydration",
+            "Low-calorie options for weight management"
+          ],
+          "notRecommended": [
+            "Chocolate",
+            "Grapes and raisins",
+            "Onions and garlic",
+            "Excessively fatty or processed foods"
+          ]
+        },
+        "health": {
+          "commonIssues": [
+            "Polycystic Kidney Disease (PKD)",
+            "Respiratory problems due to flat faces",
+            "Dental issues",
+            "Obesity"
+          ],
+          "symptomsToWatch": [
+            "Excessive drooling",
+            "Labored breathing",
+            "Swollen abdomen",
+            "Lack of appetite"
+          ],
+          "preventiveTips": [
+            "Regular vet check-ups to monitor kidney health and overall wellness.",
+            "Clean their eyes regularly to prevent tear stains.",
+            "Provide a balanced diet to prevent obesity."
+          ]
+        },
+        "owner_tips": [
+          "Persians enjoy quiet, indoor environments and do not need a lot of space.",
+          "They are affectionate but can be quite independent, requiring a calm and patient owner.",
+          "Regular grooming is essential to keep their coat healthy and free from mats."
+        ]
+      },
+      {
+        "breed": "Maine Coon",
+        "species": "Cat",
+        "general_info": {
+          "breedGroup": "Maine Coon",
+          "description": "Maine Coons are large, friendly, and intelligent cats known for their tufted ears and bushy tails.",
+          "temperament": "Affectionate, playful, and sociable",
+          "height": "10 to 16 inches",
+          "weight": "9 to 25 pounds",
+          "lifeExpectancy": "12 to 15 years"
+        },
+        "ratings": {
+          "energyLevel": 4,
+          "barkingLevel": 0,
+          "drooling": 1,
+          "shedding": 3,
+          "groomingNeeds": 4,
+          "trainability": 4,
+          "compatibilityWithKids": 5,
+          "compatibilityWithOtherPets": 5,
+          "apartmentSuitability": 4,
+          "canStayAlone": 3,
+          "familyFriendly": 5,
+          "warmWeatherSuitability": 3,
+          "coldWeatherSuitability": 5
+        },
+        "physical_characteristics": {
+          "ears": "Large ears with tufts at the tips",
+          "head": "Broad, rectangular head with a strong jaw",
+          "fur": "Long, thick, water-resistant coat with a ruff of fur around the neck",
+          "body": "Large, muscular body with a long, bushy tail",
+          "tail": "Long, bushy tail, often carried over their back"
+        },
+        "history": [
+          "The Maine Coon is one of the oldest native North American cat breeds, originating in the state of Maine.",
+          "They were originally farm cats, used for hunting rodents."
+        ],
+        "care": {
+          "exercise": "Maine Coons are active cats and require regular playtime to burn off energy.",
+          "grooming": "Their long coat requires regular brushing to prevent tangling and matting.",
+          "training": "They are intelligent and easy to train, often enjoying puzzle toys and games."
+        },
+        "diet": {
+          "recommended": [
+            "High-quality protein sources (chicken, turkey, fish)",
+            "Wet food to support hydration",
+            "High-fiber diets to maintain digestive health"
+          ],
+          "notRecommended": [
+            "Chocolate",
+            "Grapes and raisins",
+            "Onions and garlic",
+            "Excessively fatty or processed foods"
+          ]
+        },
+        "health": {
+          "commonIssues": [
+            "Hip Dysplasia",
+            "Heart Disease (Hypertrophic Cardiomyopathy)",
+            "Obesity",
+            "Dental Issues"
+          ],
+          "symptomsToWatch": [
+            "Limping or difficulty moving",
+            "Difficulty breathing",
+            "Excessive weight gain",
+            "Drooling or bad breath"
+          ],
+          "preventiveTips": [
+            "Regular vet check-ups to monitor for heart and joint issues.",
+            "Encourage healthy eating habits to avoid obesity.",
+            "Provide mental stimulation to avoid boredom."
+          ]
+        },
+        "owner_tips": [
+          "Maine Coons are known for being friendly and get along well with children and other pets.",
+          "Despite their large size, they often consider themselves lap cats and enjoy spending time with their owners.",
+          "Their thick coats require regular grooming, especially in the shedding seasons."
+        ]
+      },
+      {
+        "breed": "Siamese Cat",
+        "species": "Cat",
+        "general_info": {
+          "breedGroup": "Oriental",
+          "description": "Siamese cats are known for their striking blue eyes, sleek bodies, and vocal nature.",
+          "temperament": "Affectionate, vocal, and playful",
+          "height": "8 to 10 inches",
+          "weight": "6 to 14 pounds",
+          "lifeExpectancy": "12 to 20 years"
+        },
+        "ratings": {
+          "energyLevel": 5,
+          "barkingLevel": 0,
+          "drooling": 1,
+          "shedding": 2,
+          "groomingNeeds": 3,
+          "trainability": 5,
+          "compatibilityWithKids": 4,
+          "compatibilityWithOtherPets": 4,
+          "apartmentSuitability": 5,
+          "canStayAlone": 1,
+          "familyFriendly": 5,
+          "warmWeatherSuitability": 4,
+          "coldWeatherSuitability": 2
+        },
+        "physical_characteristics": {
+          "ears": "Large, pointed ears",
+          "head": "Triangle-shaped head with a long nose and large, almond-shaped eyes",
+          "fur": "Short, fine coat with a distinct color point pattern",
+          "body": "Sleek, slender body with a graceful build",
+          "tail": "Long, thin, tapering tail"
+        },
+        "history": [
+          "Siamese cats originated in Thailand and were considered sacred by Thai royalty.",
+          "They are one of the oldest and most recognizable cat breeds."
+        ],
+        "care": {
+          "exercise": "Siamese cats are energetic and require regular playtime to prevent boredom.",
+          "grooming": "They have a short coat that requires minimal grooming.",
+          "training": "Siamese cats are highly intelligent and can be trained easily, especially with positive reinforcement."
+        },
+        "diet": {
+          "recommended": [
+            "High-quality protein sources (chicken, turkey, fish)",
+            "Wet food to keep them hydrated",
+            "Fiber-rich foods to support digestion"
+          ],
+          "notRecommended": [
+            "Chocolate",
+            "Grapes and raisins",
+            "Onions and garlic",
+            "Excessively fatty or processed foods"
+          ]
+        },
+        "health": {
+          "commonIssues": [
+            "Dental Issues",
+            "Respiratory Issues",
+            "Heart Disease",
+            "Obesity"
+          ],
+          "symptomsToWatch": [
+            "Excessive drooling",
+            "Labored breathing",
+            "Coughing or wheezing",
+            "Weight gain"
+          ],
+          "preventiveTips": [
+            "Regular dental care to prevent gum disease.",
+            "Monitor their diet to avoid obesity.",
+            "Regular vet visits to keep an eye on heart and lung health."
+          ]
+        },
+        "owner_tips": [
+          "Siamese cats are social and should not be left alone for long periods.",
+          "They thrive on interaction and enjoy being the center of attention.",
+          "Be prepared for their vocal nature—they like to 'talk' to their owners!"
+        ]
+      },
+      {
+        "breed": "Bengal Cat",
+        "species": "Cat",
+        "general_info": {
+          "breedGroup": "Hybrid",
+          "description": "Bengal cats are wild-looking, energetic, and playful cats with beautiful spotted or marbled coats.",
+          "temperament": "Energetic, curious, and playful",
+          "height": "9 to 10 inches",
+          "weight": "8 to 15 pounds",
+          "lifeExpectancy": "12 to 16 years"
+        },
+        "ratings": {
+          "energyLevel": 5,
+          "barkingLevel": 0,
+          "drooling": 1,
+          "shedding": 3,
+          "groomingNeeds": 3,
+          "trainability": 5,
+          "compatibilityWithKids": 4,
+          "compatibilityWithOtherPets": 4,
+          "apartmentSuitability": 3,
+          "canStayAlone": 2,
+          "familyFriendly": 4,
+          "warmWeatherSuitability": 5,
+          "coldWeatherSuitability": 3
+        },
+        "physical_characteristics": {
+          "ears": "Medium to large ears with rounded tips",
+          "head": "Broad head with a wild appearance",
+          "fur": "Short to medium length with a luxurious spotted or marbled coat",
+          "body": "Muscular and athletic",
+          "tail": "Long, thick tail"
+        },
+        "history": [
+          "Bengal cats are a hybrid breed, developed by crossing domestic cats with the wild Asian leopard cat."
+        ],
+        "care": {
+          "exercise": "Bengals are very active and require a lot of playtime and exercise.",
+          "grooming": "Regular brushing to maintain their coat and remove loose hairs.",
+          "training": "Bengals are highly intelligent and can be easily trained with patience and consistency."
+        },
+        "diet": {
+          "recommended": [
+            "High-quality protein sources (chicken, turkey, fish)",
+            "Wet food to support hydration",
+            "Vegetables and fruits (carrots, blueberries)"
+          ],
+          "notRecommended": [
+            "Chocolate",
+            "Grapes and raisins",
+            "Onions and garlic",
+            "Excessively fatty or processed foods"
+          ]
+        },
+        "health": {
+          "commonIssues": [
+            "Hip Dysplasia",
+            "Heart Disease",
+            "Progressive Retinal Atrophy",
+            "Obesity"
+          ],
+          "symptomsToWatch": [
+            "Limping or favoring a limb",
+            "Excessive weight gain",
+            "Difficulty breathing",
+            "Poor coat condition"
+          ],
+          "preventiveTips": [
+            "Maintain a healthy weight through proper diet and exercise.",
+            "Regular vet check-ups to monitor heart and joint health.",
+            "Provide mental stimulation to avoid boredom."
+          ]
+        },
+        "owner_tips": [
+          "Bengals are very active and require constant stimulation.",
+          "Make sure they have plenty of toys and climbing spaces.",
+          "They are intelligent and can be trained, so provide consistent positive reinforcement."
+        ]
+      },
+      {
+        "breed": "Ragdoll",
+        "species": "Cat",
+        "general_info": {
+          "breedGroup": "Semi-longhair",
+          "description": "Ragdolls are large, affectionate cats known for their docile nature and tendency to go limp when picked up.",
+          "temperament": "Gentle, calm, affectionate",
+          "height": "9 to 11 inches",
+          "weight": "10 to 20 pounds",
+          "lifeExpectancy": "12 to 15 years"
+        },
+        "ratings": {
+          "energyLevel": 3,
+          "barkingLevel": 0,
+          "drooling": 1,
+          "shedding": 3,
+          "groomingNeeds": 3,
+          "trainability": 4,
+          "compatibilityWithKids": 5,
+          "compatibilityWithOtherPets": 5,
+          "apartmentSuitability": 5,
+          "canStayAlone": 2,
+          "familyFriendly": 5,
+          "warmWeatherSuitability": 4,
+          "coldWeatherSuitability": 3
+        },
+        "physical_characteristics": {
+          "ears": "Medium to large ears",
+          "head": "Large, rounded head with a soft expression",
+          "fur": "Semi-long, soft coat that is easy to groom",
+          "body": "Large and muscular with a rectangular build",
+          "tail": "Medium to long, bushy tail"
+        },
+        "history": [
+          "Ragdolls were developed in California in the 1960s by Ann Baker, known for their calm temperament."
+        ],
+        "care": {
+          "exercise": "Ragdolls are generally laid-back and do not require excessive exercise, but they enjoy playtime.",
+          "grooming": "Regular grooming is needed to keep their coat free from mats.",
+          "training": "Ragdolls are easy to train, they enjoy being around their humans and responding well to positive reinforcement."
+        },
+        "diet": {
+          "recommended": [
+            "High-quality protein sources (chicken, turkey, fish)",
+            "Wet food to help with hydration",
+            "Low-calorie options for weight management"
+          ],
+          "notRecommended": [
+            "Chocolate",
+            "Grapes and raisins",
+            "Onions and garlic",
+            "Excessively fatty or processed foods"
+          ]
+        },
+        "health": {
+          "commonIssues": [
+            "Heart Disease (Hypertrophic Cardiomyopathy)",
+            "Obesity",
+            "Urinary Tract Issues"
+          ],
+          "symptomsToWatch": [
+            "Labored breathing",
+            "Excessive weight gain",
+            "Frequent urination",
+            "Loss of appetite"
+          ],
+          "preventiveTips": [
+            "Regular vet visits to monitor heart and kidney health.",
+            "Provide a balanced diet to prevent obesity.",
+            "Encourage hydration by offering wet food."
+          ]
+        },
+        "owner_tips": [
+          "Ragdolls are known for their affectionate nature and love being with their family members.",
+          "They are often called 'puppy cats' because of their dog-like behavior.",
+          "Ensure they get daily attention and enjoy a calm environment."
+        ]
+      },
+    {
+      "breed": "British Shorthair",
+      "species": "Cat",
+      "general_info": {
+        "breedGroup": "Shorthair",
+        "description": "British Shorthairs are calm, independent, and affectionate cats, known for their round faces and thick coats.",
+        "temperament": "Calm, independent, and affectionate",
+        "height": "12 to 14 inches",
+        "weight": "9 to 18 pounds",
+        "lifeExpectancy": "12 to 20 years"
+      },
+      "ratings": {
+        "energyLevel": 3,
+        "barkingLevel": 0,
+        "drooling": 1,
+        "shedding": 3,
+        "groomingNeeds": 3,
+        "trainability": 4,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 5,
+        "apartmentSuitability": 4,
+        "canStayAlone": 3,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 3,
+        "coldWeatherSuitability": 4
+      },
+      "physical_characteristics": {
+        "ears": "Round, medium-sized ears",
+        "head": "Round face with large, expressive eyes",
+        "fur": "Dense, plush coat that requires regular grooming",
+        "body": "Stocky, muscular body with a broad chest",
+        "tail": "Short to medium-length tail, thick and rounded at the tip"
+      },
+      "history": [
+        "British Shorthairs were developed in the UK from local cats and have a long history as a natural breed."
+      ],
+      "care": {
+        "exercise": "British Shorthairs are generally calm and low-energy but enjoy interactive play.",
+        "grooming": "Requires regular brushing, especially during shedding seasons.",
+        "training": "They are independent but can be trained with positive reinforcement and patience."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, lamb, fish)",
+          "Wet food to support hydration",
+          "Whole grains (brown rice, oats)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Obesity",
+          "Dental Issues",
+          "Heart Conditions",
+          "Kidney Issues"
+        ],
+        "symptomsToWatch": [
+          "Excessive weight gain",
+          "Drooling or bad breath",
+          "Lethargy",
+          "Frequent urination"
+        ],
+        "preventiveTips": [
+          "Maintain a healthy weight with proper portion control.",
+          "Regular vet visits to monitor kidney and heart health.",
+          "Provide a balanced diet and daily hydration."
+        ]
+      },
+      "owner_tips": [
+        "British Shorthairs are relatively independent but enjoy companionship.",
+        "They adapt well to apartment living but appreciate daily playtime.",
+        "Make sure they have a quiet place to retreat to when they need rest."
+      ]
+    },
+    {
+      "breed": "Sphynx Cat",
+      "species": "Cat",
+      "general_info": {
+        "breedGroup": "Hairless",
+        "description": "Sphynx cats are known for their hairless bodies, large ears, and affectionate, social nature.",
+        "temperament": "Affectionate, social, and active",
+        "height": "8 to 10 inches",
+        "weight": "6 to 16 pounds",
+        "lifeExpectancy": "12 to 15 years"
+      },
+      "ratings": {
+        "energyLevel": 4,
+        "barkingLevel": 0,
+        "drooling": 1,
+        "shedding": 0,
+        "groomingNeeds": 3,
+        "trainability": 4,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 5,
+        "apartmentSuitability": 5,
+        "canStayAlone": 2,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 4,
+        "coldWeatherSuitability": 1
+      },
+      "physical_characteristics": {
+        "ears": "Large, pointed ears",
+        "head": "Rounded head with prominent cheekbones",
+        "fur": "Hairless, though they have a fine layer of peach-fuzz",
+        "body": "Muscular and sleek, with a rounded, athletic build",
+        "tail": "Long, thin, tapering tail"
+      },
+      "history": [
+        "The Sphynx cat was developed in Canada in the 1960s from hairless cats bred from domestic breeds."
+      ],
+      "care": {
+        "exercise": "Sphynx cats are energetic and need regular playtime to stay entertained.",
+        "grooming": "Although hairless, they require regular baths to remove oil buildup on their skin.",
+        "training": "Sphynx cats are intelligent and social, making them easy to train with positive reinforcement."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, turkey, fish)",
+          "Wet food to support hydration",
+          "Fiber-rich foods for digestive health"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Skin Infections",
+          "Heart Disease",
+          "Hypothyroidism",
+          "Obesity"
+        ],
+        "symptomsToWatch": [
+          "Excessive scratching or irritation",
+          "Coughing or labored breathing",
+          "Weight gain",
+          "Lethargy"
+        ],
+        "preventiveTips": [
+          "Provide regular baths to maintain healthy skin.",
+          "Monitor weight to prevent obesity.",
+          "Ensure regular vet check-ups to monitor heart and thyroid health."
+        ]
+      },
+      "owner_tips": [
+        "Sphynx cats love attention and need plenty of companionship.",
+        "Be mindful of their skin, as they can be prone to sunburns and infections.",
+        "They are great for apartment living due to their affectionate nature."
+      ]
+    },
+    {
+      "breed": "Abyssinian Cat",
+      "species": "Cat",
+      "general_info": {
+        "breedGroup": "Shorthair",
+        "description": "Abyssinians are playful, energetic, and highly intelligent cats with a striking coat.",
+        "temperament": "Playful, active, and curious",
+        "height": "8 to 10 inches",
+        "weight": "6 to 10 pounds",
+        "lifeExpectancy": "12 to 15 years"
+      },
+      "ratings": {
+        "energyLevel": 5,
+        "barkingLevel": 0,
+        "drooling": 1,
+        "shedding": 2,
+        "groomingNeeds": 2,
+        "trainability": 5,
+        "compatibilityWithKids": 4,
+        "compatibilityWithOtherPets": 4,
+        "apartmentSuitability": 4,
+        "canStayAlone": 2,
+        "familyFriendly": 4,
+        "warmWeatherSuitability": 5,
+        "coldWeatherSuitability": 2
+      },
+      "physical_characteristics": {
+        "ears": "Large, pointed ears",
+        "head": "Wedge-shaped head with a proud expression",
+        "fur": "Short, dense, ticked coat",
+        "body": "Sleek, muscular body with a graceful build",
+        "tail": "Long, slender, tapering tail"
+      },
+      "history": [
+        "Abyssinians are believed to have originated in ancient Egypt and have a history as a royal cat breed."
+      ],
+      "care": {
+        "exercise": "Abyssinians are highly active and require plenty of playtime and mental stimulation.",
+        "grooming": "Minimal grooming required due to their short coat.",
+        "training": "Abyssinians are very intelligent and can be easily trained to perform tricks."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, turkey, fish)",
+          "Wet food for hydration",
+          "Fruits and vegetables (carrots, apples)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Dental Issues",
+          "Kidney Disease",
+          "Obesity"
+        ],
+        "symptomsToWatch": [
+          "Bad breath or oral discomfort",
+          "Excessive thirst or urination",
+          "Lethargy",
+          "Weight gain"
+        ],
+        "preventiveTips": [
+          "Regular dental care to prevent gum disease.",
+          "Ensure a balanced diet to prevent obesity.",
+          "Monitor their weight and hydration levels."
+        ]
+      },
+      "owner_tips": [
+        "Abyssinians are highly social and need plenty of interaction with their owners.",
+        "They are very curious and will explore everything, so make sure your home is cat-proof.",
+        "Provide plenty of stimulation with toys and climbing structures."
+      ]
+    },
+    {
+      "breed": "Scottish Fold",
+      "species": "Cat",
+      "general_info": {
+        "breedGroup": "Shorthair",
+        "description": "Scottish Folds are known for their unique folded ears and sweet, gentle nature.",
+        "temperament": "Affectionate, calm, and gentle",
+        "height": "8 to 10 inches",
+        "weight": "6 to 13 pounds",
+        "lifeExpectancy": "12 to 15 years"
+      },
+      "ratings": {
+        "energyLevel": 3,
+        "barkingLevel": 0,
+        "drooling": 1,
+        "shedding": 3,
+        "groomingNeeds": 3,
+        "trainability": 4,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 5,
+        "apartmentSuitability": 5,
+        "canStayAlone": 3,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 3,
+        "coldWeatherSuitability": 4
+      },
+      "physical_characteristics": {
+        "ears": "Unique folded ears, rounded and small",
+        "head": "Round face with a soft expression",
+        "fur": "Short to medium length, soft coat",
+        "body": "Medium-sized, compact, and muscular",
+        "tail": "Medium-length, tapering tail"
+      },
+      "history": [
+        "Scottish Folds originated in Scotland in the 1960s, recognized for their unique folded ears."
+      ],
+      "care": {
+        "exercise": "Scottish Folds enjoy playtime and interaction with their owners.",
+        "grooming": "Minimal grooming required, but regular brushing helps manage shedding.",
+        "training": "They are intelligent and easy to train, responding well to gentle methods."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, turkey, fish)",
+          "Wet food to help with hydration",
+          "Fiber-rich foods for digestion"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Joint Issues (due to gene mutation)",
+          "Obesity",
+          "Heart Disease"
+        ],
+        "symptomsToWatch": [
+          "Difficulty walking or limping",
+          "Excessive weight gain",
+          "Labored breathing",
+          "Lethargy"
+        ],
+        "preventiveTips": [
+          "Regular vet visits to monitor joint health.",
+          "Provide a balanced diet to maintain a healthy weight.",
+          "Avoid excessive jumping and physical strain."
+        ]
+      },
+      "owner_tips": [
+        "Scottish Folds are calm and enjoy lounging around the house.",
+        "They are affectionate and will follow their owners around for attention.",
+        "Ensure they receive regular grooming to maintain their coat's health."
+      ]
+    },
+    {
+      "breed": "Burmese Cat",
+      "species": "Cat",
+      "general_info": {
+        "breedGroup": "Shorthair",
+        "description": "Burmese cats are affectionate, playful, and lively cats known for their striking golden eyes.",
+        "temperament": "Affectionate, playful, and lively",
+        "height": "8 to 10 inches",
+        "weight": "6 to 14 pounds",
+        "lifeExpectancy": "10 to 16 years"
+      },
+      "ratings": {
+        "energyLevel": 4,
+        "barkingLevel": 0,
+        "drooling": 1,
+        "shedding": 3,
+        "groomingNeeds": 2,
+        "trainability": 5,
+        "compatibilityWithKids": 5,
+        "compatibilityWithOtherPets": 4,
+        "apartmentSuitability": 5,
+        "canStayAlone": 2,
+        "familyFriendly": 5,
+        "warmWeatherSuitability": 4,
+        "coldWeatherSuitability": 3
+      },
+      "physical_characteristics": {
+        "ears": "Medium-sized, rounded ears",
+        "head": "Rounded head with a short muzzle",
+        "fur": "Short, sleek, fine coat",
+        "body": "Compact, muscular body",
+        "tail": "Medium-length tail"
+      },
+      "history": [
+        "Burmese cats originated in Southeast Asia and were introduced to the U.S. in the 1930s."
+      ],
+      "care": {
+        "exercise": "Burmese cats are playful and energetic, requiring plenty of playtime.",
+        "grooming": "Minimal grooming required due to their short coat.",
+        "training": "They are highly intelligent and can be easily trained with patience."
+      },
+      "diet": {
+        "recommended": [
+          "High-quality protein sources (chicken, turkey, fish)",
+          "Wet food to support hydration",
+          "Vegetables and fruits (carrots, spinach)"
+        ],
+        "notRecommended": [
+          "Chocolate",
+          "Grapes and raisins",
+          "Onions and garlic",
+          "Excessively fatty or processed foods"
+        ]
+      },
+      "health": {
+        "commonIssues": [
+          "Obesity",
+          "Dental Issues",
+          "Heart Disease"
+        ],
+        "symptomsToWatch": [
+          "Excessive weight gain",
+          "Bad breath or oral discomfort",
+          "Labored breathing",
+          "Lethargy"
+        ],
+        "preventiveTips": [
+          "Monitor weight to avoid obesity.",
+          "Ensure regular dental care to prevent gum disease.",
+          "Provide a balanced diet and regular vet check-ups."
+        ]
+      },
+      "owner_tips": [
+        "Burmese cats are affectionate and enjoy being the center of attention.",
+        "They are social and require interaction with their owners regularly.",
+        "They are great companions and thrive in a family environment."
+      ]
+    }
+  ]
+}
+  

@@ -42,7 +42,7 @@ const Submenu = () => (
 const Menu = () => {
   const items = [
     { to: "/home", label: "Home", Icon: Home },
-    { to: "/guide", label: "Guide", Icon: BookOpenTextIcon },
+    { to: "/breed-info", label: "Guide", Icon: BookOpenTextIcon },
     { to: "/vet", label: "Medic", Icon: PawPrint },
     { to: "/news", label: "News", Icon: Newspaper },
     { to: "/services", label: "Services", Icon: Bone },
