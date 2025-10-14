@@ -18,7 +18,7 @@ function BreedInfo() {
       try {
         setLoading(true);
         setErr("");
-        const res = await fetch(`/api/breeds/${slug}`, { signal: ac.signal });
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/breeds/${slug}`, { signal: ac.signal });
         if (!res.ok) throw new Error(`Failed to load breed (${res.status})`);
         const json = await res.json();
         setData(json);
