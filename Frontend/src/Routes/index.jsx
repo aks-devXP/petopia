@@ -16,6 +16,7 @@ import About from "../Pages/admin/about";
 import Contact from "../Pages/admin/contact";
 import ProductDirectory from "../Pages/admin/product/ProductDirectory";
 import UserDashboard from "../Pages/admin/profile/UserDashboard";
+import Welcome from "../Pages/admin/welcome";
 
 // Vets
 import VetHome from "../Pages/admin/vets";
@@ -52,9 +53,11 @@ const routes = (
     <Route path="/sign-up" element={<SignUp2 />} />
     <Route path="/sample" element={<ScrollAnimations />} />
 
+    <Route path="/welcome" element={<Welcome />} />
+
     {/* Main Layout Routes */}
     <Route path="/" element={<MainLayout />}>
-      <Route index element={<Navigate to="/home" replace />} />
+      <Route index element={<Navigate to="/welcome" replace />} />
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />

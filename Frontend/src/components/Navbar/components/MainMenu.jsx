@@ -1,12 +1,13 @@
 // MainMenu.jsx
 import {
   Bone,
-  BookOpenTextIcon,
+  BookOpen,
   ChevronDown,
   Home,
   MoveRight,
   Newspaper,
   PawPrint,
+  HeartPlus,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -42,8 +43,8 @@ const Submenu = () => (
 const Menu = () => {
   const items = [
     { to: "/home", label: "Home", Icon: Home },
-    { to: "/breed-info", label: "Guide", Icon: BookOpenTextIcon },
-    { to: "/vet", label: "Medic", Icon: PawPrint },
+    { to: "/breed-info", label: "Guide", Icon: BookOpen },
+    { to: "/vet", label: "Medic", Icon: HeartPlus },
     { to: "/news", label: "News", Icon: Newspaper },
     { to: "/services", label: "Services", Icon: Bone },
   ];

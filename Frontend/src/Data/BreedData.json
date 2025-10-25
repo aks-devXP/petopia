@@ -13,7 +13,7 @@
   
   "ratings": {
     "energyLevel": 5,
-    "barkingLevel": 4,
+    "noise": 4,
     "drooling": 1,
     "shedding": 5,
     "groomingNeeds": 5,

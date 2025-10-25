@@ -1,9 +1,8 @@
+/* Load additional legacy fonts via CSS imports */
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
-
-/* Added Fredoka One & Bree Serif */
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
 
@@ -26,7 +25,7 @@
   --black-color: hsl(0, 0%, 0%);
 
   /*========== Font and typography ==========*/
-  --body-font: var(--font-poppins);
+  --body-font: "Nunito Sans", sans-serif;
   --h1-font-size: 1.75rem;
   --normal-font-size: 1rem;
   --small-font-size: .813rem;

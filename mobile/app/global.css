@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: global custom styles */
+:root {
+    --petopia-blue: #d5ecf1;
+    --petopia-green: #d7eed5;
+    --petopia-purple: #d4d5dc;
+    --petopia-lilac: #ece4f4;
+}
+
+.text-title {
+    @apply text-2xl font-bold;
+}
+
+.bg-card {
+    @apply rounded-xl p-4 shadow-sm;
+}

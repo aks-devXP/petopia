@@ -1,93 +1,84 @@
-const mongo = require('mongoose'); 
+const mongo = require('mongoose');
+const { create } = require('./AppointmentsDB');
 const Schema = mongo.Schema;
+// Use a distinct schema and model name for trainers to avoid
+// clashing with the Vet model and triggering OverwriteModelError.
 const TrainerSchema = new Schema({
-    name : {
-        type : String,
-        required : true
-    },
-    email : {
-        type : String,
-        required : true
-    },
-    password : {
-        type : String,
-        required : true
-    },
-    phone : {
-        type : String,
-        // required : true
-    },
-    location : {
-        type : String,
-        // required : true
-    },
-    city : {
-        type : String,
-        // required : true
-    },
-    zip : {
-        type : Number,
-        // required : true
-    },
-    experience : {
-        type : String,
-        // required : true
-    },
-    description : {
-        type : String,
-        // required : true
-    },
-    profilePic:{
-        type: String,
-        default: ""
-    },
-    image:{
-      type: [String],
-    //   required: true
-    }
-    ,
-    services:{
-    //   required: true,
-      type: [String]
-    }
-    ,
-    about:{
-        type: String,
-        // required: true
-      },
-    price:{
-    //   required: true,
-      type: [Number]
-    },
-    verified:{
-      type: Boolean,
-      default: false
-    },
-    timings:{
-        type: [[String]],
-
-    },
-    password : {
-        type : String,
-        required : true
-    },
-    rating : {
-        type : Number,
-        default : 4
-    },
-    cv:{
-        type : String,
-        default : ""
-    },
-    specialization:{
-        type : String,
-    },
-    created_at : {
-        type : Date,
-        default : Date.now
-    },
-
-  })
-
-  const Trainer = mongo.model('Trainer', TrainerSchema)
-  module.exports = Trainer;
+  name: {
+    type: String,
+    required: true,
+  },
+  email:{
+    type: String,
+    required: true,
+    unique: true
+  },
+  rating:{
+    type: Number,
+    default: 4
+  },
+  phone:{
+    type: Number,
+    // required: true
+  },
+  address:{
+    type: String,
+    // required: true
+  },
+  city:{
+    type: String,
+    // required: true
+  },
+  state:{
+    type: String,
+    // required: true
+  },
+  zip:{
+    type: Number,
+    // required: true
+  },
+  profilePic:{
+    type: String,
+    default: ""
+  },
+  image:{
+    type: [String],
+    // required: true
+  },
+  about:{
+    type: String,
+    // required: true
+  },
+tenure:{
+    type: Number,
+    // required: true
+  },
+  timings:{
+    type: [[String]],
+    // required: true
+  },
+  specialization:{
+    type: String,
+    // required: true
+  },
+  password:{
+    type: String,
+    required: true
+  },
+  cv:{
+    type: String,
+    default: ""
+  }
+  ,
+  verified:{
+    type: Boolean,
+    default: false
+  },
+  created_at:{
+    type: Date,
+    default: Date.now
+  },
+})
+// Guard against recompiling the model in watch/hot-reload scenarios
+module.exports = mongo.models.Trainer || mongo.model('Trainer', TrainerSchema)
+  

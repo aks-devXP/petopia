@@ -1,13 +1,15 @@
+// vite.config.js
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import path from 'path'
+import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
   base: "/petopia/",
   build: {
-    outDir: 'dist/petopia',         
+    outDir: 'dist/petopia',
     assetsDir: 'assets',
-    emptyOutDir: true
+    emptyOutDir: true,
   },
   server: {
     open: true,
@@ -17,12 +19,15 @@ export default defineConfig({
         changeOrigin: true,
         secure: true,
       },
-    }
+    },
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    svgr(), // Enable SVG as React components
+  ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),     // src root
+      '@': path.resolve(__dirname, './src'),
       '@components': path.resolve(__dirname, './src/components'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@assets': path.resolve(__dirname, './src/assets'),

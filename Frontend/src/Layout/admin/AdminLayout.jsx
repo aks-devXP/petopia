@@ -7,7 +7,7 @@ import Navbar from '@/components/Navbar'
 const AdminLayout = () => {
   return (
     <>
-        <div className='relative h-screen bg-[#1A120B]">'>
+        <div className="relative min-h-screen bg-app-bg flex flex-col">
           <Navbar></Navbar>
           <Outlet></Outlet>
           <Footer></Footer>

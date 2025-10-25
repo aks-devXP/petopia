@@ -36,7 +36,7 @@ export default function BreedListTop() {
       try {
         setLoading(true);
         setErr('');
-        const json = await fetchJSON(`${import.meta.env.VITE_BACKEND_BASEURL}/breeds?limit=100`, { signal: ac.signal });
+        const json = await fetchJSON(`/api/breeds?q=${encodeURIComponent(debounced)}&limit=8`, { signal: ac.signal });
         setData(Array.isArray(json.data) ? json.data : []);
       } catch (e) {
         if (e.name !== 'AbortError') setErr('Failed to load breeds');

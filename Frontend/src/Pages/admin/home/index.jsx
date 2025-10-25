@@ -1,6 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
-import Footer from '@/components/Footer'
+
 import HomeScreenBG from "@assets/HomeScreen/homescreen-bg.jpg";
 import MobileHomeScreenBG from "@assets/HomeScreen/mobilehomescreen-bg.jpg";
 import Cat from "@assets/HomeScreen/cat.jpg";
