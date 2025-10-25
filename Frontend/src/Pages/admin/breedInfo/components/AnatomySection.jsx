@@ -6,7 +6,7 @@ const AnatomySection = ({ data }) => {
   const imageSrc = images?.secondary || images?.primary || '/petopia/vite.svg';
 
   return (
-    <div className="text-black px-6">
+    <div className="text-ink-primary px-6 font-nunito">
       
         <h2 className="text-3xl font-bold mb-6">Head to Tail</h2>
         <dl className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">

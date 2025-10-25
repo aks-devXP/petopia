@@ -6,10 +6,10 @@ const BasicInfo = ({ data }) => {
   const imageSrc = images?.primary || images?.secondary || '/petopia/vite.svg';
 
   return (
-    <div className=" text-black">
+    <div className=" text-ink-primary font-nunito">
       <div className="flex flex-col-reverse lg:flex-row ml-5 md:ml-20">
         <div className="p-5 flex flex-col justify-center items-center w-full jusify-center">
-          <h1 className="font-semibold text-5xl py-2 my-6 w-full">{breed}</h1>
+          <h1 className="font-quicksandBold text-5xl py-2 my-6 w-full">{breed}</h1>
           <dl className="w-full grid grid-cols-1 gap-3">
             {Object.entries(general_info).map(([key, value]) => (
               <div

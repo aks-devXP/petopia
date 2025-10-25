@@ -5,7 +5,7 @@ const CareTips = ({ data }) => {
   const { history = [], care = {}, diet = {} } = data;
 
   return (
-    <div className="text-black">
+    <div className="text-ink-primary font-nunito">
       <div className="p-6">
         <div className="space-y-10">
           {/* History Section */}
