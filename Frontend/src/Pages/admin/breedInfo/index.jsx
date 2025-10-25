@@ -45,8 +45,8 @@ function BreedInfo() {
 
       <BasicInfo data={data} />
       <div className="flex flex-col gap-8 
-      py-2 sm:py-6 
-      px-2 sm:px-4 lg:px-12 bg-app-surface rounded-2xl">
+      py-4 px-4 
+      mx-2 sm:mx-4 lg:mx-12 bg-app-surface rounded-3xl">
         <RatingSection data={data} />
         <AnatomySection data={data} />
         <CareTips data={data} />

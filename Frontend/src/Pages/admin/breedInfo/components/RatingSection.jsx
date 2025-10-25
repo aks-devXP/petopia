@@ -17,7 +17,7 @@ const RatingSection = ({ data }) => {
               {[1, 2, 3, 4, 5].map((paw) => (
                 <FaPaw
                   key={paw}
-                  className={`text-xl ${paw <= ratings[key] ? 'text-ink-primary' : 'text-white'}`}
+                  className={`text-xl ${paw <= ratings[key] ? 'text-ink-primary' : 'text-gray-500'}`}
                 />
               ))}
 
