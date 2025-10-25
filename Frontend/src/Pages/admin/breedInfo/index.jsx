@@ -41,10 +41,10 @@ function BreedInfo() {
   if (!data) return null;
 
   return (
-    <div className="container mx-auto p-6 space-y-8 bg-[#f5f5dc]">
+    <div className="container mx-auto p-6 space-y-8 bg-app-bg">
 
       <BasicInfo data={data} />
-      <div className="flex flex-col gap-8 p-6 bg-[#D8DBBD] rounded-2xl">
+      <div className="flex flex-col gap-8 py-2 sm:py-6 px-2 sm:px-4 lg:px-12 bg-app-surface rounded-2xl">
         <RatingSection data={data} />
         <AnatomySection data={data} />
         <CareTips data={data} />
