@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import trainerbg from "@assets/trainerbg.jpg";
+import trainerbg from "@assets/HomeScreen/homescreen-bg.jpg"; 
 import CareTakerOptions from "./CareTakerOptions";
 import TrainerBanner from "./components/TrainerBanner";
 import { Star, Scissors, BookOpen, Heart } from "lucide-react";
@@ -91,7 +91,7 @@ function PetServices() {
                 className={`w-[180px] text-[22px] transition-all duration-300 py-2 rounded-md
                   ${
                     selectedService === key
-                      ? "font-bold bg-white text-black"
+                      ? "font-bold bg-white text-ink-secondary"
                       : "hover:border-b-4 hover:border-gray-400 hover:font-bold"
                   }`}
               >
@@ -110,7 +110,7 @@ function PetServices() {
             className="flex items-center justify-center mt-5 w-[200px] bg-transparent border-2
               border-white px-[15px] py-[10px]
               text-white cursor-pointer text-[16px] transition-all 
-              duration-300 hover:bg-white hover:text-black"
+              duration-300 hover:bg-white hover:text-ink-secondary"
           >
             <button onClick={handleBookClick}>Book Appointment</button>
           </div>
@@ -119,15 +119,15 @@ function PetServices() {
 
       {/* Services Section */}
       <div ref={servicesRef} className="w-full bg-[#1A120B]">
-        <div className="min-h-screen bg-[#E5E5CB]">
+        <div className="min-h-screen bg-app-bg">
           {/* Quick Booking Section */}
-          <section className="py-16 bg-[#E5E5CB]">
+          <section className="py-16 bg-app-bg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-stone-800 mb-4">
                   Smooth Starts Here – Book in Seconds
                 </h2>
-                <p className="text-[#664343d3]">
+                <p className="text-ink-secondary">
                   Fast, reliable, and stress-free pet services — from grooming
                   and training to caretaking, everything your pet needs is just
                   a click away.
@@ -137,13 +137,13 @@ function PetServices() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Grooming */}
                 <div className="text-center bg-white p-8 rounded-2xl shadow-sm">
-                  <div className="w-16 h-16 bg-[#E5E5CB] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Scissors className="h-8 w-8 text-[#1A120B]" />
+                  <div className="w-16 h-16 bg-app-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Scissors className="h-8 w-8 text-ink-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-[#1A120B] mb-3">
+                  <h3 className="text-xl font-semibold text-ink-primary mb-3">
                     Pet Grooming
                   </h3>
-                  <p className="text-[#3C2A21]">
+                  <p className="text-ink-secondary">
                     Pamper your furry friend with safe and professional grooming
                     services.
                   </p>
@@ -151,13 +151,13 @@ function PetServices() {
 
                 {/* Training */}
                 <div className="text-center bg-white p-8 rounded-2xl shadow-sm">
-                  <div className="w-16 h-16 bg-[#E5E5CB] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <BookOpen className="h-8 w-8 text-[#1A120B]" />
+                  <div className="w-16 h-16 bg-app-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                    <BookOpen className="h-8 w-8 text-ink-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-[#1A120B] mb-3">
+                  <h3 className="text-xl font-semibold text-ink-primary mb-3">
                     Pet Training
                   </h3>
-                  <p className="text-[#3C2A21]">
+                  <p className="text-ink-secondary">
                     Build good habits and strengthen your bond with expert
                     training.
                   </p>
@@ -165,13 +165,13 @@ function PetServices() {
 
                 {/* Caretaking */}
                 <div className="text-center bg-white p-8 rounded-2xl shadow-sm">
-                  <div className="w-16 h-16 bg-[#E5E5CB] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Heart className="h-8 w-8 text-[#1A120B]" />
+                  <div className="w-16 h-16 bg-app-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Heart className="h-8 w-8 text-ink-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-[#1A120B] mb-3">
+                  <h3 className="text-xl font-semibold text-ink-primary mb-3">
                     Pet Caretaking
                   </h3>
-                  <p className="text-[#3C2A21]">
+                  <p className="text-ink-secondary">
                     Loving care for your pet when you can’t be there — safe and
                     reliable.
                   </p>
@@ -181,7 +181,7 @@ function PetServices() {
           </section>
 
           {/* Featured Caretaker */}
-          <section className="py-16 bg-[#E5E5CB]">
+          <section className="py-16 bg-app-bg">
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center mb-12">
                 <h2 className="text-3xl font-bold text-stone-800">
@@ -228,7 +228,7 @@ function PetServices() {
           </section>
 
           {/* Groomers */}
-          <section className="py-16 bg-stone-50">
+          <section className="py-16 bg-app-bg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center mb-12">
                 <h2 className="text-3xl font-bold text-stone-800">
@@ -314,7 +314,7 @@ function PetServices() {
           </section>
 
           {/* Testimonials */}
-          <section className="py-16 bg-stone-100">
+          <section className="py-16 bg-app-bg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-stone-800 mb-4">

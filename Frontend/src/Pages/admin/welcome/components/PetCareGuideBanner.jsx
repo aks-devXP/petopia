@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import catImage from "@assets/HomeScreen/cat.jpg";
 import dogImage from "@assets/HomeScreen/dog.jpg";
-import PawButton from "./PawButton";
+import PawButton from "@components/buttons/PawButton";
 import Slider from "./Slider";
 
 export default function PetCareGuideCard({

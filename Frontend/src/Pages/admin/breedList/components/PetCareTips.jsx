@@ -25,7 +25,7 @@ const getPentagonPosition = (index, total) => {
 
   return (
     <div className="p-4 h-full w-full mx-auto ">
-      <h2 className="text-3xl font-semibold mb-12 text-black text-center">
+      <h2 className="text-3xl md:text-5xl font-quicksandBold mb-12 text-ink-primary text-center">
         {petSelected} Care Tips - {tipSelected}
       </h2>
       
@@ -35,7 +35,7 @@ const getPentagonPosition = (index, total) => {
             <div 
               key={index}
               className="w-full h-40 text-gray-700 
-              flex flex-col items-center justify-center p-4 rounded-full shadow-md bg-white border border-gray-100 overflow-auto"
+              flex flex-col items-center justify-center p-4 rounded-full shadow-md bg-app-elevated border border-gray-100 overflow-auto"
             >
               <div className="flex items-center justify-center mb-2">
                 <strong className="ml-1 text-center">{tip.title}</strong>
@@ -55,7 +55,7 @@ const getPentagonPosition = (index, total) => {
             <div 
               key={index}
               className="absolute w-60 h-40 text-gray-700 
-              flex flex-col items-center justify-center p-4 rounded-full shadow-md bg-white border border-gray-100 overflow-auto"
+              flex flex-col items-center justify-center p-4 rounded-full shadow-md bg-app-elevated border border-gray-100 overflow-auto"
               style={positionStyle}
             >
               <div className="flex items-center justify-center mb-2">

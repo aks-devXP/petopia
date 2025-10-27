@@ -3,8 +3,8 @@ import { Dog, Cat } from "lucide-react";
 export default function PetToggle({ petSelected, setPetSelected }) {
   return (
     <div
-      className={`flex items-center p-1 w-48 rounded-full cursor-pointer transition-colors ${
-        petSelected === "Dogs" ? "bg-[#3C2A21]" : "bg-[#4B164C]"
+      className={`flex items-center p-1 w-48 rounded-full cursor-pointer transition-colors font-bold ${
+        petSelected === "Dogs" ? "bg-ink-secondary" : "bg-[#4B164C]"
       }`}
       onClick={() => setPetSelected(petSelected === "Dogs" ? "Cats" : "Dogs")}
     >

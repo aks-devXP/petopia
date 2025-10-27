@@ -17,7 +17,8 @@ import Contact from "../Pages/admin/contact";
 import ProductDirectory from "../Pages/admin/product/ProductDirectory";
 import UserDashboard from "../Pages/admin/profile/UserDashboard";
 import Welcome from "../Pages/admin/welcome";
-
+import Appointment from "../Pages/admin/appointment";
+import UserEditor from "../Pages/admin/usereditor";
 // Vets
 import VetHome from "../Pages/admin/vets";
 import VetDocs from "../Pages/admin/vets/VetDocs";
@@ -59,8 +60,10 @@ const routes = (
     <Route path="/" element={<MainLayout />}>
       <Route index element={<Navigate to="/welcome" replace />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/appointments" element={<Appointment />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/edit-user" element={<UserEditor />} />
 
       {/* Shop / List / Products */}
       <Route path="/shopping" element={<ProductDirectory />} />

@@ -10,7 +10,7 @@ const BreedList = () => {
       {/* Top section with dynamic background */}
       <div
         className={`${
-          petSelected === 'Dogs' ? 'bg-amber-100' : 'bg-purple-200'
+          petSelected === 'Dogs' ? 'bg-app-bg' : 'bg-purple-200'
         } flex flex-col items-center justify-center p-1 shadow-md`}
       >
         <BreedListTop />

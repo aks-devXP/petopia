@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import PawButton from "./PawButton";
+import PawButton from "@components/buttons/PawButton";
 import { Stethoscope, Scissors, Dumbbell } from "lucide-react";
 
 export default function ServiceHero({

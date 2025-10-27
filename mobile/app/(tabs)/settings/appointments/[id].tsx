@@ -5,42 +5,66 @@ import {
     Image,
     ScrollView,
     Text,
+    TouchableOpacity,
     View,
     useColorScheme,
     Linking,
     Platform,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { Calendar, Clock, MapPin, PawPrint, Tag, Phone } from "lucide-react-native";
+import {
+    Calendar,
+    Clock,
+    MapPin,
+    PawPrint,
+    Tag,
+    Phone,
+} from "lucide-react-native";
 
 import { StatusBadge } from "@components/appointments/StatusBadge";
 import { Section } from "@components/appointments/Section";
 import { DetailRow } from "@components/appointments/DetailRow";
 
-// ---- Types ----
+// --- Types (align with backend) ---
 type AppointmentType = "vet" | "groomer" | "trainer" | "daycare";
 type AppointmentStatus = "pending" | "confirmed" | "completed" | "cancelled";
 
-type Appointment = {
+interface Appointment {
     _id: string;
     serviceName: string;
     type: AppointmentType;
-    date: string; // ISO day
-    time: string; // HH:mm
+    date: string;
+    time: string;
     status: AppointmentStatus;
     serviceCost: number;
     description: string;
-    pet: { name: string };
+    pet: {
+        name: string;
+    };
     provider: {
         name: string;
         avatar?: string;
-        location?: string; // address
+        location?: string;
         phone?: string;
     };
-};
+}
 
-// ---- Helpers ----
-const formatDate = (iso: string) =>
+// --- Helpers ---
+function combineLocalDateTime(isoDate: string, hhmm: string) {
+    const d = new Date(isoDate);
+    const [hh, mm] = hhmm.split(":").map(Number);
+    return new Date(
+        d.getFullYear(),
+        d.getMonth(),
+        d.getDate(),
+        hh || 0,
+        mm || 0,
+        0,
+        0
+    );
+}
+
+const formatDateLocal = (iso: string) =>
     new Date(iso).toLocaleDateString(undefined, {
         weekday: "short",
         month: "short",
@@ -48,21 +72,20 @@ const formatDate = (iso: string) =>
         year: "numeric",
     });
 
-const formatTime = (iso: string, t: string) => {
-    const d = new Date(iso);
-    const [h, m] = t.split(":");
-    d.setHours(Number(h || 0), Number(m || 0));
-    return d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
-};
+const formatTimeLocal = (iso: string, t: string) =>
+    combineLocalDateTime(iso, t).toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "2-digit",
+    });
 
 const currency = (n: number) =>
-    Intl.NumberFormat(undefined, {
+    Intl.NumberFormat("en-IN", {
         style: "currency",
         currency: "INR",
         maximumFractionDigits: 0,
     }).format(n);
 
-// ---- Mock fetch (replace with API call) ----
+// --- Mock Fetch (replace with API later) ---
 async function fetchAppointmentById(id: string): Promise<Appointment> {
     await new Promise((r) => setTimeout(r, 300));
     return {
@@ -85,10 +108,10 @@ async function fetchAppointmentById(id: string): Promise<Appointment> {
     };
 }
 
+// --- Main Screen ---
 export default function AppointmentDetailPage() {
     const { id } = useLocalSearchParams<{ id: string }>();
     const isDark = useColorScheme() === "dark";
-
     const [data, setData] = useState<Appointment | null>(null);
     const [loading, setLoading] = useState(true);
     const [err, setErr] = useState("");
@@ -98,7 +121,6 @@ export default function AppointmentDetailPage() {
         (async () => {
             try {
                 setLoading(true);
-                setErr("");
                 const res = await fetchAppointmentById(String(id));
                 if (!cancelled) setData(res);
             } catch {
@@ -152,11 +174,10 @@ export default function AppointmentDetailPage() {
         );
     }
 
-    const dateStr = formatDate(data.date);
-    const timeStr = formatTime(data.date, data.time);
+    const dateStr = formatDateLocal(data.date);
+    const timeStr = formatTimeLocal(data.date, data.time);
     const iconMuted = isDark ? "#D1D5DB" : "#6B7280";
 
-    // Dial / Maps helpers
     const dial = (phone: string) => Linking.openURL(`tel:${phone}`);
     const openMaps = (address: string) => {
         const q = encodeURIComponent(address);
@@ -176,7 +197,7 @@ export default function AppointmentDetailPage() {
                 contentContainerStyle={{ paddingBottom: 112 }}
                 showsVerticalScrollIndicator={false}
             >
-                {/* Provider card — larger, clearer, status visible */}
+                {/* Provider Card */}
                 <View
                     className="mt-5 mx-4 rounded-2xl bg-light-gray dark:bg-dark-gray p-5"
                     style={{
@@ -215,26 +236,32 @@ export default function AppointmentDetailPage() {
 
                 {/* Schedule */}
                 <Section title="Schedule">
-                    <DetailRow icon={<Calendar size={20} color={iconMuted} />} label="Date" value={dateStr} />
-                    <DetailRow icon={<Clock size={20} color={iconMuted} />} label="Time" value={timeStr} />
-                    {data.provider.location ? (
+                    <DetailRow
+                        icon={<Calendar size={20} color={iconMuted} />}
+                        label="Date"
+                        value={dateStr}
+                    />
+                    <DetailRow
+                        icon={<Clock size={20} color={iconMuted} />}
+                        label="Time"
+                        value={timeStr}
+                    />
+                    {data.provider.location && (
                         <DetailRow
                             icon={<MapPin size={20} color={iconMuted} />}
                             label="Location"
                             value={data.provider.location}
                             onPress={() => openMaps(data.provider.location!)}
                         />
-                    ) : null}
-
-                    {data.provider.phone ? (
+                    )}
+                    {data.provider.phone && (
                         <DetailRow
                             icon={<Phone size={20} color={iconMuted} />}
                             label="Phone"
                             value={data.provider.phone}
                             onPress={() => dial(data.provider.phone!)}
                         />
-                    ) : null}
-
+                    )}
                 </Section>
 
                 {/* Details */}
@@ -251,8 +278,6 @@ export default function AppointmentDetailPage() {
                     />
                 </Section>
 
-
-
                 {/* Notes */}
                 <Section title="Notes">
                     <Text className="text-lg leading-6 font-nunito text-neutral-800 dark:text-neutral-200">
@@ -261,8 +286,27 @@ export default function AppointmentDetailPage() {
                 </Section>
             </ScrollView>
 
-            {/* If you have ActionBar, keep it here (not modified) */}
-            {/* <ActionBar status={data.status} onCancel={onCancel} onReschedule={onReschedule} /> */}
+            {/* Action Bar */}
+            {data.status !== "cancelled" && (
+                <View className="absolute bottom-0 left-0 right-0 flex-row justify-between px-6 py-4 bg-white dark:bg-black border-t border-neutral-200 dark:border-neutral-700">
+                    <TouchableOpacity
+                        onPress={onCancel}
+                        className="flex-1 mr-3 py-3 rounded-full border-4 border-red-600"
+                    >
+                        <Text className="text-center text-black font-nunitoBold text-base">
+                            Cancel
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={onReschedule}
+                        className="flex-1 ml-3 py-3 rounded-full border-4 border-black"
+                    >
+                        <Text className="text-center text-black font-nunitoBold text-base">
+                            Reschedule
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            )}
         </View>
     );
 }
