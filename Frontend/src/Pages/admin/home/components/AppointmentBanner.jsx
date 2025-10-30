@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Calendar, Clock, PawPrint, ChevronRight, CalendarClock } from "lucide-react";
+import AnimatedList from "@components/AnimatedList";
 
 export default function AppointmentBanner({ appointments = [] }) {
   const total = appointments.length;
@@ -15,9 +16,7 @@ export default function AppointmentBanner({ appointments = [] }) {
             Upcoming Appointments
           </h2>
           {total > 0 && (
-            <span className="text-xs md:text-sm text-ink-secondary/70">
-              ({total})
-            </span>
+            <span className="text-xs md:text-sm text-ink-secondary/70">({total})</span>
           )}
         </div>
         <Link
@@ -28,41 +27,27 @@ export default function AppointmentBanner({ appointments = [] }) {
         </Link>
       </div>
 
-      {/* Scroll area — rounded & clipped, spacing between cards */}
-      <div
-        className="h-72 overflow-y-auto px-4 py-3 space-y-3 custom-scroll"
-        style={{
-          scrollbarWidth: "thin",
-          scrollbarColor: "#D6B99D transparent",
-          // keeps layout stable so content doesn't jump when scrollbar appears
-          scrollbarGutter: "stable",
-        }}
-      >
-        <style>{`
-          /* WebKit scrollbar styling */
-          .custom-scroll::-webkit-scrollbar {
-            width: 10px;
-          }
-          .custom-scroll::-webkit-scrollbar-track {
-            background: transparent;
-            margin: 6px; /* creates top/bottom insets so arrows/ends don't poke past the rounded edge */
-          }
-          .custom-scroll::-webkit-scrollbar-thumb {
-            background-color: #d6b99d;
-            border-radius: 9999px;
-          }
-        `}</style>
-
-        {appointments.length === 0 ? (
-          <div className="h-full flex items-center justify-center">
-            <p className="text-sm text-stone-500">No upcoming appointments.</p>
-          </div>
-        ) : (
-          appointments.map((a) => (
-            <div
-              key={a._id}
-              className="flex flex-col gap-2 rounded-2xl bg-white shadow-md p-4"
-            >
+      {/* If no appointments, show the centered fallback */}
+      {appointments.length === 0 ? (
+        <div className="h-72 flex items-center justify-center px-4">
+          <p className="text-sm text-stone-500">No upcoming appointments.</p>
+        </div>
+      ) : (
+        <AnimatedList
+          items={appointments}
+          itemKey={(a) => a._id}
+          onItemSelect={(a) => console.log("Selected:", a._id)}
+          className="h-72"
+          scrollAreaClassName="h-full overflow-y-auto px-4 py-3 space-y-3 custom-scroll"
+          showGradients
+          enableArrowNavigation
+          displayScrollbar
+          gradientTop="linear-gradient(to bottom, rgba(237,224,212,0.85), rgba(237,224,212,0))"
+          gradientBottom="linear-gradient(to top, rgba(237,224,212,0.95), rgba(237,224,212,0))"
+          stagger={0.05}
+          duration={0.20}
+          renderItem={(a) => (
+            <div className="flex flex-col gap-2 rounded-2xl bg-white shadow-md p-4">
               {/* Top Row — Provider & Service (date on right) */}
               <div className="flex justify-between items-start">
                 <div className="flex items-center gap-3">
@@ -103,9 +88,17 @@ export default function AppointmentBanner({ appointments = [] }) {
                 </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          )}
+        />
+      )}
+
+      {/* Custom scrollbar styling (unchanged) */}
+      <style>{`
+        .custom-scroll { scrollbar-width: thin; scrollbar-color: #D6B99D transparent; scrollbar-gutter: stable; }
+        .custom-scroll::-webkit-scrollbar { width: 10px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; margin: 6px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background-color: #d6b99d; border-radius: 9999px; }
+      `}</style>
     </div>
   );
 }
