@@ -5,9 +5,7 @@ import { Navigate, Route } from "react-router-dom";
 import MainLayout from "../Layout/admin/AdminLayout";
 
 // Auth
-import Login from "../Pages/auth/login";
-import SignUp2 from "../Pages/auth/signin/SignUp2";
-
+import SignIn from "../Pages/auth";
 // Common
 import ScrollAnimations from "../components/ScrollAnimations";
 import List from "../Pages/admin/List";
@@ -50,15 +48,14 @@ import BreedInfo from "../Pages/admin/breedInfo";
 const routes = (
   <>
     {/* Auth Routes */}
-    <Route path="/login" element={<Login />} />
-    <Route path="/sign-up" element={<SignUp2 />} />
     <Route path="/sample" element={<ScrollAnimations />} />
-
-    <Route path="/welcome" element={<Welcome />} />
+    <Route path="/sign-in" element={<SignIn />} />
+    
 
     {/* Main Layout Routes */}
     <Route path="/" element={<MainLayout />}>
       <Route index element={<Navigate to="/welcome" replace />} />
+      <Route path="/welcome" element={<Welcome />} />
       <Route path="/home" element={<Home />} />
       <Route path="/appointments" element={<Appointment />} />
       <Route path="/about" element={<About />} />

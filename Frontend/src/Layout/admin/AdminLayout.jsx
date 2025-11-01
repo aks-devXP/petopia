@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/StaticNavbar/StaticNavbar'
 
 const AdminLayout = () => {
   return (

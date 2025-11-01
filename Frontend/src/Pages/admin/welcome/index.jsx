@@ -1,6 +1,5 @@
 import React from 'react';
 import PawPrint from './components/PawPrint';
-import NavBar from './components/NavBar';
 import Cat1 from '@assets/HomeScreen/Pets/cat3.png';
 import Cat2 from '@assets/HomeScreen/Pets/cat4.png';
 import Dog1 from '@assets/HomeScreen/Pets/dog1.png';
@@ -17,9 +16,6 @@ export default function Welcome() {
 
   return (
     <div className="flex flex-col items-center bg-app-bg">
-      <div className="w-full">
-        <NavBar onExploreClick={handleExplore} />
-      </div>
 
       <div className="w-full flex items-center justify-center pb-2">
         <PawPrint

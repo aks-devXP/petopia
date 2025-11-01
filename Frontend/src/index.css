@@ -45,7 +45,7 @@ body {
 
 @layer base {
   body {
-    @apply font-sans bg-[#1A120B] text-n-1 text-base;
+    @apply font-sans bg-app-bg text-n-1 text-base;
 
   }
 }
