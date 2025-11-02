@@ -8,6 +8,8 @@ import ServiceHero from './components/ServiceHero';
 import PetCareGuideBanner from './components/PetCareGuideBanner';
 import BlogBanner from './components/BlogBanner';
 import Footer from '@/components/Footer';
+import RotatingGuideHeadline from './components/RotatingGuideHeadline';
+import TextType from './components/TextType';
 
 export default function Welcome() {
   const handleExplore = () => {
@@ -27,9 +29,6 @@ export default function Welcome() {
               <p className="text-3xl font-nunitoBlack leading-tight text-brand">
                 Caring for<br />Your Pet Made Simple!
               </p>
-              <p className="text-lg font-nunito mt-4">
-                Everything your pet needs, all in one place.
-              </p>
             </div>
           }
         />
@@ -37,14 +36,14 @@ export default function Welcome() {
 
       {/* Explore target */}
       <div id="explore-section" className="w-full flex flex-col space-y-2 sm:space-y-6 md:space-y-8 lg:space-y-12">
+        
+
+        <TextType/>
         <ServiceHero />
+        <RotatingGuideHeadline rotationInterval={1800} />
         <PetCareGuideBanner />
         <BlogBanner />
 
-      </div>
-
-      <div className="w-full">
-        <Footer />
       </div>
     </div>
   );
