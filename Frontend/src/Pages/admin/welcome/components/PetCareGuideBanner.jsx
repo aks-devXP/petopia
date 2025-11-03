@@ -20,7 +20,7 @@ export default function PetCareGuideCard({
   const navigate = useNavigate();
 
   return (
-    <div className="mx-2 sm:mx-12">
+    <div className="mx-2 sm:mx-12 ">
       <div className="grid grid-cols-1 md:grid-cols-10 gap-2 md:gap-8 items-center">
         {/* LEFT - Content */}
         <div
@@ -31,6 +31,7 @@ export default function PetCareGuideCard({
             px-6 sm:px-6 lg:px-10
             py-6 md:py-8 lg:py-10 xl:py-12
             bg-app-surface rounded-3xl
+            shadow-md
           "
         >
           <div className="space-y-2">

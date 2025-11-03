@@ -1,41 +1,23 @@
+// BlurText.jsx (drop-in replacement)
 import { motion } from "motion/react";
 import { useEffect, useRef, useState, useMemo } from "react";
 
-/** Build per-key keyframes across snapshots */
 const buildKeyframes = (from, steps) => {
   const keys = new Set([
     ...Object.keys(from),
     ...steps.flatMap((s) => Object.keys(s)),
   ]);
   const kf = {};
-  keys.forEach((k) => {
-    kf[k] = [from[k], ...steps.map((s) => s[k])];
-  });
+  keys.forEach((k) => { kf[k] = [from[k], ...steps.map((s) => s[k])]; });
   return kf;
 };
 
-/**
- * BlurText
- * Tailwind-ready, no CSS files.
- *
- * Props:
- * - text: string
- * - delay: number (ms) stagger per segment
- * - animateBy: 'words' | 'letters'
- * - direction: 'top' | 'bottom'
- * - threshold, rootMargin: IntersectionObserver tuning
- * - animationFrom / animationTo: override default snapshots
- * - easing: (t)=>t or array easing accepted by motion
- * - onAnimationComplete: callback when last segment finishes
- * - stepDuration: seconds per step (default 0.35s)
- * - className: Tailwind classes for wrapper <p>
- */
 export default function BlurText({
   text = "",
   delay = 200,
   className = "",
-  animateBy = "words",
-  direction = "top",
+  animateBy = "words",      // 'words' | 'letters'
+  direction = "top",        // 'top' | 'bottom'
   threshold = 0.1,
   rootMargin = "0px",
   animationFrom,
@@ -44,44 +26,37 @@ export default function BlurText({
   onAnimationComplete,
   stepDuration = 0.35,
 }) {
-  const elements =
-    animateBy === "words" ? text.split(" ") : Array.from(text || "");
+  // Convert "<br/>" (in any spacing/case) to real newlines BEFORE splitting
+  const normalized = useMemo(
+    () => (text || "").replace(/\s*<br\s*\/?>\s*/gi, "\n"),
+    [text]
+  );
+
+  const blocks = useMemo(() => normalized.split("\n"), [normalized]);
   const [inView, setInView] = useState(false);
   const ref = useRef(null);
 
-  // Viewport trigger (client-only)
   useEffect(() => {
     if (!ref.current) return;
     const el = ref.current;
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          io.unobserve(el);
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); io.unobserve(el); } },
       { threshold, rootMargin }
     );
     io.observe(el);
     return () => io.disconnect();
   }, [threshold, rootMargin]);
 
-  // Default motion snapshots
   const defaultFrom = useMemo(
-    () =>
-      direction === "top"
-        ? { filter: "blur(10px)", opacity: 0, y: -50 }
-        : { filter: "blur(10px)", opacity: 0, y: 50 },
+    () => (direction === "top"
+      ? { filter: "blur(10px)", opacity: 0, y: -50 }
+      : { filter: "blur(10px)", opacity: 0, y: 50 }),
     [direction]
   );
 
   const defaultTo = useMemo(
     () => [
-      {
-        filter: "blur(5px)",
-        opacity: 0.5,
-        y: direction === "top" ? 5 : -5,
-      },
+      { filter: "blur(5px)", opacity: 0.5, y: direction === "top" ? 5 : -5 },
       { filter: "blur(0px)", opacity: 1, y: 0 },
     ],
     [direction]
@@ -90,51 +65,43 @@ export default function BlurText({
   const fromSnapshot = animationFrom ?? defaultFrom;
   const toSnapshots = animationTo ?? defaultTo;
 
-  const stepCount = toSnapshots.length + 1; // from + steps
-  const totalDuration = stepDuration * (stepCount - 1);
-  const times =
-    stepCount === 1
-      ? [0]
-      : Array.from({ length: stepCount }, (_, i) => i / (stepCount - 1));
+  const stepCount = toSnapshots.length + 1;
+  const times = Array.from({ length: stepCount }, (_, i) =>
+    stepCount === 1 ? 0 : i / (stepCount - 1)
+  );
+  const totalDuration = stepCount > 1 ? stepDuration * (stepCount - 1) : 0;
 
   return (
-    <p
-      ref={ref}
-      className={["flex flex-wrap", className].join(" ").trim()}
-      aria-label={text}
-    >
-      {elements.map((segment, index) => {
+    <p ref={ref} className={["flex flex-col", className].join(" ").trim()} aria-label={normalized}>
+      {blocks.map((line, lineIdx) => {
+        const parts = animateBy === "words" ? line.split(" ") : Array.from(line);
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
-        const transition = {
-          duration: totalDuration,
-          times,
-          delay: (index * delay) / 1000, // ms → s
-          ease: easing,
-        };
-
-        // Non-breaking space handling for words mode
-        const content =
-          animateBy === "words"
-            ? segment
-            : segment === " "
-            ? "\u00A0"
-            : segment;
-
         return (
-          <motion.span
-            key={index}
-            className="inline-block will-change-[transform,filter,opacity]"
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
-            transition={transition}
-            onAnimationComplete={
-              index === elements.length - 1 ? onAnimationComplete : undefined
-            }
-          >
-            {content}
-            {animateBy === "words" && index < elements.length - 1 && "\u00A0"}
-          </motion.span>
+          <span key={lineIdx} className="block">
+            {parts.map((seg, i, arr) => (
+              <motion.span
+                key={i}
+                className="inline-block will-change-[transform,filter,opacity]"
+                initial={fromSnapshot}
+                animate={inView ? animateKeyframes : fromSnapshot}
+                transition={{
+                  duration: totalDuration,
+                  times,
+                  delay: ((lineIdx * parts.length + i) * delay) / 1000,
+                  ease: easing,
+                }}
+                onAnimationComplete={
+                  lineIdx === blocks.length - 1 && i === arr.length - 1
+                    ? onAnimationComplete
+                    : undefined
+                }
+              >
+                {seg}
+                {animateBy === "words" && i < arr.length - 1 && "\u00A0"}
+              </motion.span>
+            ))}
+          </span>
         );
       })}
     </p>

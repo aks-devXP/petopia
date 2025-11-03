@@ -10,6 +10,7 @@ import BlogBanner from './components/BlogBanner';
 import Footer from '@/components/Footer';
 import RotatingGuideHeadline from './components/RotatingGuideHeadline';
 import TextType from './components/TextType';
+import ClickSpark from '@/components/ClickSpark'; 
 
 export default function Welcome() {
   const handleExplore = () => {
@@ -18,12 +19,25 @@ export default function Welcome() {
 
   return (
     <div className="flex flex-col items-center bg-app-bg">
+      {/* click spark overlay */}
+      <ClickSpark
+        // sparkColor="#E87C5B"  // brand-ish; tweak as you like
+        sparkCount={8}
+        sparkSize={5}
+        sparkRadius={20}
+        lineWidth={2}
+        duration={400}
+        easing="ease-out"
+        extraScale={1.0}
+        trail={true}
+        throttleMs={70}
+      />
 
       <div className="w-full flex items-center justify-center pb-2">
         <PawPrint
           className="w-[500px] hover:scale-[1.01] transition-transform duration-300 ease-out"
           fill="#e9ddd5"
-          toeImages={[Dog1, Cat2, Dog2, Cat1]} // order preserved exactly
+          toeImages={[Dog1, Cat2, Dog2, Cat1]}
           padChildren={
             <div className="text-black px-4 pt-2 w-full mt-16">
               <p className="text-3xl font-nunitoBlack leading-tight text-brand">
@@ -35,15 +49,12 @@ export default function Welcome() {
       </div>
 
       {/* Explore target */}
-      <div id="explore-section" className="w-full flex flex-col space-y-2 sm:space-y-6 md:space-y-8 lg:space-y-12">
-        
-
-        <TextType/>
+      <div id="explore-section" className="w-full flex flex-col space-y-2 sm:space-y-6 md:space-y-8 lg:space-y-12 my-4 md:my-8">
+        <TextType />
         <ServiceHero />
         <RotatingGuideHeadline rotationInterval={1800} />
         <PetCareGuideBanner />
         <BlogBanner />
-
       </div>
     </div>
   );

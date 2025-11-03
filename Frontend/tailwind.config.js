@@ -70,7 +70,7 @@ export default {
           element: "#b1d4e9" 
         },
         ink: {
-          primary: "#0c2b37",     // Primary text → text-ink-primary
+          primary: "#0c2b37" ,     // Primary text → text-ink-primary
           secondary: "#493014",   // Secondary text → text-ink-secondary
           heading: "#000000",     // Heading text → text-ink-heading
         },

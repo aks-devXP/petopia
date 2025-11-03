@@ -24,9 +24,10 @@ import VetBook from "../Pages/admin/vets/VetBook";
 import AppointmentSuccess from "../Pages/admin/vets/components/AppointmentSuccess";
 
 // Services
-import PetServices from "../Pages/admin/services";
+import Services from "../Pages/admin/services";
 import GroomerBook from "../Pages/admin/services/GroomerBook";
 import CareTaker from "../Pages/admin/services/components/CareTaker";
+import PetServices from "../Pages/admin/petservice";
 
 // NGO
 import NGO from "../Pages/admin/ngo";
@@ -80,9 +81,10 @@ const routes = (
       <Route path="/appointment-success" element={<AppointmentSuccess />} />
 
       {/* Services */}
-      <Route path="/services" element={<PetServices />} />
+      <Route path="/services" element={<Services />} />
       <Route path="/groomer-book" element={<GroomerBook />} />
       <Route path="/care-taker-book" element={<CareTaker />} />
+      <Route path='/pet-services' element={<PetServices />} />
 
       {/* NGO */}
       <Route path="/ngo" element={<NGO />} />

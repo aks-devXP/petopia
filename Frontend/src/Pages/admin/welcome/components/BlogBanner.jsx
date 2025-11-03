@@ -82,7 +82,7 @@ export default function Testimonials({
   );
 
   return (
-    <section className="bg-app-surface mx-2 sm:mx-12 rounded-3xl px-4 sm:px-8 lg:px-12~ py-6 md:py-16">
+    <section className="bg-app-surface mx-2 sm:mx-12 rounded-3xl px-4 sm:px-8 lg:px-12 py-6 md:py-16 shadow-md">
       <div className="max-w-7xl mx-auto">
         {/* Header row (matches hero spacing/scale) */}
         <div className="mb-8 md:mb-12">

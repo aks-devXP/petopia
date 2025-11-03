@@ -55,7 +55,7 @@ export default function ServiceHero({
   }));
   const navigate = useNavigate();
   return (
-    <div className="bg-app-surface mx-2 sm:mx-12 rounded-3xl px-4 sm:px-8 lg:px-20 py-6 md:py-24">
+    <div className="bg-app-surface mx-2 sm:mx-12 rounded-3xl px-4 sm:px-8 lg:px-20 py-6 md:py-24 shadow-md">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-32 items-start">
         {/* LEFT */}
         <div className="flex flex-col justify-center h-full space-y-8">

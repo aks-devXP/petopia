@@ -74,7 +74,7 @@ export default function Slider() {
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-3xl "
+      className="relative w-full overflow-hidden rounded-3xl shadow-md"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -92,7 +92,7 @@ export default function Slider() {
               i === idx ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
             }`}
           >
-            <div className="flex h-full w-full items-center justify-center rounded-3xl bg-app-surface border border-black/10">
+            <div className="flex h-full w-full items-center justify-center rounded-3xl bg-app-surface">
               <img
                 src={b.images?.primary || b.images?.secondary || "/petopia/vite.svg"}
                 alt={b.breed}

@@ -14,7 +14,7 @@ const TextType = ({
   className = '',
   showCursor = true,
   hideCursorWhileTyping = false,
-  cursorCharacter = '|',
+  cursorCharacter = '_',
   cursorClassName = '',
   cursorBlinkDuration = 0.5,
   textColors = [],
@@ -199,6 +199,13 @@ const TextType = ({
         <span
           ref={cursorRef}
           className={`ml-1 inline-block ${hideCursorNow ? 'invisible' : 'opacity-100'} ${cursorClassName}`}
+          style={{
+            color:
+              // If typing or deleting, use the same as text color — otherwise black
+              currentCharIndex < (textArray[currentTextIndex] ?? '').length || isDeleting
+                ? getCurrentTextColor() || 'inherit'
+                : '#000',
+          }}
         >
           {cursorCharacter}
         </span>
@@ -212,7 +219,7 @@ export default function HeroTyping() {
     <div className="w-full text-center text-2xl sm:text-3xl md:text-4xl font-nunitoBlack">
       <TextType
         text={[
-          'Everything your pet needs, all in one place.'
+          'Everything your pet needs, all in one place'
         ]}
         typingSpeed={80}
         deletingSpeed={35}
@@ -220,7 +227,7 @@ export default function HeroTyping() {
         initialDelay={400}
         loop = {false}
         showCursor
-        cursorCharacter="|"
+        cursorCharacter="_"
         hideCursorWhileTyping={false}
         variableSpeed={{ min: 70, max: 90 }}
         startOnVisible={true}
