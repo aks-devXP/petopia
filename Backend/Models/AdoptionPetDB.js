@@ -1,4 +1,4 @@
-const mongoo = require('mongoose');
+const mongoo = require('./SetDB');
 
 const Schema = mongoo.Schema;
 

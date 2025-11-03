@@ -1,4 +1,3 @@
-import React from 'react'
 
 const ProgressBar = ({ value = 0 }) => (
   <div className="h-2 w-full rounded-full bg-gray-200 overflow-hidden">
@@ -35,7 +34,7 @@ const CampaignCard = ({ campaign, onOpen }) => {
         </div>
 
         <div className="mt-4 flex items-center justify-between">
-          <div className="text-xs text-gray-500">By {campaign.organizer?.name}</div>
+          <div className="text-xs text-gray-500">By {campaign.name}</div>
           <button
             onClick={onOpen}
             className="inline-flex items-center rounded-lg bg-gradient-to-r from-orange-500 to-rose-500 px-3 py-1.5 text-sm font-semibold text-white shadow hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400"

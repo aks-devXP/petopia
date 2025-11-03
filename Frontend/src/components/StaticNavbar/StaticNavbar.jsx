@@ -1,8 +1,7 @@
-import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@assets/petopia-logo.svg";
-import StaggeredMenu from "./StaggeredMenu";
+import { useLocation, useNavigate } from "react-router-dom";
 import PawButton from "../buttons/PawButton";
+import StaggeredMenu from "./StaggeredMenu";
 
 const StaticNavbar = () => {
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ const StaticNavbar = () => {
   return (
     <nav
       className="
-        sticky top-0 z-[100]  /* keep it above content when menu is closed */
+        sticky top-0 z-[99]  /* keep it above content when menu is closed */
         flex items-center justify-between
         bg-ink-secondary/30 h-20 px-2 sm:px-4 backdrop-blur-xl"
     >

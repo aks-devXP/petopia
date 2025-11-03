@@ -1,5 +1,5 @@
 const stream = require('stream');
-const Breed = require('../Models/Breed');
+const Breed = require('../Models/BreedDB');
 const cloudinary = require('../Configs/cloudinary');
 
 // list breeds (for grid page)

@@ -1,0 +1,9 @@
+[*] Why not requiring mongoose directly in each model file still works?
+1. Node.js require cache
+-> When you do require('mongoose') in any file, Node.js doesn’t reload mongoose every time.
+-> Instead, it pulls it from the module cache.
+-> That means all your files (db.js, model files, etc.) are actually using the same mongoose instance under the hood.
+2. Mongoose is a singleton
+-> Mongoose maintains a global connection state.
+-> When you call mongoose.connect(...) once (in db.js), that connection is shared across the whole app.
+-> Even if you import require('mongoose') separately in your model files, it’s still the same instance because of Node’s cache.

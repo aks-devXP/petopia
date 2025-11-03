@@ -10,6 +10,17 @@ const getAllVets = async(req,res)=>{
   }
 }
 
+
+const vetExists = async(id)=>{
+  try {
+    const vet = VetModel.findById(new ObjectId(id));
+    return vet!==null;
+  } catch (error) { 
+    return false;
+  }
+}
+
+
 const createVet = async (req, res) => {
   try {
     const { name, email, phone, address, city, state, zip, about, tenure, rating, profilePic , timings} = req.body;
@@ -47,7 +58,7 @@ const createVet = async (req, res) => {
 };
 const getVet = async (req, res) => {
   try{
-    const id = req.params.id;
+    const id = req.params.id||req.verified.id;
     if(!ObjectId.isValid(id)){
       res.status(400).json({error: "Invalid ID Format", success:false})
     }
@@ -82,4 +93,4 @@ const getVetByEmail = async (req, res) => {
 }
 
 
-module.exports = {getAllVets, createVet, getVet,getVetByEmail}
+module.exports = {getAllVets, createVet, getVet,getVetByEmail, vetExists};

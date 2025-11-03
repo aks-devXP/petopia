@@ -1,6 +1,7 @@
 const UserModel = require('../Models/UsersDB');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+require("dotenv").config;
 const loginControl = async (req, res) => {  
     try {
         const { email, password } = req.body;
@@ -17,7 +18,7 @@ const loginControl = async (req, res) => {
         }
         // Testing
         // console.log(user);
-        const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
+        const token = jwt.sign({id: user._id, user_name: user.name, type:"user"}, process.env.JWT_SECRET); // currently not added the expiry time
         console.log("Login Successful and The Your Token is: ", token);
         res.status(200).json({ message: 'Login Successful',  success: true, token: token, user_name: user.name });
     }
@@ -30,7 +31,7 @@ const loginControl = async (req, res) => {
 const signupControl = async (req, res) => {
     try {
         
-        const { name, email, password } = req.body;
+        const { name, email, password } = req.body.user;
         console.log(name, email, password);
         const oldUser  =  await UserModel.findOne({
             email: email,
@@ -55,8 +56,9 @@ const signupControl = async (req, res) => {
         const user = await UserModel.findOne({
             email: email,
         });
+        // console.log(user);
 
-        const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
+        const token = jwt.sign({id: user._id, user_name: user.name, type:"user"}, process.env.JWT_SECRET); // currently not added the expiry time
         res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: user.name });
         // console.log(token);
         
@@ -66,42 +68,56 @@ const signupControl = async (req, res) => {
     }
 }
 
-const GenLoginControl = async (req, res) => {
+const AdminLoginControl = async (req, res) => {
     try {
         const { email, password } = req.body.user;
-        console.log(email, password);
+        // console.log(email, password);
         const type = req.body.type;
-        let Vet = require('../Models/VetDB');
+        let control = null;
         if(type === 'vet'){
-            Vet = require('../Models/VetDB');
+            control = require('../Models/VetDB');
         }
         else if(type === 'trainer'){
-            Vet = require('../Models/TrainerDB');
+            control = require('../Models/TrainerDB');
+        }
+        else if(type==="ngo"){
+            control = require('../Models/NGO/ngoDB');
+        }
+        else if(type==="admin"){
+            const isEmail = email===process.env["Admin-h-email"];
+            const isPass = password===process.env["Admin-h-pass"];
+            console.log(email,)
+            if(!isEmail || !isPass){
+                return res.status(400).json({message: 'Invalid Credentials', success:false});
+            }
+            const ad_token = jwt.sign({id: "ab00001", user_name: "admin001", type}, process.env.JWT_SECRET);
+            return res.status(200).json({ message: 'Login Successful',  success: true, token: ad_token, user_name: "admin" });
         }
 
-        const user = await Vet.findOne({
+
+        const user = await control.findOne({
             email: email,
         });
         if(!user){
-            return res.status(400).json({message: 'User Not Found'});
+            return res.status(400).json({success:false,message: 'User Not Found'});
         }
         const pass_Matched = await bcrypt.compare(password, user.password);
         if(!pass_Matched){
-            return res.status(400).json({message: 'Invalid Credentials'});
+            return res.status(400).json({success:false,message: 'Invalid Credentials'});
         }
         // Testing
         // console.log(user);
-        const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
-        console.log("Login Successful and The Your Token is: ", token);
+        const token = jwt.sign({id: user._id, user_name: user.name, type}, process.env.JWT_SECRET); // currently not added the expiry time
+        // console.log("Login Successful and The Your Token is: ", token);
         res.status(200).json({ message: 'Login Successful',  success: true, token: token, user_name: user.name });
     }
     catch (error) {
 
-        console.log("Error In Vet Control",error);
-        res.status(500).json({ error: error.message });
+        console.log("Error In Admin Control",error);
+        res.status(500).json({ error: error.message , success:false});
     }
 }
-const GenSignupControl = async (req, res) => {
+const AdminSignupControl = async (req, res) => {
     try {
         
         const { name, email, password } = req.body.user;
@@ -133,7 +149,7 @@ const GenSignupControl = async (req, res) => {
         const user = await Vet.findOne({
             email: email,
         });
-        const token = jwt.sign({id: user._id, user_name: user.name}, process.env.JWT_SECRET); // currently not added the expiry time
+        const token = jwt.sign({id: user._id, user_name: user.name, type}, process.env.JWT_SECRET); // currently not added the expiry time
         res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: user.name });
         // console.log(token);
     }
@@ -212,4 +228,5 @@ const FacebookControl= async (req,res)=>{
     }
 }
 
-module.exports = { loginControl, signupControl, GoogleControl, GenLoginControl, GenSignupControl,FacebookControl };
+
+module.exports = { loginControl, signupControl, GoogleControl, AdminLoginControl, AdminSignupControl,FacebookControl };

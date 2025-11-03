@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('./SetDB');
 const Schema = mongoose.Schema;
 const GroomerSchema = new Schema({
     name: {

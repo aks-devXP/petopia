@@ -1,6 +1,5 @@
-import React from 'react'
 import { motion } from 'framer-motion'
-import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa'
+import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa'
 
 const Pill = ({ children }) => (
   <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-100">
@@ -19,9 +18,9 @@ const NGOTile = ({ ngo, onClick }) => {
       className="text-left w-full rounded-xl bg-white shadow-sm ring-1 ring-gray-200 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
       aria-label={`View details for ${ngo.name}`}
     >
-      {ngo.image && (
+      {ngo.logo && (
         <div className="h-44 w-full bg-gray-100 overflow-hidden">
-          <img src={ngo.image} alt={ngo.name} className="h-full w-full object-cover" />
+          <img src={ngo.logo} alt={ngo.name} className="h-full w-full object-cover" />
         </div>
       )}
       <div className="p-4">

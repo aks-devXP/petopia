@@ -996,7 +996,7 @@ const getPetCount= async(req,res)=>{
     if (typeof category === 'string') {
       category = category.split(',').map(c => c.trim());
     }
-    console.log(category);  
+    // console.log(category);  
     if (category.length>0){
       category = new Set(category.map(c=>c.toLowerCase()));
       const catCount = animals.filter(pet=> category.has(pet.category.toLowerCase())).length;

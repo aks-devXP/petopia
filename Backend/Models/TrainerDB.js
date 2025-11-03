@@ -1,5 +1,4 @@
-const mongo = require('mongoose');
-const { create } = require('./AppointmentsDB');
+const mongo = require('./SetDB');
 const Schema = mongo.Schema;
 // Use a distinct schema and model name for trainers to avoid
 // clashing with the Vet model and triggering OverwriteModelError.

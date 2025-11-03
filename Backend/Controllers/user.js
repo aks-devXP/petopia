@@ -18,6 +18,16 @@ const ContactControl = async (req, res) => {
 
 };
 
+const userExists = async(id)=>{
+  try {
+    const user = await UserModel.findById(new mongoose.Types.ObjectId(id));
+    return user!==null;
+  } 
+  catch (error) {
+    return false;
+  }
+}
+
 const getProfileControl = async (req,res)=>{
   try{
     // const user_name = req.verified.user_name;
@@ -31,7 +41,20 @@ const getProfileControl = async (req,res)=>{
     if(!user){
       return res.status(400).json({message: 'User not found', success: false});
     }
-    res.status(200).json({message: 'Profile Info', success: true, user: user});
+    const data= {
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      age: user.age,
+      address: user.address,
+      city: user.city,
+      state: user.state,
+      profileColor: user.profileColor,
+      profilePic: user.profilePic,
+      nameColor: user.nameColor,
+      petID: user.petID
+    }
+    res.status(200).json({message: 'Profile Info', success: true, user: data});
   }
   catch(error){
     res.status(500).json({message:'Internal server error', success: false});
@@ -288,7 +311,7 @@ const deleteAppointmentControl = async (req, res) => {
 };
 
 
-module.exports = { ContactControl, getProfileControl, updateProfileControl, updatePasswordControl, createAppointmentControl, updateAppointmentControl, getAllAppointmentControl, deleteAppointmentControl };
+module.exports = { ContactControl, getProfileControl, updateProfileControl, updatePasswordControl, createAppointmentControl, updateAppointmentControl, getAllAppointmentControl, deleteAppointmentControl, userExists };
 
 
 

@@ -1,0 +1,73 @@
+## Campaign Data
+"campaign": {
+    "title": "Warm Beds for Street Animals",
+    "tagline": "Blankets and shelters before winter hits",
+    "description": "We are assembling low-cost insulated beds and distributing blankets to protect stray dogs and cats from the harsh winter nights across the city.",
+    "images": [
+      "https://cdn.example.org/campaigns/warmbeds/main.jpg",
+      "https://cdn.example.org/campaigns/warmbeds/volunteers.jpg"
+    ],
+    "goal": 75000.00,
+    "raised": 12000.00,
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "organizer_id": "68f7a7d65f0bcf688e7a4040",
+    "donation_url": "https://donate.example.org/warm-beds"
+  }
+
+
+## NGO Data
+"ngo":{
+  "name": "Love for all",
+  "founder": "Dr. Akash Garv",
+  "email": "koveall@gmzil.org",
+  "images": [
+    "https://example.com/images/ngo-main-building.jpg",
+    "https://example.com/images/children-program.jpg",
+    "https://example.com/images/volunteer-team.jpg",
+    "https://example.com/images/community-event.jpg"
+  ],
+  "password":"qwerty12345@",
+  "contact_no": "+1 (555) 128-4567",
+  "description": "Hope Foundation for Children is a non-profit organization dedicated to improving the lives of underprivileged children through education, healthcare, and community development programs. Founded in 2010, we have served over 5,000 children across 15 communities. Our mission is to provide every child with access to quality education, nutritious meals, healthcare services, and a safe environment to grow and thrive. We work closely with local communities, schools, and healthcare providers to create sustainable solutions that address the root causes of poverty and inequality.",
+  "social_media_links": {
+    "facebook": "https://facebook1.com/hopefoundation",
+    "twitter": "https://twitter1.com/hopefoundation",
+    "instagram": "https://instagram1.com/hopefoundation",
+    "linkedin": "https://linkedin1.com/company/hopefoundation"
+  },
+  "website": "https://www.loveall.org",
+  "address": "1234 Charity Lane, Suite 100",
+  "city": "Boston",
+  "state": "Massachusetts",
+  "verification_docs": {
+    "registration_certificate": "https://example.com/docs/registration-cert.pdf",
+    "tax_exemption": "https://example.com/docs/501c3-status.pdf",
+    "bank_details": "https://example.com/docs/bank-verification.pdf"
+  },
+  "is_verified": true,
+  "logo": "https://example.com/logos/hope-foundation-logo.png",
+  "activities": [
+    "Education sponsorship programs",
+    "After-school tutoring",
+    "Health checkup camps",
+    "Nutrition programs",
+    "Skills development workshops"
+  ],
+  "facilities": [
+    "Learning center with computer lab",
+    "Medical clinic",
+    "Library with 2000+ books",
+    "Sports ground",
+    "Counseling center"
+  ],
+  "established_in": 2010,
+  "total_funds_raised": 2500000.50,
+  "total_campaigns": 47
+}
+
+## Upload Multiple images
+{
+  "field_Name (defined in the routes file valid or you define more) ": [images],
+  "folder": "folder_name_over_cloudinary(by default its-> extras)"
+}
