@@ -28,7 +28,7 @@ export default function FavouriteBanner() {
         {/* LEFT */}
         <div className="w-full md:w-[55%] flex flex-col gap-4">
           <NavLink
-            to="/favorites"
+            to="/pet-services"
             className="group relative overflow-hidden rounded-3xl block"
             aria-label="Explore your favorite providers"
           >

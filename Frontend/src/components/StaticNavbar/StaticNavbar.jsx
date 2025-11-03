@@ -11,7 +11,7 @@ const StaticNavbar = () => {
 
   const items = [
     { label: "Home", ariaLabel: "Go to Home", to: "/home" },
-    { label: "Services", ariaLabel: "Go to Services", to: "/services" },
+    { label: "Services", ariaLabel: "Go to Services", to: "/pet-services" },
     { label: "Guide", ariaLabel: "Go to Breed Guide", to: "/breed-info" },
     { label: "News", ariaLabel: "Go to News", to: "/news" },
     { label: "NGO", ariaLabel: "Go to NGO/Volunteer", to: "/ngo" },

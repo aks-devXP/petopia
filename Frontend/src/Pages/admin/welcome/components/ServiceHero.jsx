@@ -81,7 +81,7 @@ export default function ServiceHero({
             <div className="mt-5">
               <PawButton 
                 text={promo.cta} 
-                onClick={() => navigate("/vet")} 
+                onClick={() => navigate("/pet-services")} 
               />
             </div>
 
