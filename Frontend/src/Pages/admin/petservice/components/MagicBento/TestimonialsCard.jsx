@@ -1,14 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 export default function TestimonialsCard({
   headline = (
     <>
-      What our <br className="hidden sm:block" />
+      What our <br className="hidden md:block" />
       happy pet parents <span className="text-rose-500">say</span>
     </>
   ),
   helper = "Real stories from families who booked vets, groomers, and trainers with Petopia.",
+  // ⬇ keep sample data
   testimonials = [
     {
       id: 1,
@@ -48,39 +49,47 @@ export default function TestimonialsCard({
     },
   ],
 }) {
-  const [visible, setVisible] = useState(1); // 1 on small, 2 on md+
+  // Always show exactly 2 at a time, sliding by ONE card per click.
+  const [index, setIndex] = useState(0); // left-most visible card
+  const viewportRef = useRef(null);
+  const [viewportW, setViewportW] = useState(0);
+
+  // measure viewport width (so each card is exactly half of it)
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const update = () => setVisible(mq.matches ? 2 : 1);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+    const measure = () => {
+      if (viewportRef.current) {
+        setViewportW(viewportRef.current.clientWidth);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
   }, []);
 
-  const [index, setIndex] = useState(0);
-  const maxIndex = Math.max(0, testimonials.length - visible);
+  const GAP = 24; // px gap between cards
+  const visible = 2; // fixed
+  const cardW = Math.max(0, (viewportW - GAP) / visible); // two cards + one gap fits perfectly
+  const maxIndex = Math.max(0, (testimonials?.length ?? 0) - visible);
 
   const handlePrev = () => setIndex((p) => Math.max(0, p - 1));
   const handleNext = () => setIndex((p) => Math.min(maxIndex, p + 1));
 
-  const GAP_PX = 24;
-  const itemWidth = useMemo(
-    () => `calc(${100 / visible}% - ${GAP_PX / visible}px)`,
-    [visible]
-  );
-  const translateX = useMemo(
-    () => `translateX(-${index * (100 / visible)}%)`,
-    [index, visible]
-  );
+  // translate track by one "card-with-gap" per index step
+  const translateX = useMemo(() => {
+    const step = cardW + GAP;
+    return `translateX(-${index * step}px)`;
+  }, [index, cardW]);
 
   return (
-    <section className="mx-1 sm:mx-2 rounded-2xl px-3 sm:px-5 lg:px-6 py-4 md:py-8 shadow-sm">
-      <div className="mb-4 md:mb-6 flex items-start sm:items-center justify-between gap-4">
+    <section className="mx-1 md:mx-2 rounded-2xl px-3 md:px-5 lg:px-6 py-4 md:py-8 shadow-sm">
+      <div className="mb-4 md:mb-6 flex items-start md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <h3 className="text-2xl sm:text-3xl font-quicksandBold leading-tight text-ink-heading">
+          <h3 className="text-2xl md:text-3xl font-quicksandBold leading-tight text-ink-heading">
             {headline}
           </h3>
-          <p className="text-ink-secondary text-sm sm:text-base max-w-xl">{helper}</p>
+          <p className="text-ink-secondary text-sm md:text-base max-w-xl">
+            {helper}
+          </p>
         </div>
 
         <div className="flex gap-2 shrink-0">
@@ -89,6 +98,7 @@ export default function TestimonialsCard({
             disabled={index === 0}
             className="w-9 h-9 rounded-full ring-1 ring-neutral-300 text-ink-heading flex items-center justify-center bg-white hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             aria-label="Previous testimonials"
+            type="button"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -97,45 +107,63 @@ export default function TestimonialsCard({
             disabled={index >= maxIndex}
             className="w-9 h-9 rounded-full ring-1 ring-neutral-300 text-ink-heading flex items-center justify-center bg-white hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             aria-label="Next testimonials"
+            type="button"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>
 
-      <div className="overflow-hidden">
+      {/* Viewport */}
+      <div ref={viewportRef} className="overflow-hidden">
+        {/* Track */}
         <div
-          className="flex gap-6 transition-transform duration-500 ease-in-out will-change-transform"
-          style={{ transform: translateX }}
+          className="flex transition-transform duration-500 ease-in-out will-change-transform"
+          style={{
+            transform: translateX,
+            // Track width = sum of all cards + gaps
+            width:
+              testimonials.length > 0
+                ? testimonials.length * cardW + Math.max(0, testimonials.length - 1) * GAP
+                : 0,
+          }}
         >
-          {testimonials.map((t) => (
+          {testimonials.map((t, i) => (
             <article
-              key={t.id}
-              className="
-                flex-shrink-0 bg-app-bg rounded-[24px] p-5 sm:p-6
-                ring-1 ring-neutral-200
-                shadow-[0_10px_30px_rgba(0,0,0,0.08)]
-                hover:shadow-[0_16px_40px_rgba(0,0,0,0.10)]
-                transition-shadow duration-200 ease-in-out
-              "
-              style={{ width: itemWidth }}
+              key={t.id ?? i}
+              className="flex-shrink-0 bg-app-bg rounded-[24px] p-5 md:p-6"
+              style={{
+                width: `${cardW}px`,
+                marginRight: i === testimonials.length - 1 ? 0 : `${GAP}px`,
+              }}
             >
               <header className="flex items-start gap-4 mb-3">
                 <img
                   src={t.image}
                   alt={t.name}
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover"
+                  className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover"
+                  loading="lazy"
                 />
                 <div>
-                  <h4 className="font-semibold text-base sm:text-lg text-ink-heading">{t.name}</h4>
-                  <div className="flex gap-1 mt-1" aria-label={`${t.rating} star rating`}>
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  <h4 className="font-semibold text-base md:text-lg text-ink-heading">
+                    {t.name}
+                  </h4>
+                  <div
+                    className="flex gap-1 mt-1"
+                    aria-label={`${t.rating} star rating`}
+                  >
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <Star
+                        key={j}
+                        className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                      />
                     ))}
                   </div>
                 </div>
               </header>
-              <p className="text-ink-secondary leading-relaxed text-sm sm:text-base">“{t.text}”</p>
+              <p className="text-ink-secondary leading-relaxed text-sm md:text-base">
+                “{t.text}”
+              </p>
             </article>
           ))}
         </div>

@@ -17,7 +17,7 @@ export default function ServiceBanner() {
         { label: "Vaccination", ariaLabel: "Vaccinations" },
         { label: "Deworming", ariaLabel: "Deworming" },
       ],
-      href: "/book?service=veterinary",
+      href: "/pet-services/vet",
     },
     {
       title: "Groomer",
@@ -28,7 +28,7 @@ export default function ServiceBanner() {
         { label: "Trim & Style", ariaLabel: "Trimming and Styling" },
         { label: "Nail Clipping & Ear Clean", ariaLabel: "Nail and Ear Care" },
       ],
-      href: "/book?service=groomer",
+      href: "/pet-services/groomer",
     },
     {
       title: "Trainer",
@@ -39,7 +39,7 @@ export default function ServiceBanner() {
         { label: "Puppy Socialization", ariaLabel: "Puppy Socialization" },
         { label: "Behavior Correction", ariaLabel: "Behavior Correction" },
       ],
-      href: "/book?service=trainer",
+      href: "/pet-services/trainer",
     },
   ];
 

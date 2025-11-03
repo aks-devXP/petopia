@@ -1,4 +1,6 @@
+// CardNav.jsx
 import { useLayoutEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { FiChevronRight } from 'react-icons/fi';
 import { PawPrint, Clock, CalendarDays } from 'lucide-react';
@@ -15,6 +17,7 @@ const CardNav = ({
   const navRef = useRef(null);
   const cardsRef = useRef([]);
   const tlRef = useRef(null);
+  const navigate = useNavigate(); // ← use router navigation (respects basename)
 
   const pets = ['Dog', 'Cat', 'Bird', 'Rabbit', 'Other'];
 
@@ -123,6 +126,18 @@ const CardNav = ({
     if (el) cardsRef.current[i] = el;
   };
 
+  // Helper: safe navigate
+  const go = (href) => {
+    if (!href) return;
+    // External links (http/https) open normally
+    if (/^https?:\/\//i.test(href)) {
+      window.location.href = href;
+      return;
+    }
+    // Internal links go through React Router (basename-aware)
+    navigate(href);
+  };
+
   return (
     <div className={`w-full z-[999] ${className}`}>
       <nav
@@ -211,9 +226,8 @@ const CardNav = ({
         >
           {(items || []).slice(0, 3).map((item, idx) => {
             const handleActivate = () => {
-              // optional: navigate or callback
               if (typeof item.onClick === 'function') item.onClick(item);
-              else if (item.href) window.location.href = item.href;
+              else if (item.href) go(item.href); // ← navigate via router
             };
             return (
               <div
