@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
-import trainerbg from "@assets/HomeScreen/homescreen-bg.jpg"; 
+import trainerbg from "@assets/HomeScreen/homescreen-bg.jpg";
+import { BookOpen, Heart, Scissors, Star } from "lucide-react";
+import { useRef, useState } from "react";
 import CareTakerOptions from "./CareTakerOptions";
 import TrainerBanner from "./components/TrainerBanner";
-import { Star, Scissors, BookOpen, Heart } from "lucide-react";
 
 function PetServices() {
   const textOptions = {
