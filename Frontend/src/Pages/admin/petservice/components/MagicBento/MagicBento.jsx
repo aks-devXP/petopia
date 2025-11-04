@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import {
   Stethoscope,
   Scissors,
-  BookOpen,
+  Dumbbell,
   BadgeCheck,
   Search,
   Calendar,
@@ -318,7 +318,7 @@ const MagicBento = ({
                 />
               ) : index === 5 ? (
                 <ServiceInner
-                  Icon={BookOpen}
+                  Icon={Dumbbell}
                   title="Training"
                   description="Better manners, stronger bond—positive training tailored to your pet’s pace."
                 />
