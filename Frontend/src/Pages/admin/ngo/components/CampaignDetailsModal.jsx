@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaChevronLeft, FaChevronRight, FaEnvelope, FaPhoneAlt, FaUser, FaGlobe } from 'react-icons/fa'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { FaChevronLeft, FaChevronRight, FaEnvelope, FaGlobe, FaPhoneAlt, FaTimes, FaUser } from 'react-icons/fa'
 
 const rupee = (n) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n || 0)
 
@@ -49,7 +49,7 @@ const CampaignDetailsModal = ({ open, campaign, onClose }) => {
   useEffect(() => { setIdx(0) }, [campaign])
 
   return (
-    <AnimatePresence>
+    <AnimatePresence className="z-[100]">
       {open && campaign && (
         <Backdrop onClose={onClose}>
           <motion.div
@@ -60,7 +60,7 @@ const CampaignDetailsModal = ({ open, campaign, onClose }) => {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 24, opacity: 0, scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10 bg-white"
+            className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10 bg-white "
           >
             {images.length > 0 && (
               <div className="relative h-72 w-full bg-black">
@@ -118,22 +118,22 @@ const CampaignDetailsModal = ({ open, campaign, onClose }) => {
               <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800">
                   <FaUser className="text-orange-600" />
-                  <span>{campaign.organizer?.name}</span>
+                  <span>{campaign.name}</span>
                 </div>
-                {campaign.organizer?.phone && (
-                  <a href={`tel:${campaign.organizer.phone}`} className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 hover:border-orange-300 hover:bg-orange-50">
+                {campaign.contact_no && (
+                  <a href={`tel:${campaign.contact_no}`} className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 hover:border-orange-300 hover:bg-orange-50">
                     <FaPhoneAlt className="text-rose-600" />
-                    <span>{campaign.organizer.phone}</span>
+                    <span>{campaign.contact_no}</span>
                   </a>
                 )}
-                {campaign.organizer?.email && (
-                  <a href={`mailto:${campaign.organizer.email}`} className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 hover:border-orange-300 hover:bg-orange-50">
+                {campaign.email && (
+                  <a href={`mailto:${campaign.email}`} className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 hover:border-orange-300 hover:bg-orange-50">
                     <FaEnvelope className="text-rose-600" />
                     <span>Send Mail</span>
                   </a>
                 )}
-                {campaign.organizer?.website && (
-                  <a href={campaign.organizer.website} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 hover:border-orange-300 hover:bg-orange-50">
+                {campaign.website && (
+                  <a href={campaign.website} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 hover:border-orange-300 hover:bg-orange-50">
                     <FaGlobe className="text-blue-600" />
                     <span>Visit website</span>
                   </a>
@@ -142,9 +142,9 @@ const CampaignDetailsModal = ({ open, campaign, onClose }) => {
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
-                  href={campaign.donateUrl || '#'}
-                  target={campaign.donateUrl ? '_blank' : undefined}
-                  rel={campaign.donateUrl ? 'noreferrer' : undefined}
+                  href={campaign.donate_url || '#'}
+                  target={campaign.donate_url ? '_blank' : undefined}
+                  rel={campaign.donate_url ? 'noreferrer' : undefined}
                   className="inline-flex items-center rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-5 py-2.5 text-white font-semibold shadow hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400"
                 >
                   Donate now

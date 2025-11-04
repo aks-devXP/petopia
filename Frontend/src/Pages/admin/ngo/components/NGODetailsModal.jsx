@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaGlobe, FaPhoneAlt, FaEnvelope, FaUser, FaDirections } from 'react-icons/fa'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect } from 'react'
+import { FaDirections, FaEnvelope, FaGlobe, FaPhoneAlt, FaTimes, FaUser } from 'react-icons/fa'
 
 const Backdrop = ({ children, onClose }) => (
   <motion.div
@@ -49,9 +49,9 @@ const NGODetailsModal = ({ open, ngo, onClose }) => {
             transition={{ type: 'spring', stiffness: 260, damping: 22 }}
             className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10 bg-white"
           >
-            {ngo.image && (
+            {ngo.logo && (
               <div className="h-56 w-full overflow-hidden">
-                <img src={ngo.image} alt={ngo.name} className="h-full w-full object-cover" />
+                <img src={ngo.logo} alt={ngo.name} className="h-full w-full object-cover" />
               </div>
             )}
             <div className="p-6">

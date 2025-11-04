@@ -2,7 +2,6 @@ import { handleError } from "../Util/Alerts";
 const baseUrl = import.meta.env.VITE_BACKEND_BASEURL
 
 
-
 export async function GetPets ()  {
   try {
     const response = await fetch(`${baseUrl}/pet/get`, {

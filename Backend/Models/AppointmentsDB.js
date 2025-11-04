@@ -1,4 +1,4 @@
-const  mongo = require('mongoose');
+const  mongo = require('./SetDB');
 const schema  = mongo.Schema;
 const appointmentSchema = new schema({
     user_id:{

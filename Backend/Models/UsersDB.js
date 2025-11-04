@@ -1,5 +1,5 @@
 
-const mogoo = require('mongoose');
+const mogoo = require('./SetDB');
 const Schema = mogoo.Schema;
 const UserSchema = new Schema({
   name: {
@@ -21,8 +21,8 @@ const UserSchema = new Schema({
     required: true
   },
   phone:{
-  type: Number,
-  unique: true,
+    type: Number,
+    unique: true,
   },
   petID:{
     type: [Schema.Types.ObjectId],

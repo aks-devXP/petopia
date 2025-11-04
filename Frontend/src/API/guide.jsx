@@ -30,7 +30,7 @@ export async function getPetCount(category = [], signal) {
     if (!res.ok) throw new Error(`getPetCount failed: ${res.status}`);
     const data = await res.json();
     if (!data?.success) throw new Error(data?.message || "Failed to fetch pet count");
-    console.log(category);
+    // console.log(category);
     return data.count ?? 0;
   } catch (err) {
     console.error("Error fetching pet count:", err);

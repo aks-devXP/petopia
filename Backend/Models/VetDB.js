@@ -1,5 +1,4 @@
-const mongo = require('mongoose');
-const { create } = require('./AppointmentsDB');
+const mongo = require('./SetDB');
 const Schema = mongo.Schema;
 const VetSchema = new Schema({
   name: {

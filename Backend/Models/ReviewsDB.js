@@ -1,4 +1,4 @@
-const mongo = require('mongoose');
+const mongo = require('./SetDB');
 const Schema = mongo.Schema;
 const ReviewSchema = new Schema({
     rating: {

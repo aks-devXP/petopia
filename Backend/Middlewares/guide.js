@@ -1,7 +1,7 @@
 const validator = require('joi');
 
 const addPetValidation = (req,res,next)=>{
-    const schema= validator.object({
+    const schema = validator.object({
       category: validator.string().trim().required().message('Category is required.'),
       name: validator.string.min(3).max(40).required().messages({
         "string.empty": "Name is required.",
