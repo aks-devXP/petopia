@@ -24,7 +24,7 @@ const StaticNavbar = () => {
   return (
     <nav
       className="
-        sticky top-0 z-[99]  /* keep it above content when menu is closed */
+        sticky top-0 z-[99]
         flex items-center justify-between
         bg-ink-secondary/30 h-20 px-2 sm:px-4 backdrop-blur-xl"
     >
@@ -35,28 +35,27 @@ const StaticNavbar = () => {
         aria-label="Go to Welcome"
       >
         <div className="flex items-center gap-2">
-                  {/* “Image” icon (inline SVG so you don’t need an asset) */}
-                  <div className="p-0.5 rounded-full bg-ink-primary flex items-center justify-center">
-                    <img src={logo} className="w-14 h-14" alt="Petopia Logo" />
-                  </div>
-                  <span className="text-ink-primary font-quicksandBold text-3xl">Petopia</span>
-                </div>
+          <div className="p-0.5 rounded-full bg-ink-primary flex items-center justify-center">
+            <img src={logo} className="w-14 h-14" alt="Petopia Logo" />
+          </div>
+          <span className="text-ink-primary font-quicksandBold text-3xl">
+            Petopia
+          </span>
+        </div>
       </button>
 
-      {/* Right: if NOT authed -> CTA; if authed -> Menu */}
-      <div className="flex items-center gap-2">
-        {!isAuthed ? (
-          <PawButton onClick={handleCTA} text="Create Your Pawfile">
-          </PawButton>
-        ) : (
-          <StaggeredMenu
-            items={items}
-            colors={["#B19EEF", "#5227FF"]}
-            menuButtonColor="#fff"
-            openMenuButtonColor="#fff"
-            changeMenuColorOnOpen
-          />
+      {/* Right: Always show menu; show PawButton only if not logged in */}
+      <div className="flex items-center gap-5">
+        {!isAuthed && (
+          <PawButton onClick={handleCTA} text="Create Your Pawfile" />
         )}
+        <StaggeredMenu
+          items={items}
+          colors={["#B19EEF", "#5227FF"]}
+          menuButtonColor="#fff"
+          openMenuButtonColor="#fff"
+          changeMenuColorOnOpen
+        />
       </div>
     </nav>
   );
