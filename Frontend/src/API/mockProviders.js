@@ -1,67 +1,22 @@
+// Cloudinary-ready profilePic URLs can be passed directly in each item.
+// Temporary defaults added for missing data based on the card design.
+
 const vets = [
   {
     id: "v1",
     type: "vet",
     name: "Dr. Anaya Kapoor",
+    profession: "Veterinarian",
     city: "Jaipur",
-    state: "Rajasthan",
+    locality: "C-Scheme",
     rating: 4.8,
-    ratingCount: 214,
-    profilePic: "https://claremontvet.com/wp-content/uploads/2023/01/CVH-team-mcdonald.png",
-    gallery: [
-      "https://images.unsplash.com/photo-1582719478325-d83a30a35d95?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1550837240-6cb547c8c7fc?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80",
-    ],
-    specialization: "Small Animal Medicine",
-    about:
-      "Dr. Kapoor leads preventive and chronic care programs for companion animals, blending evidence-based medicine with compassionate client communication.",
-    experience: 9,
-    price: 1499,
-    currency: "₹",
-    languages: ["English", "Hindi"],
-    services: [
-      "Comprehensive wellness exams",
-      "Vaccination & parasite control",
-      "Chronic condition management",
-      "Nutrition & lifestyle counselling",
-    ],
-    approach: [
-      "Fear-free handling for anxious pets",
-      "Proactive health plans with digital follow-ups",
-      "Transparent care roadmaps for every visit",
-    ],
-    achievements: [
-      "AAHA accredited 2022",
-      "Petopia Gold Partner Clinic",
-      "Certified in Companion Animal Nutrition",
-    ],
-    timings: [
-      { start: "09:00 AM", end: "09:45 AM" },
-      { start: "10:30 AM", end: "11:15 AM" },
-      { start: "12:00 PM", end: "12:30 PM" },
-      { start: "03:30 PM", end: "04:15 PM" },
-      { start: "05:00 PM", end: "05:30 PM" },
-    ],
-    testimonials: [
-      {
-        name: "Rohit & Simba",
-        quote:
-          "Dr. Kapoor's tailored care plan has kept Simba's allergies under control for the first time in years.",
-        date: "February 2025",
-      },
-      {
-        name: "Aparna & Mochi",
-        quote:
-          "Every visit feels like a partnership. We leave with clarity and actionable next steps.",
-        date: "December 2024",
-      },
-    ],
-    addons: [
-      { id: "lab-work", label: "Baseline blood work", price: 699 },
-      { id: "nutrition", label: "Nutrition consultation", price: 399 },
-      { id: "follow", label: "48-hr follow-up call", price: 249 },
-    ],
+    profilePic:
+      "https://res.cloudinary.com/demo/image/upload/c_fill,g_face,h_600,w_600/woman.jpg",
+    specialization: "General",
+    services: ["Consultation", "Vaccination", "Dental", "Emergency"],
+    homeService: true,
+    about: "10+ yrs. Companion animal care, preventive health, and dental.",
+    images: [],
   },
   {
     id: "v2",
@@ -262,10 +217,16 @@ const groomers = [
 
 const STORE = { vet: vets, trainer: trainers, groomer: groomers };
 
-export function listByType(type, { q = "", city = "" } = {}) {
+export function listByType(
+  type,
+  { q = "", city = "", date = "", time = "", services = [] } = {}
+) {
+  // basic filters; date/time left for future use
   const data = STORE[type] || [];
   const qx = q.trim().toLowerCase();
   const cx = city.trim().toLowerCase();
+  const selServices = Array.isArray(services) ? services.map((s) => s.toLowerCase()) : [];
+
   return data.filter((p) => {
     const okQ =
       !qx ||

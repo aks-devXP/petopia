@@ -1,11 +1,6 @@
+// src/Pages/petservice/components/ServiceFilters.jsx
 import { useMemo, useState, useCallback } from "react";
-import {
-  Stethoscope,
-  Scissors,
-  Dumbbell,
-  ChevronDown,
-  Search,
-} from "lucide-react";
+import { Stethoscope, Scissors, Dumbbell, ChevronDown, Search } from "lucide-react";
 
 const LABEL = { vet: "Vets", trainer: "Trainers", groomer: "Groomers" };
 const TYPE_META = [
@@ -21,19 +16,16 @@ const SERVICE_OPTIONS = {
 };
 
 export default function ServiceFilters({
-  type,                // "vet" | "trainer" | "groomer"
+  type,
   q = "",
-  date = "",           // <- NEW (YYYY-MM-DD)
-  time = "",           // <- NEW (HH:MM)
   city = "",
-  pin = "",
-  maxKm = "",
+  date = "",
+  time = "",
   selectedServices = [],
-  onChange,            // (patch) => void
-  onTypeSwitch,        // (nextType) => void
+  onChange,
+  onTypeSwitch,
 }) {
   const [openServices, setOpenServices] = useState(false);
-
   const options = useMemo(() => SERVICE_OPTIONS[type] || [], [type]);
   const allSelected =
     selectedServices.length === 0 || selectedServices.length === options.length;
@@ -42,50 +34,49 @@ export default function ServiceFilters({
     (name) => {
       const next = new Set(selectedServices);
       next.has(name) ? next.delete(name) : next.add(name);
-      const arr = Array.from(next);
-      onChange?.({ services: arr.length === options.length ? [] : arr });
+      onChange?.({ services: Array.from(next) });
     },
-    [selectedServices, options.length, onChange]
+    [selectedServices, onChange]
   );
 
-  const selectAll  = useCallback(() => onChange?.({ services: [] }), [onChange]);           // [] means “all”
-  const selectNone = useCallback(() => onChange?.({ services: ["__none__"] }), [onChange]); // optional marker
+  const selectAll = useCallback(() => onChange?.({ services: [] }), [onChange]);
+  const selectNone = useCallback(
+    () => onChange?.({ services: ["__none__"] }),
+    [onChange]
+  );
 
   return (
-    <div
-      className="
-        bg-white rounded-3xl p-4 px-6 shadow-sm
-        grid grid-cols-1 sm:grid-cols-3 md:block gap-3
-      "
-    >
-      <div className="md:my-3 md:mb-6">
-        <div className="flex md:flex-col gap-2">
-          {TYPE_META.map(({ key, label, Icon }) => {
-            const active = key === type;
-            return (
-              <button
-                key={key}
-                onClick={() => onTypeSwitch?.(key)}
-                className={`
-                  group flex items-center gap-3 sm:pl-3 font-bold rounded-full p-2 ring-1 transition
-                  ${active
-                    ? "bg-ink-primary text-app-bg ring-ink-primary"
-                    : "bg-app-elevated ring-brand/30"}
-                `}
-                title={label}
-              >
-                <Icon className={`h-5 w-5 ${active ? "text-app-bg" : "text-ink-primary"}`} />
-                {/* hide label on very small widths when filters are on top */}
-                <span className={`hidden sm:block ${active ? "text-app-bg" : "text-ink-primary"}`}>{label}</span>
-              </button>
-            );
-          })}
-        </div>
+    <div className="bg-white rounded-3xl p-5 shadow-sm flex flex-col gap-6">
+      {/* Type buttons */}
+      <div className="flex lg:flex-col gap-2">
+        {TYPE_META.map(({ key, label, Icon }) => {
+          const active = key === type;
+          return (
+            <button
+              key={key}
+              onClick={() => onTypeSwitch?.(key)}
+              type="button"
+              aria-pressed={active}
+              title={label}
+              className={`
+                group flex w-full items-center gap-3 sm:pl-3 font-bold rounded-full p-2 ring-1 transition
+                ${active ? "bg-ink-primary text-app-bg ring-ink-primary" : "bg-app-elevated ring-brand/30"}
+              `}
+            >
+              <Icon className={`h-5 w-5 ${active ? "text-app-bg" : "text-ink-primary"}`} />
+              <span className={`${active ? "text-app-bg" : "text-ink-primary"}`}>{label}</span>
+            </button>
+          );
+        })}
       </div>
 
-            <div className="md:mb-4">
+      {/* Services dropdown */}
+      <div className="md:w-full">
         <button
           onClick={() => setOpenServices((s) => !s)}
+          type="button"
+          aria-expanded={openServices}
+          aria-controls="services-panel"
           className="w-full flex items-center justify-between rounded-full ring-1 ring-brand/30 bg-app-elevated px-3 py-2 text-sm"
         >
           <span>Services</span>
@@ -93,10 +84,11 @@ export default function ServiceFilters({
         </button>
 
         {openServices && (
-          <div className="mt-2 rounded-xl ring-1 ring-brand/30 bg-white p-3">
+          <div id="services-panel" className="mt-2 rounded-xl ring-1 ring-brand/30 bg-white p-3">
             <div className="mb-2 flex justify-between gap-2 text-xs">
               <button
                 onClick={selectAll}
+                type="button"
                 className="font-bold hover:text-black text-black/70"
                 title="Select all"
               >
@@ -104,26 +96,27 @@ export default function ServiceFilters({
               </button>
               <button
                 onClick={selectNone}
+                type="button"
                 className="text-red-400 font-semibold hover:text-red-600"
-                title="Select none"
+                title="Clear"
               >
                 Clear
               </button>
+              <span className="ml-auto text-ink-secondary/70">
+                {allSelected ? "All services" : `${selectedServices.length} selected`}
+              </span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {options.map((opt) => {
                 const checked =
-                  selectedServices.length === 0
-                    ? true // empty means "all"
-                    : selectedServices.includes(opt);
+                  selectedServices.length === 0 ? true : selectedServices.includes(opt);
                 return (
                   <label
                     key={opt}
-                    className={`
-                      flex items-center gap-2 rounded-full px-2 py-2 text-sm cursor-pointer
-                      ${checked ? "bg-app-bg border border-black/10" : "hover:bg-app-bg/60"}
-                    `}
+                    className={`flex items-center gap-2 rounded-full px-2 py-2 text-sm cursor-pointer ${
+                      checked ? "bg-app-bg border border-black/10" : "hover:bg-app-bg/60"
+                    }`}
                   >
                     <input
                       type="checkbox"
@@ -140,7 +133,9 @@ export default function ServiceFilters({
         )}
       </div>
 
-      <div className="md:mb-4 grid grid-cols-1 gap-2">
+      {/* Inputs */}
+      <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-1">
+        {/* Keyword */}
         <label className="block">
           <span className="text-xs text-ink-secondary">Keyword</span>
           <div className="mt-1 flex items-center gap-2 rounded-full ring-1 ring-brand/30 bg-app-elevated px-3">
@@ -153,46 +148,40 @@ export default function ServiceFilters({
             />
           </div>
         </label>
-        <label className="block">
-            <span className="text-xs text-ink-secondary">City</span>
-            <input
-              value={city}
-              onChange={(e) => onChange?.({ city: e.target.value })}
-              placeholder="e.g. Delhi"
-              className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-3 py-2 text-sm outline-none"
-            />
-          </label>
-      </div>
 
-            <div className="md:mb-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {/* City */}
+        <label className="block">
+          <span className="text-xs text-ink-secondary">City</span>
+          <input
+            value={city}
+            onChange={(e) => onChange?.({ city: e.target.value })}
+            placeholder="e.g. Delhi"
+            className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-3 py-2 text-sm outline-none"
+          />
+        </label>
+
+        {/* Date */}
         <label className="block">
           <span className="text-xs text-ink-secondary">Date</span>
           <input
             type="date"
             value={date}
             onChange={(e) => onChange?.({ date: e.target.value })}
-            className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-4 py-2 text-sm outline-none"
+            className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-3 py-2 text-sm outline-none"
           />
         </label>
+
+        {/* Time */}
         <label className="block">
           <span className="text-xs text-ink-secondary">Time</span>
           <input
             type="time"
             value={time}
             onChange={(e) => onChange?.({ time: e.target.value })}
-            className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-4 py-2 text-sm outline-none"
+            className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-3 py-2 text-sm outline-none"
           />
         </label>
       </div>
-
-
-      {/* Apply button (optional – you already update onChange live; this is a UX nicety) */}
-      <button
-        onClick={() => onChange?.({})}
-        className="mt-1 w-full rounded-full bg-brand text-app-bg px-4 py-2 text-sm font-medium hover:opacity-95 focus:outline-none focus:ring-2 ring-focus-ring/60"
-      >
-        Apply Filters
-      </button>
     </div>
   );
 }
