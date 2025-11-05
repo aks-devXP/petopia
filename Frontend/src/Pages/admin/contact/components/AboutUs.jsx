@@ -15,7 +15,7 @@ export default function AboutUs() {
             </div>
 
             <h1 className="mt-4 text-xl sm:text-2xl lg:text-3xl font-quicksandSemiBold text-ink-primary tracking-tight">
-              Built for better pet care—every day.
+              The smarter way to care for the ones who rely on you.
             </h1>
 
             <div className="mt-5 space-y-4 text-[15px] leading-7 text-ink-secondary/90">
