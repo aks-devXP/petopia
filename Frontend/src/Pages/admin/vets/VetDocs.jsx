@@ -72,7 +72,7 @@ const VetDocs = () => {
                     </div>
                 ) : (
                     filteredDoctors.map((doc,index)=>(
-                        <div onClick={()=>{navigate(`/vet-book/${doc._id}`)}} className="border border-[rgb(201,216,255)] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 bg-sand-light">
+                        <div onClick={()=>{navigate(`/pet-services/vet/${doc._id}`)}} className="border border-[rgb(201,216,255)] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500 bg-sand-light">
                             <img className="bg-[#EAEFFF]" src={(`/petopia/Vet/${doc.profilePic}`)} alt=""/>
                             <div className="p-4">
                                 <div className="flex items-center gap-2 text-sm text-center text-green-500">

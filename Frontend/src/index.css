@@ -142,3 +142,26 @@ body {
   -ms-overflow-style: none;    /* IE and Edge */
   scrollbar-width: none;       /* Firefox */
 }
+
+.horizontal-scrollbar {
+  scrollbar-width: medium;
+  scrollbar-color: rgba(12, 43, 55, 0.25) rgba(255, 255, 255, 0.7);
+}
+
+.horizontal-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.horizontal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+}
+
+.horizontal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(216, 84, 0, 0.55);
+  border-radius: 999px;
+}
+
+.horizontal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(216, 84, 0, 0.75);
+}

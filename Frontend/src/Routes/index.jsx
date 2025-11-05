@@ -25,6 +25,7 @@ import ServiceDetailPage from "@/Pages/admin/petservice/ServiceDetailPage";
 import ServiceListPage from "@/Pages/admin/petservice/ServiceListPage";
 import GroomerBook from "@/Pages/admin/services/GroomerBook";
 import CareTaker from "@/Pages/admin/services/components/CareTaker";
+import ProviderBooking from "@/Pages/admin/booking/ProviderBooking";
 
 // NGO
 import NGO from "@/Pages/admin/ngo";
@@ -84,6 +85,7 @@ const routes = (
       <Route path='/pet-services' element={<PetServices />} />
       <Route path="/pet-services/:type" element={<ServiceListPage />} />
       <Route path="/pet-services/:type/:id" element={<ServiceDetailPage />} />
+      <Route path="/book/:type/:id" element={<ProviderBooking />} />
 
       {/* NGO */}
       <Route path="/ngo" element={<NGO />} />

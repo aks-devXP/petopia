@@ -1,0 +1,142 @@
+import React, { useMemo } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "@/components/Loader/Loader";
+import { getVetById } from "@/API/VetAPI";
+import { getOne } from "@/API/mockProviders";
+import ProviderHero from "./components/ProviderHero";
+import HighlightsGrid from "./components/HighlightsGrid";
+import ServiceShowcase from "./components/ServiceShowcase";
+import TestimonialsSection from "./components/TestimonialsSection";
+import ScheduleSidebar from "./components/ScheduleSidebar";
+import { buildProviderProfile } from "./utils/profileBuilder";
+
+const TYPE_LABELS = {
+  vet: "Veterinary Specialist",
+  trainer: "Certified Trainer",
+  groomer: "Pet Grooming Studio",
+};
+
+const ProviderBooking = ({ forcedType, forcedId }) => {
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const type = forcedType ?? params.type ?? "vet";
+  const providerId = forcedId ?? params.id;
+  const typeLabel = TYPE_LABELS[type];
+
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    enabled: Boolean(typeLabel && providerId),
+    queryKey: ["provider-booking", type, providerId],
+    queryFn: async () => {
+      if (type === "vet") {
+        const vet = await getVetById(providerId);
+        if (vet) return { source: "api", payload: vet };
+      }
+      const fallback = getOne(type, providerId);
+      if (fallback) return { source: "static", payload: fallback };
+      throw new Error("Provider not found. Please try a different specialist.");
+    },
+  });
+
+  const profile = useMemo(() => {
+    if (!data || !typeLabel) return null;
+    return buildProviderProfile(type, typeLabel, data);
+  }, [data, type, typeLabel]);
+
+  const handleConfirm = ({ day, slot, addons, total }) => {
+    if (!profile || !day || !slot) return;
+    const reference = `APT-${Date.now().toString().slice(-6)}`;
+    navigate("/appointment-success", {
+      state: {
+        appointmentData: {
+          providerName: profile.name,
+          providerType: profile.typeLabel,
+          date: day.dateDisplay,
+          dayLabel: day.label,
+          time: slot.label,
+          slotMeta: slot.meta,
+          location: {
+            city: profile.location.city,
+            state: profile.location.state,
+          },
+          currencySymbol: profile.currencySymbol,
+          total,
+          addons,
+          support: {
+            email: "care@petopia.in",
+            phone: "+91 99887 76654",
+          },
+          reference,
+          createdAt: new Date().toISOString(),
+        },
+      },
+    });
+  };
+
+  if (!typeLabel) {
+    return (
+      <div className="min-h-[60vh] grid place-content-center bg-app-bg text-center px-6">
+        <div className="max-w-xl space-y-3">
+          <h2 className="text-2xl font-quicksandBold text-ink-heading">
+            Coming soon
+          </h2>
+          <p className="text-ink-secondary/80">
+            We are curating premium specialists for this service category. Check
+            back shortly or explore another care vertical in Petopia.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading || !profile) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center bg-app-bg">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center bg-app-bg px-6">
+        <div className="max-w-lg rounded-3xl bg-white shadow-xl border border-app-surface/60 p-8 text-center space-y-3">
+          <h2 className="text-xl font-quicksandBold text-ink-heading">
+            We could not load that specialist
+          </h2>
+          <p className="text-ink-secondary/80">
+            {error?.message ||
+              "The profile you are looking for is currently unavailable. Try exploring other experts nearby."}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-app-bg via-app-surface/60 to-white">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <div className="space-y-10">
+            <ProviderHero profile={profile} />
+            <HighlightsGrid metrics={profile.metrics} />
+            <ServiceShowcase profile={profile} />
+            {profile.testimonials.length > 0 ? (
+              <TestimonialsSection testimonials={profile.testimonials} />
+            ) : null}
+          </div>
+
+          <ScheduleSidebar profile={profile} onConfirm={handleConfirm} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProviderBooking;

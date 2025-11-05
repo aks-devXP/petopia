@@ -1,5 +1,5 @@
 import { getAllNGOS, getUniqueCategories } from '@/API/NgoAPI'
-import Pagination from '@/Components/General/Pagination'
+import Pagination from '@/components/General/Pagination'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import React, { useMemo, useState } from 'react'
