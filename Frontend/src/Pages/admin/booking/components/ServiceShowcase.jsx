@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle2, HeartPulse, Sparkles } from "lucide-react";
+import { CheckCircle2, HeartPulse, Sparkles, Stethoscope, Dumbbell, Scissors } from "lucide-react";
 
 const ServiceShowcase = ({ profile }) => {
   const { services, approach, addons, typeLabel } = profile;
@@ -38,25 +38,100 @@ const ServiceShowcase = ({ profile }) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 rounded-2xl bg-ink-primary text-white p-6 shadow-[0_35px_60px_rgba(12,43,55,0.35)]">
-          <div className="flex items-center gap-3">
-            <HeartPulse className="h-5 w-5 text-brand" />
-            <span className="text-sm font-semibold uppercase tracking-wide text-brand/90">
-              Our care methodology
-            </span>
-          </div>
-          <div className="space-y-3 text-sm">
-            {approach.map((item) => (
-              <div key={item} className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 text-brand" />
-                <p className="text-white/90">{item}</p>
+        <div className="flex flex-col gap-5 rounded-2xl bg-ink-primary text-white p-6 shadow-[0_35px_60px_rgba(12,43,55,0.35)]">
+          {typeLabel.toLowerCase().includes("vet") ? (
+            <>
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-500/15">
+                  <Stethoscope className="h-5 w-5 text-emerald-300" />
+                </div>
+                <span className="text-sm font-semibold uppercase tracking-wide text-emerald-200">
+                  Clinical methodology
+                </span>
               </div>
-            ))}
-          </div>
-          <div className="rounded-2xl bg-white/10 p-4 text-xs text-white/70">
-            Always-on chat support, visit summaries, and progress dashboards are
-            included with every booking.
-          </div>
+              <div className="space-y-3 text-sm">
+                {approach.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-brand" />
+                    <p className="text-white/90">{item}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-2xl bg-white/10 p-4 text-xs text-white/70">
+                Includes lab coordination, pre-visit questionnaires, and 48-hour follow-up care with
+                your dedicated veterinary team.
+              </div>
+            </>
+          ) : typeLabel.toLowerCase().includes("trainer") ? (
+            <>
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-amber-500/15">
+                  <Dumbbell className="h-5 w-5 text-amber-300" />
+                </div>
+                <span className="text-sm font-semibold uppercase tracking-wide text-amber-200">
+                  Behaviour playbook
+                </span>
+              </div>
+              <div className="space-y-3 text-sm">
+                {approach.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-brand" />
+                    <p className="text-white/90">{item}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-2xl bg-white/10 p-4 text-xs text-white/70">
+                Weekly progress snapshots, personalised home-work, and on-demand coaching support
+                between sessions.
+              </div>
+            </>
+          ) : typeLabel.toLowerCase().includes("groomer") ? (
+            <>
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-rose-500/15">
+                  <Scissors className="h-5 w-5 text-rose-300" />
+                </div>
+                <span className="text-sm font-semibold uppercase tracking-wide text-rose-200">
+                  Spa ritual
+                </span>
+              </div>
+              <div className="space-y-3 text-sm">
+                {approach.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-brand" />
+                    <p className="text-white/90">{item}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-2xl bg-white/10 p-4 text-xs text-white/70">
+                Aromatherapy ambience, dermatologically safe products, and live updates during your
+                pet’s pampering.
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-3">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-brand/15">
+                  <HeartPulse className="h-5 w-5 text-brand" />
+                </div>
+                <span className="text-sm font-semibold uppercase tracking-wide text-brand/90">
+                  Our care methodology
+                </span>
+              </div>
+              <div className="space-y-3 text-sm">
+                {approach.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-brand" />
+                    <p className="text-white/90">{item}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-2xl bg-white/10 p-4 text-xs text-white/70">
+                Always-on chat support, visit summaries, and progress dashboards are included with
+                every booking.
+              </div>
+            </>
+          )}
         </div>
       </div>
 

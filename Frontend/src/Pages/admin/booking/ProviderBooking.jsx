@@ -125,7 +125,7 @@ const ProviderBooking = ({ forcedType, forcedId }) => {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px]">
           <div className="space-y-10">
             <ProviderHero profile={profile} />
-            <HighlightsGrid metrics={profile.metrics} />
+            {/* <HighlightsGrid metrics={profile.metrics} /> */}
             <ServiceShowcase profile={profile} />
             {profile.testimonials.length > 0 ? (
               <TestimonialsSection testimonials={profile.testimonials} />

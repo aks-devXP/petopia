@@ -219,6 +219,7 @@ export function buildProviderProfile(type, typeLabel, dataWrapper) {
 
   const heroBadges = payload.heroBadges || defaults.heroBadges;
   const tags = payload.tags || defaults.tags;
+  const bookingTime = payload.bookingTime || payload.responseTime || defaults.responseTime;
 
   const services = ensureArray(
     payload.services?.length ? payload.services : defaults.services
@@ -295,6 +296,7 @@ export function buildProviderProfile(type, typeLabel, dataWrapper) {
     tagLine: `${ratingCount}+ success stories`,
     heroBadges,
     tags,
+    bookingTime,
     services,
     approach,
     achievements,

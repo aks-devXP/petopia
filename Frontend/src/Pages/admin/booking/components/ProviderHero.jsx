@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MapPin, ShieldCheck, Star, Users } from "lucide-react";
+import { MapPin, ShieldCheck, Star, Clock, Languages } from "lucide-react";
 import GalleryLightbox from "./GalleryLightbox";
 
 const ProviderHero = ({ profile }) => {
@@ -16,6 +16,7 @@ const ProviderHero = ({ profile }) => {
     tags,
     profileImage,
     gallery,
+    bookingTime,
     about,
     achievements,
   } = profile;
@@ -58,11 +59,15 @@ const ProviderHero = ({ profile }) => {
               <span>({ratingCount}+ reviews)</span>
             </div>
             <div className="inline-flex items-center gap-2 rounded-full bg-ink-primary/5 px-3 py-1">
-              <ShieldCheck className="h-4 w-4 text-ink-primary" />
+              <ShieldCheck className="h-4 w-4 text-emerald-700" />
               <span>{experience}+ yrs experience</span>
             </div>
             <div className="inline-flex items-center gap-2 rounded-full bg-ink-primary/5 px-3 py-1">
-              <Users className="h-4 w-4 text-ink-primary" />
+              <Clock className="h-4 w-4 text-amber-600" />
+              <span>{bookingTime || "Confirms within 2 hours"}</span>
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-ink-primary/5 px-3 py-1">
+              <Languages className="h-4 w-4 text-indigo-700" />
               <span>{languages.join(" / ")}</span>
             </div>
           </div>
@@ -126,7 +131,7 @@ const ProviderHero = ({ profile }) => {
                 View gallery
               </span>
             )}
-            
+
           </button>
         </div>
       </div>
