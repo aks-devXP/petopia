@@ -1,6 +1,6 @@
 import { AlertCircle, ArrowRight, Heart, Home, PawPrint, Phone, Shield, Users } from 'lucide-react';
 import { useRef, useState } from 'react';
-import heroImageUrl from "../../../assets/NGO/NGO_hero2.png";
+import NGOHero from '@/components/NGO comp/NGOHero';
 
 export default function NGO_Home() {
   const [activeService, setActiveService] = useState(null);
@@ -89,77 +89,7 @@ export default function NGO_Home() {
 
   return (
     <div className="min-h-screen bg-app-bg">
-      {/* Hero Section */}
-      <section
-        className="relative  py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 overflow-hidden"
-        style={{
-  backgroundImage: `url(${heroImageUrl})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
-  backgroundAttachment: 'fixed'
-}}
-
-
-
-      >
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/50 z-0" />
-
-        {/* Decorative elements */}
-        <div className="absolute top-6 left-6 sm:top-10 sm:left-10 w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 bg-brand/5 rounded-full blur-3xl z-10" />
-        <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 bg-pink-mid/5 rounded-full blur-3xl z-10" />
-
-        {/* Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-6 animate-pulse border border-white/20">
-              <PawPrint className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-              <span className="text-xs sm:text-sm font-nunitoSemiBold text-white">Join 10,000+ Animal Lovers</span>
-            </div>
-
-            <h2 className="font-quicksandBold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-3 sm:mb-4 md:mb-6 leading-tight px-2">
-              Every Animal Deserves
-              <span className="block text-brand mt-1 sm:mt-2">Love & Care</span>
-            </h2>
-
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-cream-lightest font-nunito mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto px-4 leading-relaxed">
-              Join our community of compassionate individuals working together to protect and care for animals in need
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center px-4">
-              <button
-                onClick={scrollToServices}
-                className="w-full sm:w-auto px-6 md:px-8 lg:px-10 py-3 md:py-4 bg-brand hover:bg-brand-hover active:bg-brand-active text-white rounded-full font-nunitoSemiBold text-sm md:text-base transition-all hover:scale-105 active:scale-95 hover:shadow-lg flex items-center justify-center gap-2 group"
-              >
-                Explore Services
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-
-              {/* <button className="w-full sm:w-auto px-6 md:px-8 lg:px-10 py-3 md:py-4 bg-white/10 hover:bg-white/20 active:bg-white/5 text-white rounded-full font-nunitoSemiBold text-sm md:text-base border-2 border-white/30 hover:border-white/60 transition-all flex items-center justify-center gap-2">
-                <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden xs:inline">Emergency:</span> 1800-XXX-XXXX
-              </button> */}
-            </div>
-
-            {/* Trust indicators (single instance) */}
-            <div className="mt-8 sm:mt-10 md:mt-12 flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-8 text-xs sm:text-sm text-cream-lightest px-4">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-brand flex-shrink-0" />
-                <span className="font-nunito">Verified NGOs</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-brand flex-shrink-0" />
-                <span className="font-nunito">Secure Donations</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <Users className="w-3 h-3 sm:w-4 sm:h-4 text-brand flex-shrink-0" />
-                <span className="font-nunito">24/7 Support</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <NGOHero onExploreServices={scrollToServices} />
       {/* --- END HERO --- */}
 
       {/* Stats Section */}
