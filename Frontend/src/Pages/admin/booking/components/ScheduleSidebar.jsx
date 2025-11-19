@@ -1,12 +1,45 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   CalendarDays,
   Clock,
   IndianRupee,
   Info,
   ShieldCheck,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { handleError, handleSuccess } from "@/Util/Alerts";
+import PetCard from "@/Pages/admin/home/components/PetCard";
+
+const FALLBACK_PETS = [
+  {
+    id: "pet-milo",
+    name: "Milo",
+    age: 2,
+    category: "Dog",
+    breed: "Beagle",
+    image:
+      "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=640&auto=format&fit=crop",
+  },
+  {
+    id: "pet-luna",
+    name: "Luna",
+    age: 3,
+    category: "Cat",
+    breed: "Siamese",
+    image:
+      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=640&auto=format&fit=crop",
+  },
+  {
+    id: "pet-buddy",
+    name: "Buddy",
+    age: 4,
+    category: "Dog",
+    breed: "Golden Retriever",
+    image:
+      "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=640&auto=format&fit=crop",
+  },
+];
 
 const ScheduleSidebar = ({
   profile,
@@ -14,17 +47,28 @@ const ScheduleSidebar = ({
   variant = "page",
   ctaLabel = "Request booking",
   helperText,
+  pets = [],
 }) => {
   const { schedule, basePrice, currencySymbol, addons, name } = profile;
   const [selectedDayIdx, setSelectedDayIdx] = useState(0);
   const [selectedSlotIdx, setSelectedSlotIdx] = useState(null);
   const [selectedAddons, setSelectedAddons] = useState([]);
+  const resolvedPets = pets.length > 0 ? pets : FALLBACK_PETS;
+  const [selectedPetId, setSelectedPetId] = useState(resolvedPets[0]?.id);
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    if (pets.length > 0) {
+      setSelectedPetId((prev) => prev || pets[0]?.id);
+    }
+  }, [pets]);
 
   const activeDay = schedule[selectedDayIdx] || null;
   const activeSlot =
     activeDay && selectedSlotIdx !== null
       ? activeDay.slots[selectedSlotIdx]
       : null;
+  const selectedPet = resolvedPets.find((pet) => pet.id === selectedPetId) || null;
 
   const total = useMemo(() => {
     const addonTotal = selectedAddons.reduce((sum, addon) => sum + addon.price, 0);
@@ -42,6 +86,10 @@ const ScheduleSidebar = ({
   };
 
   const handleSubmit = () => {
+    if (!selectedPet) {
+      handleError("Please pick which pet this visit is for.");
+      return;
+    }
     if (!activeDay || !activeSlot) {
       handleError("Please select a date and time slot to continue.");
       return;
@@ -52,7 +100,29 @@ const ScheduleSidebar = ({
       slot: activeSlot,
       addons: selectedAddons,
       total,
+      pet: selectedPet,
     });
+  };
+
+  const slidePets = (direction) => {
+    const el = sliderRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * 220, behavior: "smooth" });
+  };
+
+  const renderPetCard = (pet) => {
+    const active = pet.id === selectedPetId;
+    return (
+      <div key={pet.id} className="shrink-0">
+        <div
+          className={`rounded-3xl border-2 ${
+            active ? "border-brand shadow-lg" : "border-transparent"
+          }`}
+        >
+          <PetCard pet={pet} onClick={() => setSelectedPetId(pet.id)} />
+        </div>
+      </div>
+    );
   };
 
   const containerClass =
@@ -159,6 +229,43 @@ const ScheduleSidebar = ({
                 )}
               </button>
             ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-app-surface/60 bg-app-elevated/60 p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-ink-secondary/70">
+                Select pet
+              </p>
+              <p className="text-sm font-medium text-ink-heading">Who is this visit for?</p>
+            </div>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => slidePets(-1)}
+                className="rounded-full border border-stone-200 bg-white/70 p-2 text-ink-primary hover:bg-stone-100"
+                aria-label="Previous pet"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => slidePets(1)}
+                className="rounded-full border border-stone-200 bg-white/70 p-2 text-ink-primary hover:bg-stone-100"
+                aria-label="Next pet"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+          <div className="mt-4">
+            <div
+              ref={sliderRef}
+              className="flex gap-4 overflow-x-auto py-3 px-2 horizontal-scrollbar"
+            >
+              {resolvedPets.map(renderPetCard)}
+            </div>
           </div>
         </div>
 
