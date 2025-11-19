@@ -8,7 +8,13 @@ import {
 } from "lucide-react";
 import { handleError, handleSuccess } from "@/Util/Alerts";
 
-const ScheduleSidebar = ({ profile, onConfirm }) => {
+const ScheduleSidebar = ({
+  profile,
+  onConfirm,
+  variant = "page",
+  ctaLabel = "Request booking",
+  helperText,
+}) => {
   const { schedule, basePrice, currencySymbol, addons, name } = profile;
   const [selectedDayIdx, setSelectedDayIdx] = useState(0);
   const [selectedSlotIdx, setSelectedSlotIdx] = useState(null);
@@ -49,9 +55,19 @@ const ScheduleSidebar = ({ profile, onConfirm }) => {
     });
   };
 
+  const containerClass =
+    variant === "modal"
+      ? "rounded-3xl bg-white/95 p-5 ring-1 ring-app-surface/60 shadow-2xl max-h-[70vh] overflow-y-auto"
+      : "sticky top-24 h-fit rounded-3xl bg-white/90 p-6 ring-1 ring-app-surface/60 shadow-[0_30px_80px_rgba(12,43,55,0.18)] backdrop-blur";
+
+  const emptyClass =
+    variant === "modal"
+      ? "rounded-3xl bg-white/95 p-6 text-center ring-1 ring-app-surface/60 shadow-2xl"
+      : "sticky top-28 h-fit rounded-3xl bg-white/80 p-6 text-center ring-1 ring-app-surface/60 shadow-[0_22px_60px_rgba(12,43,55,0.12)]";
+
   if (schedule.length === 0) {
     return (
-      <aside className="sticky top-28 h-fit rounded-3xl bg-white/80 p-6 text-center ring-1 ring-app-surface/60 shadow-[0_22px_60px_rgba(12,43,55,0.12)]">
+      <aside className={emptyClass}>
         <CalendarDays className="mx-auto h-10 w-10 text-brand" />
         <p className="mt-4 text-base font-medium text-ink-heading">
           New slots opening soon
@@ -65,7 +81,7 @@ const ScheduleSidebar = ({ profile, onConfirm }) => {
   }
 
   return (
-    <aside className="sticky top-24 h-fit rounded-3xl bg-white/90 p-6 ring-1 ring-app-surface/60 shadow-[0_30px_80px_rgba(12,43,55,0.18)] backdrop-blur">
+    <aside className={containerClass}>
       <div className="space-y-6">
         <div className="space-y-2">
           <h3 className="text-lg font-semibold text-ink-heading">
@@ -194,14 +210,14 @@ const ScheduleSidebar = ({ profile, onConfirm }) => {
           </div>
           <p className="flex items-center gap-2 text-xs text-ink-secondary/70">
             <ShieldCheck className="h-4 w-4 text-brand" />
-            You will be charged once {name} confirms the appointment.
+            {helperText || `You will be charged once ${name} confirms the appointment.`}
           </p>
           <button
             type="button"
             onClick={handleSubmit}
             className="w-full rounded-2xl bg-ink-heading px-4 py-3 text-sm font-semibold text-white transition hover:bg-ink-primary"
           >
-            Request booking
+            {ctaLabel}
           </button>
         </div>
 
