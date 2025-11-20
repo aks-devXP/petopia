@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { MapPin, ShieldCheck, Star, Clock, Languages } from "lucide-react";
+import { Clock, Languages, MapPin, ShieldCheck, Star } from "lucide-react";
+import { useState } from "react";
 import GalleryLightbox from "./GalleryLightbox";
 
 const ProviderHero = ({ profile }) => {
@@ -14,7 +14,7 @@ const ProviderHero = ({ profile }) => {
     languages,
     heroBadges,
     tags,
-    profileImage,
+    profilePic:profileImage,
     gallery,
     bookingTime,
     about,

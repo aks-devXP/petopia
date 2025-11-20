@@ -1,6 +1,8 @@
 const UserModel = require('../Models/UsersDB');
 const Appointment = require('../Models/AppointmentsDB');
 const Contact = require('../Models/ContactDB');
+const ObjectId = require('mongoose').Types.ObjectId;
+
 const ContactControl = async (req, res) => {
   const { name, email, category, message } = req.body;
   const contact = new Contact({
@@ -20,7 +22,7 @@ const ContactControl = async (req, res) => {
 
 const userExists = async(id)=>{
   try {
-    const user = await UserModel.findById(new mongoose.Types.ObjectId(id));
+    const user = await UserModel.findById(new ObjectId(id));
     return user!==null;
   } 
   catch (error) {
@@ -37,7 +39,7 @@ const getProfileControl = async (req,res)=>{
   
     console.log("User ID", id);
     const user = await UserModel.findById(id);
-    console.log(user.name);
+    // console.log(user.name);
     if(!user){
       return res.status(400).json({message: 'User not found', success: false});
     }
@@ -52,7 +54,8 @@ const getProfileControl = async (req,res)=>{
       profileColor: user.profileColor,
       profilePic: user.profilePic,
       nameColor: user.nameColor,
-      petID: user.petID
+      petID: user.petID,
+      banner:user.banner
     }
     res.status(200).json({message: 'Profile Info', success: true, user: data});
   }
@@ -131,6 +134,7 @@ const updateProfileControl = async (req, res) => {
     user_data.state = user.state;
     user_data.profileColor = user.profileColor;
     user_data.profilePic = user.profilePic;
+    user_data.banner= user.banner;
     // console.log(user_data.profileColor, "user profile color in update profile control");
     user_data.nameColor = user.nameColor;
     await user_data.save();
@@ -167,7 +171,7 @@ const updatePasswordControl = async (req, res) => {
 }
 catch (error) {
   console.log(error,"error in update password");
-  res.status(500).json({ message: 'Internal server error', success: false });
+  res.status(500).json({ message: error.message||'Internal server error', success: false });
 }
 };
 

@@ -21,6 +21,7 @@ const TokenValidator = async (req,res,next)=>{
     }
     if (type == "user"){
       exists = await userExists(decoded.id);
+      // console.log(decoded.id);
     }
     else if(type == "vet"){
       exists = await vetExists(decoded.id);

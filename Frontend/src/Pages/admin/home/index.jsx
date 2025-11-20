@@ -1,13 +1,18 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 
-import WelcomeBanner from "./components/WelcomeBanner"; // adjust path if needed
-import AppointmentBanner from "./components/AppointmentBanner"; // your JSX banner component
-import PetBanner from "./components/PetBanner";
-import FavouriteBanner from "./components/FavouriteBanner";
-import ProfileBanner from "./components/ProfileBanner";
-import MessagePreferencesBanner from "./components/MessagePreferencesBanner";
+import { GetPets, UpdatePet, UploadPetImage } from "@/API/PetApi";
+import { GetProfileInfo } from "@/API/UserAPI";
 import PawButton from "@/components/buttons/PawButton";
+import Loader from "@/Components/Loader/Loader";
+import { handleError } from "@/Util/Alerts";
+import { useQuery } from "@tanstack/react-query";
+import AppointmentBanner from "./components/AppointmentBanner"; // your JSX banner component
+import FavouriteBanner from "./components/FavouriteBanner";
+import MessagePreferencesBanner from "./components/MessagePreferencesBanner";
+import PetBanner from "./components/PetBanner";
+import ProfileBanner from "./components/ProfileBanner";
+import WelcomeBanner from "./components/WelcomeBanner"; // adjust path if needed
 
 // Dummy data aligned with your Appointment shape
 const DUMMY_APPOINTMENTS = [
@@ -99,14 +104,94 @@ const DUMMY_APPOINTMENTS = [
 ];
 
 export default function Home() {
+  const [isLoading,setLoading]= useState(false);
+  const User = useQuery({
+    queryKey: ["UserProfile"],
+    queryFn: GetProfileInfo,
+    staleTime:1000*60*60*10,
+    retry:2
+  }
+  );
+  const [error, setError]= useState("");
+
+  const Pets = useQuery({
+    queryKey:["GetPets"],
+    queryFn: GetPets,
+    staleTime:1000*60*60*13,
+    retry:2
+  })
+
+  const updatePets = async ({data, image,imageDeleted,old_photo }) => {
+    try {
+      // If a new image file is provided
+      if (image||imageDeleted) {
+        const photo = await UploadPetImage({
+          photo:old_photo, // old photo URL to delete
+          image,             // new image file to upload
+          imageDeleted
+        });
+
+        if (!photo.success) {
+          throw new Error(photo.message || "Image upload failed");
+        }
+
+        // Replace photo field with the new image URL
+        data.photo = photo.data[0].url;
+        // console.log(photo.data[0].url);
+      }
+
+      // Now send updated data to backend
+      const resp = await UpdatePet(data);
+
+      if (!resp.success) {
+        throw new Error(resp.message || "Failed to update pet");
+      }
+
+      return {
+        success: true,
+        message: "Pet updated successfully",
+        data: resp.data,
+      };
+    } catch (error) {
+      console.error("updatePets error:", error);
+      // handleError(error.message || "Failed to update pet's data");
+      return {
+        success: false,
+        message: error.message || "Something went wrong while updating pet",
+      };
+    }
+  };
+
+  const [username,setUsername] = useState('User');
+
+  useEffect(()=>{ 
+    setLoading(true)
+    if(!User.isLoading&&!Pets.isLoading){
+      setLoading(false)
+      // console.log()
+      setUsername(User.data.name)
+      if(!User.error&&!Pets.error){
+        const o_error = User.error+"\n"+Pets.error;
+        
+        setError(o_error.trim());
+      }
+      // console.log(Pets.data)
+    }
+  },[User,Pets])
+  if(isLoading){
+    return <Loader/>
+  }
+  if(error){
+    handleError(User.error)
+  }
   return (
     <div className="w-full space-y-6">
-      <WelcomeBanner username="Aditya" />
+      <WelcomeBanner username={username} />
 
       {/* Dashboard banner: fixed height, internal scroll, compact cards */}
       <div className="px-4 py-2 md:py-4 lg:mx-8 flex-1 flex flex-col md:flex-row gap-6">
         <div className="md:w-[65%] w-full">
-          <PetBanner />
+          <PetBanner petInfo={Pets.data??[]} updatePets={updatePets}/>
         </div>
         <div className="md:w-[35%] w-full">
           <AppointmentBanner appointments={DUMMY_APPOINTMENTS} />
@@ -119,7 +204,7 @@ export default function Home() {
       <div className="px-4 py-2 md:py-4 lg:mx-8 flex flex-col md:flex-row gap-6 justify-center">
 
         <div className="md:inline-block w-full md:w-fit flex md:aspect-square ">
-          <ProfileBanner className="h-full w-full" />
+          <ProfileBanner profileData={User.data ?? {}} className="h-full w-full" />
         </div>
 
         <div className="flex-1">

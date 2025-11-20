@@ -3,18 +3,19 @@ const User = require('../Models/UsersDB');
 const ObjectId = require('mongoose').Types.ObjectId;
 const createPet = async (req, res) => {
   try{
-    let { name, age, category, breed } = req.body;
+    let { name, age, category, breed,photo } = req.body;
     name = name.trim().toLowerCase();
     age = parseInt(age);
     category = category.trim().toLowerCase();
     breed = breed.trim().toLowerCase();
-    console.log(name, age, category, breed);
+    // console.log(name, age, category, breed, photo);
     const userId = req.verified.id; 
     const newPet = new Pet({
       name: name,
       age: age,
       category: category,
-      breed: breed
+      breed: breed,
+      photo:photo
     })
     const {_id} = await newPet.save();
     const user = await User.findById(userId);
@@ -23,7 +24,7 @@ const createPet = async (req, res) => {
     }
     user.petID.push(_id);
     await user.save();
-    console.log('Pet Created Successfully');
+    // console.log('Pet Created Successfully');
     res.status(201).json({ message: 'Pet Created Successfully', success: true });
 
   }
@@ -66,7 +67,7 @@ const updatePet = async (req, res) => {
   try {
     const petInfo = req.body;
     const petId = petInfo._id;
-    console.log("Pet ID:", petId);
+    // console.log("Pet ID:", petId);
 
     if (!ObjectId.isValid(petId)) {
       return res.status(400).json({ error: 'Invalid pet ID' });
@@ -82,7 +83,7 @@ const updatePet = async (req, res) => {
     pet_data.age = petInfo.age;
     pet_data.category = petInfo.category;
     pet_data.breed = petInfo.breed;
-
+    pet_data.photo = petInfo.photo;
     await pet_data.save();
 
     console.log('Pet updated successfully');

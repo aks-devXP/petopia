@@ -1,16 +1,16 @@
-import React, { useMemo, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import FacebookLogin from '@greatsumini/react-facebook-login';
 import { useGoogleLogin } from '@react-oauth/google';
 
-import { LoginAPI, GoogleLoginAPI, FacebookLoginAPI, SingUpAPI } from '@/API/GeneralAPI';
+import { FacebookLoginAPI, GoogleLoginAPI, LoginAPI, SingUpAPI } from '@/API/GeneralAPI';
 import { handleError, handleInfo, handleSuccess } from '@/Util/Alerts';
 
-import FlipAuthToggle from './FlipAuthToggle';
 import PawButton from '@/components/buttons/PawButton';
+import FlipAuthToggle from './FlipAuthToggle';
 
 function isEmailLike(v) {
   return typeof v === 'string' && v.includes('@') && v.includes('.');
@@ -31,7 +31,7 @@ export default function AuthSwitcher() {
       password: '',
     },
   });
-
+  const facbook_id = import.meta.env.VITE_Facebook_Key;
   // ---- GOOGLE LOGIN ----
   const GoogleMechanism = useGoogleLogin({
     onSuccess: async (credentialResponse) => {
@@ -254,7 +254,7 @@ export default function AuthSwitcher() {
             </button>
 
             <FacebookLogin
-              appId="2461290760871938"
+              appId={facbook_id}
               autoLoad={false}
               fields="name,email,picture"
               onSuccess={() => handleSuccess('Facebook flow started')}

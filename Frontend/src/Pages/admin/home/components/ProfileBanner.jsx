@@ -1,9 +1,8 @@
 // ProfileBanner.jsx
-import React from "react";
-import { MdEdit } from "react-icons/md";
-import { Mail, Phone, PawPrint } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import Card from "@components/card";
+import { Mail, PawPrint, Phone } from "lucide-react";
+import { MdEdit } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const ProfileBanner = ({ profileData = {}, className = "" }) => {
   const navigate = useNavigate();
@@ -93,8 +92,8 @@ const ProfileBanner = ({ profileData = {}, className = "" }) => {
       {/* Stats row */}
       <div className="mt-6 mb-3 grid grid-cols-3 gap-4 md:!gap-14">
         <Stat icon={<PawPrint className="h-4 w-4 text-brand" />} value={petsCount} label="Pets Linked" />
-        <Stat icon={<Mail className="h-4 w-4 text-brand" />} value={email ? "• • • •" : "—"} label="Email" title={email} />
-        <Stat icon={<Phone className="h-4 w-4 text-brand" />} value={phone ? "• • • •" : "—"} label="Phone" title={String(phone || "")} />
+        <Stat icon={<Mail className="h-4 w-4 text-brand" />} value={email ? email.split('@')[0].slice(0,7) : "—"} label="Email" title={email} />
+        <Stat icon={<Phone className="h-4 w-4 text-brand" />} value={phone ? phone.toString().slice(0,5) : "—"} label="Phone" title={String(phone || "")} />
       </div>
     </Card>
   );

@@ -78,7 +78,7 @@ export async function CreatePet(pet) {
     console.log("Pet Created", data);
     return data;
   } catch (error) {
-    handleError(error.message);
+    throw new Error(error.message);
   }
 }
 
@@ -102,6 +102,7 @@ export async function UpdatePet(pet) {
     handleError(error.message);
   }
 }
+
 export async function DeletePet(petId) {
   try {
     const response = await fetch(`${baseUrl}/pet/delete/${petId}`, {
@@ -122,3 +123,65 @@ export async function DeletePet(petId) {
     handleError(error.message);
   }
 }
+
+  export async function UploadPetImage(params) {
+    try {
+      const field = import.meta.env.VITE_Pofilefield;
+      // console.log(field)
+      const token = localStorage.getItem("token");
+      // console.log(params);
+      // Step 1: Delete previous photo (if any)
+      if (params.photo||params.imageDeleted) {
+        const img = params.photo;
+        const deleteResp = await fetch(`${baseUrl}/upload/delete_images`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `${token}`,
+          },
+          body: JSON.stringify({
+            images: [img],
+          }),
+        });
+  
+        const deleteData = await deleteResp.json();
+        // console.log(deleteData);
+        if (!deleteResp.ok || !deleteData.success) {
+          throw new Error(deleteData.message || "Failed to delete existing image.");
+        }
+        if(params.imageDeleted){
+          return {success:true, data:[{uri:""}]};
+        }
+      }
+      
+      // Step 2: Upload new image (file)
+      if (!params.image) {
+        throw new Error("No image file provided for upload.");
+      }
+  
+      const formData = new FormData();
+      formData.append(field, params.image); 
+      formData.append("folder", "Pets");
+      formData.append("fieldName", field)
+  
+      const uploadResp = await fetch(`${baseUrl}/upload/m_images`, {
+        method: "POST",
+        headers: {
+          "Authorization": `${token}`,
+          // NOTE: don't set Content-Type here — browser handles it for FormData
+        },
+        body: formData,
+      });
+  
+      const uploadData = await uploadResp.json();
+      if (!uploadResp.ok || !uploadData.success) {
+        throw new Error(uploadData.message || "Failed to upload new image.");
+      }
+  
+      // Step 3: Return uploaded image URL(s)
+      return uploadData;
+    } catch (error) {
+      // console.error("UploadPetImage error:", error);
+      throw new Error(error.message || "Failed to upload pet image.");
+    }
+  }

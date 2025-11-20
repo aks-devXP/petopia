@@ -36,6 +36,14 @@ const UserSchema = new Schema({
     type: String,
     default: "#0fff00"
   },
+  banner:{
+    type:String,
+    default:""
+  },
+  locality:{
+  type:String,
+  default:""
+  },
   city:{
     type: String,
     default: ""

@@ -1,9 +1,7 @@
+// middleware/GroomerValidation.js
 const joi = require('joi');
 
-const VetValidation = (req, res, next) => {
-  // Support both body shapes: { ... } or { vet: { ... } }
-  const raw = req.body && req.body.vet ? req.body.vet : req.body || {};
-
+const GroomerValidation = (req, res, next) => {
   const schema = joi.object({
     // Basic info
     name: joi.string().trim().min(3).required().messages({
@@ -20,12 +18,12 @@ const VetValidation = (req, res, next) => {
       'any.required': 'Email is required.',
     }),
 
-    // stored as Number in Mongo, validated as 10-digit number
+    // Phone stored as Number in Mongo, validated as 10-digit number
     phone: joi
       .number()
       .integer()
-      .min(1000000000) // 10 digits min
-      .max(9999999999) // 10 digits max
+      .min(1000000000) // 10-digit min
+      .max(9999999999) // 10-digit max
       .required()
       .messages({
         'number.base': 'Phone must be a number.',
@@ -52,16 +50,21 @@ const VetValidation = (req, res, next) => {
       'any.required': 'State is required.',
     }),
 
-    locality: joi.string().trim().allow('', null).optional().messages({
-      'string.base': 'Locality must be a string.',
-    }),
+    locality: joi
+      .string()
+      .trim()
+      .allow('', null)
+      .optional()
+      .messages({
+        'string.base': 'Locality must be a string.',
+      }),
 
-    // Pincode (6 digits as number)
+    // Pincode as Number (6 digits)
     zip: joi
       .number()
       .integer()
-      .min(100000) // 6 digits min
-      .max(999999) // 6 digits max
+      .min(100000) // 6-digit min
+      .max(999999) // 6-digit max
       .required()
       .messages({
         'number.base': 'Pincode must be a number.',
@@ -77,7 +80,7 @@ const VetValidation = (req, res, next) => {
       'any.required': 'About is required.',
     }),
 
-    // NEW: experience instead of tenure (years)
+    // Experience in years
     experience: joi
       .number()
       .integer()
@@ -89,13 +92,13 @@ const VetValidation = (req, res, next) => {
         'any.required': 'Experience is required.',
       }),
 
+    // Rating & ratingCount (optional)
     rating: joi.number().min(0).max(5).default(4).messages({
       'number.base': 'Rating must be a number.',
       'number.min': 'Rating cannot be negative.',
       'number.max': 'Rating cannot exceed 5.',
     }),
 
-    // optional rating count
     ratingCount: joi
       .number()
       .integer()
@@ -116,7 +119,6 @@ const VetValidation = (req, res, next) => {
         'string.uri': 'Profile picture must be a valid URL.',
       }),
 
-    // NEW: gallery replaces old image[]
     gallery: joi
       .array()
       .items(
@@ -127,24 +129,9 @@ const VetValidation = (req, res, next) => {
       )
       .default([])
       .messages({
-        'array.base': 'Gallery must be an array.',
+        'array.base': 'Gallery must be an array of URLs.',
       }),
 
-    // Optional legacy image[] still allowed (controller maps to gallery)
-    image: joi
-      .array()
-      .items(
-        joi.string().uri().messages({
-          'string.base': 'Each image must be a string URL.',
-          'string.uri': 'Each image must be a valid URL.',
-        })
-      )
-      .optional()
-      .messages({
-        'array.base': 'Images must be an array.',
-      }),
-
-    // NEW: languages
     languages: joi
       .array()
       .items(
@@ -157,31 +144,73 @@ const VetValidation = (req, res, next) => {
         'array.base': 'Languages must be an array of strings.',
       }),
 
-    // NEW: pricing & currency
-    price: joi
-      .number()
-      .min(0)
-      .optional()
+    // timings: [["09:00 AM","12:00 PM"], ["4:00 PM","7:00 PM"]]
+    timings: joi
+      .array()
+      .items(
+        joi
+          .array()
+          .items(
+            joi.string().trim().required().messages({
+              'string.base': 'Timing entries must be strings.',
+              'string.empty': 'Timing entries cannot be empty.',
+              'any.required': 'Timing entries are required.',
+            })
+          )
+          .min(2)
+          .required()
+          .messages({
+            'array.base': 'Each timing must be an array of [start, end] strings.',
+            'array.min': 'Each timing must have both start and end times.',
+          })
+      )
+      .required()
       .messages({
-        'number.base': 'Price must be a number.',
-        'number.min': 'Price cannot be negative.',
+        'array.base': 'Timings must be an array of [start, end] arrays.',
+        'any.required': 'Timings are required.',
       }),
 
-    currency: joi
-      .string()
-      .trim()
-      .max(5)
-      .optional()
+    specialization: joi.string().trim().required().messages({
+      'string.base': 'Specialization must be a string.',
+      'string.empty': 'Specialization is required.',
+      'any.required': 'Specialization is required.',
+    }),
+
+    // Services are optional UI tags
+    services: joi
+      .array()
+      .items(
+        joi.string().trim().min(3).messages({
+          'string.base': 'Each service must be a string.',
+          'string.min': 'Each service must be at least 3 characters long.',
+        })
+      )
+      .default([])
       .messages({
-        'string.base': 'Currency must be a string.',
+        'array.base': 'Services must be an array of strings.',
       }),
 
-    // NEW: approach & achievements
+    // Facilities → facMask in controller
+    facilities: joi
+      .array()
+      .items(
+        joi.string().trim().min(3).messages({
+          'string.base': 'Each facility must be a string.',
+          'string.min': 'Each facility must be at least 3 characters long.',
+        })
+      )
+      .required()
+      .messages({
+        'array.base': 'Facilities must be an array of strings.',
+        'any.required': 'At least one facility is required.',
+      }),
+
     approach: joi
       .array()
       .items(
-        joi.string().trim().messages({
-          'string.base': 'Each approach item must be a string.',
+        joi.string().trim().min(3).messages({
+          'string.base': 'Each approach entry must be a string.',
+          'string.min': 'Each approach entry must be at least 3 characters long.',
         })
       )
       .default([])
@@ -192,8 +221,9 @@ const VetValidation = (req, res, next) => {
     achievements: joi
       .array()
       .items(
-        joi.string().trim().messages({
+        joi.string().trim().min(3).messages({
           'string.base': 'Each achievement must be a string.',
+          'string.min': 'Each achievement must be at least 3 characters long.',
         })
       )
       .default([])
@@ -201,19 +231,28 @@ const VetValidation = (req, res, next) => {
         'array.base': 'Achievements must be an array of strings.',
       }),
 
-    // NEW: addons -> array of objects
     addons: joi
       .array()
       .items(
         joi.object({
-          id: joi.string().trim().required().messages({
-            'string.base': 'Addon id must be a string.',
-            'any.required': 'Addon id is required.',
-          }),
-          label: joi.string().trim().required().messages({
-            'string.base': 'Addon label must be a string.',
-            'any.required': 'Addon label is required.',
-          }),
+          id: joi
+            .string()
+            .trim()
+            .required()
+            .messages({
+              'string.base': 'Addon id must be a string.',
+              'string.empty': 'Addon id is required.',
+              'any.required': 'Addon id is required.',
+            }),
+          label: joi
+            .string()
+            .trim()
+            .required()
+            .messages({
+              'string.base': 'Addon label must be a string.',
+              'string.empty': 'Addon label is required.',
+              'any.required': 'Addon label is required.',
+            }),
           price: joi
             .number()
             .min(0)
@@ -227,59 +266,9 @@ const VetValidation = (req, res, next) => {
       )
       .default([])
       .messages({
-        'array.base': 'Addons must be an array.',
+        'array.base': 'Addons must be an array of objects.',
       }),
 
-    // timings: NEW shape -> [[ start, end ],..]
-    timings: joi
-  .array()
-  .items(
-    joi
-      .array()
-      .items(
-        joi.string().trim().required().messages({
-          'string.base': 'Timing entries must be strings.',
-          'string.empty': 'Timing entries cannot be empty.',
-          'any.required': 'Timing entries are required.',
-        })
-      )
-      .length(2) // exactly [start, end]
-      .messages({
-        'array.base': 'Each timing must be an array of [start, end] strings.',
-        'array.length': 'Each timing must have both start and end times.',
-      })
-  )
-  .required()
-  .messages({
-    'array.base': 'Timings must be an array of [start, end] arrays.',
-    'any.required': 'Timings are required.',
-  }),
-
-
-    specialization: joi.string().trim().required().messages({
-      'string.base': 'Specialization must be a string.',
-      'string.empty': 'Specialization is required.',
-      'any.required': 'Specialization is required.',
-    }),
-
-    // facilities = logical list; controller converts to facMask
-    facilities: joi
-      .array()
-      .items(
-        joi.string().trim().min(3).messages({
-          'string.base': 'Each facility must be a string.',
-          'string.min': 'Each facility must be at least 3 characters long.',
-        })
-      )
-      .min(1)
-      .required()
-      .messages({
-        'array.base': 'Facilities must be an array of strings.',
-        'array.min': 'At least one facility is required.',
-        'any.required': 'Facilities are required.',
-      }),
-
-    // docs: URL list
     docs: joi
       .array()
       .items(
@@ -303,18 +292,9 @@ const VetValidation = (req, res, next) => {
         'string.min': 'Password must be at least 8 characters long.',
         'any.required': 'Password is required.',
       }),
-
-    // Optional type (kept mainly for consistency)
-    type: joi
-      .string()
-      .valid('vet')
-      .optional()
-      .messages({
-        'any.only': 'Type, if provided, must be "vet".',
-      }),
   });
 
-  const { error, value } = schema.validate(raw, {
+  const { error, value } = schema.validate(req.body, {
     abortEarly: false,
     stripUnknown: true,
     convert: true,
@@ -328,14 +308,8 @@ const VetValidation = (req, res, next) => {
     });
   }
 
-  // Put sanitized value back respecting original shape
-  if (req.body && req.body.vet) {
-    req.body.vet = value;
-  } else {
-    req.body = value;
-  }
-
+  req.body = value;
   return next();
 };
 
-module.exports = { VetValidation };
+module.exports = { GroomerValidation };

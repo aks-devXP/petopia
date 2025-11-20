@@ -18,6 +18,10 @@ const PetSchema = new Schema({
   breed:{
     type: String,
     required: true,
+  },
+  photo:{
+    type: String,
+    default:''
   }
 
   

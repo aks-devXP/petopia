@@ -1,7 +1,16 @@
-import React from "react";
 import { Edit3 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function PetCard({ pet, onClick }) {
+  // console.log(pet);
+  const [photo,setPhoto] = useState("https://res.cloudinary.com/dvjcvwp61/image/upload/v1762546264/Gemini_Generated_Image_iqz1xuiqz1xuiqz1_lr0lce.png")
+  useEffect(()=>{
+    if(pet.photo){
+      
+      setPhoto(pet.photo);
+    }
+  },[pet])
+  
   return (
     <button
       onClick={onClick}
@@ -14,7 +23,7 @@ export default function PetCard({ pet, onClick }) {
     >
       <div className="h-full flex-1 w-full flex flex-col">
           <img
-            src={pet.image}
+            src={photo}
             alt={`${pet.name}`}
             className="aspect-square w-full object-cover rounded-2xl"
             loading="lazy"

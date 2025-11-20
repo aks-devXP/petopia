@@ -1,5 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Plus, ChevronLeft, ChevronRight, PawPrint } from "lucide-react";
+import { CreatePet, UploadPetImage } from "@/API/PetApi";
+import { handleError, handleSuccess } from "@/Util/Alerts";
+import { ChevronLeft, ChevronRight, PawPrint, Plus } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PetCard from "./PetCard";
 import PetModal from "./PetModal";
 
@@ -14,12 +16,18 @@ const DUMMY_PETS = [
     image: "https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1280&auto=format&fit=crop" },
 ];
 
-export default function PetBanner() {
-  const [pets, setPets] = useState(DUMMY_PETS);
+export default function PetBanner({petInfo=[], updatePets}) {
+  const [pets, setPets] = useState([]);
   const [cursor, setCursor] = useState(0); // left index of 2-card window
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState(null);
 
+   useEffect(()=>{
+    if(petInfo && petInfo.length > 0){
+      setPets(petInfo);
+      // console.log("firse");
+    }
+  },[petInfo])
   // build items + one trailing placeholder to allow "[last, empty]"
   const items = useMemo(() => [...pets, { id: "__empty__", empty: true }], [pets]);
 
@@ -80,21 +88,85 @@ export default function PetBanner() {
       setModalOpen(true);
     }
   }
-  function handleSave(form) {
-    if (editing) {
-      setPets((prev) => prev.map((p) => (p.id === editing.id ? { ...p, ...form } : p)));
-    } else {
-      const newPet = {
-        id: "p" + Math.random().toString(36).slice(2, 9),
-        image:
-          "https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1280&auto=format&fit=crop",
+  
+async function handleSave(form, file, { previewCleared } = {}) {
+  try {
+    if (!editing) {
+      // ---------- CREATE FLOW ----------
+      // 1) Upload image if provided
+      let photoUrl = form.photo || "";
+      if (file) {
+        const uploaded = await UploadPetImage({
+          photo: "",           // no old photo on create
+          imageDeleted: false, // irrelevant for create
+          image: file,
+        });
+        if (!uploaded?.success) {
+          throw new Error(uploaded?.message || "Image upload failed");
+        }
+        photoUrl = uploaded.data?.[0]?.url || "";
+      }
+
+      // 2) Build payload
+      const payload = {
         ...form,
+        age: Number(form.age),
+        photo: photoUrl,
       };
-      setPets((prev) => [newPet, ...prev]);
-      setCursor(0);
+
+      // 3) Create on backend
+      const resp = await CreatePet(payload);
+      if (!resp?.success) {
+        throw new Error(resp?.message || "Failed to create pet");
+      }
+
+      // 4) Update local list (prefer server echo)
+      const created = resp.data ?? payload;
+      setPets((prev) => [created, ...prev]);
+      setCursor?.(0);
+
+      handleSuccess("Pet created successfully");
+    } 
+    else {
+      // ---------- UPDATE FLOW ----------
+      const payload = {
+        ...editing, // ensure id/_id is present
+        ...form,
+        age: Number(form.age),
+        // keep existing photo unless user explicitly cleared it
+        photo: previewCleared ? "" : (editing?.photo ?? form?.photo ?? ""),
+      };
+
+      const resp = await updatePets({
+        data: payload,
+        image: file || undefined,     // triggers upload if present
+        imageDeleted: previewCleared, // lets helper know user removed photo
+        old_photo: editing.photo
+      });
+
+      if (!resp?.success) {
+        throw new Error(resp?.message || "Failed to update pet");
+      }
+
+      const updated = resp.data ?? payload;
+
+      setPets((prev) =>
+        prev.map((p) =>
+          (editing._id && p._id === editing._id) || (editing.id && p.id === editing.id)
+            ? { ...p, ...updated }
+            : p
+        )
+      );
+
+      handleSuccess("Pet updated successfully");
     }
+
     setModalOpen(false);
+  } 
+  catch (err) {
+    handleError(err?.message || "Failed to save pet");
   }
+}
 
   const prev = () => setCursor((i) => Math.max(0, i - 1));          // slide by 1
   const next = () => setCursor((i) => Math.min(maxCursor, i + 1));  // slide by 1
@@ -171,15 +243,17 @@ export default function PetBanner() {
               >
                 {items.map((pet) =>
                   pet.empty ? (
-                    <div
-                      key="empty-tail"
-                      className="aspect-[4/5] w-48 sm:w-56 shrink-0 rounded-2xl border border-dashed border-stone-300
-                                 grid place-items-center text-ink-secondary/70"
-                    >
-                      Empty
+                    // <div
+                    //   key="empty-tail"
+                    //   className="aspect-[4/5] w-48 sm:w-56 shrink-0 rounded-2xl border border-dashed border-stone-300
+                    //              grid place-items-center text-ink-secondary/70"
+                    // >
+                    //   Empty
+                    // </div>
+                    <div key={1006}>
                     </div>
                   ) : (
-                    <div key={pet.id} className="shrink-0">
+                    <div key={pet._id} className="shrink-0">
                       <PetCard pet={pet} onClick={() => openEdit(pet)} />
                     </div>
                   )

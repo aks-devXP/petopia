@@ -1,7 +1,7 @@
 // src/Pages/petservice/components/ProviderCard.jsx
-import React, { useState, useMemo } from "react";
+import { Heart, Home, MapPin, Star } from "lucide-react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Star, Home, MapPin } from "lucide-react";
 
 const DEFAULT_IMG =
   "https://res.cloudinary.com/demo/image/upload/c_fill,g_auto,w_800,h_600/sample.jpg";
@@ -25,10 +25,10 @@ export default function ProviderCard({
   const {
     id,
     name = "Sophie Bennett",
-    profession = "Groomer",
+    specialization:profession = "Groomer",
     rating = 4.7,
     profilePic,
-    services = ["Grooming", "Washing", "Trimming", "Something Else"],
+    facilities: services = ["Grooming", "Washing", "Trimming", "Something Else"],
     homeService = false,
     locality = "C-Scheme",
     city = "Jaipur",

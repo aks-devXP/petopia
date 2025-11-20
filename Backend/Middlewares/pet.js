@@ -18,11 +18,24 @@ const ValidatePet = (req, res, next) => {
     breed: joi.string().required().messages({
       'string.empty': 'Breed is required',
       'any.required': 'Breed is required'
-    })
+    }),
+    photo: joi
+    .string()
+    .trim()
+    .uri()
+    .allow(null, '')
+    .optional()
+    .messages({
+      'string.base': 'Photo must be a string.',
+      'string.uri': 'Photo must be a valid URL.',
+      'any.allowOnly': 'Photo can only be null or an empty string.',
+      'any.required': 'Photo field is required.',
+    }),
+
   });
   const { name, age, category, breed } = req.body;
   const { error } = schema.validate({ name, age, category, breed } );
-  console.log("Middle Pet", req.body);
+  // console.log("Middle Pet", req.body);
   if (error) {
     return res.status(400).json({ message: error.details[0].message });
   }

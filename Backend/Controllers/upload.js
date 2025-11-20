@@ -36,8 +36,10 @@ const uploadProfileImage  =  async (req, res) => {
 
 const uploadMultipleImages = async (req, res) => {
   try {
-    const folder = req.body.folder || 'extras';
+    let folder = req.body.folder || 'extras';
+
     const fieldName = req.body.fieldName;
+
     // console.log(req.files);
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).json({
@@ -48,16 +50,21 @@ const uploadMultipleImages = async (req, res) => {
 
     let filesToUpload = [];
     let actualFieldName = '';
-
+    // console.log(fieldName);
     if (fieldName && req.files[fieldName]) {
       // Use specified field name
       filesToUpload = req.files[fieldName];
       actualFieldName = fieldName;
     } else {
       // Use first available field
-      const firstField = Object.keys(req.files)[0];
-      filesToUpload = req.files[firstField];
-      actualFieldName = firstField;
+      // const firstField = Object.keys(req.files)[0];
+      // filesToUpload = req.files[firstField];
+      // actualFieldName = firstField;
+      return res.status(401).json({
+        success:false,
+        message:"Invalid Image Field"
+      });
+
     }
 
     if (filesToUpload.length === 0) {
@@ -107,7 +114,7 @@ const deleteMultipleImages = async (req, res) => {
   try {
     // Get array of URLs from body
     const imageUrls = req.body.urls || req.body.images;
-    
+    console.log(imageUrls);
     // Validate input
     if (!imageUrls || !Array.isArray(imageUrls) || imageUrls.length === 0) {
       return res.status(400).json({
@@ -156,15 +163,13 @@ const deleteMultipleImages = async (req, res) => {
     // console.log(` Deleted: ${successful}, Failed: ${failed}`);
 
     // Return 204 if all succeeded, 207 if partial success
-    if (failed === 0) {
-      return res.status(204).send();
-    } else {
-      return res.status(207).json({
+    
+      return res.status(200).json({
         success: true,
         message: `Deleted ${successful} of ${results.length} images`,
         results: results
       });
-    }
+    
 
   } catch (error) {
     // console.error(' Delete multiple images error:', error);

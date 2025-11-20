@@ -1,8 +1,8 @@
-import React from "react";
-import { CheckCircle2, HeartPulse, Sparkles, Stethoscope, Dumbbell, Scissors } from "lucide-react";
+import { CheckCircle2, Dumbbell, HeartPulse, Scissors, Sparkles, Stethoscope } from "lucide-react";
 
 const ServiceShowcase = ({ profile }) => {
-  const { services, approach, addons, typeLabel } = profile;
+  const {services, approach, addons, typeLabel } = profile;
+  console.log(profile);
 
   return (
     <section className="space-y-8 rounded-3xl bg-white/80 p-8 ring-1 ring-app-surface/70 shadow-[0_30px_65px_rgba(12,43,55,0.12)]">

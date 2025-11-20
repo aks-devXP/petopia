@@ -222,7 +222,7 @@ export function buildProviderProfile(type, typeLabel, dataWrapper) {
   const bookingTime = payload.bookingTime || payload.responseTime || defaults.responseTime;
 
   const services = ensureArray(
-    payload.services?.length ? payload.services : defaults.services
+    payload.facilities?.length ? payload.facilities : defaults.services
   );
 
   const approach = ensureArray(

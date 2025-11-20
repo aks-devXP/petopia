@@ -1,6 +1,5 @@
-// src/Pages/petservice/components/ServiceFilters.jsx
-import { useMemo, useState, useCallback } from "react";
-import { Stethoscope, Scissors, Dumbbell, ChevronDown, Search } from "lucide-react";
+import { ChevronDown, Dumbbell, Scissors, Search, Stethoscope } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 
 const LABEL = { vet: "Vets", trainer: "Trainers", groomer: "Groomers" };
 const TYPE_META = [
@@ -24,24 +23,57 @@ export default function ServiceFilters({
   selectedServices = [],
   onChange,
   onTypeSwitch,
+  availableServices = [],
+  servicesLoading = false,
+  servicesError = false,
 }) {
   const [openServices, setOpenServices] = useState(false);
-  const options = useMemo(() => SERVICE_OPTIONS[type] || [], [type]);
+
+  // Decide current options:
+  // 1) prefer backend-provided `availableServices` if non-empty
+  // 2) otherwise fallback to static defaults for the current type
+  const [options, setOptions] = useState(
+    availableServices && availableServices.length > 0
+      ? availableServices
+      : SERVICE_OPTIONS[type] || []
+  );
+
+  useEffect(() => {
+    if (Array.isArray(availableServices) && availableServices.length > 0) {
+      setOptions(availableServices);
+    } else {
+      setOptions(SERVICE_OPTIONS[type] || []);
+    }
+  }, [availableServices, type]);
+
+  // Treat "_none_" as explicit "no services selected"
+  const cleanedSelected = selectedServices.includes("_none_")
+    ? selectedServices.filter((s) => s !== "_none_")
+    : selectedServices;
+
   const allSelected =
-    selectedServices.length === 0 || selectedServices.length === options.length;
+    (cleanedSelected.length === 0 || cleanedSelected.length === options.length) &&
+    !selectedServices.includes("_none_");
 
   const toggleService = useCallback(
     (name) => {
-      const next = new Set(selectedServices);
-      next.has(name) ? next.delete(name) : next.add(name);
-      onChange?.({ services: Array.from(next) });
+      // always strip the special marker when user actively toggles
+      const base = new Set(
+        selectedServices.filter((s) => s !== "_none_")
+      );
+      base.has(name) ? base.delete(name) : base.add(name);
+      onChange?.({ services: Array.from(base) });
     },
     [selectedServices, onChange]
   );
 
-  const selectAll = useCallback(() => onChange?.({ services: [] }), [onChange]);
+  const selectAll = useCallback(
+    () => onChange?.({ services: [] }), // [] = treat as "all" on UI
+    [onChange]
+  );
+
   const selectNone = useCallback(
-    () => onChange?.({ services: ["__none__"] }),
+    () => onChange?.({ services: ["_none_"] }), // special marker, all checkboxes off
     [onChange]
   );
 
@@ -64,7 +96,7 @@ export default function ServiceFilters({
               `}
             >
               <Icon className={`h-5 w-5 ${active ? "text-app-bg" : "text-ink-primary"}`} />
-              <span className={`${active ? "text-app-bg" : "text-ink-primary"}`}>{label}</span>
+              <span className={active ? "text-app-bg" : "text-ink-primary"}>{label}</span>
             </button>
           );
         })}
@@ -85,6 +117,18 @@ export default function ServiceFilters({
 
         {openServices && (
           <div id="services-panel" className="mt-2 rounded-xl ring-1 ring-brand/30 bg-white p-3">
+            {/* Loading / error states for service options */}
+            {servicesLoading && (
+              <p className="text-xs text-ink-secondary/70 mb-2">
+                Loading services…
+              </p>
+            )}
+            {servicesError && !servicesLoading && (
+              <p className="text-xs text-red-500 mb-2">
+                Failed to load services. Showing defaults.
+              </p>
+            )}
+
             <div className="mb-2 flex justify-between gap-2 text-xs">
               <button
                 onClick={selectAll}
@@ -103,32 +147,46 @@ export default function ServiceFilters({
                 Clear
               </button>
               <span className="ml-auto text-ink-secondary/70">
-                {allSelected ? "All services" : `${selectedServices.length} selected`}
+                {allSelected
+                  ? "All services"
+                  : selectedServices.includes("_none_")
+                  ? "None selected"
+                  : `${cleanedSelected.length} selected`}
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {options.map((opt) => {
-                const checked =
-                  selectedServices.length === 0 ? true : selectedServices.includes(opt);
-                return (
-                  <label
-                    key={opt}
-                    className={`flex items-center gap-2 rounded-full px-2 py-2 text-sm cursor-pointer ${
-                      checked ? "bg-app-bg border border-black/10" : "hover:bg-app-bg/60"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => toggleService(opt)}
-                      className="accent-brand"
-                    />
-                    <span className="text-ink-primary">{opt}</span>
-                  </label>
-                );
-              })}
-            </div>
+            {options.length === 0 ? (
+              <p className="text-xs text-ink-secondary/70">
+                No services available for this provider type.
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {options.map((opt) => {
+                  const checked = selectedServices.includes("_none_")
+                    ? false
+                    : cleanedSelected.length === 0
+                    ? true
+                    : cleanedSelected.includes(opt);
+
+                  return (
+                    <label
+                      key={opt}
+                      className={`flex items-center gap-2 rounded-full px-2 py-2 text-sm cursor-pointer ${
+                        checked ? "bg-app-bg border border-black/10" : "hover:bg-app-bg/60"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleService(opt)}
+                        className="accent-brand"
+                      />
+                      <span className="text-ink-primary">{opt}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
       </div>

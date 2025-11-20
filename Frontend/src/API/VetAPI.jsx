@@ -2,66 +2,66 @@ import { handleError } from "../Util/Alerts";
 
 const baseUrl = import.meta.env.VITE_BACKEND_BASEURL;
 
-const getVets = async () => {
+const getVets = async (params) => {
   try{
-    const response = await fetch(`${baseUrl}/vet/all-data`,{
+    const {name,city,categories=[], ...rest} =  params;
+    const mode = "any";
+    const query = new URLSearchParams();
+    
+    query.set("mode",mode);
+    if(name){
+      query.set("name",name);
+    }
+    if(city){
+      query.set("city",city);
+    }
+    if(categories.length>0){
+      query.set("facilities",categories.join(','));
+    }
+    console.log(categories);
+    const response = await fetch(`${baseUrl}/vet/all-data?${query.toString()}`,{
       method:"GET",
       headers: {
         'Content-Type': 'application/json',
       }
     });
+    
+    // console.log(response)
+    
     const data = await response.json();
     if (!data.success) {
       throw new Error(data.message);
     }
-    return data.vets;
+    return data.data;
   }
   catch (error){
-    handleError(error);
+    throw new Error(error.message || "Failed to fetch vets");
   }
 }
 
-const createVet = async ({
-  name,
-  email,
-  rating,
-  phone,
-  address,
-  city,
-  state,
-  zip,
-  profilePic,
-  about,
-  tenure,
-  timings,
-}) => {
+const getAllCategories= async ()=>{
   try {
-    const response = await fetch(`${baseUrl}/vet/create-vet`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const resp = await fetch(`${baseUrl}/vet/categories`,{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json",
       },
-      body: JSON.stringify({
-        name,
-        email,
-        rating,
-        phone,
-        address,
-        city,
-        state,
-        zip,
-        profilePic,
-        about,
-        tenure,
-        timings
-      }),
     });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    handleError(error);
+    if(!resp.ok){
+      throw new Error(`${resp.status}:${resp.statusText}`)
+    }
+    const payload = await resp.json();
+    if(!payload.success){
+      throw new Error(payload.message);
+    }
+    return payload.data;
+  } 
+  catch (error) {
+    console.log(error);
+    throw new Error(error.message);
   }
-};
+}
 
 const getVetById = async (id) =>  {
   try {
@@ -75,9 +75,9 @@ const getVetById = async (id) =>  {
     });
     // console.log(response)
     const data = await response.json();
-    // console.log(await data.vet)
+    // console.log(await data.data)
 
-    return data.vet;
+    return data.data;
   } catch (error) {
     handleError(error);
   }
@@ -98,5 +98,5 @@ const getVetByEmail = async (email) =>  {
   }
 }
 
-export { createVet, getVetByEmail, getVetById, getVets };
+export { getAllCategories, getVetByEmail, getVetById, getVets };
 

@@ -1,14 +1,13 @@
-import React, { useMemo } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "@/components/Loader/Loader";
-import { getVetById } from "@/API/VetAPI";
+import { getProviderById } from "@/API/ServiceProviders";
 import { getOne } from "@/API/mockProviders";
+import Loader from "@/components/Loader/Loader";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ProviderHero from "./components/ProviderHero";
-import HighlightsGrid from "./components/HighlightsGrid";
+import ScheduleSidebar from "./components/ScheduleSidebar";
 import ServiceShowcase from "./components/ServiceShowcase";
 import TestimonialsSection from "./components/TestimonialsSection";
-import ScheduleSidebar from "./components/ScheduleSidebar";
 import { buildProviderProfile } from "./utils/profileBuilder";
 
 const TYPE_LABELS = {
@@ -35,8 +34,16 @@ const ProviderBooking = ({ forcedType, forcedId }) => {
     queryKey: ["provider-booking", type, providerId],
     queryFn: async () => {
       if (type === "vet") {
-        const vet = await getVetById(providerId);
+        const vet = await getProviderById({type, id:providerId});
         if (vet) return { source: "api", payload: vet };
+      }
+      else if(type==="trainer"){
+        const trainer = await getProviderById({type, id:providerId});
+        if (trainer) return { source: "api", payload: trainer };
+      }
+      else if(type==="groomer"){
+        const groomer = await getProviderById({type, id:providerId});
+        if (groomer) return { source: "api", payload: groomer };
       }
       const fallback = getOne(type, providerId);
       if (fallback) return { source: "static", payload: fallback };

@@ -11,7 +11,6 @@ import Appointment from "@/Pages/admin/appointment";
 import Contact from "@/Pages/admin/contact";
 import Home from "@/Pages/admin/home";
 import UserDashboard from "@/Pages/admin/profile/UserDashboard";
-import UserEditor from "@/Pages/admin/usereditor";
 import Welcome from "@/Pages/admin/welcome";
 // Vets
 import VetHome from "@/Pages/admin/vets";
@@ -20,12 +19,12 @@ import VetDocs from "@/Pages/admin/vets/VetDocs";
 import AppointmentSuccess from "@/Pages/admin/vets/components/AppointmentSuccess";
 
 // Services
+import ProviderBooking from "@/Pages/admin/booking/ProviderBooking";
 import PetServices from "@/Pages/admin/petservice";
 import ServiceDetailPage from "@/Pages/admin/petservice/ServiceDetailPage";
 import ServiceListPage from "@/Pages/admin/petservice/ServiceListPage";
 import GroomerBook from "@/Pages/admin/services/GroomerBook";
 import CareTaker from "@/Pages/admin/services/components/CareTaker";
-import ProviderBooking from "@/Pages/admin/booking/ProviderBooking";
 
 // NGO
 import NGO from "@/Pages/admin/ngo";
@@ -44,6 +43,7 @@ import NewsPage from "@/Pages/admin/news/NewsPage";
 import BreedInfo from "@/Pages/admin/breedInfo";
 import BreedList from "@/Pages/admin/breedList";
 import NGO_Home from "@/Pages/admin/ngo/NGO_Home";
+import UserEditor from "@/Pages/admin/usereditor";
 import RequireAuth from "./RequireAuth";
 
 const routes = (

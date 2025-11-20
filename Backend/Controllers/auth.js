@@ -1,7 +1,8 @@
 const UserModel = require('../Models/UsersDB');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-require("dotenv").config;
+require("dotenv").config();
+const salt = Number(process.env.Salt_Rounds);
 const loginControl = async (req, res) => {  
     try {
         const { email, password } = req.body;
@@ -39,18 +40,19 @@ const signupControl = async (req, res) => {
         if(oldUser){
             return res.status(400).json({message: 'User Already Exist By This Email. Please Login'});
         }
-        const nameExist  = await UserModel.findOne({
-            name: name,
-        })
-        if(nameExist){
-            return res.status(400).json({message: 'User Already Exist By This Name. Please Login'});
-        }
+        // name need not to be unique 
+        // const nameExist  = await UserModel.findOne({
+        //     name: name,
+        // })
+        // if(nameExist){
+        //     return res.status(400).json({message: 'User Already Exist By This Name. Please Login'});
+        // }
         const newUser = new UserModel({
             name: name,
             email: email,
             password: password,
         });
-        const enc_pass = await bcrypt.hash(password, 12);
+        const enc_pass = await bcrypt.hash(password, salt);
         newUser.password = enc_pass;
         await newUser.save();
         const user = await UserModel.findOne({
@@ -168,9 +170,9 @@ const GoogleControl = async (req, res) => {
         const user = await UserModel.findOne({
             email: email,
         });
-        
+        // console.log(user);
         if(user){
-            const token = jwt.sign({id: user._id, user_name: name}, process.env.JWT_SECRET);
+            const token = jwt.sign({id: user._id, user_name: name,type:"user"}, process.env.JWT_SECRET);
             let pass_Matched = false;
             if (user.password === 'facebook12345'|| user.password === 'google12345') {
                 pass_Matched = true;
@@ -184,12 +186,13 @@ const GoogleControl = async (req, res) => {
                 password: 'google12345',
             });
             const newU = await newUser.save();
-            const token = jwt.sign({id: newU._id, user_name: name}, process.env.JWT_SECRET);
+            const token = jwt.sign({id: newU._id, user_name: name,type:"user"}, process.env.JWT_SECRET);
             res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: name,pass_changed: false  });
         }   
         
     }
     catch(error){
+        console.log(error)
         res.status(500).json({ message: error.message });
     }
 
@@ -202,7 +205,7 @@ const FacebookControl= async (req,res)=>{
             email: email,
         })
         if(user){
-            const token = jwt.sign({id: user._id, user_name: name}, process.env.JWT_SECRET);
+            const token = jwt.sign({id: user._id, user_name: name,type:"user"}, process.env.JWT_SECRET);
             let pass_Matched = false;
             // console.log(user.password);
             if (user.password === 'facebook12345'|| user.password === 'google12345') {
@@ -217,7 +220,7 @@ const FacebookControl= async (req,res)=>{
                 password: 'facebook12345',
             });
             const newU = await newUser.save();
-            const token = jwt.sign({id: newU._id, user_name: name}, process.env.JWT_SECRET); 
+            const token = jwt.sign({id: newU._id, user_name: name,type:"user"}, process.env.JWT_SECRET); 
             res.status(201).json({ message: 'Signup Successful' ,success: true, token: token, user_name: name,pass_changed: false  });
         }
     }
