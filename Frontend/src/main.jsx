@@ -7,7 +7,7 @@ import { LoadingProvider } from './Pages/LodingPage.jsx';
 const queryClient = new QueryClient();
 const google_key = import.meta.env.VITE_Google_Key;
 createRoot(document.getElementById('root')).render(
-    <GoogleOAuthProvider clientId="494362090516-r69v7vu4ar7hid9jrvngng3b2uajrt2v.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={google_key}>
     <LoadingProvider>
     <QueryClientProvider client={queryClient}>
        <App />
