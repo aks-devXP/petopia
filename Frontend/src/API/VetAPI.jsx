@@ -18,7 +18,7 @@ const getVets = async (params) => {
     if(categories.length>0){
       query.set("facilities",categories.join(','));
     }
-    console.log(categories);
+    // console.log(categories);
     const response = await fetch(`${baseUrl}/vet/all-data?${query.toString()}`,{
       method:"GET",
       headers: {
@@ -65,7 +65,7 @@ const getAllCategories= async ()=>{
 
 const getVetById = async (id) =>  {
   try {
-    console.log(id)
+    // console.log(id)
     // ${baseUrl}
     const response = await fetch(`${baseUrl}/vet/data/${id}`,{
       method: "GET",

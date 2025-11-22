@@ -32,15 +32,12 @@ const appointmentSchema = new schema({
     status:{
         type: String,
         required: true,
-        default: 'pending'
+        default: 'pending',
+        enum: ['pending', 'confirmed', 'completed', 'cancelled']
     },
     description:{
         type: String,
-        required: true
-    },
-    created_at:{
-        type: Date,
-        default: Date.now
+        // required: true
     },
     serviceCost:{
         type: Number,
@@ -48,9 +45,20 @@ const appointmentSchema = new schema({
     },
     serviceName:{
         type: String,
-        required: true
+        // required: true
     },
-})
+    addons :{
+        type: [String],
+        default: []
+    },
+    
+},{
+        timestamps: true
+    });
+
+appointmentSchema.index({user_id:1, authority_id:1});
+
+
 
 
 module.exports = mongo.model('Appointment', appointmentSchema)

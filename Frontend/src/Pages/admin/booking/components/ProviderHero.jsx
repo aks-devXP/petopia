@@ -14,7 +14,7 @@ const ProviderHero = ({ profile }) => {
     languages,
     heroBadges,
     tags,
-    profilePic:profileImage,
+    profileImage,
     gallery,
     bookingTime,
     about,
@@ -23,7 +23,7 @@ const ProviderHero = ({ profile }) => {
 
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const hasGallery = Array.isArray(gallery) && gallery.length > 0;
-
+  // console.log(profile);
   return (
     <section className="relative overflow-hidden rounded-3xl bg-app-elevated shadow-[0_25px_80px_rgba(12,43,55,0.12)] ring-1 ring-app-surface/70">
       <div className="absolute inset-0 bg-gradient-to-br from-brand/15 via-transparent to-ink-primary/5" />
@@ -109,6 +109,11 @@ const ProviderHero = ({ profile }) => {
         </div>
 
         <div className="relative flex items-center justify-center">
+          {hasGallery ? (<img
+              src={profileImage}
+              alt={name}
+              className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+            />):(
           <button
             type="button"
             onClick={() => hasGallery && setIsGalleryOpen(true)}
@@ -120,6 +125,7 @@ const ProviderHero = ({ profile }) => {
               alt={name}
               className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
             />
+            
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-heading/80 via-ink-heading/20 to-transparent px-4 py-3">
               <p className="text-xs font-medium uppercase tracking-wide text-white/70">
                 Trusted by {ratingCount}+ pet parents
@@ -132,7 +138,8 @@ const ProviderHero = ({ profile }) => {
               </span>
             )}
 
-          </button>
+          </button>)
+        }
         </div>
       </div>
 

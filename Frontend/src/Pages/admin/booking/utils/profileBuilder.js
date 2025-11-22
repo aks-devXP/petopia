@@ -220,7 +220,11 @@ export function buildProviderProfile(type, typeLabel, dataWrapper) {
   const heroBadges = payload.heroBadges || defaults.heroBadges;
   const tags = payload.tags || defaults.tags;
   const bookingTime = payload.bookingTime || payload.responseTime || defaults.responseTime;
-
+  if(payload.facilities?.length>0){
+    payload.facilities = payload.facilities.map((service)=>{
+    return service.split('_').map(word=>word.charAt(0).toUpperCase()+word.slice(1).toLowerCase()).join(' ');
+  })
+  }
   const services = ensureArray(
     payload.facilities?.length ? payload.facilities : defaults.services
   );
@@ -278,7 +282,7 @@ export function buildProviderProfile(type, typeLabel, dataWrapper) {
   ];
 
   const profileImage = resolveImage(type, source, payload.profilePic, defaults);
-  const gallery = buildGallery(payload, defaults, profileImage);
+  const gallery = payload.gallery;
 
   return {
     id: payload._id || payload.id || `${type}-${name}`.toLowerCase(),
@@ -412,9 +416,6 @@ function formatSlotLabel(start, end) {
 
 function resolveImage(type, source, profilePic, defaults) {
   if (profilePic) {
-    if (source === "api" && type === "vet") {
-      return `/petopia/Vet/${profilePic}`;
-    }
     return profilePic;
   }
   return defaults.fallbackImage || DEFAULT_TYPE.fallbackImage;

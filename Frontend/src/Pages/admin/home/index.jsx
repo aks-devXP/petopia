@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 
+import { getAppointmentsByUser } from "@/API/AppointmentAPI";
 import { GetPets, UpdatePet, UploadPetImage } from "@/API/PetApi";
 import { GetProfileInfo } from "@/API/UserAPI";
 import PawButton from "@/components/buttons/PawButton";
@@ -15,6 +16,7 @@ import ProfileBanner from "./components/ProfileBanner";
 import WelcomeBanner from "./components/WelcomeBanner"; // adjust path if needed
 
 // Dummy data aligned with your Appointment shape
+
 const DUMMY_APPOINTMENTS = [
   {
     _id: "a1",
@@ -113,7 +115,12 @@ export default function Home() {
   }
   );
   const [error, setError]= useState("");
-
+  const appointmentData = useQuery({
+    queryKey: ["UserAppointments"],
+    queryFn: async ()=> getAppointmentsByUser(),
+    staleTime:1000*60*30,
+    retry:2
+  })
   const Pets = useQuery({
     queryKey:["GetPets"],
     queryFn: GetPets,
@@ -166,18 +173,22 @@ export default function Home() {
 
   useEffect(()=>{ 
     setLoading(true)
-    if(!User.isLoading&&!Pets.isLoading){
+    if(!User.isLoading&&!Pets.isLoading&&!appointmentData.isLoading){
       setLoading(false)
       // console.log()
       setUsername(User.data.name)
-      if(!User.error&&!Pets.error){
-        const o_error = User.error+"\n"+Pets.error;
+      if(!User.error&&!Pets.error&&!appointmentData.error){
+        const o_error = User.error+"\n"+Pets.error+"\n"+appointmentData.error;
+        // if(o_error.trim()!=="" ){
+        //   console.log(o_error);
+        // }
+
         
         setError(o_error.trim());
       }
       // console.log(Pets.data)
     }
-  },[User,Pets])
+  },[User,Pets, appointmentData])
   if(isLoading){
     return <Loader/>
   }
@@ -194,7 +205,7 @@ export default function Home() {
           <PetBanner petInfo={Pets.data??[]} updatePets={updatePets}/>
         </div>
         <div className="md:w-[35%] w-full">
-          <AppointmentBanner appointments={DUMMY_APPOINTMENTS} />
+          <AppointmentBanner appointments={appointmentData.data} />
         </div>
       </div>
 

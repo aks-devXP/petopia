@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import PetCard from "@/Pages/admin/home/components/PetCard";
+import { handleError } from "@/Util/Alerts";
 import {
   CalendarDays,
+  ChevronLeft,
+  ChevronRight,
   Clock,
   IndianRupee,
   Info,
   ShieldCheck,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
-import { handleError, handleSuccess } from "@/Util/Alerts";
-import PetCard from "@/Pages/admin/home/components/PetCard";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const FALLBACK_PETS = [
   {
@@ -56,6 +56,7 @@ const ScheduleSidebar = ({
   const resolvedPets = pets.length > 0 ? pets : FALLBACK_PETS;
   const [selectedPetId, setSelectedPetId] = useState(resolvedPets[0]?.id);
   const sliderRef = useRef(null);
+  const isLoggedIN = Boolean(localStorage.getItem("token"));
 
   useEffect(() => {
     if (pets.length > 0) {
@@ -86,15 +87,20 @@ const ScheduleSidebar = ({
   };
 
   const handleSubmit = () => {
+    if(!isLoggedIN){
+      handleError("Please Login to book an appointment.");
+      return;
+    }
     if (!selectedPet) {
       handleError("Please pick which pet this visit is for.");
       return;
     }
-    if (!activeDay || !activeSlot) {
+    if (!activeDay || !activeSlot ) {
       handleError("Please select a date and time slot to continue.");
       return;
     }
-    handleSuccess("Your slot is reserved while we complete the booking.");
+    // console.log(selectedPet,activeSlot, activeDay, addons, total);
+    
     onConfirm({
       day: activeDay,
       slot: activeSlot,
@@ -113,7 +119,7 @@ const ScheduleSidebar = ({
   const renderPetCard = (pet) => {
     const active = pet.id === selectedPetId;
     return (
-      <div key={pet.id} className="shrink-0">
+      <div key={pet._id??pet.id} className="shrink-0">
         <div
           className={`rounded-3xl border-2 ${
             active ? "border-brand shadow-lg" : "border-transparent"
@@ -231,7 +237,8 @@ const ScheduleSidebar = ({
             ))}
           </div>
         </div>
-
+        {/* Pet Selector */}
+        {isLoggedIN &&(
         <div className="rounded-2xl border border-app-surface/60 bg-app-elevated/60 p-4">
           <div className="flex items-center justify-between">
             <div>
@@ -268,7 +275,8 @@ const ScheduleSidebar = ({
             </div>
           </div>
         </div>
-
+        )}
+      {/* ADD Ons Component */}
         {addons.length > 0 && (
           <div className="rounded-2xl border border-app-surface/60 bg-app-bg/80 p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-ink-secondary/70">

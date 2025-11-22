@@ -28,6 +28,7 @@ export default function AuthSwitcher() {
   } = useForm({
     defaultValues: {
       name: '',
+      email: '',
       password: '',
     },
   });
@@ -40,6 +41,7 @@ export default function AuthSwitcher() {
           'https://www.googleapis.com/oauth2/v3/userinfo',
           { headers: { Authorization: `Bearer ${credentialResponse.access_token}` } }
         );
+        console.log(userInfoResponse);
         const userInfo = await userInfoResponse.json();
 
         const response = await GoogleLoginAPI({ email: userInfo.email, name: userInfo.name });
@@ -88,10 +90,13 @@ export default function AuthSwitcher() {
   };
 
   // ---- SUBMIT HANDLER (LOGIN / SIGNUP) ----
-  const onSubmit = async ({ name, password }) => {
+  const onSubmit = async ({ name,email, password }) => {
     // “name” is actually the email field (per your request)
-    if (!isEmailLike(name)) {
-      return setError('name', { message: 'Please enter a valid email' });
+    if (!isEmailLike(email)) {
+      return setError('email', { message: 'Please enter a valid email' });
+    }
+    if( mode==='signup' && !name){
+      return setError('name', { message: 'Please enter your name' });
     }
     if (!password) return setError('password', { message: 'Please enter your password' });
 
@@ -118,7 +123,7 @@ export default function AuthSwitcher() {
     // signup
     const derivedName = name.split('@')[0] || 'Petopia User';
     try {
-      const resp = await SingUpAPI({ name: derivedName, email: name, password });
+      const resp = await SingUpAPI({ name: name??derivedName, email: email, password });
       const data = await resp.json();
 
       if (data.success) {
@@ -155,11 +160,40 @@ export default function AuthSwitcher() {
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          {/* User Name  */}
+          { mode==='signup'&&
+          <div>
+            <label className="block text-sm font-medium mb-1">Name</label>
+            <Controller
+              name="name"
+              control={control}
+              rules={{ required: 'This field is required' }}
+              render={({ field, fieldState }) => (
+                <>
+                  <input
+                    {...field}
+                    type="text"
+                    inputMode="text"
+                    autoComplete="username"
+                    placeholder="your name"
+                    disabled={isSubmitting}
+                    className={`w-full rounded-xl border px-4 py-3 bg-gray-200 focus:border focus:border-ink-primary/30 outline-none transition
+                                ${fieldState.error ? 'border-red-500' : 'border-transparent'} `}
+                  />
+                  {fieldState.error && (
+                    <p className="mt-1 text-xs text-red-500">{fieldState.error.message}</p>
+                  )}
+                </>
+              )}
+            />
+          </div>
+          }
           {/* Email (fixed label for both modes) */}
+
           <div>
             <label className="block text-sm font-medium mb-1">Email</label>
             <Controller
-              name="name"
+              name="email"
               control={control}
               rules={{ required: 'This field is required' }}
               render={({ field, fieldState }) => (
@@ -229,9 +263,9 @@ export default function AuthSwitcher() {
             {/* <PawButton type="submit" loading={isSubmitting} label={submitLabel} /> */}
 
             {/* If not, wrap it in a native submit button to guarantee form submit: */}
-            <button type="submit" disabled={isSubmitting} className="w-full disabled:opacity-70">
-              <PawButton loading={isSubmitting} label={submitLabel} />
-            </button>
+            <div  className="flex justify-center w-full mt-1 ">
+              <PawButton loading={isSubmitting} label={submitLabel} disabled={isSubmitting} />
+            </div>
           </div>
 
           {/* Divider */}

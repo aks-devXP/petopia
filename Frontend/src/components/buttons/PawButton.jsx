@@ -1,17 +1,20 @@
-import React from "react";
 import { PawPrint } from "lucide-react";
 
 export default function PawButton({ 
   onClick,
   text = "Get Started",
-  className = "" 
+  className = "" ,
+  disabled = false,
 }) {
   return (
     <button
+      type="submit"
       onClick={onClick}
+      disabled= {disabled}
       className={`
         inline-flex items-center justify-center
         rounded-full 
+        disabled:opacity-70
         transition-all duration-200 
         hover:scale-[1.01] hover:shadow-lg
         focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30

@@ -2,7 +2,7 @@ import { CheckCircle2, Dumbbell, HeartPulse, Scissors, Sparkles, Stethoscope } f
 
 const ServiceShowcase = ({ profile }) => {
   const {services, approach, addons, typeLabel } = profile;
-  console.log(profile);
+  // console.log(profile);
 
   return (
     <section className="space-y-8 rounded-3xl bg-white/80 p-8 ring-1 ring-app-surface/70 shadow-[0_30px_65px_rgba(12,43,55,0.12)]">

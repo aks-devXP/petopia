@@ -1,4 +1,3 @@
-// middleware/GroomerValidation.js
 const joi = require('joi');
 
 const GroomerValidation = (req, res, next) => {

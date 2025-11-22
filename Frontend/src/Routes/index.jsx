@@ -10,7 +10,6 @@ import About from "@/Pages/admin/about";
 import Appointment from "@/Pages/admin/appointment";
 import Contact from "@/Pages/admin/contact";
 import Home from "@/Pages/admin/home";
-import UserDashboard from "@/Pages/admin/profile/UserDashboard";
 import Welcome from "@/Pages/admin/welcome";
 // Vets
 import VetHome from "@/Pages/admin/vets";
@@ -63,13 +62,12 @@ const routes = (
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/sample" element={<NGO_Home />} />
       
-      <Route path="/appointments" element={<Appointment />} />
+      
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/edit-user" element={<UserEditor />} />
 
       {/* User */}
-      <Route path="/dashboard/:option" element={<UserDashboard />} />
+      {/* <Route path="/dashboard/:option" element={<UserDashboard />} /> */}
 
       {/* Breed Info */}
       <Route path="/breed-info" element={<BreedList />} />
@@ -79,7 +77,6 @@ const routes = (
       <Route path="/vet" element={<VetHome />} />
       <Route path="/vet-docs" element={<VetDocs />} />
       <Route path="/vet-book/:id" element={<VetBook />} />
-      <Route path="/appointment-success" element={<AppointmentSuccess />} />
 
       {/* Services */}
       <Route path='/pet-services' element={<PetServices />} />
@@ -101,7 +98,10 @@ const routes = (
       <Route path="/news/:id" element={<NewsPage />} />
       {/* Protected Routes */}
       <Route element={<RequireAuth/>}>
+      <Route path="/appointment-success" element={<AppointmentSuccess />} />
+      <Route path="/appointments" element={<Appointment />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/edit-user" element={<UserEditor />} />
       </Route>
     </Route>
   </>

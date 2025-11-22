@@ -33,7 +33,7 @@ export async function FacebookLoginAPI(user){
   return await res.json();
 }
 export async function SingUpAPI(user){
-  console.log(user);
+  // console.log(user);
   return  await fetch(`${Base_URL}/auth/signup`,{
     method:'POST',
     headers:{
@@ -43,7 +43,7 @@ export async function SingUpAPI(user){
   });
 }
 export async function LoginGenAPI(user,type){
-  console.log(user);
+  // console.log(user);
   return fetch(`${Base_URL}/auth/gen-login`,{
     method:"POST",
     headers:{
@@ -54,7 +54,7 @@ export async function LoginGenAPI(user,type){
 }
 
 export  async  function ContactAPI(contactInfo){
-  console.log(contactInfo.message);
+  // console.log(contactInfo.message);
   return fetch(`${Base_URL}/user/contact-us`,{
     method:'POST',
     headers:{
@@ -74,7 +74,7 @@ export async function UploadImageAPI(image,public_id){
     body:JSON.stringify({image,public_id})
   });
   const data = await response.json();
-  console.log('File uploaded successfully:', data);
+  // console.log('File uploaded successfully:', data);
   // console.log("UploadedImage Response",response);
   return data;
 }

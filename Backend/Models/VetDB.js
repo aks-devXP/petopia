@@ -161,4 +161,4 @@ VetSchema.index({ facMask: 1 });
 VetSchema.index({ name: "text" });
 VetSchema.index({ city: 1, locality: 1 });
 
-module.exports = mongo.model('Vet', VetSchema);
+module.exports = mongo.model('vet', VetSchema);

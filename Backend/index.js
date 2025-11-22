@@ -53,8 +53,8 @@ app.use('/api/trainer', require('./Routes/trainer'));
 app.use('/api/pet', require('./Routes/pet'));
 app.use('/api/adoption', require('./Routes/adoption'));
 app.use('/api/ngo', require('./Routes/ngo'));
-
-
+app.use('/api/groomer', require('./Routes/groomer'));
+app.use('/api/appointment', require("./Routes/appointment"));
 
 
 app.use('/api', require('./Routes/geminiWrapper'));

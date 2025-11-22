@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Calendar,
   CheckCircle2,
@@ -144,7 +143,7 @@ const AppointmentSuccess = () => {
   ];
 
   const handleViewAppointments = () => {
-    navigate("/dashboard/3");
+    navigate("/appointments");
   };
 
   const handleBookAgain = () => {

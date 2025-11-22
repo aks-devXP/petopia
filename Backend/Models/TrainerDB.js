@@ -150,4 +150,4 @@ TrainerSchema.index({name:"text"});
 TrainerSchema.index({city:1,locality:1});
 
 // Guard against recompiling the model in watch/hot-reload scenarios
-module.exports = mongo.models.Trainer || mongo.model('Trainer', TrainerSchema);
+module.exports = mongo.models.Trainer || mongo.model('trainer', TrainerSchema);

@@ -1,19 +1,23 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { getAppointmentsByUser } from "@/API/AppointmentAPI";
+import Loader from "@/Components/Loader/Loader";
+import { handleError } from "@/Util/Alerts";
+import { useQuery } from "@tanstack/react-query";
 import {
-  ChevronDown,
-  Calendar,
-  Clock,
-  MapPin,
-  Phone,
-  Tag,
-  PawPrint,
-  CheckCircle2,
-  XCircle,
-  Hourglass,
   BadgeCheck,
+  Calendar,
+  CheckCircle2,
+  ChevronDown,
+  Clock,
+  Hourglass,
+  MapPin,
+  PawPrint,
+  Phone,
   Star,
+  Tag,
+  XCircle,
 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ScheduleSidebar from "../booking/components/ScheduleSidebar";
 import { buildProviderProfile } from "../booking/utils/profileBuilder";
 
@@ -225,6 +229,7 @@ function ActionModal({ modal, onClose }) {
   const isReview = type === "review";
   const [rating, setRating] = useState(5);
   const [hoverRating, setHoverRating] = useState(null);
+  
   useEffect(() => {
     if (!modal.open) {
       setRating(5);
@@ -378,7 +383,6 @@ function ActionModal({ modal, onClose }) {
 
 /* ========== Page ========== */
 export default function AppointmentsTablePage() {
-  const data = DUMMY; // inline dummy
   const navigate = useNavigate();
 
   const [query, setQuery] = useState("");
@@ -386,6 +390,59 @@ export default function AppointmentsTablePage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [expanded, setExpanded] = useState({});
   const [modal, setModal] = useState({ open: false, type: null, appointment: null });
+  const appointmentsData = useQuery({
+    queryKey:["Get-Appointments"],
+    queryFn: async()=>getAppointmentsByUser(),
+    staleTime:10*60*1000,
+    
+  });
+
+
+  
+  const rawApiAppointments = appointmentsData.data || []; // backend: { success, data: [...] }
+
+  // Map API → UI shape; fallback to DUMMY if nothing yet
+  const data = useMemo(() => {
+    if (!rawApiAppointments.length) {
+      return DUMMY; // fallback when no appointments yet or still loading
+    }
+
+    return rawApiAppointments.map((a) => {
+      const provider = a.provider || {};
+      const pet = a.pet || {};
+
+      const locationString = [provider.city, provider.state]
+        .filter(Boolean)
+        .join(", ");
+
+      // simple avatar fallback per type
+      let avatarFallback = "";
+      if (a.type === "vet") avatarFallback = DUMMY[0].provider.avatar;
+      else if (a.type === "groomer") avatarFallback = DUMMY[1].provider.avatar;
+      else if (a.type === "trainer") avatarFallback = DUMMY[2].provider.avatar;
+      else avatarFallback = DUMMY[0].provider.avatar;
+
+      return {
+        _id: a.id || a._id,
+        serviceName: a.serviceName || "Pet service",
+        type: a.type,
+        date: a.date,
+        time: a.time,
+        status: a.status,
+        serviceCost: a.serviceCost,
+        description: a.description || "",
+        pet: {
+          name: pet.name || "Your pet",
+        },
+        provider: {
+          name: provider.name || "Your provider",
+          avatar: provider.avatar || avatarFallback,
+          location: locationString || "Your city",
+          phone: provider.phone || "",
+        },
+      };
+    });
+  }, [rawApiAppointments]);
 
   const stats = useMemo(() => {
     const summary = data.reduce(
@@ -534,7 +591,14 @@ export default function AppointmentsTablePage() {
       </>
     );
   };
+  if (appointmentsData.isLoading) {
+  
+    return <Loader/>;
+}
 
+  if(appointmentsData.isError){
+    handleError(appointmentsData.error?.message || "Failed to load appointments. Please try again.");
+  }
   return (
     <div className="flex-1 px-4 pb-12 lg:mx-8">
       <div className="my-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">

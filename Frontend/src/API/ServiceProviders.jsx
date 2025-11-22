@@ -1,3 +1,4 @@
+import { Service_formatter } from '@/Util/general/StringFormatter';
 import * as GroomerApi from './GroomerAPI';
 import * as TrainerApi from "./TrainerAPI";
 import * as VetApi from "./VetAPI";
@@ -62,18 +63,21 @@ export async function getProvidersCategories(params={}) {
       throw new Error("Service Providers Type is required");
 
     }
+    let services = [];
+
     if(type==="vet"){
-      return await VetApi.getAllCategories();
+      services = await VetApi.getAllCategories();
     }
     else if(type==="trainer"){
-      return await TrainerApi.getCategories();
+      services= await TrainerApi.getCategories();
     }
     else if(type==="groomer"){
-      return await GroomerApi.getCategories();
+      services= await GroomerApi.getCategories();
     }
     else{
       throw new Error("Invalid Service Provider");
     }
+    return await Service_formatter(services);
   }
   catch(error){
     throw new Error(error.message||`Unable to fetch the Categories of ${params.type}`)

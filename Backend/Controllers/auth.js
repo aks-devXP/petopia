@@ -33,7 +33,7 @@ const signupControl = async (req, res) => {
     try {
         
         const { name, email, password } = req.body.user;
-        console.log(name, email, password);
+        // console.log(name, email, password);
         const oldUser  =  await UserModel.findOne({
             email: email,
         })

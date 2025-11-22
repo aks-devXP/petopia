@@ -6,26 +6,13 @@ const {
 const { Int32 } = require('bson');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-
+const normalizeTimings = require('../scripts/normalizeTimings');
 const {
   maskFor,
   facilitiesFromMask,
   GROOMER_FACILITY_BITS,
 } = require('../scripts/bitmask');
 
-/* ------------ helpers ------------- */
-
-// timings: [["9:00 AM","12:00 PM"], ["4:00 PM","7:00 PM"]] -> [{start,end}, ...]
-function normalizeTimings(rawTimings = []) {
-  if (!Array.isArray(rawTimings)) return [];
-
-  return rawTimings
-    .filter((slot) => Array.isArray(slot) && slot.length >= 2)
-    .map(([start, end]) => ({
-      start: String(start).trim(),
-      end: String(end).trim(),
-    }));
-}
 
 // ?facilities=grooming,home_service -> ["grooming","home_service"]
 function parseFacilitiesQuery(q) {
@@ -303,10 +290,115 @@ const getCategories = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  try {
+    const id = req.params.id || req.verified?.id;
+
+    if (!ObjectId.isValid(id)) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'Invalid ID format' });
+    }
+
+    // Accept flat body or { groomer: {...} }
+    const raw = req.body?.groomer ? req.body.groomer : (req.body || {});
+
+    // Only allow these fields to be updated – no password/verified from client
+    const ALLOWED = new Set([
+      'name',
+      'email',
+      'phone',
+      'address',
+      'city',
+      'state',
+      'locality',
+      'zip',
+      'about',
+      'experience',
+      'rating',
+      'ratingCount',
+      'profilePic',
+      'gallery',
+      'languages',
+      'timings',
+      'specialization',
+      'services',
+      'facilities',
+      'approach',
+      'achievements',
+      'addons',
+      'docs',
+    ]);
+
+    const updateDoc = {};
+    for (const [key, value] of Object.entries(raw)) {
+      if (ALLOWED.has(key)) {
+        updateDoc[key] = value;
+      }
+    }
+
+    // Make extra sure no password sneaks in
+    if ('password' in updateDoc) {
+      delete updateDoc.password;
+    }
+
+    // Facilities -> facMask (and remove facilities from stored doc)
+    if (Array.isArray(updateDoc.facilities)) {
+      updateDoc.facMask = new Int32(
+        Number(maskFor(updateDoc.facilities, GROOMER_FACILITY_BITS))
+      );
+      delete updateDoc.facilities;
+    }
+
+    // Timings normalization if provided as [["start","end"], ...]
+    if (Array.isArray(updateDoc.timings)) {
+      updateDoc.timings = normalizeTimings(updateDoc.timings);
+    }
+
+    const updated = await Groomer.findByIdAndUpdate(
+      id,
+      { $set: updateDoc },
+      {
+        new: true,
+        runValidators: true,
+        context: 'query',
+        projection: { password: 0 }, // never return password
+      }
+    );
+
+    if (!updated) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Groomer not found' });
+    }
+
+    const out = updated.toObject();
+    out.facilities = facilitiesFromMask(
+      out.facMask ?? 0,
+      GROOMER_FACILITY_BITS
+    );
+    delete out.facMask;
+
+    return res.status(200).json({
+      success: true,
+      message: 'Groomer updated successfully',
+      data: out,
+    });
+  } catch (error) {
+    console.error('update groomer error:', error);
+    return res.status(500).json({
+      success: false,
+      message: error?.message || 'Internal server error',
+    });
+  }
+};
+
+
 module.exports = {
   create,
   getData,
   getById,
   deleteById,
   getCategories,
+  update,
 };

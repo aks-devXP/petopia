@@ -29,19 +29,18 @@ exports.TRAINER_FACILITY_BITS = {
 };
 
 exports.GROOMER_FACILITY_BITS = {
-  // assign stable bit positions (0..31)
-  grooming: 0,
-  boarding: 1,
-  surgery: 2,
-  teleconsult: 3,
-  pharmacy: 4,
-  in_clinic: 5,
-  home_visit: 6,
-  pickup_drop: 7,
-  emergency_24x7: 8,
-  cashless_insurance: 9,
-
+  basic_grooming: 0,            // Bath, brush, nail trim
+  full_grooming: 1,             // Full-service grooming + styling
+  spa_bath: 2,                  // Aroma bath, conditioning, massage
+  de_shedding: 3,               // Coat thinning & shedding control
+  tick_flea_treatment: 4,       // Anti-parasite wash
+  home_service: 5,              // Grooming at client's home
+  pickup_drop: 6,               // Pickup & drop for pets
+  cat_specialist: 7,            // Groomer trained for cats
+  styled_haircut: 8,            // Breed-specific / fancy cuts
+  dental_cleaning: 9,           // Dental hygiene for pets
 };
+
 
 exports.maskFor =(facilities = [],FACILITY_BITS={})=> {
   let m = 0n; // BigInt to avoid JS overflow while computing
