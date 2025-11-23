@@ -1,7 +1,7 @@
 
 import { GetProfileInfo, UpdateProfileInfo, UploadUserImage } from "@/API/UserAPI";
 
-import Loader from "@/Components/Loader/Loader";
+import Loader from "@/components/Loader/Loader";
 import { handleError, handleSuccess } from "@/Util/Alerts";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
