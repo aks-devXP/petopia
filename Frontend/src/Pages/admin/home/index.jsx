@@ -5,7 +5,7 @@ import { getAppointmentsByUser } from "@/API/AppointmentAPI";
 import { GetPets, UpdatePet, UploadPetImage } from "@/API/PetApi";
 import { GetProfileInfo } from "@/API/UserAPI";
 import PawButton from "@/components/buttons/PawButton";
-import Loader from "@/Components/Loader/Loader";
+import Loader from "@/components/Loader/Loader";
 import { handleError } from "@/Util/Alerts";
 import { useQuery } from "@tanstack/react-query";
 import AppointmentBanner from "./components/AppointmentBanner"; // your JSX banner component
