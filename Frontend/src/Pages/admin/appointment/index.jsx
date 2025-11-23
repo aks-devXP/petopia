@@ -1,5 +1,5 @@
 import { getAppointmentsByUser } from "@/API/AppointmentAPI";
-import Loader from "@/Components/Loader/Loader";
+import Loader from "@/components/Loader/Loader";
 import { handleError } from "@/Util/Alerts";
 import { useQuery } from "@tanstack/react-query";
 import {
