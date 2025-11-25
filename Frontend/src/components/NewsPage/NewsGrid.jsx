@@ -13,4 +13,3 @@ const NewsGrid = ({ items }) => {
 
 export default NewsGrid
 
-

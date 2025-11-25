@@ -207,14 +207,14 @@ const NewsPage = ({topic,subtopic,time,img,imgSrc,data,author,date}) => {
   const item = NewsData[id] || Object.values(NewsData)[0];
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-b from-app-bg via-app-surface to-app-bg pb-12">
         <Heading topic={item.topic} subtopic={item.subtopic} time={item.time}></Heading>
         <MainImage img={item.img} imgSrc={item.imgSrc}></MainImage>
-        <div className='flex justify-evenly h-fit pb-5'>
+        <div className='flex justify-evenly h-fit pb-5 px-6 gap-10 max-w-6xl mx-auto'>
             <Content data={item.data}></Content>
             <Sidebar author={item.author} date={item.date}></Sidebar>
         </div>
-    </>
+    </div>
   )
 }
 

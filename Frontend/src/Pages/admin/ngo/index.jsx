@@ -1,15 +1,20 @@
 import React, { useRef } from 'react'
 import BasicHero from '@/components/BasicHero'
 import InfiniteScroll from '@/components/InfiniteScroll'
-import Banner from '@/components/NGO comp/Banner'
-import Impact from '@/components/NGO comp/Impact'
 import SupportACause from '@/components/NGO comp/SupportACause'
 import NGOHero from '@/components/NGO comp/NGOHero'
+import ImpactScroller from '@/components/NGO comp/ImpactScroller'
 
 const NGO = () => {
   const impactRef = useRef(null)
+  const supportRef = useRef(null)
+
   const scrollToImpact = () => {
     impactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const scrollToSupport = () => {
+    supportRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
   const path = "NGO/"
   const list = [ { name: "Dog Caring", src: `${path}2e5f69dd-1a6a-4260-b39d-6cc56932d751.jpeg`},
@@ -26,34 +31,22 @@ const NGO = () => {
       { name: "Srinagar", src: `${path}2e5f69dd-1a6a-4260-b39d-6cc56932d751.jpeg`}]
       
   return (
-    <div className='w-full bg-[#0b0811]'>
-      <NGOHero onExploreServices={scrollToImpact} />
+    <div className='w-full bg-[#0b0811] font-nunito'>
+      <NGOHero onExploreServices={scrollToSupport} />
       
       <div className='m-10'>
         <BasicHero title={"Need to find a new home for a pet?"} description={"We're here to help them find a new, loving family—quickly and safely by Adopting a Pet."} buttonText={"Learn More"} imageSrc={"https://media.adoptapet.com/image/upload/c_scale,w_524,dpr_2/f_auto,q_auto/homepage-rehome-pet.jpg"} imageLeft={false}/>
       </div>
       
-      <div>
+      <div ref={supportRef}>
         <SupportACause />
       </div>
       
       <div className='m-10 h-[500px]'>
-        <BasicHero title={"Be the change, you always hoped for"} description={"Join us as a Volunteer and make a Difference in Someone's Life Today"} buttonText={"Get Involved"} imageSrc={"https://images.squarespace-cdn.com/content/v1/667b351276399d72c27b633e/e402dcb1-58f7-441c-82e0-314b1081fcbe/babyPuppy.jpg"} imageLeft={true} bgColor={"bg-[#00D4FF]"} textColor={"text-[#001F3F]"} textColor2={"text-gray-700"} to={"/volunteer"}/>
+        <BasicHero title={"Be the change, you always hoped for"} description={"Make a Difference in Someone's Life Today"} buttonText={"Join as Volunteer"} imageSrc={"https://images.squarespace-cdn.com/content/v1/667b351276399d72c27b633e/e402dcb1-58f7-441c-82e0-314b1081fcbe/babyPuppy.jpg"} imageLeft={true} bgColor={"bg-[#00D4FF]"} textColor={"text-[#001F3F]"} textColor2={"text-gray-700"} to={"/volunteer"}/>
       </div>
 
-      <div className='bg-gradient-to-r from-[#ffe3ef] via-[#fff4e0] to-[#e2faff] my-10 flex flex-col rounded-[32px]'>
-        <div className='flex justify-left px-4 py-2  '>
-          <h3 className='text-5xl font-grotesk font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,#5c3bff_0%,#ff6cab_80%)] text-left tracking-widest'>One Memory</h3>
-        </div>
-        
-        <InfiniteScroll dir="right" max_width="8xl" img_width="80" img_height="60" list = {list} folder = "NGO" bg_col="#FF9D3D" rounded="0" pad="0" mx="2"></InfiniteScroll>
-        
-        <div className='flex justify-end px-4 mt-2'>
-          <h3 className='text-5xl font-grotesk font-bold text-right  bg-clip-text text-transparent bg-[linear-gradient(90deg,#ff8d70_0%,#ff5894_85%)] tracking-widest'>One Life</h3>
-        </div>
-        
-        <InfiniteScroll  dir="left" max_width="8xl" img_width="80" img_height="60" list = {list2} folder = "NGO" bg_col="#FF9D3D" rounded="0" pad="4" mx="2"/>
-      </div>
+      <ImpactScroller />
     </div>
   )
 }

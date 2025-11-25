@@ -16,7 +16,7 @@ const NewsHero = ({
           muted
           playsInline
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/15" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
           <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
             {title}
@@ -31,5 +31,3 @@ const NewsHero = ({
 }
 
 export default NewsHero
-
-

@@ -43,6 +43,12 @@ const NGOHero = ({ onExploreServices }) => {
     }
   };
 
+  const handleDiscoverClick = () => {
+    if (onDiscoverNGOs) {
+      onDiscoverNGOs();
+    }
+  };
+
   return (
     <section className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden bg-[#050b1e]">
       <div className="absolute inset-0 pointer-events-none">
@@ -101,12 +107,6 @@ const NGOHero = ({ onExploreServices }) => {
             >
               Explore Services
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button
-              type="button"
-              className="w-full sm:w-auto px-7 py-3 md:px-8 md:py-4 rounded-full font-nunitoSemiBold text-sm md:text-base bg-white/10 text-white border border-white/30 hover:bg-white/20 hover:border-white/60 transition-all"
-            >
-              Discover NGOs
             </button>
           </div>
 

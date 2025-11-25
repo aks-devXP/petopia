@@ -5,6 +5,7 @@ import MainLayout from "../Layout/admin/AdminLayout";
 
 // Auth
 import SignIn from "@/Pages/auth";
+import ScrollToTop from "./ScrollToTop";
 // Common
 import About from "@/Pages/admin/about";
 import Appointment from "@/Pages/admin/appointment";
@@ -46,8 +47,8 @@ import UserEditor from "@/Pages/admin/usereditor";
 import RequireAuth from "./RequireAuth";
 
 const routes = (
-  <>
-    {/* Auth Routes */}
+  <Route element={<ScrollToTop />}>
+    {/* Auth Route */}
     <Route path="/sign-in" element={<SignIn />} />
 
 
@@ -104,7 +105,7 @@ const routes = (
       <Route path="/edit-user" element={<UserEditor />} />
       </Route>
     </Route>
-  </>
+  </Route>
 );
 
 export default routes;

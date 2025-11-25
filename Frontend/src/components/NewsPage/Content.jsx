@@ -3,7 +3,7 @@ import React from 'react'
 const Content = ({data}) => {
   return (
     <>
-        <div className='w-[60%] font-thin'>
+        <div className='w-[60%] font-thin text-ink-primary leading-relaxed'>
             {data || (<>
               <h4>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores eligendi tenetur eveniet iure quaerat facere recusandae totam magni voluptate, dolore, id cumque labore eaque. Repellendus commodi itaque expedita vel, aliquid atque consectetur. Dolorem asperiores iste maiores? Quaerat, eum vero beatae necessitatibus recusandae eligendi itaque distinctio officiis aperiam quidem harum asperiores ducimus, maiores nam, dolorem debitis architecto quia. Ratione velit sed voluptatum optio ipsa debitis non ad assumenda est laudantium eligendi officia temporibus dolorum dolores error, quam harum reiciendis unde sapiente!</h4>
 

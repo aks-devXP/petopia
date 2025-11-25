@@ -106,7 +106,7 @@ const News = () => {
   }, [shouldScroll, currentPage])
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-b from-app-bg via-app-surface to-app-bg pb-12">
       <NewsHero className='mt-10' />
       <div className='w-full mx-auto px-4 mb-5'>
         <TrendingNews/>
@@ -122,7 +122,7 @@ const News = () => {
 
 
         <div ref={newsGridRef}>
-          <h2 className='text-2xl text-center font-extrabold mt-10 mb-4'>Latest stories</h2>
+          <h2 className='text-2xl text-center font-extrabold mt-10 mb-4 text-ink-primary'>Latest stories</h2>
         </div>
         <NewsGrid items={paginatedItems} />
         
@@ -135,7 +135,7 @@ const News = () => {
 
         <NewsletterCTA className='max-w-6xl' />
       </div>
-    </>
+    </div>
   )
 }
 
