@@ -207,8 +207,7 @@ const MagicBento = ({
             const baseClassName =
               `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] w-full max-w-full 
                p-5 rounded-3xl border border-solid font-nunitosan text-ink-primary overflow-hidden 
-               transition-all duration-300 ease-in-out hover:-translate-y-0.5 
-               hover:shadow-[0_8px_25px_rgba(0,0,0,0.12)]
+               transition-all duration-300 ease-in-out
                focus:outline-none focus:ring-2 ring-focus-ring/60
                bg-app-elevated ${enableBorderGlow ? "card--border-glow" : ""}`;
 
@@ -228,8 +227,8 @@ const MagicBento = ({
                   <span className="card__label text-base text-ink-secondary" />
                 </div>
                 <div className="card__content flex flex-col relative text-center items-center">
-                  <div className="w-16 h-16 bg-app-bg rounded-full flex items-center justify-center mb-3">
-                    <Icon className="h-8 w-8 text-ink-primary" aria-hidden="true" />
+                  <div className="w-16 h-16 bg-ink-primary rounded-full flex items-center justify-center mb-3">
+                    <Icon className="h-8 w-8 text-white" aria-hidden="true" />
                   </div>
                   <h3 className={`card__title text-ink-heading font-nunitoSemiBold text-lg m-0 mb-2 ${textAutoHide ? "text-clamp-1" : ""}`}>
                     {title}
@@ -241,56 +240,92 @@ const MagicBento = ({
               </>
             );
 
-            const StepsInner = () => (
-              <>
-                <div className="card__header flex flex-col justify-between gap-6 xl:mt-6 relative"> 
-                  <span className="lg:text-5xl text-2xl md:text-2xl xl:text-6xl text-ink-secondary font-bold">How to Book</span> 
-                  <span className="hidden lg:block xl:text-2xl lg:text-xl text-ink-secondary">We made booking simple <br/> Just follow these quick steps to get trusted pet care without the back-and-forth.</span> 
-                </div>
-                <div className="card__content relative">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="relative bg-app-bg/40 rounded-2xl p-4">
-                      <div className="text-5xl font-extrabold text-ink-primary/10 absolute -top-2 -right-2 select-none">01</div>
-                      <div className="relative">
-                        <div className="w-12 h-12 rounded-xl bg-app-bg flex items-center justify-center mb-3">
-                          <Search className="w-6 h-6 text-ink-primary" />
-                        </div>
-                        <h4 className="text-base font-nunitoSemiBold text-ink-heading mb-1">Find Your Service</h4>
-                        <p className="text-xs text-ink-secondary font-semibold">Browse certified vets, trainers, and groomers near you.</p>
-                      </div>
-                    </div>
-                    <div className="relative bg-app-bg/40 rounded-2xl p-4">
-                      <div className="text-5xl font-extrabold text-ink-primary/10 absolute -top-2 -right-2 select-none">02</div>
-                      <div className="relative">
-                        <div className="w-12 h-12 rounded-xl bg-app-bg flex items-center justify-center mb-3">
-                          <Calendar className="w-6 h-6 text-ink-primary" />
-                        </div>
-                        <h4 className="text-base font-nunitoSemiBold text-ink-heading mb-1">Select Date & Time</h4>
-                        <p className="text-xs text-ink-secondary font-semibold opacity-90">Pick a slot that fits—see real-time availability.</p>
-                      </div>
-                    </div>
-                    <div className="relative bg-app-bg/40 rounded-2xl p-4">
-                      <div className="text-5xl font-extrabold text-ink-primary/10 absolute -top-2 -right-2 select-none">03</div>
-                      <div className="relative">
-                        <div className="w-12 h-12 rounded-xl bg-app-bg flex items-center justify-center mb-3">
-                          <CheckCircle2 className="w-6 h-6 text-ink-primary" />
-                        </div>
-                        <h4 className="text-base font-nunitoSemiBold text-ink-heading mb-1">Book Appointment</h4>
-                        <p className="text-xs text-ink-secondary font-semibold opacity-90">Confirm in one click—get instant confirmation & reminders.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            );
+const StepsInner = () => (
+  <>
+    {/* Header */}
+    <div className="card__header flex flex-col justify-between gap-6 xl:mt-6 relative">
+      <span className="lg:text-5xl text-2xl md:text-2xl xl:text-6xl text-ink-secondary font-bold">
+        How to Book
+      </span>
+      <span className="hidden lg:block xl:text-2xl lg:text-xl text-ink-secondary opacity-80">
+        We made booking simple — follow these steps to get trusted pet care without the back-and-forth.
+      </span>
+    </div>
+
+    {/* Steps */}
+    <div className="card__content relative mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+        {/* STEP 01 — Mint */}
+        <div className="relative rounded-2xl p-5 bg-[#DFF7E6] shadow-sm hover:brightness-105 transition-all">
+          <div className="text-6xl font-extrabold text-[#9BD8B8]/40 absolute -top-3 -right-3 select-none">
+            01
+          </div>
+
+          <div className="relative">
+            <div className="w-12 h-12 rounded-xl bg-white/60 flex items-center justify-center mb-3 shadow-sm">
+              <Search className="w-6 h-6 text-ink-primary" />
+            </div>
+            <h4 className="text-base font-nunitoSemiBold text-ink-heading mb-1">
+              Find Your Service
+            </h4>
+            <p className="text-xs text-ink-secondary font-semibold opacity-90">
+              Browse certified vets, trainers, and groomers near you.
+            </p>
+          </div>
+        </div>
+
+        {/* STEP 02 — Peach */}
+        <div className="relative rounded-2xl p-5 bg-[#FFE7D6] shadow-sm hover:brightness-105 transition-all">
+          <div className="text-6xl font-extrabold text-[#FFB899]/40 absolute -top-3 -right-3 select-none">
+            02
+          </div>
+
+          <div className="relative">
+            <div className="w-12 h-12 rounded-xl bg-white/60 flex items-center justify-center mb-3 shadow-sm">
+              <Calendar className="w-6 h-6 text-ink-primary" />
+            </div>
+            <h4 className="text-base font-nunitoSemiBold text-ink-heading mb-1">
+              Select Date & Time
+            </h4>
+            <p className="text-xs text-ink-secondary font-semibold opacity-90">
+              Pick a slot that fits—see real-time availability.
+            </p>
+          </div>
+        </div>
+
+        {/* STEP 03 — Lavender */}
+        <div className="relative rounded-2xl p-5 bg-[#E8E4FF] shadow-sm hover:brightness-105 transition-all">
+          <div className="text-6xl font-extrabold text-[#B7B1F4]/40 absolute -top-3 -right-3 select-none">
+            03
+          </div>
+
+          <div className="relative">
+            <div className="w-12 h-12 rounded-xl bg-white/60 flex items-center justify-center mb-3 shadow-sm">
+              <CheckCircle2 className="w-6 h-6 text-ink-primary" />
+            </div>
+            <h4 className="text-base font-nunitoSemiBold text-ink-heading mb-1">
+              Book Appointment
+            </h4>
+            <p className="text-xs text-ink-secondary font-semibold opacity-90">
+              Confirm in one click — get instant confirmation & reminders.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </>
+);
+
 
             const content =
               index === 0 ? (
                 <>
                   <div className="card__header flex justify-between gap-3 relative" />
                   <div className="card__content flex flex-col relative text-center items-center">
-                    <div className="w-16 h-16 bg-app-bg rounded-full flex items-center justify-center mb-3">
-                      <BadgeCheck className="h-8 w-8 text-ink-primary" aria-hidden="true" />
+                    <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-3">
+                      <BadgeCheck className="h-8 w-8 text-white" aria-hidden="true" />
                     </div>
                     <h3 className={`card__title text-ink-heading font-nunitoSemiBold text-lg m-0 mb-2 ${textAutoHide ? "text-clamp-1" : ""}`}>
                       Verified Services

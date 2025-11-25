@@ -23,7 +23,8 @@ export default function ParticleCard({
   style,
   particleCount = DEFAULT_PARTICLE_COUNT,
   glowColor = DEFAULT_GLOW_COLOR,
-  enableTilt = true,
+  // these props are now no-ops for movement, kept only for API compatibility
+  enableTilt = false,
   clickEffect = false,
   enableMagnetism = false,
 }) {
@@ -33,7 +34,6 @@ export default function ParticleCard({
   const isHoveredRef = useRef(false);
   const memoizedParticles = useRef([]);
   const particlesInitialized = useRef(false);
-  const magnetismAnimationRef = useRef(null);
 
   const initializeParticles = useCallback(() => {
     if (particlesInitialized.current || !cardRef.current) return;
@@ -47,7 +47,6 @@ export default function ParticleCard({
   const clearAllParticles = useCallback(() => {
     timeoutsRef.current.forEach((id) => clearTimeout(id));
     timeoutsRef.current = [];
-    magnetismAnimationRef.current?.kill?.();
 
     particlesRef.current.forEach((particle) => {
       gsap.to(particle, {
@@ -68,6 +67,7 @@ export default function ParticleCard({
     memoizedParticles.current.forEach((particle, index) => {
       const timeoutId = window.setTimeout(() => {
         if (!isHoveredRef.current || !cardRef.current) return;
+
         const clone = particle.cloneNode(true);
         cardRef.current.appendChild(clone);
         particlesRef.current.push(clone);
@@ -77,6 +77,7 @@ export default function ParticleCard({
           { scale: 0, opacity: 0 },
           { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(1.7)" }
         );
+
         gsap.to(clone, {
           x: (Math.random() - 0.5) * 90,
           y: (Math.random() - 0.5) * 90,
@@ -86,6 +87,7 @@ export default function ParticleCard({
           repeat: -1,
           yoyo: true,
         });
+
         gsap.to(clone, {
           opacity: 0.25,
           duration: 1.4,
@@ -94,6 +96,7 @@ export default function ParticleCard({
           yoyo: true,
         });
       }, index * 100);
+
       timeoutsRef.current.push(timeoutId);
     });
   }, [initializeParticles]);
@@ -105,58 +108,59 @@ export default function ParticleCard({
     const handleMouseEnter = () => {
       isHoveredRef.current = true;
       animateParticles();
-      if (enableTilt) {
-        gsap.to(el, { rotateX: 4, rotateY: 4, duration: 0.25, ease: "power2.out", transformPerspective: 1000 });
-      }
+      // no tilt / movement on hover
     };
 
     const handleMouseLeave = () => {
       isHoveredRef.current = false;
       clearAllParticles();
-      if (enableTilt) gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.25, ease: "power2.out" });
-      if (enableMagnetism) gsap.to(el, { x: 0, y: 0, duration: 0.25, ease: "power2.out" });
+      // ensure card stays at its original transform
+      gsap.set(el, { rotateX: 0, rotateY: 0, x: 0, y: 0 });
     };
 
-    const handleMouseMove = (e) => {
-      if (!enableTilt && !enableMagnetism) return;
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      if (enableTilt) {
-        const rotateX = ((y - centerY) / centerY) * -8;
-        const rotateY = ((x - centerX) / centerX) * 8;
-        gsap.to(el, { rotateX, rotateY, duration: 0.1, ease: "power2.out", transformPerspective: 1000 });
-      }
-      if (enableMagnetism) {
-        gsap.to(el, { x: (x - centerX) * 0.05, y: (y - centerY) * 0.05, duration: 0.25, ease: "power2.out" });
-      }
+    const handleMouseMove = () => {
+      // intentionally empty — we no longer move the card with the cursor
     };
 
     const handleClick = (e) => {
       if (!clickEffect) return;
+
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
+
       const maxDistance = Math.max(
         Math.hypot(x, y),
         Math.hypot(x - rect.width, y),
         Math.hypot(x, y - rect.height),
         Math.hypot(x - rect.width, y - rect.height)
       );
+
       const ripple = document.createElement("div");
       ripple.style.cssText = `
         position: absolute; width: ${maxDistance * 2}px; height: ${maxDistance * 2}px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(${DEFAULT_GLOW_COLOR}, 0.35) 0%,
-          rgba(${DEFAULT_GLOW_COLOR}, 0.18) 30%, transparent 70%);
+        background: radial-gradient(circle,
+          rgba(${DEFAULT_GLOW_COLOR}, 0.35) 0%,
+          rgba(${DEFAULT_GLOW_COLOR}, 0.18) 30%,
+          transparent 70%);
         left: ${x - maxDistance}px; top: ${y - maxDistance}px;
         pointer-events: none; z-index: 1000;
       `;
+
       el.appendChild(ripple);
-      gsap.fromTo(ripple, { scale: 0, opacity: 1 }, { scale: 1, opacity: 0, duration: 0.7, ease: "power2.out", onComplete: () => ripple.remove() });
+
+      gsap.fromTo(
+        ripple,
+        { scale: 0, opacity: 1 },
+        {
+          scale: 1,
+          opacity: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          onComplete: () => ripple.remove(),
+        }
+      );
     };
 
     el.addEventListener("mouseenter", handleMouseEnter);
@@ -171,11 +175,16 @@ export default function ParticleCard({
       el.removeEventListener("mousemove", handleMouseMove);
       el.removeEventListener("click", handleClick);
       clearAllParticles();
+      gsap.set(el, { rotateX: 0, rotateY: 0, x: 0, y: 0 });
     };
-  }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect]);
+  }, [animateParticles, clearAllParticles, disableAnimations, clickEffect]);
 
   return (
-    <div ref={cardRef} className={`${className} relative overflow-hidden`} style={{ ...style, position: "relative" }}>
+    <div
+      ref={cardRef}
+      className={`${className} relative overflow-hidden`}
+      style={{ ...style, position: "relative" }}
+    >
       {children}
     </div>
   );
