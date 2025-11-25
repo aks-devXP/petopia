@@ -51,7 +51,7 @@ export default function AboutUs() {
           {/* Right: model (fill height; responsive) */}
           <div className="h-full">
             {/* On mobile keep a square; on lg fill height */}
-            <div className="relative w-full aspect-square sm:aspect-[4/3] lg:aspect-auto lg:h-full rounded-3xl overflow-hidden">
+            <div className="relative hover:cursor w-full aspect-square sm:aspect-[4/3] lg:aspect-auto lg:h-full rounded-3xl overflow-hidden">
               <ModelViewer
                 url={dogUrl}
                 width="100%"

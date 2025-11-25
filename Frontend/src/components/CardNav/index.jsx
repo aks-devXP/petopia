@@ -145,77 +145,66 @@ const CardNav = ({
         className="card-nav block h-[60px] p-0 rounded-xl relative overflow-hidden will-change-[height]"
         style={{ backgroundColor: baseColor }}
       >
-        {/* TOP BAR — Pet / Time / Date / Hamburger */}
-        <div className="card-nav-top absolute inset-x-0 top-0 h-[60px] px-3 z-[999]">
-          <div className="h-full w-full grid grid-cols-4 sm:grid-cols-10 items-center gap-0 sm:gap-8 text-slate-900">
-            {/* Pet */}
-            <div className="flex items-center gap-2 min-w-0 sm:col-span-3">
-              <span className="inline-flex items-center gap-1 text-xs sm:text-sm text-slate-700 font-semibold">
-                <PawPrint className="h-4 w-4 opacity-80" aria-hidden="true" />
-                Pet
-              </span>
-              <select
-                className="w-full rounded-lg border border-slate-200 px-3 py-2 bg-white outline-none focus:border-slate-400 text-sm"
-                defaultValue=""
-                aria-label="Select Pet"
-              >
-                <option value="" disabled>Choose</option>
-                {pets.map((p) => (
-                  <option key={p} value={p}>{p}</option>
-                ))}
-              </select>
-            </div>
 
-            {/* Time */}
-            <div className="flex items-center gap-2 min-w-0 sm:col-span-3">
-              <span className="inline-flex items-center gap-1 text-xs sm:text-sm text-slate-700 font-semibold">
-                <Clock className="h-4 w-4 opacity-80" aria-hidden="true" />
-                Time
-              </span>
-              <input
-                type="time"
-                className="w-full rounded-lg border border-slate-200 px-3 py-2 bg-white outline-none focus:border-slate-400 text-sm"
-                aria-label="Select Time"
-              />
-            </div>
+<div className="card-nav-top absolute inset-x-0 top-0 h-[60px] px-3 z-[999]">
+  <div className="h-full w-full flex items-center justify-between gap-3 sm:gap-6 text-slate-900">
+    
+    {/* Left text */}
+    <div className="flex-1 min-w-0 flex items-center h-full">
+      <p
+        className="
+          text-sm
+          sm:text-base
+          md:text-lg
+          lg:text-2xl
+          font-bold
+          font-quicksandBold
+          text-slate-800
+          leading-snug
+        "
+      >
+        Start your pet&apos;s care journey with trusted Veterinarians, Groomers and Trainers.
+      </p>
+    </div>
 
-            {/* Date */}
-            <div className="flex items-center gap-2 min-w-0 sm:col-span-3">
-              <span className="inline-flex items-center gap-1 text-xs sm:text-sm text-slate-700 font-semibold">
-                <CalendarDays className="h-4 w-4 opacity-80" aria-hidden="true" />
-                Date
-              </span>
-              <input
-                type="date"
-                className="w-full rounded-lg border border-slate-200 px-3 py-2 bg-white outline-none focus:border-slate-400 text-sm"
-                aria-label="Select Date"
-              />
-            </div>
+    {/* Right hamburger button */}
+    <div className="flex items-center justify-end flex-shrink-0">
+      <div
+        className={`
+          hamburger-menu
+          ${isHamburgerOpen ? "open" : ""}
+          group
+          h-[40px] w-[40px]
+          flex flex-col items-center justify-center
+          cursor-pointer gap-[6px]
+          rounded-full
+          border-2 border-slate-300
+          hover:border-slate-400
+          hover:bg-slate-100/60
+          transition
+        `}
+        onClick={toggleMenu}
+        role="button"
+        aria-label={isExpanded ? "Close menu" : "Open menu"}
+        tabIndex={0}
+        style={{ color: menuColor }}
+      >
+        <div
+          className={`hamburger-line w-[22px] h-[3px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear ${
+            isHamburgerOpen ? "translate-y-[4px] rotate-45" : ""
+          }`}
+        />
+        <div
+          className={`hamburger-line w-[22px] h-[3px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear ${
+            isHamburgerOpen ? "-translate-y-[4px] -rotate-45" : ""
+          }`}
+        />
+      </div>
+    </div>
 
-            {/* Hamburger (right-most) */}
-            <div className="flex items-center justify-end sm:justify-center sm:col-span-1">
-              <div
-                className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-[36px] w-[36px] flex flex-col items-center justify-center cursor-pointer gap-[6px] rounded-md hover:bg-slate-100 transition`}
-                onClick={toggleMenu}
-                role="button"
-                aria-label={isExpanded ? 'Close menu' : 'Open menu'}
-                tabIndex={0}
-                style={{ color: menuColor }}
-              >
-                <div
-                  className={`hamburger-line w-[22px] h-[3px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear ${
-                    isHamburgerOpen ? 'translate-y-[4px] rotate-45' : ''
-                  }`}
-                />
-                <div
-                  className={`hamburger-line w-[22px] h-[3px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear ${
-                    isHamburgerOpen ? '-translate-y-[4px] -rotate-45' : ''
-                  }`}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+  </div>
+</div>
+
 
         {/* EXPANDABLE CONTENT — each CARD is the only clickable target */}
         <div
