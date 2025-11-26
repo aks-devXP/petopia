@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 const TextType = ({
   text,
   as: Component = 'div',
-  typingSpeed = 50,
+  typingSpeed = 150,
   initialDelay = 0,
   pauseDuration = 2000,
   deletingSpeed = 30,
@@ -221,9 +221,9 @@ export default function HeroTyping() {
         text={[
           'Everything your pet needs, all in one place'
         ]}
-        typingSpeed={80}
+        typingSpeed={150}
         deletingSpeed={35}
-        pauseDuration={1400}
+        pauseDuration={100}
         initialDelay={400}
         loop = {false}
         showCursor

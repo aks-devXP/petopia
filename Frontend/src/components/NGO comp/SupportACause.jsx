@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// Centralized data; swap to props or external data source if needed
+// Centralized data; can still be overridden via props
 const CAUSES = [
   {
     id: 1,
@@ -44,68 +44,81 @@ const CAUSES = [
 const isInternal = (href) => typeof href === "string" && href.startsWith("/");
 const hasLink = (href) => typeof href === "string" && href.length > 0;
 
-const CardMedia = ({ image, title }) => (
-  <div
-    className="relative h-64"
-    style={{
-      backgroundImage: `url(${image})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}
-  >
-    <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-colors duration-300 grid place-items-center">
-      <h3 className="text-white text-2xl font-bold text-center px-4">{title}</h3>
-    </div>
-  </div>
-);
+const CauseCircle = ({ cause }) => {
+  const CircleContent = (
+    <div className="group relative aspect-square w-72 rounded-full overflow-hidden shadow-lg cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C42] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FFF7D6] transition-transform duration-300 ">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${cause.image})` }}
+      />
 
-const CauseCard = ({ cause }) => {
-  return (
-    <div className="rounded-lg shadow-lg overflow-hidden bg-white group">
-      {hasLink(cause.link) ? (
-        isInternal(cause.link) ? (
-          <Link to={cause.link} aria-label={cause.title} className="block outline-none">
-            <CardMedia image={cause.image} title={cause.title} />
-          </Link>
-        ) : (
-          <a href={cause.link} target="_blank" rel="noopener noreferrer" aria-label={cause.title} className="block">
-            <CardMedia image={cause.image} title={cause.title} />
-          </a>
-        )
-      ) : (
-        <CardMedia image={cause.image} title={cause.title} />
-      )}
-      <div className="p-4">
-        <p className="text-gray-600 text-sm">{cause.description}</p>
-        <div className="mt-4 text-center">
-          {hasLink(cause.link) ? (
-            isInternal(cause.link) ? (
-              <Link to={cause.link} className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300">
-                Learn More
-              </Link>
-            ) : (
-              <a href={cause.link} target="_blank" rel="noopener noreferrer" className="text-[#704214] font-bold hover:text-[#FF8C42] duration-300">
-                Learn More
-              </a>
-            )
-          ) : (
-            <span className="text-gray-400 font-semibold cursor-not-allowed">Coming soon</span>
-          )}
-        </div>
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/35 group-hover:bg-black/55 transition-colors duration-300" />
+
+      {/* Text swap container */}
+      <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+        {/* Title (default) */}
+        <p className="text-white text-lg sm:text-xl font-semibold leading-snug transition-opacity duration-300 group-hover:opacity-0">
+          {cause.title}
+        </p>
+
+        {/* Description (on hover) */}
+        <p className="absolute text-white text-xs sm:text-sm leading-snug opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          {cause.description}
+        </p>
       </div>
     </div>
+  );
+
+  if (!hasLink(cause.link)) {
+    return (
+      <div aria-label={cause.title} className="flex justify-center">
+        {CircleContent}
+      </div>
+    );
+  }
+
+  return isInternal(cause.link) ? (
+    <Link
+      to={cause.link}
+      aria-label={cause.title}
+      className="flex justify-center"
+    >
+      {CircleContent}
+    </Link>
+  ) : (
+    <a
+      href={cause.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={cause.title}
+      className="flex justify-center"
+    >
+      {CircleContent}
+    </a>
   );
 };
 
 const SupportACause = ({ items = CAUSES }) => {
   return (
-    <section className="bg-[#FFF7D6] py-12 px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl font-bold text-center text-black mb-12 tracking-tight">
-        SUPPORT A CAUSE
+    <section className="bg-app-surface py-12 rounded-3xl mx-2 sm:mx-12 px-12 mt-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+        Support a cause
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      {/* ✨ New description text */}
+      <p className="text-slate-600 max-w-3xl mb-10 text-sm sm:text-base">
+        Every small act of kindness helps build a safer, happier world for
+        animals. Whether you choose to adopt, donate, volunteer, or raise your
+        voice against cruelty — Petopia makes it easier to support the causes
+        that truly matter.
+      </p>
+
+      {/* 4 → 2 → 1 responsive layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 justify-items-center">
         {items.map((cause) => (
-          <CauseCard key={cause.id} cause={cause} />
+          <CauseCircle key={cause.id} cause={cause} />
         ))}
       </div>
     </section>

@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+ 
 const BasicHero = ({ imageSrc, title, description, buttonText, imageLeft, bgColor, textColor, textColor2, to }) => {
   const navigate = useNavigate();
   return (
     <div className={`${bgColor ? bgColor : "bg-[#C2F7F0]"} h-full flex flex-col md:flex-row items-center justify-between gap-10 p-10 rounded-lg`}>
       {/* Content on the left or right depending on imageLeft */}
-
+ 
       {!imageLeft && (
         <div className="md:w-1/2 space-y-4">
           <h2 className={`text-4xl font-bold ${textColor ? textColor : "text-gray-900"} `}>{title ? title : "Add title Here"}</h2>
