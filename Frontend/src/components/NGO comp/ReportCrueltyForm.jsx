@@ -1,18 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { 
-  FaFilePdf, 
-  FaFileImage, 
-  FaTimes, 
-  FaUser, 
-  FaPhone, 
-  FaEnvelope, 
-  FaMapMarkerAlt, 
-  FaCalendarAlt,
-  FaExclamationTriangle,
-  FaShieldAlt,
-  FaInfoCircle
-} from 'react-icons/fa';
+import { createReport, uploadEvidence } from '@/API/CrueltyReportAPI';
+import { handleError, handleInfo, handleSuccess } from '@/Util/Alerts';
+import { useRef, useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
+import { FaCalendarAlt, FaEnvelope, FaExclamationTriangle, FaFileImage, FaFilePdf, FaInfoCircle, FaMapMarkerAlt, FaPhone, FaShieldAlt, FaTimes, FaUser } from 'react-icons/fa';
 
 const ReportCrueltyForm = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +13,7 @@ const ReportCrueltyForm = () => {
     email: '',
     animalLocation: '',
     animalCity: '',
+    // can't use date of future
     incidentDate: '',
     incidentDetails: '',
     consent: false,

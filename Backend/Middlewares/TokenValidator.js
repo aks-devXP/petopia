@@ -31,7 +31,8 @@ const TokenValidator = async (req,res,next)=>{
       // console.log(type);
     }
     else if(type==="admin"){
-      if(!decoded.id ==="ab00001"){
+      const admin_id = process.env["Admin-id"];
+      if(decoded.id !==admin_id){
         return res.status(401).json({success:false, message: "Invalid token - entity does not exist"});
       }
       exists = true;
