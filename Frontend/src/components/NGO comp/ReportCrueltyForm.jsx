@@ -1,18 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { 
-  FaFilePdf, 
-  FaFileImage, 
-  FaTimes, 
-  FaUser, 
-  FaPhone, 
-  FaEnvelope, 
-  FaMapMarkerAlt, 
-  FaCalendarAlt,
-  FaExclamationTriangle,
-  FaShieldAlt,
-  FaInfoCircle
-} from 'react-icons/fa';
+import { createReport, uploadEvidence } from '@/API/CrueltyReportAPI';
+import { handleError, handleInfo, handleSuccess } from '@/Util/Alerts';
+import { useRef, useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
+import { FaCalendarAlt, FaEnvelope, FaExclamationTriangle, FaFileImage, FaFilePdf, FaInfoCircle, FaMapMarkerAlt, FaPhone, FaShieldAlt, FaTimes, FaUser } from 'react-icons/fa';
 
 const ReportCrueltyForm = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +13,7 @@ const ReportCrueltyForm = () => {
     email: '',
     animalLocation: '',
     animalCity: '',
+    // can't use date of future
     incidentDate: '',
     incidentDetails: '',
     consent: false,
@@ -136,35 +127,61 @@ const ReportCrueltyForm = () => {
       });
 
       const data = await res.json();
-      console.log("Verification result:", data);
+      return data;
+      // console.log("Verification result:", data);
     } catch (err) {
-      console.error("Failed to verify token", err);
+      // console.error("Failed to verify token", err);
     }
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Validate captcha
-    if (!captchaValue) {
-      alert('Please complete the captcha verification');
+    try {
+      e.preventDefault();
+      if (!captchaValue) {
+      handleInfo('Please complete the captcha verification'); // Use handleInfo instead of alert
       return;
     }
-
     // Get the token from the recaptcha
-    const token = window.grecaptcha.getResponse();
-    console.log(JSON.stringify(token));
-
-    // Send the token to the backend
-    sendTokenToBackend(token);
-
-    // Reset the CAPTCHA after submit
-    window.grecaptcha.reset();
-    
-    // Handle form submission here
-    console.log(formData);
-
-    // adding API call for submission
+    // const token = window.grecaptcha.getResponse();
+    const token = recaptchaRef.current.getValue();
+    // console.log(JSON.stringify(token));
+    if (!token) {
+          throw new Error("reCAPTCHA token missing. Please try again.");
+      }
+  
+      // Send the token to the backend
+      const captcha = await sendTokenToBackend(token);
+      if(!captcha.success){
+        throw new Error("Captcha Verification Failed");
+      }
+      
+      
+      // Handle form submission here
+      // console.log(formData);
+  
+      // adding API call for submission
+      // Step-1 Upload Files if given
+      const uploaded = await uploadEvidence({photos:formData.files});
+      formData.photoURLS = uploaded.map(element => {
+        return element.url;
+      });
+      const data = formData;
+      delete data.files;
+      console.log(uploaded);
+      const report = await createReport(formData)
+      if(report){
+        handleSuccess("Report Submitted Successfully")
+        handleInfo("We will try to address it as soon as possible. Thank you!")
+      }
+      
+    } 
+    catch (error) {
+      handleError(error.message||"Error in Submitting the Cruelty Report Form")
+    }
+    finally{
+      // Reset the CAPTCHA after submit
+      recaptchaRef.current.reset();
+    }
   };
 
   const onCaptchaChange = (value) => {

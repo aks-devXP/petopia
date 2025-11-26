@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 // ------- ALL the middlewares-------
-const {validateNGO} = require("../Middlewares/ngo");
+const {validateNGO, validateCrueltyReport} = require("../Middlewares/ngo");
 
 // ------- ALL the controllers-------
 //  NGO related controllers
@@ -142,6 +142,26 @@ router.put('/Cmupdate/:id',validateCampaign,Campaign.updateCampaign);
 // -------------Delete a Campaign
 router.delete('/Cmdelete/:id',TokenValidator,Campaign.deleteCampaign);
 
+
+
+//************* Report Animal Cruelty Routes ***************
+
+const CrueltyReportController = require('../Controllers/NGO/cruelty_report');
+
+
+//------------- Create Cruelty Report -----------------
+router.post('/create-report',validateCrueltyReport,CrueltyReportController.createReport);
+
+// ------------ Get All Cruelty Reports ---------------
+router.get('/all-reports',TokenValidator,CrueltyReportController.getAllReport);
+
+
+// ------------- Get Cruelty Report By Id --------------
+
+router.get('/report-by-id',TokenValidator, CrueltyReportController.getReportById);
+
+// ------------- Update Cruelty Report Status-----------------
+router.put('/update-report-status/:id', TokenValidator, CrueltyReportController.updateReportStatus);
 module.exports = router;
 
 

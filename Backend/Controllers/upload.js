@@ -37,6 +37,12 @@ const uploadProfileImage  =  async (req, res) => {
 const uploadMultipleImages = async (req, res) => {
   try {
     let folder = req.body.folder || 'extras';
+    
+    const id = req.verified?.id;
+    if(id){
+      folder = `${folder}/${id}`;
+    }
+    
 
     const fieldName = req.body.fieldName;
 

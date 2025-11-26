@@ -1,5 +1,5 @@
 const axios = require('axios');
-
+require('dotenv').config();
 const verifyCaptcha = async (token) => {
   try {
     const secret = process.env.RECAPTCHA_SECRET_KEY; 
@@ -13,6 +13,7 @@ const verifyCaptcha = async (token) => {
     });
 
     const data = response.data;
+    // console.log(response);
 
     if (data.success) {
       return { success: true };
