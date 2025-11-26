@@ -217,28 +217,6 @@ export default function ServiceFilters({
             className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-3 py-2 text-sm outline-none"
           />
         </label>
-
-        {/* Date */}
-        <label className="block">
-          <span className="text-xs text-ink-secondary">Date</span>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => onChange?.({ date: e.target.value })}
-            className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-3 py-2 text-sm outline-none"
-          />
-        </label>
-
-        {/* Time */}
-        <label className="block">
-          <span className="text-xs text-ink-secondary">Time</span>
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => onChange?.({ time: e.target.value })}
-            className="mt-1 w-full rounded-full ring-1 ring-brand/30 bg-app-elevated px-3 py-2 text-sm outline-none"
-          />
-        </label>
       </div>
     </div>
   );
