@@ -306,8 +306,77 @@ const validateNGO = (req, res, next) => {
 };
 
 
+const crueltyReportValidatorSchema = validator.object({
+  reporter_name: validator.string().trim().min(2).max(100).required(),
+  reporter_email: validator.string().trim().lowercase().email().required()
+  .messages({
+    'string.email': 'Reporter email must be a valid email address',
+  }),
+  address: validator.string().trim().min(5).required(),
+  description: validator.string().trim().min(10).required(),
+
+  // date of incident
+  doi: validator.date().iso().required(),
+
+  reporter_phone: validator.string()
+    .trim()
+    // basic phone pattern: digits, spaces, +, - with reasonable length
+    .pattern(/^[0-9+\-\s]{7,20}$/)
+    .required()
+    .messages({
+      'string.pattern.base': "Your phone number must be 7-20 chars and may include digits, +, -, and spaces",
+
+    }),
+  city: validator.string().trim().required().messages(
+  {
+    'string.base':"City must be a string",
+    'string.empty':"City is required"
+  }
+  ),
+  consent: validator.boolean().required().messages({
+    'any.required':"Reporter's consent is required"
+  }),
+  animal_city: validator.string().trim().required(),
+  animal_location: validator.string().trim().required(),
+  
+  
+  photo_url: validator.array().items(validator.string().uri()
+            .messages({
+            'string.uri': 'Each photo URL must be a valid URL',
+            'string.base': "Each photo URL must be a string",
+            })
+            )
+            .max(3).optional()
+            .messages({
+              'array.max': 'No more than 3 photos are allowed',
+            }),
+});
+
+const validateCrueltyReport = (req, res, next) => {
+  const { error, value } = crueltyReportValidatorSchema.validate(req.body, {
+    abortEarly: false,   // return all errors, not just first
+    stripUnknown: true,  // remove fields not in schema
+  });
+
+  if (error) {
+    // console.error('Cruelty report validation errors:', error.details);
+    return res.status(400).json({
+      success: false,
+      message: 'Cruelty report validation failed',
+      errors: error.details.map((d) => d.message),
+    });
+  }
+
+  // use the cleaned / coerced value
+  req.body = value;
+  return next();
+};
+
+
+
 module.exports = {
   validateCampaign,
-  validateNGO
+  validateNGO,
+  validateCrueltyReport,
 }
 

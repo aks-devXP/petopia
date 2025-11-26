@@ -6,8 +6,14 @@ import NgoHowCanYouHelp from './components/NgoHowCanYouHelp'
 
 const NGO = () => {
   const impactRef = useRef(null)
+  const supportRef = useRef(null)
+
   const scrollToImpact = () => {
     impactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const scrollToSupport = () => {
+    supportRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
   const path = "NGO/"
   const list = [ { name: "Dog Caring", src: `${path}2e5f69dd-1a6a-4260-b39d-6cc56932d751.jpeg`},

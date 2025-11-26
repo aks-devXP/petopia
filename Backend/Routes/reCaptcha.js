@@ -9,6 +9,7 @@ router.post("/", async (req, res) => {
   }
 
   const result = await verifyCaptcha(token);
+  // console.log(result);
   return res.status(result.success ? 200 : 403).json(result);
 });
 

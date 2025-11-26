@@ -51,8 +51,8 @@ const NewsPagination = ({
           disabled={currentPage === 1}
           className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
             currentPage === 1
-              ? 'text-gray-400 cursor-not-allowed'
-              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              ? 'text-ink-primary/30 cursor-not-allowed'
+              : 'text-ink-primary hover:bg-app-surface hover:text-ink-primary'
           }`}
         >
           Previous
@@ -67,10 +67,10 @@ const NewsPagination = ({
               disabled={page === '...'}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 page === currentPage
-                  ? 'bg-emerald-600 text-white'
+                  ? 'bg-brand text-white shadow-sm shadow-brand/40'
                   : page === '...'
-                  ? 'text-gray-400 cursor-default'
-                  : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                  ? 'text-ink-primary/30 cursor-default'
+                  : 'text-ink-primary hover:bg-app-surface hover:text-ink-primary'
               }`}
             >
               {page}
@@ -84,8 +84,8 @@ const NewsPagination = ({
           disabled={currentPage === totalPages}
           className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
             currentPage === totalPages
-              ? 'text-gray-400 cursor-not-allowed'
-              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              ? 'text-ink-primary/30 cursor-not-allowed'
+              : 'text-ink-primary hover:bg-app-surface hover:text-ink-primary'
           }`}
         >
           Next
@@ -93,7 +93,7 @@ const NewsPagination = ({
       </nav>
 
       {/* Page info */}
-      <div className="ml-4 text-sm text-gray-600">
+      <div className="ml-4 text-sm text-ink-primary">
         Page {currentPage} of {totalPages}
       </div>
     </div>

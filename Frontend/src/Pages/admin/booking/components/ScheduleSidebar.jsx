@@ -48,11 +48,13 @@ const ScheduleSidebar = ({
   ctaLabel = "Request booking",
   helperText,
   pets = [],
+  selectedAddons = [],
+  onToggleAddon = () => {},
 }) => {
-  const { schedule, basePrice, currencySymbol, addons, name } = profile;
+  const { schedule, basePrice, name } = profile;
   const [selectedDayIdx, setSelectedDayIdx] = useState(0);
   const [selectedSlotIdx, setSelectedSlotIdx] = useState(null);
-  const [selectedAddons, setSelectedAddons] = useState([]);
+  const [note, setNote] = useState("");
   const resolvedPets = pets.length > 0 ? pets : FALLBACK_PETS;
   const [selectedPetId, setSelectedPetId] = useState(resolvedPets[0]?.id);
   const sliderRef = useRef(null);
@@ -76,16 +78,6 @@ const ScheduleSidebar = ({
     return basePrice + addonTotal;
   }, [selectedAddons, basePrice]);
 
-  const toggleAddon = (addon) => {
-    setSelectedAddons((prev) => {
-      const exists = prev.find((item) => item.id === addon.id);
-      if (exists) {
-        return prev.filter((item) => item.id !== addon.id);
-      }
-      return [...prev, addon];
-    });
-  };
-
   const handleSubmit = () => {
     if(!isLoggedIN){
       handleError("Please Login to book an appointment.");
@@ -99,14 +91,14 @@ const ScheduleSidebar = ({
       handleError("Please select a date and time slot to continue.");
       return;
     }
-    // console.log(selectedPet,activeSlot, activeDay, addons, total);
-    
+    // console.log(selectedPet,activeSlot, activeDay, total);
     onConfirm({
       day: activeDay,
       slot: activeSlot,
       addons: selectedAddons,
       total,
       pet: selectedPet,
+      note,
     });
   };
 
@@ -276,42 +268,19 @@ const ScheduleSidebar = ({
           </div>
         </div>
         )}
-      {/* ADD Ons Component */}
-        {addons.length > 0 && (
-          <div className="rounded-2xl border border-app-surface/60 bg-app-bg/80 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-ink-secondary/70">
-              Personalise your visit
-            </p>
-            <div className="mt-3 space-y-2">
-              {addons.map((addon) => {
-                const checked = selectedAddons.some(
-                  (item) => item.id === addon.id
-                );
-                return (
-                  <label
-                    key={addon.id}
-                    className={`flex cursor-pointer items-center justify-between gap-3 rounded-xl border px-3 py-2 text-sm transition ${
-                      checked
-                        ? "border-brand bg-white"
-                        : "border-transparent bg-white/60 hover:border-brand/30"
-                    }`}
-                  >
-                    <span className="flex-1 text-ink-heading">{addon.label}</span>
-                    <span className="text-xs text-ink-secondary/70">
-                      {addon.price > 0 ? `+₹${addon.price}` : "Included"}
-                    </span>
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => toggleAddon(addon)}
-                      className="h-4 w-4 accent-brand"
-                    />
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-        )}
+      {/* Appointment note */}
+        <div className="rounded-2xl border border-app-surface/60 bg-app-elevated/80 p-4 space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wide text-ink-secondary/70">
+            Add a note for the specialist
+          </p>
+          <textarea
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            rows={3}
+            placeholder="Share concerns, allergies, or anything the specialist should prepare for."
+            className="w-full rounded-xl border border-app-surface/80 bg-white p-3 text-sm text-ink-heading shadow-sm focus:border-brand focus:ring-brand"
+          />
+        </div>
 
         <div className="rounded-2xl border border-app-surface/60 bg-white p-4 space-y-3">
           <div className="flex items-center justify-between">

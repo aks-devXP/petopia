@@ -125,8 +125,8 @@ const TrendingNews = () => {
   return (
     <>
         <section className='mt-5 mb-10'>
-            <div className='py-6 bg-transparent h-fit'>
-            <h2 className="text-center text-2xl md:text-3xl font-extrabold mb-5">Trending News</h2>
+            <div className='py-6 bg-white h-fit rounded-3xl border border-brand/20 shadow-md shadow-brand/10'>
+            <h2 className="text-center text-2xl md:text-3xl font-extrabold mb-5 text-ink-primary">Trending News</h2>
                 <Marquee pauseOnHover={false} speed={50} gradient={false} autoFill={true} className='py-2'>
                   <div className='flex items-stretch gap-6 px-4 md:px-0'>
                     <Card img={NewsData["A"].img} topic={NewsData["A"].topic} subtopic={NewsData["A"].subtopic} id='A'></Card>

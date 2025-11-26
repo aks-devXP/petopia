@@ -12,14 +12,14 @@ const NewsFilters = ({
   onTimeRangeChange
 }) => {
   return (
-    <div className="w-[80%] mx-auto bg-white/70 backdrop-blur rounded-2xl border border-gray-200 p-4 md:p-5 mb-8">
+    <div className="w-[80%] mx-auto bg-app-surface/80 backdrop-blur rounded-2xl border border-app-surface p-4 md:p-5 mb-8 shadow-sm text-ink-primary">
       <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
         <div className="flex-1">
           <input
             value={query}
             onChange={(e) => onQueryChange(e.target.value)}
             placeholder="Search news, topics, keywords..."
-            className="w-full h-11 rounded-xl border border-gray-300 px-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className="w-full h-11 rounded-xl border border-stone-200 bg-white px-4 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent text-ink-primary placeholder:text-ink-primary/40"
           />
         </div>
 
@@ -27,7 +27,7 @@ const NewsFilters = ({
           <select
             value={selectedCategory}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="h-11 rounded-xl border border-gray-300 px-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="h-11 rounded-xl border border-stone-200 bg-white px-3 text-ink-primary focus:outline-none focus:ring-2 focus:ring-brand"
           >
             {categories.map((c) => (
               <option key={c} value={c}>{c}</option>
@@ -37,7 +37,7 @@ const NewsFilters = ({
           <select
             value={timeRange}
             onChange={(e) => onTimeRangeChange(e.target.value)}
-            className="h-11 rounded-xl border border-gray-300 px-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="h-11 rounded-xl border border-stone-200 bg-white px-3 text-ink-primary focus:outline-none focus:ring-2 focus:ring-brand"
           >
             {timeRanges.map((t) => (
               <option key={t} value={t}>{t}</option>
@@ -50,5 +50,3 @@ const NewsFilters = ({
 }
 
 export default NewsFilters
-
-

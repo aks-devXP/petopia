@@ -221,14 +221,14 @@ const MagicBento = ({
               "--glow-radius": "200px",
             };
 
-            const ServiceInner = ({ Icon, title, description }) => (
+            const ServiceInner = ({ Icon, title, description, iconColor = "text-ink-heading", iconBg = "bg-ink-primary" }) => (
               <>
                 <div className="card__header flex justify-between gap-3 relative">
                   <span className="card__label text-base text-ink-secondary" />
                 </div>
                 <div className="card__content flex flex-col relative text-center items-center">
-                  <div className="w-16 h-16 bg-ink-primary rounded-full flex items-center justify-center mb-3">
-                    <Icon className="h-8 w-8 text-white" aria-hidden="true" />
+                  <div className={`w-16 h-16 ${iconBg} rounded-full flex items-center justify-center mb-3`}>
+                    <Icon className={`h-8 w-8 ${iconColor}`} aria-hidden="true" />
                   </div>
                   <h3 className={`card__title text-ink-heading font-nunitoSemiBold text-lg m-0 mb-2 ${textAutoHide ? "text-clamp-1" : ""}`}>
                     {title}
@@ -340,6 +340,8 @@ const StepsInner = () => (
                   Icon={Stethoscope}
                   title="Veterinary Care"
                   description="From first checkups to urgent care—licensed vets who treat your pet like family."
+                  iconColor="text-rose-500"
+                  iconBg="bg-rose-100"
                 />
               ) : index === 2 ? (
                 <StepsInner />
@@ -350,12 +352,16 @@ const StepsInner = () => (
                   Icon={Scissors}
                   title="Grooming"
                   description="Fresh bath, tidy trim, happy wiggles—safe, gentle grooming your pet will love."
+                  iconColor="text-blue-500"
+                  iconBg="bg-blue-100"
                 />
               ) : index === 5 ? (
                 <ServiceInner
                   Icon={Dumbbell}
                   title="Training"
                   description="Better manners, stronger bond—positive training tailored to your pet’s pace."
+                  iconColor="text-amber-500"
+                  iconBg="bg-amber-100"
                 />
               ) : (
                 <>

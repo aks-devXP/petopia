@@ -55,6 +55,70 @@ const sampleItems = [
     badge: 'Research',
     category: 'Health',
   },
+  {
+    id: 'G',
+    image: 'https://images.pexels.com/photos/5732476/pexels-photo-5732476.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+    title: 'NGOs launch nationwide winter feeding drive',
+    excerpt: 'Volunteer groups across 40 cities roll out insulated shelters and feeding stations for street animals.',
+    badge: 'Relief',
+    category: 'Policy',
+  },
+  {
+    id: 'H',
+    image: 'https://images.pexels.com/photos/7210757/pexels-photo-7210757.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+    title: 'First pet blood bank opens in Pune',
+    excerpt: 'State-of-the-art canine and feline blood bank promises faster emergency care for pets in Maharashtra.',
+    badge: 'Health',
+    category: 'Health',
+  },
+  {
+    id: 'I',
+    image: 'https://images.pexels.com/photos/5731905/pexels-photo-5731905.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+    title: 'Pet-friendly housing policy gains traction',
+    excerpt: 'Housing boards in Bengaluru pilot guidelines to protect pet owners from unfair restrictions.',
+    badge: 'Policy',
+    category: 'Policy',
+  },
+  {
+    id: 'J',
+    image: 'https://images.pexels.com/photos/7210290/pexels-photo-7210290.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+    title: 'Tech startup debuts AI health tracker for dogs',
+    excerpt: 'Wearable collar monitors vitals, flags anomalies, and syncs with vets for preventive care.',
+    badge: 'Tech',
+    category: 'Health',
+  },
+  {
+    id: 'K',
+    image: 'https://images.pexels.com/photos/7210636/pexels-photo-7210636.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+    title: 'Adoption festival places 500+ animals in new homes',
+    excerpt: 'Weekend mega-camp in Delhi sees record turnout for rescued dogs and cats.',
+    badge: 'Adoption',
+    category: 'Adoption',
+  },
+  {
+    id: 'L',
+    image: 'https://images.pexels.com/photos/7210404/pexels-photo-7210404.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+    title: 'Stray animal vaccination week kicks off nationwide',
+    excerpt: 'Municipal bodies and NGOs coordinate free anti-rabies shots with door-to-door awareness drives.',
+    badge: 'Health',
+    category: 'Health',
+  },
+  {
+    id: 'M',
+    image: 'https://images.pexels.com/photos/5957482/pexels-photo-5957482.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+    title: 'Eco-parks to feature pet-friendly trails',
+    excerpt: 'New guidelines propose dedicated leashed zones, hydration points, and waste stations in city parks.',
+    badge: 'Policy',
+    category: 'Policy',
+  },
+  {
+    id: 'N',
+    image: 'https://images.pexels.com/photos/7210591/pexels-photo-7210591.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+    title: 'Therapy dogs deployed in exam centers',
+    excerpt: 'Schools invite certified therapy animals to help students manage stress during board exams.',
+    badge: 'Wellness',
+    category: 'Inspiration',
+  },
 ]
 
 const News = () => {
@@ -106,7 +170,7 @@ const News = () => {
   }, [shouldScroll, currentPage])
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-b from-app-bg via-app-surface to-app-bg pb-12">
       <NewsHero className='mt-10' />
       <div className='w-full mx-auto px-4 mb-5'>
         <TrendingNews/>
@@ -122,7 +186,7 @@ const News = () => {
 
 
         <div ref={newsGridRef}>
-          <h2 className='text-2xl text-center font-extrabold mt-10 mb-4'>Latest stories</h2>
+          <h2 className='text-2xl text-center font-extrabold mt-10 mb-4 text-ink-primary'>Latest stories</h2>
         </div>
         <NewsGrid items={paginatedItems} />
         
@@ -135,7 +199,7 @@ const News = () => {
 
         <NewsletterCTA className='max-w-6xl' />
       </div>
-    </>
+    </div>
   )
 }
 
