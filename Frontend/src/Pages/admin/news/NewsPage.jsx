@@ -56,6 +56,70 @@ const NewsPage = ({topic,subtopic,time,img,imgSrc,data,author,date}) => {
       badge: 'Research',
       category: 'Health',
     },
+    {
+      id: 'G',
+      image: 'https://images.pexels.com/photos/5732476/pexels-photo-5732476.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+      title: 'NGOs launch nationwide winter feeding drive',
+      excerpt: 'Volunteer groups across 40 cities roll out insulated shelters and feeding stations for street animals.',
+      badge: 'Relief',
+      category: 'Policy',
+    },
+    {
+      id: 'H',
+      image: 'https://images.pexels.com/photos/7210757/pexels-photo-7210757.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+      title: 'First pet blood bank opens in Pune',
+      excerpt: 'State-of-the-art canine and feline blood bank promises faster emergency care for pets in Maharashtra.',
+      badge: 'Health',
+      category: 'Health',
+    },
+    {
+      id: 'I',
+      image: 'https://images.pexels.com/photos/5731905/pexels-photo-5731905.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+      title: 'Pet-friendly housing policy gains traction',
+      excerpt: 'Housing boards in Bengaluru pilot guidelines to protect pet owners from unfair restrictions.',
+      badge: 'Policy',
+      category: 'Policy',
+    },
+    {
+      id: 'J',
+      image: 'https://images.pexels.com/photos/7210290/pexels-photo-7210290.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+      title: 'Tech startup debuts AI health tracker for dogs',
+      excerpt: 'Wearable collar monitors vitals, flags anomalies, and syncs with vets for preventive care.',
+      badge: 'Tech',
+      category: 'Health',
+    },
+    {
+      id: 'K',
+      image: 'https://images.pexels.com/photos/7210636/pexels-photo-7210636.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+      title: 'Adoption festival places 500+ animals in new homes',
+      excerpt: 'Weekend mega-camp in Delhi sees record turnout for rescued dogs and cats.',
+      badge: 'Adoption',
+      category: 'Adoption',
+    },
+    {
+      id: 'L',
+      image: 'https://images.pexels.com/photos/7210404/pexels-photo-7210404.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+      title: 'Stray animal vaccination week kicks off nationwide',
+      excerpt: 'Municipal bodies and NGOs coordinate free anti-rabies shots with door-to-door awareness drives.',
+      badge: 'Health',
+      category: 'Health',
+    },
+    {
+      id: 'M',
+      image: 'https://images.pexels.com/photos/5957482/pexels-photo-5957482.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+      title: 'Eco-parks to feature pet-friendly trails',
+      excerpt: 'New guidelines propose dedicated leashed zones, hydration points, and waste stations in city parks.',
+      badge: 'Policy',
+      category: 'Policy',
+    },
+    {
+      id: 'N',
+      image: 'https://images.pexels.com/photos/7210591/pexels-photo-7210591.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2',
+      title: 'Therapy dogs deployed in exam centers',
+      excerpt: 'Schools invite certified therapy animals to help students manage stress during board exams.',
+      badge: 'Wellness',
+      category: 'Inspiration',
+    },
   ]
 
   // Build NewsData dynamically from sampleItems so every id resolves,
@@ -119,6 +183,18 @@ const NewsPage = ({topic,subtopic,time,img,imgSrc,data,author,date}) => {
             a new feature—it's a step toward inclusive mobility where everyone,
             including our animal companions, is considered.
           </h4>
+          <br />
+          <h4>
+            Drivers opting into Uber Pet receive sensitization tips on handling animals,
+            carrying a towel or sheet, and ensuring AC comfort. Pet parents are reminded
+            to carry leashes and travel crates for safety during peak hours.
+          </h4>
+          <br />
+          <h4>
+            Early riders report smoother vet visits and reduced wait times for transport,
+            especially in rain-heavy evenings when hailing regular cabs is difficult.
+            The rollout will be monitored for demand, with expansion to more cities likely.
+          </h4>
         </>
       ),
       author: "Express News Service",
@@ -157,6 +233,19 @@ const NewsPage = ({topic,subtopic,time,img,imgSrc,data,author,date}) => {
             the market is evolving to cater to the preferences of a younger,
             more informed demographic.
           </h4>
+          <br />
+          <h4>
+            Subscription boxes, app-based training sessions, and pet insurance plans
+            are seeing upticks as first-time owners look for guided support.
+            Community adoption drives and foster programs have also grown as housing
+            societies become more pet-friendly.
+          </h4>
+          <br />
+          <h4>
+            Experts caution that education around responsible ownership is essential:
+            regular vet checkups, parasite prevention, and socialization are key to
+            keeping this generation of pets healthy and well-adjusted.
+          </h4>
         </>
       ),
       author: "BrandWagon Online",
@@ -193,10 +282,285 @@ const NewsPage = ({topic,subtopic,time,img,imgSrc,data,author,date}) => {
             pet ownership in India, emphasizing preparedness and comprehensive
             care.
           </h4>
+          <br />
+          <h4>
+            Brokers report more customers opting for accident and surgery riders,
+            while wellness add-ons for vaccines and dental care are gaining interest.
+            Digital claims and cashless tie-ups with clinics are making policies easier to use.
+          </h4>
+          <br />
+          <h4>
+            Analysts expect regulatory clarity on pet insurance standards this year,
+            which could streamline pricing and encourage wider adoption beyond metro cities.
+          </h4>
         </>
       ),
       author: "Press Trust of India",
       date: "May 8, 2024 17:41 IST",
+    },
+    D: {
+      topic: "Tiger conservation efforts show promising results",
+      subtopic:
+        "New census indicates uptick in tiger populations due to habitat protection.",
+      time: "6",
+      img: "https://d1jyxxz9imt9yb.cloudfront.net/medialib/4030/image/s768x1300/white_tiger_2_Cropped2.jpg",
+      imgSrc: "National Tiger Census",
+      data: (
+        <>
+          <h4>
+            India’s latest tiger census reports a steady rise in numbers across protected reserves,
+            crediting expanded corridors, anti-poaching patrols, and community-led conservation.
+          </h4>
+          <br />
+          <h4>
+            Forest departments note that buffer zones with regulated eco-tourism have reduced human-wildlife conflict,
+            while rapid response teams and improved veterinary care are helping rehabilitate injured big cats.
+          </h4>
+          <br />
+          <h4>
+            Experts caution that climate change and habitat fragmentation remain risks; they recommend continued
+            funding for corridor projects, camera-trap networks, and local livelihood programs that keep communities invested.
+          </h4>
+          <br />
+          <h4>
+            NGOs have called for stricter enforcement against illegal trade and more training for frontline staff.
+            The government plans to table new guidelines on conflict mitigation and compensation for affected villages.
+          </h4>
+        </>
+      ),
+      author: "Wildlife Desk",
+      date: "March 15, 2025 10:05 IST",
+    },
+    E: {
+      topic: "Community drive helps 200+ street dogs find homes",
+      subtopic:
+        "NGOs and citizens collaborate for a mega adoption weekend across cities.",
+      time: "7",
+      img: "https://images.pexels.com/photos/573271/pexels-photo-573271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      imgSrc: "Adoptathon Mumbai",
+      data: (
+        <>
+          <h4>
+            A coalition of city shelters and citizen volunteers hosted a weekend adoption fair,
+            setting up microchip booths, free first vaccines, and behavior assessments for prospective adopters.
+          </h4>
+          <br />
+          <h4>
+            Over 200 dogs and cats were paired with families, with post-adoption support groups created on messaging apps
+            so new pet parents can get training and veterinary guidance during the first 90 days.
+          </h4>
+          <br />
+          <h4>
+            Organizers highlighted the role of foster networks in socializing rescued animals,
+            reducing shelter crowding, and improving match quality.
+          </h4>
+          <br />
+          <h4>
+            The success has prompted plans for quarterly adoption festivals, with corporate sponsors offering
+            starter kits and subsidized insurance to encourage responsible ownership.
+          </h4>
+        </>
+      ),
+      author: "City Volunteer Collective",
+      date: "February 22, 2025 14:40 IST",
+    },
+    F: {
+      topic: "Study: Pets reduce workplace stress significantly",
+      subtopic:
+        "Research shows employee well-being rises when offices adopt pet-friendly policies.",
+      time: "6",
+      img: "https://images.pexels.com/photos/574539/pexels-photo-574539.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      imgSrc: "WorkWell Labs",
+      data: (
+        <>
+          <h4>
+            A cross-industry survey found that employees in pet-friendly offices reported 25% lower stress scores
+            and higher collaboration, citing casual pet interactions as icebreakers and mood boosters.
+          </h4>
+          <br />
+          <h4>
+            Companies adopting the policy paired it with hygiene protocols, dedicated pet zones,
+            and optional “no-pet days” to accommodate allergies and personal preferences.
+          </h4>
+          <br />
+          <h4>
+            HR teams also noted a decline in sick days and improved retention among younger employees
+            who value inclusive and flexible workplaces.
+          </h4>
+          <br />
+          <h4>
+            The study recommends pilot programs, clear etiquette guidelines, and partnerships with local vets
+            for vaccination and behavior screening to ensure safety.
+          </h4>
+        </>
+      ),
+      author: "Workplace Wellbeing Desk",
+      date: "January 18, 2025 09:20 IST",
+    },
+    G: {
+      topic: "NGOs launch nationwide winter feeding drive",
+      subtopic:
+        "Volunteer groups across 40 cities roll out insulated shelters and feeding stations for street animals.",
+      time: "5",
+      img: "https://images.pexels.com/photos/5732476/pexels-photo-5732476.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2",
+      imgSrc: "Community Relief",
+      data: (
+        <>
+          <h4>
+            With temperatures dipping, NGOs and RWAs are deploying straw-lined kennels, thermal blankets,
+            and evening feeding points to keep strays warm and nourished.
+          </h4>
+          <br />
+          <h4>
+            Volunteers are mapping high-risk zones—markets, bus depots, and construction sites—
+            to ensure vulnerable animals have access to shelter and clean water through the night.
+          </h4>
+          <br />
+          <h4>
+            The drive includes awareness workshops on humane feeding practices and a hotline for reporting
+            injured animals; rapid response teams coordinate with local vets for emergency care.
+          </h4>
+          <br />
+          <h4>
+            Donors can sponsor a shelter unit or monthly food packs; organizers plan to publish impact dashboards
+            showing how many animals are served per locality.
+          </h4>
+        </>
+      ),
+      author: "Relief Network Bureau",
+      date: "December 12, 2024 21:05 IST",
+    },
+    H: {
+      topic: "First pet blood bank opens in Pune",
+      subtopic:
+        "State-of-the-art canine and feline blood bank promises faster emergency care for pets in Maharashtra.",
+      time: "7",
+      img: "https://images.pexels.com/photos/7210757/pexels-photo-7210757.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2",
+      imgSrc: "Pune Pet Health",
+      data: (
+        <>
+          <h4>
+            A dedicated pet blood bank with cold-chain storage, cross-matching labs, and on-call logistics
+            has launched in Pune, reducing wait times for transfusions in critical cases.
+          </h4>
+          <br />
+          <h4>
+            The facility has enrolled donor dogs and cats screened for diseases, and is partnering with clinics
+            to establish drop-off points and mobile collection drives.
+          </h4>
+          <br />
+          <h4>
+            Pet parents can register healthy animals as donors, receiving annual health checkups in return,
+            while vets get 24/7 access to packed cells and plasma for surgeries and trauma care.
+          </h4>
+          <br />
+          <h4>
+            The founders aim to replicate the model in Mumbai and Bengaluru within a year,
+            creating a regional network to share inventory during shortages.
+          </h4>
+        </>
+      ),
+      author: "HealthTech Desk",
+      date: "January 5, 2025 12:10 IST",
+    },
+    I: {
+      topic: "Pet-friendly housing policy gains traction",
+      subtopic:
+        "Housing boards in Bengaluru pilot guidelines to protect pet owners from unfair restrictions.",
+      time: "6",
+      img: "https://images.pexels.com/photos/5731905/pexels-photo-5731905.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2",
+      imgSrc: "Civic Matters",
+      data: (
+        <>
+          <h4>
+            Resident Welfare Associations in Bengaluru are adopting model bylaws that affirm pet ownership rights,
+            ban breed discrimination, and set fair rules for leash use, hygiene, and quiet hours.
+          </h4>
+          <br />
+          <h4>
+            Legal experts note these guidelines align with Animal Welfare Board advisories and reduce disputes between
+            residents by clarifying responsibilities for both pet parents and non-pet neighbors.
+          </h4>
+          <br />
+          <h4>
+            Training workshops for security staff and facility teams are being rolled out to ensure humane handling
+            and to avoid unlawful restrictions on elevators or common areas.
+          </h4>
+          <br />
+          <h4>
+            City civic bodies are watching the pilot closely; if successful, the framework could be recommended
+            statewide, giving pet owners more stability when renting or buying homes.
+          </h4>
+        </>
+      ),
+      author: "Urban Living Beat",
+      date: "February 2, 2025 16:00 IST",
+    },
+    J: {
+      topic: "Tech startup debuts AI health tracker for dogs",
+      subtopic:
+        "Wearable collar monitors vitals, flags anomalies, and syncs with vets for preventive care.",
+      time: "5",
+      img: "https://images.pexels.com/photos/7210290/pexels-photo-7210290.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2",
+      imgSrc: "PawTech Labs",
+      data: (
+        <>
+          <h4>
+            A Bengaluru startup has launched an AI-powered collar that tracks heart rate variability,
+            activity, sleep patterns, and scratching behavior to predict health issues early.
+          </h4>
+          <br />
+          <h4>
+            The device syncs with a vet dashboard, sending alerts for anomalies like rising temperature,
+            reduced mobility, or excessive licking that could indicate pain or allergies.
+          </h4>
+          <br />
+          <h4>
+            Users get personalized care plans, nudges for vaccines and deworming, and a telehealth integration
+            for quick consults; early trials report faster intervention for GI upsets and joint flare-ups.
+          </h4>
+          <br />
+          <h4>
+            PawTech Labs plans to add ECG-grade sensors and cat-specific form factors next year,
+            while partnering with insurers for preventive-care discounts.
+          </h4>
+        </>
+      ),
+      author: "Tech & Wellness",
+      date: "March 2, 2025 11:35 IST",
+    },
+    K: {
+      topic: "Adoption festival places 500+ animals in new homes",
+      subtopic:
+        "Weekend mega-camp in Delhi sees record turnout for rescued dogs and cats.",
+      time: "7",
+      img: "https://images.pexels.com/photos/7210636/pexels-photo-7210636.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=2",
+      imgSrc: "Adopt Delhi",
+      data: (
+        <>
+          <h4>
+            Shelters from Delhi-NCR hosted a two-day festival with on-site vets, trainers, and behavior counselors
+            helping families pick the right companion from senior dogs to energetic puppies and calm cats.
+          </h4>
+          <br />
+          <h4>
+            Adoption fees were waived for senior animals and special-needs pets, while every adoption
+            included microchipping, first vaccines, and a starter kit from sponsors.
+          </h4>
+          <br />
+          <h4>
+            Workshops on decompression, diet transitions, and crate training prepared adopters for the first week at home,
+            reducing returns and boosting long-term placement success.
+          </h4>
+          <br />
+          <h4>
+            Organizers plan follow-up community walks and socialization events to build a support network for new pet parents
+            and encourage responsible care.
+          </h4>
+        </>
+      ),
+      author: "Adoption Desk",
+      date: "January 28, 2025 18:10 IST",
     },
   }
 
@@ -204,7 +568,18 @@ const NewsPage = ({topic,subtopic,time,img,imgSrc,data,author,date}) => {
   
 
   const { id } = useParams();
-  const item = NewsData[id] || Object.values(NewsData)[0];
+
+  // normalize data into an array with explicit ids
+  const newsArray = Object.entries(NewsData).map(([key, value]) => ({
+    ...value,
+    id: value.id || key,
+    image: value.image || value.img,
+  }));
+
+  const item = newsArray.find((news) => news.id === id) || newsArray[0];
+
+  // pick 3 related from NewsData excluding current
+  const related = newsArray.filter((news) => news.id !== item?.id).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-app-bg via-app-surface to-app-bg pb-12">
@@ -212,7 +587,7 @@ const NewsPage = ({topic,subtopic,time,img,imgSrc,data,author,date}) => {
         <MainImage img={item.img} imgSrc={item.imgSrc}></MainImage>
         <div className='flex justify-evenly h-fit pb-5 px-6 gap-10 max-w-6xl mx-auto'>
             <Content data={item.data}></Content>
-            <Sidebar author={item.author} date={item.date}></Sidebar>
+            <Sidebar author={item.author} date={item.date} related={related}></Sidebar>
         </div>
     </div>
   )

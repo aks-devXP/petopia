@@ -31,6 +31,8 @@ const ReportCrueltyForm = () => {
 
   const [fileError, setFileError] = useState('');
   const [captchaValue, setCaptchaValue] = useState(null);
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const recaptchaRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -136,35 +138,43 @@ const ReportCrueltyForm = () => {
       });
 
       const data = await res.json();
-      console.log("Verification result:", data);
+      return data?.success;
     } catch (err) {
       console.error("Failed to verify token", err);
+      return false;
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError('');
 
-    // Validate captcha
     if (!captchaValue) {
-      alert('Please complete the captcha verification');
+      setSubmitError('Please complete the captcha verification.');
       return;
     }
 
-    // Get the token from the recaptcha
     const token = window.grecaptcha.getResponse();
-    console.log(JSON.stringify(token));
+    if (!token) {
+      setSubmitError('Captcha token missing. Please retry.');
+      return;
+    }
 
-    // Send the token to the backend
-    sendTokenToBackend(token);
+    setIsSubmitting(true);
+    const verified = await sendTokenToBackend(token);
 
-    // Reset the CAPTCHA after submit
+    if (!verified) {
+      setSubmitError('Captcha verification failed. Please retry.');
+      window.grecaptcha.reset();
+      setIsSubmitting(false);
+      return;
+    }
+
     window.grecaptcha.reset();
-    
-    // Handle form submission here
-    console.log(formData);
+    setIsSubmitting(false);
 
-    // adding API call for submission
+    // TODO: add form submission API call here
+    console.log(formData);
   };
 
   const onCaptchaChange = (value) => {
@@ -524,14 +534,19 @@ const ReportCrueltyForm = () => {
             </div>
           </div>
 
+          {submitError && (
+            <p className="text-center text-sm text-red-600 mt-3">{submitError}</p>
+          )}
+
           {/* Submit Button */}
           <div className="text-center mt-8">
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-3 py-4 px-8 border border-transparent shadow-lg text-base font-semibold rounded-lg text-white bg-gradient-to-r from-[#FF8C42] to-[#704214] hover:from-[#704214] hover:to-[#FF8C42] focus:outline-none focus:ring-4 focus:ring-[#FF8C42]/30 transition-all transform hover:scale-105 active:scale-95"
+              disabled={isSubmitting}
+              className="inline-flex items-center justify-center gap-3 py-4 px-8 border border-transparent shadow-lg text-base font-semibold rounded-lg text-white bg-gradient-to-r from-[#FF8C42] to-[#704214] hover:from-[#704214] hover:to-[#FF8C42] focus:outline-none focus:ring-4 focus:ring-[#FF8C42]/30 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <FaShieldAlt className="text-lg" />
-              Submit Report
+              {isSubmitting ? 'Submitting...' : 'Submit Report'}
             </button>
             <p className="text-xs text-gray-500 mt-4">
               By submitting this form, you confirm that all information provided is accurate to the best of your knowledge.
