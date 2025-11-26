@@ -5,7 +5,7 @@ import { getOne } from "@/API/mockProviders";
 import { handleError, handleSuccess } from "@/Util/Alerts";
 import Loader from "@/components/Loader/Loader";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProviderHero from "./components/ProviderHero";
 import ScheduleSidebar from "./components/ScheduleSidebar";
@@ -22,6 +22,7 @@ const TYPE_LABELS = {
 const ProviderBooking = ({ forcedType, forcedId }) => {
   const params = useParams();
   const navigate = useNavigate();
+  const [selectedAddons, setSelectedAddons] = useState([]);
 
   const type = forcedType ?? params.type ?? "vet";
   const providerId = forcedId ?? params.id;
@@ -67,7 +68,17 @@ const ProviderBooking = ({ forcedType, forcedId }) => {
     return buildProviderProfile(type, typeLabel, data);
   }, [data, type, typeLabel]);
 
-  const handleConfirm = async ({ day, slot, addons, total, pet }) => {
+  const toggleAddon = (addon) => {
+    setSelectedAddons((prev) => {
+      const exists = prev.find((item) => item.id === addon.id);
+      if (exists) {
+        return prev.filter((item) => item.id !== addon.id);
+      }
+      return [...prev, addon];
+    });
+  };
+
+  const handleConfirm = async ({ day, slot, addons, total, pet, note }) => {
     try {
       if (!profile || !day || !slot) return;
       const reference = `APT-${Date.now().toString().slice(-6)}`;
@@ -79,6 +90,7 @@ const ProviderBooking = ({ forcedType, forcedId }) => {
         serviceCost:total,
         pet_id:pet._id,
         addons,
+        note,
       })
       if(appointmentCreated){
       handleSuccess("Your slot is reserved while we complete the booking.");
@@ -98,6 +110,7 @@ const ProviderBooking = ({ forcedType, forcedId }) => {
             currencySymbol: profile.currencySymbol,
             total,
             addons,
+            note,
             support: {
               email: "care@petopia.in",
               phone: "+91 99887 76654",
@@ -163,13 +176,23 @@ const ProviderBooking = ({ forcedType, forcedId }) => {
           <div className="space-y-10">
             <ProviderHero profile={profile} />
             {/* <HighlightsGrid metrics={profile.metrics} /> */}
-            <ServiceShowcase profile={profile} />
+            <ServiceShowcase
+              profile={profile}
+              selectedAddons={selectedAddons}
+              onToggleAddon={toggleAddon}
+            />
             {profile.testimonials.length > 0 ? (
               <TestimonialsSection testimonials={profile.testimonials} />
             ) : null}
           </div>
 
-          <ScheduleSidebar profile={profile} onConfirm={handleConfirm}  pets={petQuery.data}/>
+          <ScheduleSidebar
+            profile={profile}
+            onConfirm={handleConfirm}
+            pets={petQuery.data}
+            selectedAddons={selectedAddons}
+            onToggleAddon={toggleAddon}
+          />
         </div>
       </div>
     </div>

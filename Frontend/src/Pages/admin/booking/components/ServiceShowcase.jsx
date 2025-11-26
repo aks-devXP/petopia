@@ -1,6 +1,6 @@
 import { CheckCircle2, Dumbbell, HeartPulse, Scissors, Sparkles, Stethoscope } from "lucide-react";
 
-const ServiceShowcase = ({ profile }) => {
+const ServiceShowcase = ({ profile, selectedAddons = [], onToggleAddon = () => {} }) => {
   const {services, approach, addons, typeLabel } = profile;
   // console.log(profile);
 
@@ -142,19 +142,29 @@ const ServiceShowcase = ({ profile }) => {
             <span>Recommended add-ons</span>
           </div>
           <div className="mt-3 flex flex-wrap gap-3">
-            {addons.map((addon) => (
-              <span
-                key={addon.id}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-medium text-ink-heading ring-1 ring-app-surface/60 shadow-sm"
-              >
-                {addon.label}
-                {addon.price > 0 ? (
-                  <span className="text-ink-secondary/70">+₹{addon.price}</span>
-                ) : (
-                  <span className="text-brand/80">Included</span>
-                )}
-              </span>
-            ))}
+            {addons.map((addon) => {
+              const checked = selectedAddons.some((item) => item.id === addon.id);
+              return (
+                <button
+                  key={addon.id}
+                  type="button"
+                  onClick={() => onToggleAddon(addon)}
+                  className={`relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium ring-1 shadow-sm transition-all ${
+                    checked
+                      ? "bg-brand text-white ring-brand/40 shadow-[0_12px_30px_rgba(216,84,0,0.18)] scale-[1.02]"
+                      : "bg-white text-ink-heading ring-app-surface/60 hover:-translate-y-0.5 hover:ring-brand/40"
+                  }`}
+                >
+                  {addon.label}
+                  {addon.price > 0 ? (
+                    <span className={checked ? "text-white/80" : "text-ink-secondary/70"}>+₹{addon.price}</span>
+                  ) : (
+                    <span className={checked ? "text-white/80" : "text-brand/80"}>Included</span>
+                  )}
+                  {checked && <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-white animate-ping" />}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
