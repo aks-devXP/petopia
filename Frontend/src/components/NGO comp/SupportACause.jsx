@@ -54,17 +54,17 @@ const CauseCircle = ({ cause }) => {
       />
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/35 group-hover:bg-black/55 transition-colors duration-300" />
+      <div className="absolute inset-0 bg-black/45 group-hover:bg-black/65 transition-colors duration-300" />
 
       {/* Text swap container */}
       <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
         {/* Title (default) */}
-        <p className="text-white text-lg sm:text-xl font-semibold leading-snug transition-opacity duration-300 group-hover:opacity-0">
+        <p className="text-white text-2xl font-semibold leading-snug transition-opacity duration-300 group-hover:opacity-0">
           {cause.title}
         </p>
 
         {/* Description (on hover) */}
-        <p className="absolute text-white text-xs sm:text-sm leading-snug opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <p className="absolute text-white text-md leading-snug opacity-0 transition-opacity duration-300 group-hover:opacity-100 mx-2">
           {cause.description}
         </p>
       </div>
