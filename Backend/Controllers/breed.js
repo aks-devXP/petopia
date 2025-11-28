@@ -5,7 +5,7 @@ const cloudinary = require('../Configs/cloudinary');
 // list breeds (for grid page)
 exports.listBreeds = async (req, res, next) => {
   try {
-    const { q, species, page = 1, limit = 20 } = req.query;
+    const { q, species, page = 1, limit = 100 } = req.query;
     const filter = {};
     if (species) filter.species = species;
     if (q) filter.$or = [

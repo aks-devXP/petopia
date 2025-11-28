@@ -20,7 +20,7 @@ const loginControl = async (req, res) => {
         // Testing
         // console.log(user);
         const token = jwt.sign({id: user._id, user_name: user.name, type:"user"}, process.env.JWT_SECRET); // currently not added the expiry time
-        console.log("Login Successful and The Your Token is: ", token);
+        // console.log("Login Successful and The Your Token is: ", token);
         res.status(200).json({ message: 'Login Successful',  success: true, token: token, user_name: user.name });
     }
     catch (error) {
@@ -85,6 +85,10 @@ const AdminLoginControl = async (req, res) => {
         else if(type==="ngo"){
             control = require('../Models/NGO/ngoDB');
         }
+        else if(type==="groomer"){
+            control = require("../Models/GroomerDB");
+        }
+
         else if(type==="admin"){
             const isEmail = email===process.env["Admin-h-email"];
             const isPass = password===process.env["Admin-h-pass"];
@@ -96,6 +100,9 @@ const AdminLoginControl = async (req, res) => {
             return res.status(200).json({ message: 'Login Successful',  success: true, token: ad_token, user_name: "admin" });
         }
 
+        if(!control){
+            return res.status(403).json({success:false,message: 'User Not Found'});
+        }
 
         const user = await control.findOne({
             email: email,

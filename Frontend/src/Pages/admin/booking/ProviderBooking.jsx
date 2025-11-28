@@ -80,6 +80,7 @@ const ProviderBooking = ({ forcedType, forcedId }) => {
 
   const handleConfirm = async ({ day, slot, addons, total, pet, note }) => {
     try {
+      console.log(addons);
       if (!profile || !day || !slot) return;
       const reference = `APT-${Date.now().toString().slice(-6)}`;
       const appointmentCreated = await createAppointment({
@@ -90,7 +91,7 @@ const ProviderBooking = ({ forcedType, forcedId }) => {
         serviceCost:total,
         pet_id:pet._id,
         addons,
-        note,
+        description:note,
       })
       if(appointmentCreated){
       handleSuccess("Your slot is reserved while we complete the booking.");

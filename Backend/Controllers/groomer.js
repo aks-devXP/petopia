@@ -1,4 +1,3 @@
-// controllers/GroomerController.js
 const Groomer = require('../Models/GroomerDB');
 const {
   Types: { ObjectId },
@@ -12,6 +11,7 @@ const {
   facilitiesFromMask,
   GROOMER_FACILITY_BITS,
 } = require('../scripts/bitmask');
+const GroomerDB = require('../Models/GroomerDB');
 
 
 // ?facilities=grooming,home_service -> ["grooming","home_service"]
@@ -172,7 +172,7 @@ const getData = async (req, res) => {
 
     const filter = buildFilter({ facilities, city, name, mode });
 
-    const groomers = await Groomer.find(filter, { password: 0 }).sort({
+    const groomers = await Groomer.find(filter, { password: 0 , docs:0}).sort({
       createdAt: -1,
     });
 
@@ -209,7 +209,7 @@ const getById = async (req, res) => {
         .json({ success: false, message: 'Invalid ID format' });
     }
 
-    const doc = await Groomer.findById(id, { password: 0 });
+    const doc = await Groomer.findById(id, { password: 0, docs:0 });
     if (!doc) {
       return res
         .status(404)
@@ -393,6 +393,49 @@ const update = async (req, res) => {
   }
 };
 
+const groomerExists = async (id)=>{
+  try {
+    const exists = await Groomer.findById(id);
+    return Boolean(exists)
+  } catch (error) {
+    return false;
+  }
+}
+
+const getProfile = async(req,res)=>{
+  try {
+    const id = req.verified?.id;
+    
+    const groom =await Groomer.findById(id,{
+      password:0
+    });
+     if (!groom) {
+      return res.status(404).json({
+        message: "Could not find your profile",
+        success: false,
+        data: {},
+      });
+    }
+
+    const out = groom.toObject();
+    out.facilities = facilitiesFromMask(out.facMask ?? 0, GROOMER_FACILITY_BITS);
+    delete out.facMask;
+
+    return res.status(200).json({
+      message: "Successfully fetched profile",
+      success: true,
+      data: out,
+    });
+  } catch (error) {
+    // console.error("getProfile error:", error);
+    return res.status(500).json({
+      message: error?.message || "Could not find your profile",
+      success: false,
+      data: {},
+    });
+  }
+}
+
 
 module.exports = {
   create,
@@ -401,4 +444,6 @@ module.exports = {
   deleteById,
   getCategories,
   update,
+  getProfile,
+  groomerExists
 };

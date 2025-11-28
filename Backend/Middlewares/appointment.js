@@ -28,7 +28,33 @@ const appointmentSchema = Joi.object({
 
   serviceName: Joi.string().allow('', null).optional(),
 
-  addons: Joi.array().items(Joi.string()).default([]),
+  addons: Joi
+        .array()
+        .items(
+          Joi.object({
+            id: Joi.string().trim().required().messages({
+              'string.base': 'Addon id must be a string.',
+              'any.required': 'Addon id is required.',
+            }),
+            label: Joi.string().trim().required().messages({
+              'string.base': 'Addon label must be a string.',
+              'any.required': 'Addon label is required.',
+            }),
+            price: Joi
+              .number()
+              .min(0)
+              .required()
+              .messages({
+                'number.base': 'Addon price must be a number.',
+                'number.min': 'Addon price cannot be negative.',
+                'any.required': 'Addon price is required.',
+              }),
+          })
+        )
+        .default([])
+        .messages({
+          'array.base': 'Addons must be an array.',
+        }),
 });
 
 // Express middleware
@@ -39,7 +65,7 @@ function validateAppointment(req, res, next) {
   });
 
   if (error) {
-    // console.log("Validation Error:", error);
+    console.log("Validation Error:", error);
     return res.status(400).json({
       success: false,
       message: 'Invalid appointment payload',

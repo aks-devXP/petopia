@@ -66,6 +66,7 @@ const uploadMultipleImages = async (req, res) => {
       // const firstField = Object.keys(req.files)[0];
       // filesToUpload = req.files[firstField];
       // actualFieldName = firstField;
+      // console.log("hello");
       return res.status(401).json({
         success:false,
         message:"Invalid Image Field"
@@ -105,7 +106,7 @@ const uploadMultipleImages = async (req, res) => {
     });
 
   } catch (error) {
-    // console.error('Upload error:', error);
+    console.error('Upload error:', error);
     return res.status(500).json({
       success: false,
       message: 'Failed to upload images',

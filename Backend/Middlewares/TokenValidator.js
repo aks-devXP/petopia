@@ -4,6 +4,9 @@ const {userExists}=  require('../Controllers/user');
 const {vetExists} = require('../Controllers/vet');
 const {ngoExists} = require('../Controllers/NGO/ngo');
 const { isTokenExpired } = require('../scripts/isTokenExpired');
+const {groomerExists} = require("../Controllers/groomer");
+const {trainerExists} = require("../Controllers/trainer");
+
 
 const TokenValidator = async (req,res,next)=>{
   try {
@@ -16,7 +19,7 @@ const TokenValidator = async (req,res,next)=>{
     let exists = false;
     const type = decoded.type;
     // console.log(decoded);
-    if(!type || (type != "user" && type != "vet" && type != "ngo"&& type!="admin")){
+    if(!type || (type != "user" && type != "vet" && type != "ngo"&& type!="admin"&&type!="groomer"&& type!="trainer")){
       return res.status(401).json({success:false, message: "Invalid token"})
     }
     if (type == "user"){
@@ -29,6 +32,12 @@ const TokenValidator = async (req,res,next)=>{
     else if (type ==="ngo"){
       exists = await ngoExists(decoded.id);
       // console.log(type);
+    }
+    else if (type==="groomer"){
+      exists = await groomerExists(decoded.id);
+    }
+    else if(type==="trainer"){
+      exists = await trainerExists(decoded.id)
     }
     else if(type==="admin"){
       const admin_id = process.env["Admin-id"];

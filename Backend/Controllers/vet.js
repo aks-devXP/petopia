@@ -92,8 +92,9 @@ function toPublicVet(doc) {
   if (!Array.isArray(obj.languages)) obj.languages = [];
   if (!Array.isArray(obj.approach)) obj.approach = [];
   if (!Array.isArray(obj.achievements)) obj.achievements = [];
-  if (!Array.isArray(obj.testimonials)) obj.testimonials = [];
+  // if (!Array.isArray(obj.testimonials)) obj.testimonials = [];
   if (!Array.isArray(obj.addons)) obj.addons = [];
+
 
   return obj;
 }
@@ -106,7 +107,7 @@ const getAllVets = async (req, res) => {
 
     const filter = buildFilter({ facilities, city, name, mode });
 
-    const vets = await VetModel.find(filter, { password: 0 }).sort({
+    const vets = await VetModel.find(filter, { password: 0 ,docs:0}).sort({
       createdAt: -1,
     });
 
@@ -242,7 +243,8 @@ const createVet = async (req, res) => {
 
 const updateVet = async (req, res) => {
   try {
-    const id = req.params.id || req.verified?.id;
+    // const id = req.params.id || req.verified?.id;
+    const id = req.verified?.id;
     if (!ObjectId.isValid(id)) {
       return res
         .status(400)
@@ -279,7 +281,6 @@ const updateVet = async (req, res) => {
       'achievements', // NEW
       'testimonials', // NEW
       'addons', // NEW
-      'type', // optional, but keep to 'vet' usually
     ]);
 
     const update = {};
@@ -356,7 +357,7 @@ const getVet = async (req, res) => {
         .json({ message: 'Invalid ID format', success: false });
     }
 
-    const vet = await VetModel.findById(id, { password: 0 });
+    const vet = await VetModel.findById(id, { password: 0, docs:0 });
     if (!vet) {
       return res
         .status(404)
@@ -418,6 +419,39 @@ const getVetCategories = async (req, res) => {
   }
 };
 
+const getProfile = async (req,res)=>{
+  try {
+    const id = req.verified.id;
+    
+    const vet = await VetModel.findById(id).select('-password -__v -createdAt -updatedAt');
+    // other way I could have written it
+    // .select({
+    // password:0, __v:0
+    // })
+    if(!vet){
+      res.status(404).json({
+        message:"User doesn't exist.",
+        success:false,
+        data:{},
+      })
+    }
+    const data = toPublicVet(vet);
+    res.status(200).json({
+      success:true,
+      data,
+      message:"Successfully fetched Profile"
+
+    })
+  } catch (error) {
+    console.log("Profile Controller",error);
+    res.status(500).json({
+      message:error.message,
+      success:false,
+      data:[]
+    })
+  }
+}
+
 module.exports = {
   getAllVets,
   createVet,
@@ -426,4 +460,5 @@ module.exports = {
   vetExists,
   updateVet,
   getVetCategories,
+  getProfile,
 };

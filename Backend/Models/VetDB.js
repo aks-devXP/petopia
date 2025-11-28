@@ -98,14 +98,6 @@ const VetSchema = new Schema(
       default: [],
     },
 
-    // Testimonials
-    // testimonials: [
-    //   {
-    //     name: { type: String, required: true },
-    //     quote: { type: String, required: true },
-    //     date: { type: String }, // you can switch to Date later if needed
-    //   },
-    // ],
 
     // Add-ons: id/label/price
     addons: [

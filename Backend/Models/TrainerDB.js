@@ -131,9 +131,9 @@ const TrainerSchema = new Schema(
       required: true,
     },
 
-    cv: {
-      type: String,
-      default: '',
+    docs: {
+      type: [String],
+      default: [],
     },
 
     verified: {

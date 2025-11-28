@@ -1,4 +1,3 @@
-// controllers/trainerController.js
 const Trainer = require('../Models/TrainerDB');
 const {
   maskFor,
@@ -164,7 +163,7 @@ const getTrainer = async (req, res) => {
     }
 
     // --- DB QUERY ---
-    const trainers = await Trainer.find(filter, { password: 0 }).sort({
+    const trainers = await Trainer.find(filter, { password: 0, docs:0 }).sort({
       createdAt: -1,
     });
 
@@ -205,7 +204,7 @@ const getTrainerById = async (req, res) => {
       });
     }
 
-    const trainer = await Trainer.findById(id, { password: 0 });
+    const trainer = await Trainer.findById(id, { password: 0, docs:0 });
 
     if (!trainer) {
       return res.status(404).json({
@@ -381,6 +380,46 @@ const deleteTrainer = async (req,res)=>{
     })
   }
 }
+
+const trainerExists = async (id) => {
+  const exists = await Trainer.findById(id);
+  return !!exists;
+}
+
+const getProfile = async(req,res)=>{
+  try {
+    const id = req.verified?.id;
+    
+    const train =await Trainer.findById(id,{
+      password:0
+    });
+     if (!train) {
+      return res.status(404).json({
+        message: "Could not find your profile",
+        success: false,
+        data: {},
+      });
+    }
+
+    const out = train.toObject();
+    out.facilities = facilitiesFromMask(out.facMask ?? 0, TRAINER_FACILITY_BITS);
+    delete out.facMask;
+
+    return res.status(200).json({
+      message: "Successfully fetched profile",
+      success: true,
+      data: out,
+    });
+  } catch (error) {
+    // console.error("getProfile error:", error);
+    return res.status(500).json({
+      message: error?.message || "Could not find your profile",
+      success: false,
+      data: {},
+    });
+  }
+}
+
 module.exports = {
   createTrainer,
   getTrainer,
@@ -388,4 +427,6 @@ module.exports = {
   getTrainerById,
   getTrainerCategories,
   deleteTrainer,
+  trainerExists,
+  getProfile
 };

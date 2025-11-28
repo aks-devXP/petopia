@@ -1,9 +1,22 @@
 import { createReport, uploadEvidence } from '@/API/CrueltyReportAPI';
-import { handleError, handleInfo, handleSuccess } from '@/Util/Alerts';
+import { handleInfo, handleSuccess } from '@/Util/Alerts';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { FaCalendarAlt, FaEnvelope, FaExclamationTriangle, FaFileImage, FaFilePdf, FaInfoCircle, FaMapMarkerAlt, FaPhone, FaShieldAlt, FaTimes, FaUser } from 'react-icons/fa';
-
+const Dummy = {
+  name: '',
+    address: '',
+    city: '',
+    phoneNumber: '',
+    email: '',
+    animalLocation: '',
+    animalCity: '',
+    // can't use date of future
+    incidentDate: '',
+    incidentDetails: '',
+    consent: false,
+    files: []
+}
 const ReportCrueltyForm = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -137,36 +150,114 @@ const ReportCrueltyForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitError('');
 
-    if (!captchaValue) {
-      setSubmitError('Please complete the captcha verification.');
+    try {
+      e.preventDefault();
+      setSubmitError('');
+  
+      if (!captchaValue) {
+        throw new Error('Please complete the captcha verification.');
+        
+      }
+  
+      const token = window.grecaptcha.getResponse();
+      if (!token) {
+        throw new Error('Captcha token missing. Please retry.');
+        
+      }
+  
+      setIsSubmitting(true);
+      const verified = await sendTokenToBackend(token);
+  
+      if (!verified) {
+        throw new Error('Captcha verification failed. Please retry.');
+      }
+      
+
+      // API
+      // console.log(formData);
+       // adding API call for submission
+      // Step-1 Upload Files if given
+      // Only if there are files
+      let uploaded = [];
+      if (formData.files && formData.files.length > 0) {
+        uploaded = await uploadEvidence({ photos: formData.files });
+      }
+
+      // map to URLs
+      formData.photoURLs = uploaded.map((item) => item.url);
+
+      // const data = formData;
+      // delete data.files;
+      // console.log(uploaded);
+      const report = await createReport(formData)
+      if(report){
+        handleSuccess("Report Submitted Successfully")
+        handleInfo("We will try to address it as soon as possible. Thank you!")
+      }
+      setFormData(Dummy);
       return;
+    } 
+    catch (error) {
+      setSubmitError(error.message||"Failed To Submit The Query");
+      
     }
-
-    const token = window.grecaptcha.getResponse();
-    if (!token) {
-      setSubmitError('Captcha token missing. Please retry.');
-      return;
-    }
-
-    setIsSubmitting(true);
-    const verified = await sendTokenToBackend(token);
-
-    if (!verified) {
-      setSubmitError('Captcha verification failed. Please retry.');
+    finally{
       window.grecaptcha.reset();
       setIsSubmitting(false);
-      return;
+      
     }
-
-    window.grecaptcha.reset();
-    setIsSubmitting(false);
-
-    // TODO: add form submission API call here
-    console.log(formData);
   };
+
+  //  const handleSubmit = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     if (!captchaValue) {
+  //     handleInfo('Please complete the captcha verification'); // Use handleInfo instead of alert
+  //     return;
+  //   }
+
+  //   // adding API call for submission
+  //   // const token = window.grecaptcha.getResponse();
+  //   const token = recaptchaRef.current.getValue();
+  //   // console.log(JSON.stringify(token));
+  //   if (!token) {
+  //         throw new Error("reCAPTCHA token missing. Please try again.");
+  //     }
+  
+  //     // Send the token to the backend
+  //     const captcha = await sendTokenToBackend(token);
+  //     if(!captcha.success){
+  //       throw new Error("Captcha Verification Failed");
+  //     }
+      
+      
+  //     // Handle form submission here  
+  //     // adding API call for submission
+  //     // Step-1 Upload Files if given
+  //     const uploaded = await uploadEvidence({photos:formData.files});
+  //     formData.photoURLS = uploaded.map(element => {
+  //       return element.url;
+  //     });
+  //     const data = formData;
+  //     delete data.files;
+  //     // console.log(uploaded);
+  //     const report = await createReport(formData)
+  //     if(report){
+  //       handleSuccess("Report Submitted Successfully")
+  //       handleInfo("We will try to address it as soon as possible. Thank you!")
+  //     }
+      
+  //   } 
+  //   catch (error) {
+  //     handleError(error.message||"Error in Submitting the Cruelty Report Form")
+  //   }
+  //   finally{
+  //     // Reset the CAPTCHA after submit
+  //     recaptchaRef.current.reset();
+  //   }
+  // };
+
 
   const onCaptchaChange = (value) => {
     setCaptchaValue(value);

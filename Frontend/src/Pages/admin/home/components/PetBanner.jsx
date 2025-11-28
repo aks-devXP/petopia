@@ -254,7 +254,7 @@ async function handleSave(form, file, { previewCleared } = {}) {
                     </div>
                   ) : (
                     <div key={pet._id} className="shrink-0">
-                      <PetCard pet={pet} onClick={() => openEdit(pet)} />
+                      <PetCard pet={pet} onClick={() => openEdit(pet)} isEditable={true} />
                     </div>
                   )
                 )}

@@ -4,13 +4,17 @@ const {create,
   getData,
   getById,
   deleteById,
-  getCategories,update} = require('../Controllers/groomer');
+  getCategories,update,
+getProfile} = require('../Controllers/groomer');
 const TokenValidator= require('../Middlewares/TokenValidator');
+
+const allowed_users = require('../Middlewares/allowedUsers');
   router.get('/all-data',getData),
   // router.post('/create',GroomerValidation,create);
   router.get('/getCategories',getCategories);
   router.get('/data/:id',getById);
-  router.put('/update/:id',TokenValidator,GroomerValidation,update);
+  router.put('/update',TokenValidator,allowed_users(["groomer"]),GroomerValidation,update);
+  router.get("/profile",TokenValidator,allowed_users(["admin","groomer"]),getProfile);
   router.delete('/delete',TokenValidator,deleteById);
   
 

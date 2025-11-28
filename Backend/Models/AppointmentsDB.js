@@ -47,10 +47,13 @@ const appointmentSchema = new schema({
         type: String,
         // required: true
     },
-    addons :{
-        type: [String],
-        default: []
-    },
+    addons: [
+      {
+        id: { type: String, required: true },
+        label: { type: String, required: true },
+        price: { type: Number, required: true },
+      },
+    ],
     
 },{
         timestamps: true

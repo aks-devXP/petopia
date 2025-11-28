@@ -3,7 +3,7 @@ const baseUrl = import.meta.env.VITE_BACKEND_BASEURL;
 export async function createReport(params) {
   try {
     
-    const response = await fetch(`${baseUrl}/cruelty-report/create`,
+    const response = await fetch(`${baseUrl}/ngo/create-report`,
       {
         body:JSON.stringify({
           reporter_name: params.name,
@@ -17,7 +17,7 @@ export async function createReport(params) {
           doi: params.incidentDate,
           description:params.incidentDetails,
           consent: params.consent,
-          photo_url: params.photoURLs||[],
+          photo_url: params.photoURLS||[],
         }),
         method: "POST",
         headers:{
@@ -35,26 +35,36 @@ export async function createReport(params) {
     throw new Error("Error in posting cruelty report: "+ error.message);
   }
 }
-
-export async function uploadEvidence(params) {
+export async function uploadEvidence({ photos }) {
   try {
-    const field = import.meta.env.VITE_report_field;
-    const folder =import.meta.env.VITE_report_folder;
+    const field = import.meta.env.VITE_report_field;   
+    const folder = import.meta.env.VITE_report_folder; 
+
     const formData = new FormData();
-    formData.append(field,params.photos);
-    formData.append("folder",folder);
-    formData.append("field",field);
-    // don't need to specify api content type as it will be handled by the call automatically for form data type
-    const uploadResp = await fetch(`${baseUrl}/upload/upload_report_photos`,{
-      method:"POST"
+
+    // append each file to the same field name
+    (photos || []).forEach((file) => {
+      formData.append(field, file);
     });
+
+    formData.append("folder", folder);
+    formData.append("fieldName", field);
+
+    const uploadResp = await fetch(`${baseUrl}/upload/upload_report_photos`, {
+      method: "POST",
+      body: formData,
+      // No "Content-Type" header – browser sets correct multipart boundary
+    });
+
     const payload = await uploadResp.json();
-    if(!uploadResp.ok||!payload.success){
-      throw new Error(payload.error||"Failed To Upload Photos");
+
+    if (!uploadResp.ok || !payload.success) {
+      console.log(uploadResp);
+      throw new Error(payload.error || "Failed To Upload Photos");
     }
+
     return payload.data;
-  }  
-  catch(error){
+  } catch (error) {
     throw new Error(error.message);
   }
 }
