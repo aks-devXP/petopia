@@ -32,16 +32,18 @@ export async function FacebookLoginAPI(user){
   })
   return await res.json();
 }
-// export async function SingUpAPI(user){
-//   // console.log(user);
-//   return  await fetch(`${Base_URL}/auth/signup`,{
-//     method:'POST',
-//     headers:{
-//       'Content-Type':"application/json"
-//     },
-//     body:JSON.stringify({user})
-//   });
-// }
+export async function SignUpAPI(user){
+  // console.log(user);
+  return  await fetch(`${Base_URL}/auth/signup`,{
+    method:'POST',
+    headers:{
+      'Content-Type':"application/json"
+    },
+    body:JSON.stringify({user})
+  });
+}
+
+
 // export async function LoginGenAPI(user,type){
 //   // console.log(user);
 //   return fetch(`${Base_URL}/auth/gen-login`,{

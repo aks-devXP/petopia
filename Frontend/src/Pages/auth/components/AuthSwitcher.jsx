@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import FacebookLogin from '@greatsumini/react-facebook-login';
 import { useGoogleLogin } from '@react-oauth/google';
 
-import { FacebookLoginAPI, GoogleLoginAPI, LoginAPI, SingUpAPI } from '@/API/GeneralAPI';
+import { FacebookLoginAPI, GoogleLoginAPI, LoginAPI, SignUpAPI } from '@/API/GeneralAPI';
 import { handleError, handleInfo, handleSuccess } from '@/Util/Alerts';
 
 import PawButton from '@/components/buttons/PawButton';
@@ -123,7 +123,7 @@ export default function AuthSwitcher() {
     // signup
     const derivedName = name.split('@')[0] || 'Petopia User';
     try {
-      const resp = await SingUpAPI({ name: name??derivedName, email: email, password });
+      const resp = await SignUpAPI({ name: name??derivedName, email: email, password });
       const data = await resp.json();
 
       if (data.success) {
