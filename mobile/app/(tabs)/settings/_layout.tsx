@@ -43,10 +43,6 @@ export default function SettingsLayout() {
             <Stack.Screen name="appointments" options={{ headerShown: false }} />
 
             <Stack.Screen name="pets" options={{ title: "My Pets" }} />
-            <Stack.Screen
-                name="medical-history"
-                options={{ title: "Medical History" }}
-            />
         </Stack>
     );
 }

@@ -3,10 +3,11 @@ import FloatingTabBar from "../../components/FloatingTabBar";
 
 export default function TabsLayout() {
     const pathname = usePathname();
+    const normalizedPath = pathname.replace("/(tabs)", "");
 
     // All settings sub-routes (except index)
     const shouldHideTabBar =
-        pathname.startsWith("/settings/") && pathname !== "/settings";
+        normalizedPath.startsWith("/settings/") && normalizedPath !== "/settings";
 
     return (
         <Tabs
@@ -14,13 +15,13 @@ export default function TabsLayout() {
                 headerShown: false,
                 tabBarShowLabel: false,
             }}
-
+            initialRouteName="(breed)/index"
             tabBar={(props) => (shouldHideTabBar ? null : <FloatingTabBar {...props} />)}
         >
-            <Tabs.Screen name="more/index" />
-            <Tabs.Screen name="vet/index" />
-            <Tabs.Screen name="home/index" />
+            <Tabs.Screen name="ngo/index" />
+            <Tabs.Screen name="providers/index" />
             <Tabs.Screen name="(breed)/index" />
+            <Tabs.Screen name="vet/index" />
             <Tabs.Screen name="settings" />
         </Tabs>
     );
