@@ -110,9 +110,10 @@ const StaticNavbar = () => {
           <div className="rounded-full flex items-center justify-center">
             <img src={logo} className="w-14 h-14" alt="Petopia Logo" />
           </div>
-          <span className="text-ink-primary font-quicksandBold text-xl md:text-3xl">
+          <span className="hidden md:inline text-ink-primary font-quicksandBold md:text-3xl">
             Petopia
           </span>
+
         </div>
       </button>
 
